@@ -2,81 +2,9 @@ import React from "react";
 
 const Header: React.FC<{}> = () => {
   return (
-    <header className="has_top scroll_header_top_area stick transparent scrolled_not_transparent page_header sticky sticky_animate">
+    <header className="has_top scroll_header_top_area stick transparent scrolled_not_transparent page_header">
       <div className="header_inner clearfix">
         <div className="header_top_bottom_holder">
-          <div
-            className="header_top clearfix"
-            style={{ backgroundColor: "rgba(255, 255, 255, 0)" }}
-          >
-            <div className="left">
-              <div className="inner" />
-            </div>
-            <div className="right">
-              <div className="inner">
-                <div className="header-widget widget_icl_lang_sel_widget header-right-widget">
-                  <div className="wpml-ls-sidebars-header_right wpml-ls wpml-ls-legacy-list-horizontal">
-                    <ul>
-                      <li className="wpml-ls-slot-header_right wpml-ls-item wpml-ls-item-en wpml-ls-current-language wpml-ls-first-item wpml-ls-item-legacy-list-horizontal">
-                        {" "}
-                        <a
-                          href="https://choezekuchen.com"
-                          className="wpml-ls-link"
-                        >
-                          {" "}
-                          <img
-                            className="wpml-ls-flag"
-                            src="https://choezekuchen.com/wp-content/plugins/sitepress-multilingual-cms/res/flags/en.png?690ea8"
-                            alt=""
-                            width={34}
-                            height={26}
-                          />
-                          <span className="wpml-ls-native">English</span>
-                        </a>
-                      </li>
-                      <li className="wpml-ls-slot-header_right wpml-ls-item wpml-ls-item-vi wpml-ls-last-item wpml-ls-item-legacy-list-horizontal">
-                        {" "}
-                        <a
-                          href="https://choezekuchen.com/vi/"
-                          className="wpml-ls-link"
-                        >
-                          {" "}
-                          <img
-                            className="wpml-ls-flag"
-                            src="https://choezekuchen.com/wp-content/plugins/sitepress-multilingual-cms/res/flags/vi.png?690ea8"
-                            alt=""
-                            width={34}
-                            height={26}
-                          />
-                          <span className="wpml-ls-display">Vietnamese</span>
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-                <div className="header-widget widget_text header-right-widget">
-                  <div className="textwidget">
-                    <div
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        marginRight: 80,
-                        marginLeft: 20,
-                        paddingTop: 5,
-                      }}
-                    >
-                      <a href="/my-account">
-                        <i
-                          className="wp-svg-user-3 user-3"
-                          style={{ fontSize: 22, color: "#fff" }}
-                        />
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
           <div
             className="header_bottom clearfix"
             style={{ backgroundColor: "rgba(255, 255, 255, 0)" }}
@@ -94,41 +22,48 @@ const Header: React.FC<{}> = () => {
               </div>
               <div className="logo_wrapper">
                 <div className="q_logo">
+                  {" "}
                   <a
                     itemProp="url"
                     href="https://choezekuchen.com/"
-                    style={{ height: "70px", visibility: "visible" }}
+                    style={{ height: 105, visibility: "visible" }}
                   >
+                    {" "}
                     <img
                       itemProp="image"
                       className="normal"
                       src="https://choezekuchen.com/wp-content/uploads/2016/02/Logo-Drikung-Rinpochen-sent.png?690ea8"
                       alt="Logo"
-                    />
+                      style={{ height: "100%" }}
+                    />{" "}
                     <img
                       itemProp="image"
                       className="light"
                       src="https://choezekuchen.com/wp-content/uploads/2016/02/Logo-Drikung-Rinpochen-sent.png?690ea8"
                       alt="Logo"
-                    />
+                      style={{ height: "100%" }}
+                    />{" "}
                     <img
                       itemProp="image"
                       className="dark"
                       src="https://choezekuchen.com/wp-content/uploads/2016/02/Logo-Drikung-Rinpochen-sent.png?690ea8"
                       alt="Logo"
-                    />
+                      style={{ height: "100%" }}
+                    />{" "}
                     <img
                       itemProp="image"
                       className="sticky"
                       src="https://choezekuchen.com/wp-content/uploads/2016/02/Logo-Drikung-Rinpochen-sent.png?690ea8"
                       alt="Logo"
-                    />
+                      style={{ height: "100%" }}
+                    />{" "}
                     <img
                       itemProp="image"
                       className="mobile"
                       src="https://choezekuchen.com/wp-content/uploads/2016/02/Logo-Drikung-Rinpochen-sent.png?690ea8"
                       alt="Logo"
-                    />
+                      style={{ height: "100%" }}
+                    />{" "}
                   </a>
                 </div>
               </div>
@@ -141,10 +76,10 @@ const Header: React.FC<{}> = () => {
             <nav className="main_menu drop_down right">
               <ul id="menu-main-menu">
                 <li
-                  id="nav-menu-item-1065"
-                  className="menu-item menu-item-type-post_type menu-item-object-page  narrow"
+                  id="nav-menu-item-2119"
+                  className="menu-item menu-item-type-post_type menu-item-object-page narrow active"
                 >
-                  <a href="https://choezekuchen.com/?page_id=8">
+                  <a href="https://choezekuchen.com/home/" className="current">
                     <i className="menu_icon blank fa" />
                     <span>Home</span>
                     <span className="plus" />
@@ -152,7 +87,7 @@ const Header: React.FC<{}> = () => {
                 </li>
                 <li
                   id="nav-menu-item-1052"
-                  className="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children  has_sub narrow"
+                  className="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children has_sub narrow"
                 >
                   <a href="https://choezekuchen.com/about-rinpoche/">
                     <i className="menu_icon blank fa" />
@@ -164,7 +99,7 @@ const Header: React.FC<{}> = () => {
                       <ul>
                         <li
                           id="nav-menu-item-1062"
-                          className="menu-item menu-item-type-post_type menu-item-object-page "
+                          className="menu-item menu-item-type-post_type menu-item-object-page"
                         >
                           <a href="https://choezekuchen.com/gurus/">
                             <i className="menu_icon blank fa" />
@@ -174,7 +109,7 @@ const Header: React.FC<{}> = () => {
                         </li>
                         <li
                           id="nav-menu-item-1053"
-                          className="menu-item menu-item-type-post_type menu-item-object-page "
+                          className="menu-item menu-item-type-post_type menu-item-object-page"
                         >
                           <a href="https://choezekuchen.com/about-rinpoche/history-of-choeze-kuchen-rinpoche/">
                             <i className="menu_icon blank fa" />
@@ -184,7 +119,7 @@ const Header: React.FC<{}> = () => {
                         </li>
                         <li
                           id="nav-menu-item-1858"
-                          className="menu-item menu-item-type-post_type menu-item-object-page "
+                          className="menu-item menu-item-type-post_type menu-item-object-page"
                         >
                           <a href="https://choezekuchen.com/jigme-choewang-lodro-the-10th-reincarnation-of-choeze-kuchen-rinpoche/">
                             <i className="menu_icon blank fa" />
@@ -208,7 +143,7 @@ const Header: React.FC<{}> = () => {
                           <ul>
                             <li
                               id="nav-menu-item-1349"
-                              className="menu-item menu-item-type-post_type menu-item-object-page "
+                              className="menu-item menu-item-type-post_type menu-item-object-page"
                             >
                               <a href="https://choezekuchen.com/about-rinpoche/tieu-su-duc-choeze-kuchen-rinpoche-doi-thu-11-2/the-11th-choeze-kuchen-rinpoche/young-choeze-kuchen-rinpoche-2-years-of-age/">
                                 <i className="menu_icon blank fa" />
@@ -220,7 +155,7 @@ const Header: React.FC<{}> = () => {
                             </li>
                             <li
                               id="nav-menu-item-1058"
-                              className="menu-item menu-item-type-post_type menu-item-object-page "
+                              className="menu-item menu-item-type-post_type menu-item-object-page"
                             >
                               <a href="https://choezekuchen.com/about-rinpoche/tieu-su-duc-choeze-kuchen-rinpoche-doi-thu-11-2/the-11th-choeze-kuchen-rinpoche/the-hevajra-retreat/">
                                 <i className="menu_icon blank fa" />
@@ -236,7 +171,7 @@ const Header: React.FC<{}> = () => {
                 </li>
                 <li
                   id="nav-menu-item-1048"
-                  className="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children  has_sub narrow"
+                  className="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children has_sub narrow"
                 >
                   <a href="https://choezekuchen.com/teaching/">
                     <i className="menu_icon blank fa" />
@@ -259,7 +194,7 @@ const Header: React.FC<{}> = () => {
                           <ul>
                             <li
                               id="nav-menu-item-1857"
-                              className="menu-item menu-item-type-post_type menu-item-object-page "
+                              className="menu-item menu-item-type-post_type menu-item-object-page"
                             >
                               <a href="https://choezekuchen.com/teaching/pure-motivation-and-great-conviction-2/">
                                 <i className="menu_icon blank fa" />
@@ -271,7 +206,7 @@ const Header: React.FC<{}> = () => {
                             </li>
                             <li
                               id="nav-menu-item-1050"
-                              className="menu-item menu-item-type-post_type menu-item-object-page "
+                              className="menu-item menu-item-type-post_type menu-item-object-page"
                             >
                               <a href="https://choezekuchen.com/teaching/the-perfect-dedication-2/">
                                 <i className="menu_icon blank fa" />
@@ -281,7 +216,7 @@ const Header: React.FC<{}> = () => {
                             </li>
                             <li
                               id="nav-menu-item-1051"
-                              className="menu-item menu-item-type-post_type menu-item-object-page "
+                              className="menu-item menu-item-type-post_type menu-item-object-page"
                             >
                               <a href="https://choezekuchen.com/teaching/the-perfect-way-to-practice-2/">
                                 <i className="menu_icon blank fa" />
@@ -293,7 +228,7 @@ const Header: React.FC<{}> = () => {
                         </li>
                         <li
                           id="nav-menu-item-2095"
-                          className="menu-item menu-item-type-post_type menu-item-object-page "
+                          className="menu-item menu-item-type-post_type menu-item-object-page"
                         >
                           <a href="https://choezekuchen.com/ngondro/">
                             <i className="menu_icon blank fa" />
@@ -303,7 +238,7 @@ const Header: React.FC<{}> = () => {
                         </li>
                         <li
                           id="nav-menu-item-1851"
-                          className="menu-item menu-item-type-post_type menu-item-object-page "
+                          className="menu-item menu-item-type-post_type menu-item-object-page"
                         >
                           <a href="https://choezekuchen.com/teaching/phowa-practice/">
                             <i className="menu_icon blank fa" />
@@ -313,7 +248,7 @@ const Header: React.FC<{}> = () => {
                         </li>
                         <li
                           id="nav-menu-item-2086"
-                          className="menu-item menu-item-type-post_type menu-item-object-page "
+                          className="menu-item menu-item-type-post_type menu-item-object-page"
                         >
                           <a href="https://choezekuchen.com/achi-chokyi-drolma/">
                             <i className="menu_icon blank fa" />
@@ -323,7 +258,7 @@ const Header: React.FC<{}> = () => {
                         </li>
                         <li
                           id="nav-menu-item-2082"
-                          className="menu-item menu-item-type-post_type menu-item-object-page "
+                          className="menu-item menu-item-type-post_type menu-item-object-page"
                         >
                           <a href="https://choezekuchen.com/guru-rinpoche/">
                             <i className="menu_icon blank fa" />
@@ -333,7 +268,7 @@ const Header: React.FC<{}> = () => {
                         </li>
                         <li
                           id="nav-menu-item-2096"
-                          className="menu-item menu-item-type-post_type menu-item-object-page "
+                          className="menu-item menu-item-type-post_type menu-item-object-page"
                         >
                           <a href="https://choezekuchen.com/vajrasattva/">
                             <i className="menu_icon blank fa" />
@@ -347,7 +282,7 @@ const Header: React.FC<{}> = () => {
                 </li>
                 <li
                   id="nav-menu-item-1063"
-                  className="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children  has_sub narrow"
+                  className="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children has_sub narrow"
                 >
                   <a href="https://choezekuchen.com/monastery/">
                     <i className="menu_icon blank fa" />
@@ -359,7 +294,7 @@ const Header: React.FC<{}> = () => {
                       <ul>
                         <li
                           id="nav-menu-item-2105"
-                          className="menu-item menu-item-type-post_type menu-item-object-page "
+                          className="menu-item menu-item-type-post_type menu-item-object-page"
                         >
                           <a href="https://choezekuchen.com/about-rinpoche/history-of-choeze-kuchen-rinpoche-2/">
                             <i className="menu_icon blank fa" />
@@ -369,7 +304,7 @@ const Header: React.FC<{}> = () => {
                         </li>
                         <li
                           id="nav-menu-item-2076"
-                          className="menu-item menu-item-type-post_type menu-item-object-page "
+                          className="menu-item menu-item-type-post_type menu-item-object-page"
                         >
                           <a href="https://choezekuchen.com/monastery/tibetan-monastery/">
                             <i className="menu_icon blank fa" />
@@ -379,7 +314,7 @@ const Header: React.FC<{}> = () => {
                         </li>
                         <li
                           id="nav-menu-item-2109"
-                          className="menu-item menu-item-type-post_type menu-item-object-page "
+                          className="menu-item menu-item-type-post_type menu-item-object-page"
                         >
                           <a href="https://choezekuchen.com/neban/">
                             <i className="menu_icon blank fa" />
@@ -389,7 +324,7 @@ const Header: React.FC<{}> = () => {
                         </li>
                         <li
                           id="nav-menu-item-1982"
-                          className="menu-item menu-item-type-post_type menu-item-object-page "
+                          className="menu-item menu-item-type-post_type menu-item-object-page"
                         >
                           <a href="https://choezekuchen.com/singapore-center/">
                             <i className="menu_icon blank fa" />
@@ -403,7 +338,7 @@ const Header: React.FC<{}> = () => {
                 </li>
                 <li
                   id="nav-menu-item-2055"
-                  className="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children  has_sub narrow"
+                  className="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children has_sub narrow"
                 >
                   <a href="https://choezekuchen.com/prayers/">
                     <i className="menu_icon blank fa" />
@@ -415,7 +350,7 @@ const Header: React.FC<{}> = () => {
                       <ul>
                         <li
                           id="nav-menu-item-2059"
-                          className="menu-item menu-item-type-post_type menu-item-object-page "
+                          className="menu-item menu-item-type-post_type menu-item-object-page"
                         >
                           <a href="https://choezekuchen.com/sadhanas/">
                             <i className="menu_icon blank fa" />
@@ -425,7 +360,7 @@ const Header: React.FC<{}> = () => {
                         </li>
                         <li
                           id="nav-menu-item-2063"
-                          className="menu-item menu-item-type-post_type menu-item-object-page "
+                          className="menu-item menu-item-type-post_type menu-item-object-page"
                         >
                           <a href="https://choezekuchen.com/choeze-kuchen-rinpoches-chanting-audio/">
                             <i className="menu_icon blank fa" />
@@ -439,7 +374,7 @@ const Header: React.FC<{}> = () => {
                 </li>
                 <li
                   id="nav-menu-item-1072"
-                  className="menu-item menu-item-type-post_type_archive menu-item-object-ai1ec_event menu-item-has-children  has_sub narrow"
+                  className="menu-item menu-item-type-post_type_archive menu-item-object-ai1ec_event menu-item-has-children has_sub narrow"
                 >
                   <a href="https://choezekuchen.com/event/">
                     <i className="menu_icon blank fa" />
@@ -451,7 +386,7 @@ const Header: React.FC<{}> = () => {
                       <ul>
                         <li
                           id="nav-menu-item-1336"
-                          className="menu-item menu-item-type-post_type menu-item-object-page "
+                          className="menu-item menu-item-type-post_type menu-item-object-page"
                         >
                           <a href="https://choezekuchen.com/information-registration/">
                             <i className="menu_icon blank fa" />
@@ -465,7 +400,7 @@ const Header: React.FC<{}> = () => {
                 </li>
                 <li
                   id="nav-menu-item-1064"
-                  className="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children  has_sub narrow"
+                  className="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children has_sub narrow"
                 >
                   <a href="https://choezekuchen.com/offering/">
                     <i className="menu_icon blank fa" />
@@ -477,7 +412,7 @@ const Header: React.FC<{}> = () => {
                       <ul>
                         <li
                           id="nav-menu-item-1334"
-                          className="menu-item menu-item-type-post_type menu-item-object-page "
+                          className="menu-item menu-item-type-post_type menu-item-object-page"
                         >
                           <a href="https://choezekuchen.com/thong-tin-dang-ky/">
                             <i className="menu_icon blank fa" />
@@ -491,7 +426,7 @@ const Header: React.FC<{}> = () => {
                 </li>
                 <li
                   id="nav-menu-item-1060"
-                  className="menu-item menu-item-type-post_type menu-item-object-page current_page_parent  narrow"
+                  className="menu-item menu-item-type-post_type menu-item-object-page current_page_parent narrow"
                 >
                   <a href="https://choezekuchen.com/the-blog/">
                     <i className="menu_icon blank fa" />
@@ -504,10 +439,10 @@ const Header: React.FC<{}> = () => {
             <nav className="mobile_menu">
               <ul id="menu-main-menu-1">
                 <li
-                  id="mobile-menu-item-1065"
-                  className="menu-item menu-item-type-post_type menu-item-object-page "
+                  id="mobile-menu-item-2119"
+                  className="menu-item menu-item-type-post_type menu-item-object-page active"
                 >
-                  <a href="https://choezekuchen.com/?page_id=8">
+                  <a href="https://choezekuchen.com/home/" className="current">
                     <span>Home</span>
                   </a>
                   <span className="mobile_arrow">
@@ -517,7 +452,7 @@ const Header: React.FC<{}> = () => {
                 </li>
                 <li
                   id="mobile-menu-item-1052"
-                  className="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children  has_sub"
+                  className="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children has_sub"
                 >
                   <a href="https://choezekuchen.com/about-rinpoche/">
                     <span>ABOUT RINPOCHE</span>
@@ -529,7 +464,7 @@ const Header: React.FC<{}> = () => {
                   <ul className="sub_menu">
                     <li
                       id="mobile-menu-item-1062"
-                      className="menu-item menu-item-type-post_type menu-item-object-page "
+                      className="menu-item menu-item-type-post_type menu-item-object-page"
                     >
                       <a href="https://choezekuchen.com/gurus/">
                         <span>Gurus</span>
@@ -541,7 +476,7 @@ const Header: React.FC<{}> = () => {
                     </li>
                     <li
                       id="mobile-menu-item-1053"
-                      className="menu-item menu-item-type-post_type menu-item-object-page "
+                      className="menu-item menu-item-type-post_type menu-item-object-page"
                     >
                       <a href="https://choezekuchen.com/about-rinpoche/history-of-choeze-kuchen-rinpoche/">
                         <span>HISTORY OF CHOEZE KUCHEN RINPOCHE</span>
@@ -553,7 +488,7 @@ const Header: React.FC<{}> = () => {
                     </li>
                     <li
                       id="mobile-menu-item-1858"
-                      className="menu-item menu-item-type-post_type menu-item-object-page "
+                      className="menu-item menu-item-type-post_type menu-item-object-page"
                     >
                       <a href="https://choezekuchen.com/jigme-choewang-lodro-the-10th-reincarnation-of-choeze-kuchen-rinpoche/">
                         <span>
@@ -568,7 +503,7 @@ const Header: React.FC<{}> = () => {
                     </li>
                     <li
                       id="mobile-menu-item-1054"
-                      className="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children  has_sub"
+                      className="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children has_sub"
                     >
                       <a href="https://choezekuchen.com/about-rinpoche/previous-reincarnation-the-10th-choeze-kuchen-rinpoche/">
                         <span>The 11th Choeze Kuchen Rinpoche</span>
@@ -580,7 +515,7 @@ const Header: React.FC<{}> = () => {
                       <ul className="sub_menu">
                         <li
                           id="mobile-menu-item-1349"
-                          className="menu-item menu-item-type-post_type menu-item-object-page "
+                          className="menu-item menu-item-type-post_type menu-item-object-page"
                         >
                           <a href="https://choezekuchen.com/about-rinpoche/tieu-su-duc-choeze-kuchen-rinpoche-doi-thu-11-2/the-11th-choeze-kuchen-rinpoche/young-choeze-kuchen-rinpoche-2-years-of-age/">
                             <span>
@@ -594,7 +529,7 @@ const Header: React.FC<{}> = () => {
                         </li>
                         <li
                           id="mobile-menu-item-1058"
-                          className="menu-item menu-item-type-post_type menu-item-object-page "
+                          className="menu-item menu-item-type-post_type menu-item-object-page"
                         >
                           <a href="https://choezekuchen.com/about-rinpoche/tieu-su-duc-choeze-kuchen-rinpoche-doi-thu-11-2/the-11th-choeze-kuchen-rinpoche/the-hevajra-retreat/">
                             <span>The Hevajra Retreat</span>
@@ -610,7 +545,7 @@ const Header: React.FC<{}> = () => {
                 </li>
                 <li
                   id="mobile-menu-item-1048"
-                  className="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children  has_sub"
+                  className="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children has_sub"
                 >
                   <a href="https://choezekuchen.com/teaching/">
                     <span>Teaching</span>
@@ -622,7 +557,7 @@ const Header: React.FC<{}> = () => {
                   <ul className="sub_menu">
                     <li
                       id="mobile-menu-item-2102"
-                      className="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children  has_sub"
+                      className="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children has_sub"
                     >
                       <a href="https://choezekuchen.com/dharma-teaching/">
                         <span>DHARMA TEACHING</span>
@@ -634,7 +569,7 @@ const Header: React.FC<{}> = () => {
                       <ul className="sub_menu">
                         <li
                           id="mobile-menu-item-1857"
-                          className="menu-item menu-item-type-post_type menu-item-object-page "
+                          className="menu-item menu-item-type-post_type menu-item-object-page"
                         >
                           <a href="https://choezekuchen.com/teaching/pure-motivation-and-great-conviction-2/">
                             <span>PURE MOTIVATION AND GREAT CONVICTION</span>
@@ -646,7 +581,7 @@ const Header: React.FC<{}> = () => {
                         </li>
                         <li
                           id="mobile-menu-item-1050"
-                          className="menu-item menu-item-type-post_type menu-item-object-page "
+                          className="menu-item menu-item-type-post_type menu-item-object-page"
                         >
                           <a href="https://choezekuchen.com/teaching/the-perfect-dedication-2/">
                             <span>THE PERFECT DEDICATION</span>
@@ -658,7 +593,7 @@ const Header: React.FC<{}> = () => {
                         </li>
                         <li
                           id="mobile-menu-item-1051"
-                          className="menu-item menu-item-type-post_type menu-item-object-page "
+                          className="menu-item menu-item-type-post_type menu-item-object-page"
                         >
                           <a href="https://choezekuchen.com/teaching/the-perfect-way-to-practice-2/">
                             <span>THE PERFECT WAY TO PRACTICE</span>
@@ -672,7 +607,7 @@ const Header: React.FC<{}> = () => {
                     </li>
                     <li
                       id="mobile-menu-item-2095"
-                      className="menu-item menu-item-type-post_type menu-item-object-page "
+                      className="menu-item menu-item-type-post_type menu-item-object-page"
                     >
                       <a href="https://choezekuchen.com/ngondro/">
                         <span>NGONDRO</span>
@@ -684,7 +619,7 @@ const Header: React.FC<{}> = () => {
                     </li>
                     <li
                       id="mobile-menu-item-1851"
-                      className="menu-item menu-item-type-post_type menu-item-object-page "
+                      className="menu-item menu-item-type-post_type menu-item-object-page"
                     >
                       <a href="https://choezekuchen.com/teaching/phowa-practice/">
                         <span>PHOWA PRACTICE</span>
@@ -696,7 +631,7 @@ const Header: React.FC<{}> = () => {
                     </li>
                     <li
                       id="mobile-menu-item-2086"
-                      className="menu-item menu-item-type-post_type menu-item-object-page "
+                      className="menu-item menu-item-type-post_type menu-item-object-page"
                     >
                       <a href="https://choezekuchen.com/achi-chokyi-drolma/">
                         <span>ACHI CHOKYI DROLMA</span>
@@ -708,7 +643,7 @@ const Header: React.FC<{}> = () => {
                     </li>
                     <li
                       id="mobile-menu-item-2082"
-                      className="menu-item menu-item-type-post_type menu-item-object-page "
+                      className="menu-item menu-item-type-post_type menu-item-object-page"
                     >
                       <a href="https://choezekuchen.com/guru-rinpoche/">
                         <span>GURU RINPOCHE</span>
@@ -720,7 +655,7 @@ const Header: React.FC<{}> = () => {
                     </li>
                     <li
                       id="mobile-menu-item-2096"
-                      className="menu-item menu-item-type-post_type menu-item-object-page "
+                      className="menu-item menu-item-type-post_type menu-item-object-page"
                     >
                       <a href="https://choezekuchen.com/vajrasattva/">
                         <span>VAJRASATTVA</span>
@@ -734,7 +669,7 @@ const Header: React.FC<{}> = () => {
                 </li>
                 <li
                   id="mobile-menu-item-1063"
-                  className="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children  has_sub"
+                  className="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children has_sub"
                 >
                   <a href="https://choezekuchen.com/monastery/">
                     <span>Monastery</span>
@@ -746,7 +681,7 @@ const Header: React.FC<{}> = () => {
                   <ul className="sub_menu">
                     <li
                       id="mobile-menu-item-2105"
-                      className="menu-item menu-item-type-post_type menu-item-object-page "
+                      className="menu-item menu-item-type-post_type menu-item-object-page"
                     >
                       <a href="https://choezekuchen.com/about-rinpoche/history-of-choeze-kuchen-rinpoche-2/">
                         <span>TIBET – CHOEZE MONASTARY</span>
@@ -758,7 +693,7 @@ const Header: React.FC<{}> = () => {
                     </li>
                     <li
                       id="mobile-menu-item-2076"
-                      className="menu-item menu-item-type-post_type menu-item-object-page "
+                      className="menu-item menu-item-type-post_type menu-item-object-page"
                     >
                       <a href="https://choezekuchen.com/monastery/tibetan-monastery/">
                         <span>BUTAN PROJECTS</span>
@@ -770,7 +705,7 @@ const Header: React.FC<{}> = () => {
                     </li>
                     <li
                       id="mobile-menu-item-2109"
-                      className="menu-item menu-item-type-post_type menu-item-object-page "
+                      className="menu-item menu-item-type-post_type menu-item-object-page"
                     >
                       <a href="https://choezekuchen.com/neban/">
                         <span>NEPAL – PHARBING CENTER</span>
@@ -782,7 +717,7 @@ const Header: React.FC<{}> = () => {
                     </li>
                     <li
                       id="mobile-menu-item-1982"
-                      className="menu-item menu-item-type-post_type menu-item-object-page "
+                      className="menu-item menu-item-type-post_type menu-item-object-page"
                     >
                       <a href="https://choezekuchen.com/singapore-center/">
                         <span>SINGAPORE CENTER</span>
@@ -796,7 +731,7 @@ const Header: React.FC<{}> = () => {
                 </li>
                 <li
                   id="mobile-menu-item-2055"
-                  className="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children  has_sub"
+                  className="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children has_sub"
                 >
                   <a href="https://choezekuchen.com/prayers/">
                     <span>Prayers</span>
@@ -808,7 +743,7 @@ const Header: React.FC<{}> = () => {
                   <ul className="sub_menu">
                     <li
                       id="mobile-menu-item-2059"
-                      className="menu-item menu-item-type-post_type menu-item-object-page "
+                      className="menu-item menu-item-type-post_type menu-item-object-page"
                     >
                       <a href="https://choezekuchen.com/sadhanas/">
                         <span>Sadhanas</span>
@@ -820,7 +755,7 @@ const Header: React.FC<{}> = () => {
                     </li>
                     <li
                       id="mobile-menu-item-2063"
-                      className="menu-item menu-item-type-post_type menu-item-object-page "
+                      className="menu-item menu-item-type-post_type menu-item-object-page"
                     >
                       <a href="https://choezekuchen.com/choeze-kuchen-rinpoches-chanting-audio/">
                         <span>Choeze Kuchen Rinpoche’s chanting Audio</span>
@@ -834,7 +769,7 @@ const Header: React.FC<{}> = () => {
                 </li>
                 <li
                   id="mobile-menu-item-1072"
-                  className="menu-item menu-item-type-post_type_archive menu-item-object-ai1ec_event menu-item-has-children  has_sub"
+                  className="menu-item menu-item-type-post_type_archive menu-item-object-ai1ec_event menu-item-has-children has_sub"
                 >
                   <a href="https://choezekuchen.com/event/">
                     <span>Events</span>
@@ -846,7 +781,7 @@ const Header: React.FC<{}> = () => {
                   <ul className="sub_menu">
                     <li
                       id="mobile-menu-item-1336"
-                      className="menu-item menu-item-type-post_type menu-item-object-page "
+                      className="menu-item menu-item-type-post_type menu-item-object-page"
                     >
                       <a href="https://choezekuchen.com/information-registration/">
                         <span>Information Registration</span>
@@ -860,7 +795,7 @@ const Header: React.FC<{}> = () => {
                 </li>
                 <li
                   id="mobile-menu-item-1064"
-                  className="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children  has_sub"
+                  className="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children has_sub"
                 >
                   <a href="https://choezekuchen.com/offering/">
                     <span>Offering</span>
@@ -872,7 +807,7 @@ const Header: React.FC<{}> = () => {
                   <ul className="sub_menu">
                     <li
                       id="mobile-menu-item-1334"
-                      className="menu-item menu-item-type-post_type menu-item-object-page "
+                      className="menu-item menu-item-type-post_type menu-item-object-page"
                     >
                       <a href="https://choezekuchen.com/thong-tin-dang-ky/">
                         <span>Thông Tin Đăng Ký</span>
@@ -886,7 +821,7 @@ const Header: React.FC<{}> = () => {
                 </li>
                 <li
                   id="mobile-menu-item-1060"
-                  className="menu-item menu-item-type-post_type menu-item-object-page current_page_parent "
+                  className="menu-item menu-item-type-post_type menu-item-object-page current_page_parent"
                 >
                   <a href="https://choezekuchen.com/the-blog/">
                     <span>Blog</span>
