@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
 import { THEME } from "../common";
 
 type TStyled = {
@@ -12,12 +12,5 @@ export const GlobalStyle = createGlobalStyle`
         font-family: ${(props: TStyled) => props.theme.primaryFont};
         font-size: 14px;
 
-    }
-    h1{
-      font-size:45px ;
-      font-weight:bold ;
-    }
-    .text-center{
-      text-align: center ;
     }
 `;

@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Input, Button, Checkbox, Row, Col } from "antd";
+import { Form, Input, Button, Checkbox, Row } from "antd";
 import { DivLoginWrapper } from "./index.styles";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 
@@ -8,9 +8,9 @@ const Login: React.FC<{}> = () => {
     console.log("Success:", values);
   };
 
-  const onFinishFailed = (errorInfo: any) => {
-    console.log("Failed:", errorInfo);
-  };
+  // const onFinishFailed = (errorInfo: any) => {
+  //   console.log("Failed:", errorInfo);
+  // };
 
   return (
     <DivLoginWrapper>

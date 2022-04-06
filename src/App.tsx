@@ -1,6 +1,7 @@
 import React from "react";
-import Header from "./components/Header";
+// import Header from "./components/Header";
 import Footer from "./components/Footer";
+import HeaderV1 from "./components/HeaderV1";
 import { ThemeProvider } from "styled-components";
 import { GlobalStyle } from "./styles/index.style";
 import { THEME } from "./common";
@@ -13,7 +14,7 @@ function App() {
     <Router>
       <ThemeProvider theme={THEME}>
         <GlobalStyle />
-        <Header />
+        <HeaderV1 />
         <Routes>
           <Route path="/" element={<Login />} />
           <Route path="/login" element={<Login />} />

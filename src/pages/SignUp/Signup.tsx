@@ -1,12 +1,13 @@
 import React from "react";
 import { DivSignupWrapper } from "./index.style";
-import { Form, Input, Button, Select, Row, Col } from "antd";
+import { Form, Input, Button, Row, Col } from "antd";
 // import { LockOutlined } from "@ant-design/icons";
 const layout = {
   labelCol: { span: 7 },
   wrapperCol: { span: 17 },
 };
-const { Option } = Select;
+// const { Option } = Select;
+/* eslint-disable no-template-curly-in-string */
 const validateMessages = {
   required: "${label} is required!",
   types: {
