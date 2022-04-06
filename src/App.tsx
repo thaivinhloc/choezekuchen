@@ -6,7 +6,7 @@ import { GlobalStyle } from "./styles";
 import { THEME } from "./common";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login/Login";
-import SignUp from "./pages/SignUp";
+import SignUp from "./pages/SignUp/Signup";
 
 function App() {
   return (
