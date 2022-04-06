@@ -1,7 +1,10 @@
 import styled from "styled-components";
 
 export const DivLoginWrapper = styled.div`
-  padding: 140px 0px;
+  padding: 70px 0px;
+  .header {
+    margin-bottom: 30px;
+  }
   .login-form {
     width: 500px;
   }

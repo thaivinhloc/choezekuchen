@@ -1,6 +1,6 @@
 import styled from "styled-components";
 export const DivSignupWrapper = styled.div`
-  padding: 120px 0px;
+  padding: 70px 0px;
   .signup-form {
     width: 500px;
     margin: 0 auto;
@@ -16,6 +16,7 @@ export const DivSignupWrapper = styled.div`
     margin-bottom: 12px;
   }
   .button-signup {
+    width: 100%;
     margin-top: 20px;
   }
 `;

@@ -13,4 +13,11 @@ export const GlobalStyle = createGlobalStyle`
         font-size: 14px;
 
     }
+    h1{
+      font-size:45px ;
+      font-weight:bold ;
+    }
+    .text-center{
+      text-align: center ;
+    }
 `;

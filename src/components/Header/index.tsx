@@ -1,8 +1,27 @@
-import React from "react";
-import banner from "../../assets/title-image-3.jpeg";
+import React, { useEffect, useState } from "react";
 import { DivHeaderWrapper } from "./index.style";
+import { useLocation } from "react-router-dom";
 
 const Header: React.FC<{}> = () => {
+  const location = useLocation();
+  const [title, setTitle] = useState<string>("");
+
+  useEffect(() => {
+    let text = "";
+    switch (location.pathname) {
+      case "/login":
+        text = "";
+        break;
+      case "/signup":
+        text = "";
+        break;
+      default:
+        text = "";
+        break;
+    }
+    setTitle(text);
+  }, [location.pathname]);
+
   return (
     <DivHeaderWrapper>
       <header className="has_top scroll_header_top_area stick transparent scrolled_not_transparent page_header">
@@ -850,7 +869,7 @@ const Header: React.FC<{}> = () => {
         </div>
       </header>
       <div className="title">
-        <h1>Login</h1>
+        <h1>{title}</h1>
       </div>
     </DivHeaderWrapper>
   );
