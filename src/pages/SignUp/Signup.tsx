@@ -25,9 +25,9 @@ const SignUp = () => {
 
   return (
     <DivSignupWrapper>
-      <div className="text-center">
+      {/* <div className="text-center">
         <h1>SIGN UP</h1>
-      </div>
+      </div> */}
       <Row justify="center">
         <Col span={10}>
           <Form

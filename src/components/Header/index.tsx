@@ -10,13 +10,13 @@ const Header: React.FC<{}> = () => {
     let text = "";
     switch (location.pathname) {
       case "/login":
-        text = "";
+        text = "LOGIN";
         break;
       case "/signup":
-        text = "";
+        text = "SIGN UP";
         break;
       default:
-        text = "";
+        text = "CHOEZE KUCHEN";
         break;
     }
     setTitle(text);
@@ -869,7 +869,7 @@ const Header: React.FC<{}> = () => {
         </div>
       </header>
       <div className="title">
-        <h1>CHOEZE KUCHEN</h1>
+        <h1>{title}</h1>
       </div>
     </DivHeaderWrapper>
   );

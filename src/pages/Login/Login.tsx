@@ -14,9 +14,9 @@ const Login: React.FC<{}> = () => {
 
   return (
     <DivLoginWrapper>
-      <div className="text-center">
+      {/* <div className="text-center">
         <h1 className="header">Login</h1>
-      </div>
+      </div> */}
       <Row justify="center" align="middle">
         <Form name="normal_login" className="login-form" onFinish={onFinish}>
           <Form.Item
