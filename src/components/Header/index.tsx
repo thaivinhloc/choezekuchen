@@ -1,6 +1,20 @@
+import { Button, Typography } from "antd";
 import React, { useEffect, useState } from "react";
-import { DivHeaderWrapper } from "./index.style";
+import ReactCountryFlag from "react-country-flag";
 import { useLocation } from "react-router-dom";
+import HeaderProfileDropdown from "./HeaderProfileDropdown";
+import { DivHeaderWrapper } from "./index.style";
+
+const langs = [
+  {
+    code: "GB",
+    name: "English",
+  },
+  {
+    code: "VN",
+    name: "Vietnamese",
+  },
+];
 
 const Header: React.FC<{}> = () => {
   const location = useLocation();
@@ -24,9 +38,36 @@ const Header: React.FC<{}> = () => {
 
   return (
     <DivHeaderWrapper>
-      <header className="has_top scroll_header_top_area stick transparent scrolled_not_transparent page_header">
+      <div className="has_top scroll_header_top_area stick transparent scrolled_not_transparent page_header">
         <div className="header_inner clearfix">
           <div className="header_top_bottom_holder">
+            <div
+              style={{
+                padding: "5px 45px",
+                display: "flex",
+                justifyContent: "flex-end",
+              }}
+            >
+              {langs.map((lang) => (
+                <Button type="link">
+                  <Typography.Paragraph style={{ color: "#fff" }}>
+                    <ReactCountryFlag
+                      style={{
+                        fontSize: "2em",
+                        lineHeight: "2em",
+                        marginRight: 8,
+                      }}
+                      title={lang.name}
+                      countryCode={lang.code}
+                      svg
+                    />
+                    {lang.name}
+                  </Typography.Paragraph>
+                </Button>
+              ))}
+
+              <HeaderProfileDropdown />
+            </div>
             <div
               className="header_bottom clearfix"
               style={{ backgroundColor: "rgba(255, 255, 255, 0)" }}
@@ -867,7 +908,7 @@ const Header: React.FC<{}> = () => {
             </div>
           </div>
         </div>
-      </header>
+      </div>
       <div className="title">
         <h1>{title}</h1>
       </div>

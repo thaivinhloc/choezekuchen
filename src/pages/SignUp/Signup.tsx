@@ -1,12 +1,14 @@
+import { Button, Col, Form, Input, Row } from "antd";
+import { useForm } from "antd/lib/form/Form";
 import React from "react";
+import { useAuth } from "../../context/AuthContext";
+import { TSignup } from "../../context/AuthTypes";
 import { DivSignupWrapper } from "./index.style";
-import { Form, Input, Button, Select, Row, Col } from "antd";
-// import { LockOutlined } from "@ant-design/icons";
+
 const layout = {
   labelCol: { span: 7 },
   wrapperCol: { span: 17 },
 };
-const { Option } = Select;
 const validateMessages = {
   required: "${label} is required!",
   types: {
@@ -19,8 +21,11 @@ const validateMessages = {
 };
 
 const SignUp = () => {
-  const onFinish = (values: any) => {
-    console.log(values);
+  const [form] = useForm<TSignup>();
+  const { onRegister, isLoading } = useAuth();
+
+  const onFinish = async (value: TSignup) => {
+    onRegister(value);
   };
 
   return (
@@ -31,6 +36,7 @@ const SignUp = () => {
       <Row justify="center">
         <Col span={10}>
           <Form
+            form={form}
             className="signup-form"
             {...layout}
             name="nest-messages"
@@ -38,27 +44,18 @@ const SignUp = () => {
             validateMessages={validateMessages}
           >
             <Form.Item
-              name={["user", "name"]}
+              name={"username"}
               label="Username"
               rules={[{ required: true }]}
             >
               <Input size="large" placeholder="Username" />
             </Form.Item>
             <Form.Item
-              name={["user", "email"]}
+              name={"email"}
               label="Email"
-              rules={[{ type: "email" }]}
+              rules={[{ type: "email", required: true }]}
             >
               <Input size="large" placeholder="example@gmail.com" />
-            </Form.Item>
-            <Form.Item
-              name="phone"
-              label="Phone Number"
-              rules={[
-                { required: true, message: "Please input your phone number!" },
-              ]}
-            >
-              <Input size="large" style={{ width: "100%" }} />
             </Form.Item>
             <Form.Item
               label="Password"
@@ -74,7 +71,7 @@ const SignUp = () => {
             </Form.Item>
             <Form.Item
               label="Confirm Password"
-              name="password"
+              name="confirmPassword"
               rules={[
                 {
                   required: true,
@@ -89,7 +86,12 @@ const SignUp = () => {
               />
             </Form.Item>
             <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 7 }}>
-              <Button size="large" className="button-signup" htmlType="submit">
+              <Button
+                size="large"
+                className="button-signup"
+                htmlType="submit"
+                loading={isLoading}
+              >
                 Singup
               </Button>
             </Form.Item>

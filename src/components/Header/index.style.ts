@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Banner from "../../assets/title-image-3.jpeg";
 
-export const DivHeaderWrapper = styled.div`
+export const DivHeaderWrapper = styled.header`
   background-image: url(${Banner});
   .title {
     > h1 {
