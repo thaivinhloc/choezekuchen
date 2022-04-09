@@ -5,34 +5,59 @@ import { DivTableRetreat } from "../index.style";
 const dataSource = [
   {
     key: "1",
-    name: "Mike",
-    age: 32,
-    address: "10 Downing Street",
-  },
-  {
-    key: "2",
-    name: "John",
-    age: 42,
-    address: "10 Downing Street",
+    name: "Nguyen Thi Lan Chau",
+    city: "Ho Chi Minh",
+    country: "Vietnam",
   },
 ];
 
 const columns = [
   {
-    title: "Name",
+    title: "Full Name",
     dataIndex: "name",
     key: "name",
   },
   {
-    title: "Age",
-    dataIndex: "age",
-    key: "age",
+    title: "City",
+    dataIndex: "city",
+    key: "city",
   },
   {
-    title: "Address",
-    dataIndex: "address",
-    key: "address",
+    title: "Country",
+    dataIndex: "country",
+    key: "country",
   },
+  {
+    title: "Commited",
+    dataIndex: "commited",
+    key: "commited",
+  },
+  {
+    title: "Completed",
+    dataIndex: "completed",
+    key: "completed",
+  },
+  {
+    title: "%",
+    dataIndex: "percent",
+    key: "percent",
+  },
+  {
+    title: "Daily Average",
+    dataIndex: "daily-average",
+    key: "daily-average",
+  },
+  {
+    title: "Daily Required",
+    dataIndex: "daily-required",
+    key: "daily-required",
+  },
+  {
+    title: "Updated",
+    dataIndex: "updated",
+    key: "updated",
+  },
+  
 ];
 
 const RetreatListing = () => {
