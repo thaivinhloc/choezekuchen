@@ -6,7 +6,8 @@ export const DivRetreatWrapper = styled.div`
   .ant-tabs {
     .retreat {
       &-left {
-        border-right: 1px solid;
+        padding: 0 10px;
+        text-align: center;
       }
       &__right {
         &-form {
@@ -17,8 +18,8 @@ export const DivRetreatWrapper = styled.div`
         }
         .box-title {
           /* background: #f6f6f6; */
-          background: #aca3a3;
-          color: #000;
+          background: #bf1111;
+          color: #fff;
           padding: 10px;
           font-weight: bold;
           border-bottom: 1px solid #999;
