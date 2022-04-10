@@ -80,7 +80,10 @@ const Login: React.FC<{}> = () => {
             >
               Log in
             </Button>
-            Or <Link to="/signup">register now!</Link>
+            Dont't have an account?{" "}
+            <Link to="/signup">
+              <strong>Register Now</strong>
+            </Link>
           </Form.Item>
         </Form>
       </Row>

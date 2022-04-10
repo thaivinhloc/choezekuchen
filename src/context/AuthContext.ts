@@ -7,6 +7,7 @@ type authContextType = {
   onLogin: (data: TLogin) => any;
   onRegister: (data: TSignup) => any;
   onLogout: () => any;
+  onGetMe: () => any;
 };
 
 const authContextDefaultValues: authContextType = {
@@ -15,6 +16,7 @@ const authContextDefaultValues: authContextType = {
   onLogin: (data: TLogin) => {},
   onRegister: async (data: TSignup) => {},
   onLogout: () => {},
+  onGetMe: () => {},
 };
 
 export const AuthContext = createContext<authContextType>(

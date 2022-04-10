@@ -9,10 +9,9 @@ type Props = {
   children: ReactNode;
 };
 export function AuthProvider({ children }: Props) {
+  const navigate = useNavigate();
   const [user, setUser] = useState<IUser | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-
-  const navigate = useNavigate();
 
   const onLogin = async (data: TLogin) => {
     try {
@@ -30,6 +29,7 @@ export function AuthProvider({ children }: Props) {
       setIsLoading(false);
     }
   };
+
   const onLogout = () => {
     localStorage.removeItem("token");
     setUser(null);
@@ -55,6 +55,20 @@ export function AuthProvider({ children }: Props) {
       setIsLoading(false);
     }
   };
+
+  const onGetMe = async () => {
+    try {
+      console.log("get me");
+      const result: IUser = await Client.get("/users/me");
+      console.log("result", result);
+      setUser(result);
+    } catch (error: any) {
+      notification.error({
+        message: "Error",
+        description: error?.error?.message || "",
+      });
+    }
+  };
   return (
     <AuthContext.Provider
       value={{
@@ -63,6 +77,7 @@ export function AuthProvider({ children }: Props) {
         onRegister,
         onLogout,
         isLoading,
+        onGetMe,
       }}
     >
       {children}

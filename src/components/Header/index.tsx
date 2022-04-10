@@ -1,30 +1,47 @@
 import { Button, Typography } from "antd";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useLayoutEffect } from "react";
 import ReactCountryFlag from "react-country-flag";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 import HeaderProfileDropdown from "./HeaderProfileDropdown";
 import { DivHeaderWrapper } from "./index.style";
 
 const langs = [
-  {
-    code: "GB",
-    name: "English",
-  },
+  // {
+  //   code: "GB",
+  //   name: "English",
+  // },
   {
     code: "VN",
-    name: "Vietnamese",
+    name: "",
   },
 ];
 
 const Header: React.FC<{}> = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const [title, setTitle] = useState<string>("");
+  const token = localStorage.getItem("token");
+  const { onGetMe, user } = useAuth();
+
+  useLayoutEffect(() => {
+    if (token && !user) {
+      onGetMe();
+    }
+  }, []);
+
+  useLayoutEffect(() => {
+    const isPrivateRoute = ["/login", "signup"].includes(location.pathname);
+    if (isPrivateRoute && token) {
+      navigate("/");
+    }
+  }, [location.pathname, token, navigate]);
 
   useEffect(() => {
     let text = "";
     switch (location.pathname) {
       case "/login":
-        text = "LOGIN";
+        text = "LOG IN";
         break;
       case "/signup":
         text = "SIGN UP";

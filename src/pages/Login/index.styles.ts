@@ -16,6 +16,6 @@ export const DivLoginWrapper = styled.div`
   }
   .login-form-button {
     width: 100%;
-    margin-bottom: 12px;
+    margin-bottom: 14px;
   }
 `;

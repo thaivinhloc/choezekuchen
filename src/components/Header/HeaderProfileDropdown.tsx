@@ -9,17 +9,22 @@ const HeaderProfileDropdown = () => {
   const auth = useAuth();
   const { onLogout } = useAuth();
   const user = auth.user as IUser;
+
   const menu = (
     <Menu>
       <Menu.Item key="0">
-        <a href="/profile">Profile</a>
+        <Link to="/profile">Profile</Link>
+      </Menu.Item>
+      <Menu.Item key="2">
+        <Link to="/retreat">Retreat</Link>
       </Menu.Item>
       <Menu.Divider />
-      <Menu.Item key="1" onClick={onLogout}>
+      <Menu.Item key="3" onClick={onLogout}>
         Log out
       </Menu.Item>
     </Menu>
   );
+
   return (
     <>
       {!user?.username ? (

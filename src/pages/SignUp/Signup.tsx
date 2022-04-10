@@ -1,6 +1,7 @@
 import { Button, Col, Form, Input, Row } from "antd";
 import { useForm } from "antd/lib/form/Form";
 import React from "react";
+import { Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { TSignup } from "../../context/AuthTypes";
 import { DivSignupWrapper } from "./index.style";
@@ -33,70 +34,74 @@ const SignUp = () => {
       {/* <div className="text-center">
         <h1>SIGN UP</h1>
       </div> */}
-      <Row justify="center">
-        <Col span={10}>
-          <Form
-            form={form}
-            className="signup-form"
-            {...layout}
-            name="nest-messages"
-            onFinish={onFinish}
-            validateMessages={validateMessages}
+      <Row justify="center" align="middle">
+        {/* <Col span={10}> */}
+        <Form
+          form={form}
+          className="signup-form"
+          {...layout}
+          // name="nest-messages"
+          onFinish={onFinish}
+          validateMessages={validateMessages}
+        >
+          <Form.Item
+            name={"username"}
+            label="Username"
+            rules={[{ required: true }]}
           >
-            <Form.Item
-              name={"username"}
-              label="Username"
-              rules={[{ required: true }]}
+            <Input size="large" placeholder="Username" />
+          </Form.Item>
+          <Form.Item
+            name={"email"}
+            label="Email"
+            rules={[{ type: "email", required: true }]}
+          >
+            <Input size="large" placeholder="example@gmail.com" />
+          </Form.Item>
+          <Form.Item
+            label="Password"
+            name="password"
+            rules={[
+              {
+                required: true,
+                message: "Please input your Password!",
+              },
+            ]}
+          >
+            <Input size="large" type="password" placeholder="Password" />
+          </Form.Item>
+          <Form.Item
+            label="Confirm Password"
+            name="confirmPassword"
+            rules={[
+              {
+                required: true,
+                message: "Please input your Confirm Password!",
+              },
+            ]}
+          >
+            <Input
+              size="large"
+              type="password"
+              placeholder="Confirm Password"
+            />
+          </Form.Item>
+          <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 7 }}>
+            <Button
+              size="large"
+              className="button-signup"
+              htmlType="submit"
+              loading={isLoading}
             >
-              <Input size="large" placeholder="Username" />
-            </Form.Item>
-            <Form.Item
-              name={"email"}
-              label="Email"
-              rules={[{ type: "email", required: true }]}
-            >
-              <Input size="large" placeholder="example@gmail.com" />
-            </Form.Item>
-            <Form.Item
-              label="Password"
-              name="password"
-              rules={[
-                {
-                  required: true,
-                  message: "Please input your Password!",
-                },
-              ]}
-            >
-              <Input size="large" type="password" placeholder="Password" />
-            </Form.Item>
-            <Form.Item
-              label="Confirm Password"
-              name="confirmPassword"
-              rules={[
-                {
-                  required: true,
-                  message: "Please input your Confirm Password!",
-                },
-              ]}
-            >
-              <Input
-                size="large"
-                type="password"
-                placeholder="Confirm Password"
-              />
-            </Form.Item>
-            <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 7 }}>
-              <Button
-                size="large"
-                className="button-signup"
-                htmlType="submit"
-                loading={isLoading}
-              >
-                Singup
-              </Button>
-            </Form.Item>
-          </Form>
-        </Col>
+              Singup
+            </Button>
+            Already have member?{" "}
+            <Link to="/login">
+              <strong>Log In</strong>
+            </Link>
+          </Form.Item>
+        </Form>
+        {/* </Col> */}
       </Row>
     </DivSignupWrapper>
   );
