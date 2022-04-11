@@ -69,6 +69,15 @@ export function AuthProvider({ children }: Props) {
       });
     }
   };
+
+  const onResetPassword = async () => {
+    try {
+      const result = await Client.post("/auth/reset-password");
+      console.log("------result", result);
+    } catch (error) {
+      console.log("----error", error);
+    }
+  };
   return (
     <AuthContext.Provider
       value={{
@@ -78,6 +87,7 @@ export function AuthProvider({ children }: Props) {
         onLogout,
         isLoading,
         onGetMe,
+        onResetPassword,
       }}
     >
       {children}

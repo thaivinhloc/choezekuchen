@@ -9,14 +9,17 @@ const layout = {
   wrapperCol: { span: 24 },
 };
 const Profile = () => {
-  const { user } = useAuth();
+  const { user, onResetPassword } = useAuth();
   const [form] = useForm();
 
-  type TRenderItem = {
-    title: string;
+  type TResetPassword = {
+    currentPassword: string;
     content: string;
   };
-  const onFinish = async (value: any) => {};
+
+  const onFinish = async (value: any) => {
+    // onResetPassword();
+  };
   return (
     <DivProfileWrapper>
       <div>
@@ -64,8 +67,8 @@ const Profile = () => {
                 <Input size="large" type="password" placeholder="Password" />
               </Form.Item>
               <Form.Item
-                label="Password"
-                name="password"
+                label="New Password"
+                name="newPassword"
                 rules={[
                   {
                     required: true,

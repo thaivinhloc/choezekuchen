@@ -1,15 +1,50 @@
 import { Button, Col, Divider, Form, Input, Row } from "antd";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { DivRetreatWrapper } from "./index.style";
 import { Tabs } from "antd";
 import RetreatListing from "./components/RetreatListing";
 import { useAuth } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import Client from "../../services/client";
 const { TabPane } = Tabs;
+
+export interface User {
+  name: string;
+  commited: number;
+  completed: number;
+  due: number;
+  dailyAverage: number;
+  dailyRequired: number;
+  lastUpdated: string;
+}
+
+export interface IResponseRetreat {
+  name: string;
+  description?: any;
+  totalCommitment: number;
+  totalGroupCompleted: number;
+  totalParticipants: number;
+  user?: User;
+}
 
 const Retreat = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
+  const [dataRetreat, setDataRetreat] = useState<IResponseRetreat | null>(null);
+
+  useEffect(() => {
+    getRetreatPublic();
+  }, []);
+
+  const getRetreatPublic = async () => {
+    try {
+      const result: IResponseRetreat = await Client.get("/active-retreat");
+      setDataRetreat(result);
+    } catch (error) {
+      console.log("----err", error);
+    }
+  };
+
   function callback(key: any) {
     console.log(key);
   }
@@ -36,6 +71,8 @@ const Retreat = () => {
     }
   };
 
+  const userRetreat: User | undefined = dataRetreat?.user;
+
   return (
     <DivRetreatWrapper>
       <Tabs defaultActiveKey="1" onChange={callback}>
@@ -44,7 +81,8 @@ const Retreat = () => {
             <Col span={7} className="retreat__right">
               <div className="retreat__right-form">
                 <div className="box-title">
-                  Update your 100-syllable mantra recitation
+                  {dataRetreat?.name ||
+                    "Update your 100-syllable mantra recitation"}
                 </div>
                 <div className="retreat-submit">
                   <Form>
@@ -56,20 +94,52 @@ const Retreat = () => {
                     </div>
                   </Form>
                 </div>
-                <div className="box-title">Nguyen Thi Lan Chau</div>
-                <div className="box-content">
-                  <RenderItem title="Commited:" content="10,800" />
-                  <RenderItem title="Completed:" content="0" />
-                  <RenderItem title="Due:" content="10,800" />
-                  <RenderItem title="Daily Everage:" content="0" />
-                  <RenderItem title="Daily Required:" content="10,478" />
-                  <RenderItem title="Last Updated:" content="" />
-                </div>
+                {dataRetreat?.user && (
+                  <>
+                    <div className="box-title">{userRetreat?.name || ""}</div>
+                    <div className="box-content">
+                      <RenderItem
+                        title="Commited:"
+                        content={userRetreat?.commited || 0}
+                      />
+                      <RenderItem
+                        title="Completed:"
+                        content={userRetreat?.completed || 0}
+                      />
+                      <RenderItem
+                        title="Due:"
+                        content={userRetreat?.due || 0}
+                      />
+                      <RenderItem
+                        title="Daily Everage:"
+                        content={userRetreat?.dailyAverage || 0}
+                      />
+                      <RenderItem
+                        title="Daily Required:"
+                        content={userRetreat?.dailyRequired || 0}
+                      />
+                      <RenderItem
+                        title="Last Updated:"
+                        content={userRetreat?.lastUpdated || 0}
+                      />
+                    </div>
+                  </>
+                )}
+
                 <div className="box-title">Group Commitment</div>
                 <div className="box-content">
-                  <RenderItem title="Total Commitment:" content="100,000" />
-                  <RenderItem title="No. of Participants:" content="0" />
-                  <RenderItem title="Group Completed:" content="33,833" />
+                  <RenderItem
+                    title="Total Commitment:"
+                    content={dataRetreat?.totalCommitment || 0}
+                  />
+                  <RenderItem
+                    title="No. of Participants:"
+                    content={dataRetreat?.totalParticipants || 0}
+                  />
+                  <RenderItem
+                    title="Group Completed:"
+                    content={dataRetreat?.totalGroupCompleted || 0}
+                  />
                   <RenderItem title="Due:" content="66,167" />
                 </div>
               </div>
