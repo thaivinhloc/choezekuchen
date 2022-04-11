@@ -1,13 +1,54 @@
+import { Button, Typography } from "antd";
 import React from "react";
+import ReactCountryFlag from "react-country-flag";
+import HeaderProfileDropdown from "../Header/HeaderProfileDropdown";
 import { DivHeaderWrapperV1 } from "./index.style";
-const index = () => {
+
+const langs = [
+  // {
+  //   code: "GB",
+  //   name: "English",
+  // },
+  {
+    code: "VN",
+    name: "",
+  },
+];
+const HeaderV1 = () => {
   return (
     <DivHeaderWrapperV1>
       {/* Search Popup */}
 
       {/* Navigation menu (default bg-primary) */}
-      <header className="demo demo1">
-        <nav className="navbar bg-primary">
+      <header className="demo demo1 bg-primary">
+        <div
+          style={{
+            padding: "5px 45px",
+            display: "flex",
+            justifyContent: "flex-end",
+          }}
+        >
+          {langs.map((lang) => (
+            <Button type="link">
+              <Typography.Paragraph style={{ color: "#fff" }}>
+                <ReactCountryFlag
+                  style={{
+                    fontSize: "2em",
+                    lineHeight: "2em",
+                    marginRight: 8,
+                  }}
+                  title={lang.name}
+                  countryCode={lang.code}
+                  svg
+                />
+                {lang.name}
+              </Typography.Paragraph>
+            </Button>
+          ))}
+
+          <HeaderProfileDropdown />
+        </div>
+        <nav className="navbar ">
           <div className="navbar-logo">
             <i
               style={{ fontSize: 28, color: "$dark" }}
@@ -214,4 +255,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default HeaderV1;

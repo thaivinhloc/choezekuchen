@@ -17,6 +17,6 @@ export const DivSignupWrapper = styled.div`
   }
   .button-signup {
     width: 100%;
-    margin-top: 20px;
+    margin: 5px 0px 12px;
   }
 `;

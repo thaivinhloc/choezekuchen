@@ -1,11 +1,18 @@
+import { LockOutlined, UserOutlined } from "@ant-design/icons";
+import { Button, Checkbox, Form, Input, Row } from "antd";
+import { useForm } from "antd/lib/form/Form";
 import React from "react";
-import { Form, Input, Button, Checkbox, Row } from "antd";
+import { Link } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
+import { TLogin } from "../../context/AuthTypes";
 import { DivLoginWrapper } from "./index.styles";
-import { UserOutlined, LockOutlined } from "@ant-design/icons";
 
 const Login: React.FC<{}> = () => {
-  const onFinish = (values: any) => {
-    console.log("Success:", values);
+  const [form] = useForm<TLogin>();
+  const { onLogin, user, isLoading } = useAuth();
+
+  const onFinish = (values: TLogin) => {
+    onLogin(values);
   };
 
   // const onFinishFailed = (errorInfo: any) => {
@@ -14,14 +21,16 @@ const Login: React.FC<{}> = () => {
 
   return (
     <DivLoginWrapper>
-      <div className="text-center">
-        <h1 className="header">Login</h1>
-      </div>
       <Row justify="center" align="middle">
-        <Form name="normal_login" className="login-form" onFinish={onFinish}>
+        <Form
+          name="normal_login"
+          form={form}
+          className="login-form"
+          onFinish={onFinish}
+        >
           <Form.Item
             label="Username"
-            name="username"
+            name="identifier"
             rules={[
               {
                 required: true,
@@ -67,10 +76,14 @@ const Login: React.FC<{}> = () => {
               size="large"
               htmlType="submit"
               className="login-form-button"
+              loading={isLoading}
             >
               Log in
             </Button>
-            Or <a href="/signup">register now!</a>
+            Dont't have an account?{" "}
+            <Link to="/signup">
+              <strong>Register Now</strong>
+            </Link>
           </Form.Item>
         </Form>
       </Row>

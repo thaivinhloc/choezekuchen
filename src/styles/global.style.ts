@@ -19,5 +19,17 @@ export const GlobalStyle = createGlobalStyle`
     }
     .text-center{
       text-align: center ;
+    };
+    p{
+      color:#000 ;
+    }
+    .d-flex{
+      display:flex ;
+    }
+    .bold{
+      font-weight:bold ;
+    }
+    .text-center{
+      text-align:center ;
     }
 `;
