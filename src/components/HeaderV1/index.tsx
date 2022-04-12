@@ -1,6 +1,8 @@
 import { Button, Typography } from "antd";
-import React from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import ReactCountryFlag from "react-country-flag";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
 import HeaderProfileDropdown from "../Header/HeaderProfileDropdown";
 import { DivHeaderWrapperV1 } from "./index.style";
 
@@ -15,6 +17,40 @@ const langs = [
   },
 ];
 const HeaderV1 = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+  const [title, setTitle] = useState<string>("");
+  const token = localStorage.getItem("token");
+  const { onGetMe, user } = useAuth();
+
+  useLayoutEffect(() => {
+    if (token && !user) {
+      onGetMe();
+    }
+  }, []);
+
+  useLayoutEffect(() => {
+    const isPrivateRoute = ["/login", "signup"].includes(location.pathname);
+    if (isPrivateRoute && token) {
+      navigate("/");
+    }
+  }, [location.pathname, token, navigate]);
+
+  useEffect(() => {
+    let text = "";
+    switch (location.pathname) {
+      case "/login":
+        text = "LOG IN";
+        break;
+      case "/signup":
+        text = "SIGN UP";
+        break;
+      default:
+        text = "CHOEZE KUCHEN";
+        break;
+    }
+    setTitle(text);
+  }, [location.pathname]);
   return (
     <DivHeaderWrapperV1>
       {/* Search Popup */}

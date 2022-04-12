@@ -123,7 +123,6 @@ export const DivHeaderWrapperV1 = styled.div`
     background: ${(props: TStyled) => props.theme.primary};
     background-image: url("https://choezekuchen.com/wp-content/uploads/2022/01/title-image-3.jpeg?690ea8");
     background-size: auto;
-    z-index: 99999;
     .navbar-toggler,
     .nav-link,
     .utils-search {
