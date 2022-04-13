@@ -59,6 +59,13 @@ const SignUp = () => {
             <Input size="large" placeholder="example@gmail.com" />
           </Form.Item>
           <Form.Item
+            name={"address"}
+            label="Address"
+            rules={[{ required: false }]}
+          >
+            <Input size="large" placeholder="Your address" />
+          </Form.Item>
+          <Form.Item
             label="Password"
             name="password"
             rules={[
@@ -93,7 +100,7 @@ const SignUp = () => {
               htmlType="submit"
               loading={isLoading}
             >
-              Singup
+              Signup
             </Button>
             Already have member?{" "}
             <Link to="/login">
