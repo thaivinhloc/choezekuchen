@@ -1,4 +1,4 @@
-import { Button, Col, Form, Input, Row } from "antd";
+import { Button, Form, Input, Row } from "antd";
 import { useForm } from "antd/lib/form/Form";
 import React from "react";
 import { Link } from "react-router-dom";
@@ -78,6 +78,18 @@ const SignUp = () => {
                 required: true,
                 message: "Please input your Confirm Password!",
               },
+              ({ getFieldValue }) => ({
+                validator(_, value) {
+                  if (!value || getFieldValue("password") === value) {
+                    return Promise.resolve();
+                  }
+                  return Promise.reject(
+                    new Error(
+                      "The two passwords that you entered do not match!"
+                    )
+                  );
+                },
+              }),
             ]}
           >
             <Input
@@ -93,7 +105,7 @@ const SignUp = () => {
               htmlType="submit"
               loading={isLoading}
             >
-              Singup
+              Sign Up
             </Button>
             Already have member?{" "}
             <Link to="/login">

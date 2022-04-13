@@ -39,6 +39,7 @@ export const DivRetreatWrapper = styled.div`
       &-content {
         padding: 10px;
         text-align: right;
+        width: 94%;
       }
       &-submit {
         padding: 10px;

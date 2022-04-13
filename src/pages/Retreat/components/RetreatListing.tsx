@@ -1,21 +1,16 @@
 import { Table } from "antd";
 import React from "react";
+import { IResponseListRetreat, IUser } from "../../../services/retreatTypes";
 import { DivTableRetreat } from "../index.style";
-
-const dataSource = [
-  {
-    key: "1",
-    name: "Nguyen Thi Lan Chau",
-    city: "Ho Chi Minh",
-    country: "Vietnam",
-  },
-];
 
 const columns = [
   {
     title: "Full Name",
-    dataIndex: "name",
-    key: "name",
+    dataIndex: "user",
+    key: "user",
+    render: (user: IUser) => {
+      return <span>{user.username}</span>;
+    },
   },
   {
     title: "City",
@@ -44,26 +39,27 @@ const columns = [
   },
   {
     title: "Daily Average",
-    dataIndex: "daily-average",
-    key: "daily-average",
+    dataIndex: "dailyAverage",
+    key: "dailyAverage",
   },
   {
     title: "Daily Required",
-    dataIndex: "daily-required",
-    key: "daily-required",
+    dataIndex: "dailyRequired",
+    key: "dailyRequired",
   },
   {
     title: "Updated",
-    dataIndex: "updated",
-    key: "updated",
+    dataIndex: "lastUpdated",
+    key: "lastUpdated",
   },
-  
 ];
 
-const RetreatListing = () => {
+const RetreatListing: React.FC<{ listRetreat: IResponseListRetreat[] }> = ({
+  listRetreat,
+}) => {
   return (
     <DivTableRetreat>
-      <Table dataSource={dataSource} columns={columns} />
+      <Table dataSource={listRetreat} columns={columns} />
     </DivTableRetreat>
   );
 };
