@@ -6,6 +6,7 @@ import Footer from "./components/Footer";
 import Header from "./components/Header";
 import HeaderV1 from "./components/HeaderV1";
 import HeaderMobile from "./components/HeaderV1/HeaderMobile";
+import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import { AuthProvider } from "./context/AuthProvider";
 import Home from "./pages/Home";
 import Login from "./pages/Login/Login";
@@ -23,7 +24,9 @@ function App() {
           {/* <HeaderV1 /> */}
           <HeaderMobile />
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route element={<PrivateRoute />}>
+              <Route path="/" element={<Home />} />
+            </Route>
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/retreat" element={<Retreat />} />

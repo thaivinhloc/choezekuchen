@@ -1,9 +1,9 @@
 import { ReactNode, useState } from "react";
-import Client from "../services/client";
 import { AuthContext } from "./AuthContext";
 import { IResponseLogin, IUser, TLogin, TSignup } from "./AuthTypes";
 import { useNavigate } from "react-router-dom";
 import { notification } from "antd";
+import Client from "../services/Client";
 
 type Props = {
   children: ReactNode;
@@ -16,14 +16,19 @@ export function AuthProvider({ children }: Props) {
   const onLogin = async (data: TLogin) => {
     try {
       setIsLoading(true);
-      const result: IResponseLogin = await Client.post("/auth/local", data);
+      const result: IResponseLogin = await Client.createRequest({
+        path: "/api/auth/local",
+        method: "post",
+        body: data,
+        external: true,
+      });
       localStorage.setItem("token", result.jwt);
       setUser(result.user);
       navigate("/retreat");
     } catch (error: any) {
       notification.error({
         message: "Error",
-        description: error?.error?.message || "",
+        description: error || "",
       });
     } finally {
       setIsLoading(false);
@@ -35,14 +40,17 @@ export function AuthProvider({ children }: Props) {
     setUser(null);
     navigate("/login");
   };
+
   const onRegister = async (data: TSignup) => {
     try {
       setIsLoading(true);
+      const result: IResponseLogin = await Client.createRequest({
+        path: "/api/auth/local/register",
+        method: "post",
+        body: data,
+        external: true,
+      });
 
-      const result: IResponseLogin = await Client.post(
-        "/auth/local/register",
-        data
-      );
       localStorage.setItem("token", result.jwt);
       setUser(result.user);
       navigate("/retreat");
@@ -58,8 +66,10 @@ export function AuthProvider({ children }: Props) {
 
   const onGetMe = async () => {
     try {
-      console.log("get me");
-      const result: IUser = await Client.get("/users/me");
+      const result: IUser = await Client.createRequest({
+        path: "/api/users/me",
+        method: "get",
+      });
       console.log("result", result);
       setUser(result);
     } catch (error: any) {
@@ -67,6 +77,17 @@ export function AuthProvider({ children }: Props) {
         message: "Error",
         description: error?.error?.message || "",
       });
+    }
+  };
+
+  const onResetPassword = async () => {
+    try {
+      const result = await Client.createRequest({
+        path: "/api/auth/reset-password",
+        method: "post",
+      });
+    } catch (error) {
+      console.log("----error", error);
     }
   };
   return (
@@ -78,6 +99,7 @@ export function AuthProvider({ children }: Props) {
         onLogout,
         isLoading,
         onGetMe,
+        onResetPassword,
       }}
     >
       {children}

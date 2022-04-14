@@ -5,6 +5,7 @@ export type TLogin = {
 export type TSignup = {
   username: string;
   email: string;
+  address: string;
   password: string;
   confirmPassword: string;
 };

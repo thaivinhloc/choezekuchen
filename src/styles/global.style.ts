@@ -32,4 +32,20 @@ export const GlobalStyle = createGlobalStyle`
     .text-center{
       text-align:center ;
     }
+    .ellipsis {
+        display: -webkit-box !important;
+        -webkit-line-clamp: 1 !important;
+        -webkit-box-orient: vertical !important;
+        overflow: hidden !important;
+        white-space: normal !important;
+        &-1 {
+        width: calc(90%);
+        overflow: hidden;
+        position: relative;
+        display: inline-block ;
+        text-decoration: none;
+        text-overflow: ellipsis;
+        white-space: nowrap ;
+        }
+    }
 `;

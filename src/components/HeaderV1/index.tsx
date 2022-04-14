@@ -192,7 +192,6 @@ const HeaderV1 = () => {
                 </li>
               </ul>
             </li>
-
             <li className="nav-item">
               <a href="#" className="nav-link">
                 TEACHING

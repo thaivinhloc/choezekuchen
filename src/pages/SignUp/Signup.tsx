@@ -1,7 +1,7 @@
-import { Button, Col, Form, Input, Row } from "antd";
+import { Button, Form, Input, Row } from "antd";
 import { useForm } from "antd/lib/form/Form";
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { TSignup } from "../../context/AuthTypes";
 import { DivSignupWrapper } from "./index.style";
@@ -23,7 +23,12 @@ const validateMessages = {
 const SignUp = () => {
   const [form] = useForm<TSignup>();
   const { onRegister, isLoading } = useAuth();
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    const token = !!localStorage.getItem("token");
+    if (token) navigate("/");
+  }, []);
   const onFinish = async (value: TSignup) => {
     onRegister(value);
   };
@@ -58,6 +63,13 @@ const SignUp = () => {
             <Input size="large" placeholder="example@gmail.com" />
           </Form.Item>
           <Form.Item
+            name={"address"}
+            label="Address"
+            rules={[{ required: false }]}
+          >
+            <Input size="large" placeholder="Your address" />
+          </Form.Item>
+          <Form.Item
             label="Password"
             name="password"
             rules={[
@@ -77,6 +89,18 @@ const SignUp = () => {
                 required: true,
                 message: "Please input your Confirm Password!",
               },
+              ({ getFieldValue }) => ({
+                validator(_, value) {
+                  if (!value || getFieldValue("password") === value) {
+                    return Promise.resolve();
+                  }
+                  return Promise.reject(
+                    new Error(
+                      "The two passwords that you entered do not match!"
+                    )
+                  );
+                },
+              }),
             ]}
           >
             <Input
@@ -92,7 +116,7 @@ const SignUp = () => {
               htmlType="submit"
               loading={isLoading}
             >
-              Singup
+              Sign Up
             </Button>
             Already have member?{" "}
             <Link to="/login">
