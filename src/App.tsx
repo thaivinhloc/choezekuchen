@@ -5,6 +5,7 @@ import { THEME } from "./common";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import HeaderV1 from "./components/HeaderV1";
+import HeaderMobile from "./components/HeaderV1/HeaderMobile";
 import { AuthProvider } from "./context/AuthProvider";
 import Home from "./pages/Home";
 import Login from "./pages/Login/Login";
@@ -19,7 +20,8 @@ function App() {
       <ThemeProvider theme={THEME}>
         <GlobalStyle />
         <AuthProvider>
-          <HeaderV1 />
+          {/* <HeaderV1 /> */}
+          <HeaderMobile />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />

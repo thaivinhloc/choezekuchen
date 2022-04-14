@@ -49,12 +49,6 @@ export const DivHeaderWrapperV1 = styled.div`
           border-radius: 2px;
           white-space: nowrap;
           margin-right: 16px;
-
-          /* color: #636363;
-          white-space: unset;
-          padding: 0;
-          text-align: right;
-          margin: 0; */
           &:hover {
             border: 2px solid #fff;
           }
@@ -86,14 +80,6 @@ export const DivHeaderWrapperV1 = styled.div`
   .dropdown {
     &-nav-item {
       padding: 5px 0;
-      /* .q_menu_arrow {
-        display: inline-block;
-        float: right;
-        position: relative;
-        top: 2px;
-        font-size: 12px;
-        color: #888;
-      } */
       .arrow-right {
         display: block;
         margin: 5px auto;
@@ -153,7 +139,7 @@ export const DivHeaderWrapperV1 = styled.div`
         color: ${(props: TStyled) => props.theme.default};
       }
       .dropdown {
-        top: 0;
+        top: -10px;
         left: calc(100% + 10px);
         &:before {
           top: 10px;
@@ -226,6 +212,35 @@ export const DivHeaderWrapperV1 = styled.div`
     }
     &:hover > a::before {
       transform: rotate(90deg);
+    }
+  }
+`;
+
+export const DivHeaderMobile = styled.div`
+  button {
+    background: none;
+    border: none;
+    box-shadow: none;
+    height: 90px;
+    width: 100%;
+  }
+  .ant-btn-primary:hover,
+  .ant-btn-primary:focus {
+    /* color: #fff; */
+    border-color: none;
+    background: none;
+  }
+  .headermobile {
+    /* justify-content: space-between; */
+    justify-content: space-between;
+    align-items: center;
+    &-logo {
+      height: 60px;
+      width: 60px;
+    }
+    &-ICTab {
+      width: 20px;
+      height: 20px;
     }
   }
 `;

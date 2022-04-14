@@ -2,6 +2,7 @@ import { Button, Typography } from "antd";
 import React, { useEffect, useLayoutEffect, useState } from "react";
 import ReactCountryFlag from "react-country-flag";
 import { useLocation, useNavigate } from "react-router-dom";
+import { ROUTES } from "../../common/routes";
 import { useAuth } from "../../context/AuthContext";
 import HeaderProfileDropdown from "../Header/HeaderProfileDropdown";
 import { DivHeaderWrapperV1 } from "./index.style";
@@ -104,12 +105,49 @@ const HeaderV1 = () => {
                 <span className="close-btn">+</span>
               </button>
             </li>
-            <li className="nav-item">
+            {ROUTES.map((route) => (
+              <li className="nav-item" key={route.path}>
+                <a href={route.path} className="nav-link">
+                  {route.label}
+                </a>
+                {route.childrent.length > 0 && (
+                  <ul className="dropdown">
+                    {route.childrent.map((childrent) => (
+                      <li className="dropdown-nav-item nav-item">
+                        <div style={{ display: "flex" }}>
+                          <a href={route.path} className="dropdown-nav-link">
+                            {childrent.label}
+                          </a>
+                          {childrent.childrent.length > 0 && (
+                            <div className="arrow-right" />
+                          )}
+                        </div>
+                        {childrent.childrent.length > 0 && (
+                          <ul className="dropdown">
+                            {childrent.childrent.map((route) => (
+                              <li className="dropdown-nav-item nav-item">
+                                <a
+                                  href={route.path}
+                                  className="dropdown-nav-link"
+                                >
+                                  {route.label}
+                                </a>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </li>
+            ))}
+            {/* <li className="nav-item">
               <a href="#" className="nav-link">
                 HOME
               </a>
-            </li>
-            <li className="nav-item">
+            </li> */}
+            {/* <li className="nav-item">
               <a href="#" className="nav-link">
                 ABOUT RINPOCHE
               </a>
@@ -154,6 +192,7 @@ const HeaderV1 = () => {
                 </li>
               </ul>
             </li>
+
             <li className="nav-item">
               <a href="#" className="nav-link">
                 TEACHING
@@ -283,7 +322,7 @@ const HeaderV1 = () => {
               <a href="#" className="nav-link">
                 BLOG
               </a>
-            </li>
+            </li> */}
           </ul>
         </nav>
       </header>
