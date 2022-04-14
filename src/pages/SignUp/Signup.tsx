@@ -1,7 +1,7 @@
 import { Button, Form, Input, Row } from "antd";
 import { useForm } from "antd/lib/form/Form";
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { TSignup } from "../../context/AuthTypes";
 import { DivSignupWrapper } from "./index.style";
@@ -24,7 +24,12 @@ const validateMessages = {
 const SignUp = () => {
   const [form] = useForm<TSignup>();
   const { onRegister, isLoading } = useAuth();
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    const token = !!localStorage.getItem("token");
+    if (token) navigate("/");
+  }, []);
   const onFinish = async (value: TSignup) => {
     onRegister(value);
   };

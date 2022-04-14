@@ -1,8 +1,8 @@
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Checkbox, Form, Input, Row } from "antd";
 import { useForm } from "antd/lib/form/Form";
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { TLogin } from "../../context/AuthTypes";
 import { DivLoginWrapper } from "./index.styles";
@@ -10,13 +10,15 @@ import { DivLoginWrapper } from "./index.styles";
 const Login: React.FC<{}> = () => {
   const [form] = useForm<TLogin>();
   const { onLogin, user, isLoading } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = !!localStorage.getItem("token");
+    if (token) navigate("/");
+  }, []);
 
   const onFinish = (values: TLogin) => {
     onLogin(values);
-  };
-
-  const onFinishFailed = (errorInfo: any) => {
-    console.log("Failed:", errorInfo);
   };
 
   return (
