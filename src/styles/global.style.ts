@@ -48,4 +48,13 @@ export const GlobalStyle = createGlobalStyle`
         white-space: nowrap ;
         }
     }
+    .btn-primary{
+      border:2px solid #303030 ;
+      text-transform:uppercase ;
+      &:hover,:active{
+        background-color:#1abc9c ;
+        border-color:#1abc9c ;
+        color:#fff ;
+      }
+    }
 `;
