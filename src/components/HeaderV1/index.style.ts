@@ -6,6 +6,9 @@ type TStyled = {
 };
 
 export const DivHeaderWrapperV1 = styled.div`
+  h5 {
+    background-color: red;
+  }
   .navbar-logo {
     img {
       display: block;
@@ -73,6 +76,16 @@ export const DivHeaderWrapperV1 = styled.div`
       &:focus {
         box-shadow: 0 0 0 2px rgba(#000, 0.36);
       }
+    }
+    &__title {
+      font-size: 45px;
+      line-height: 47px;
+      font-weight: 700px;
+      letter-spacing: 4px;
+      /* margin: 0 auto; */
+      text-align: center;
+      height: 100px;
+      color: #ffffff;
     }
   }
 

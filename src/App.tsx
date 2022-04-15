@@ -21,8 +21,8 @@ function App() {
       <ThemeProvider theme={THEME}>
         <GlobalStyle />
         <AuthProvider>
-          {/* <HeaderV1 /> */}
-          <HeaderMobile />
+          <HeaderV1 />
+          {/* <HeaderMobile /> */}
           <Routes>
             <Route element={<PrivateRoute />}>
               <Route path="/" element={<Home />} />

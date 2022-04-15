@@ -160,3 +160,45 @@ export const ROUTES = [
     childrent: [],
   },
 ];
+export const ROUTES_TITLE = [
+  {
+    label: "CHOEZE KUCHEN",
+    path: "/",
+    children: [],
+  },
+  {
+    label: "ABOUT RINPOCHE",
+    path: "/",
+    children: [],
+  },
+  {
+    label: "TEACHING",
+    path: "/",
+    children: [],
+  },
+  {
+    label: "MONASTERY",
+    path: "/",
+    children: [],
+  },
+  {
+    label: "PLAYERS",
+    path: "/",
+    children: [],
+  },
+  {
+    label: "ARCHIVE",
+    path: "/",
+    children: [],
+  },
+  {
+    label: "OFFERING",
+    path: "/",
+    children: [],
+  },
+  {
+    label: "BLOG",
+    path: "/",
+    children: [],
+  },
+];
