@@ -2,6 +2,7 @@ import { Button, Typography } from "antd";
 import React, { useEffect, useLayoutEffect, useState } from "react";
 import ReactCountryFlag from "react-country-flag";
 import { useLocation, useNavigate } from "react-router-dom";
+import { ROUTES } from "../../common/routes";
 import { useAuth } from "../../context/AuthContext";
 import HeaderProfileDropdown from "../Header/HeaderProfileDropdown";
 import { DivHeaderWrapperV1 } from "./index.style";
@@ -45,12 +46,19 @@ const HeaderV1 = () => {
       case "/signup":
         text = "SIGN UP";
         break;
+      case "/retreat":
+        text = "RETREAT";
+        break;
+      case "/retreat":
+        text = "RETREAT";
+        break;
       default:
         text = "CHOEZE KUCHEN";
         break;
     }
     setTitle(text);
   }, [location.pathname]);
+
   return (
     <DivHeaderWrapperV1>
       {/* Search Popup */}
@@ -286,6 +294,7 @@ const HeaderV1 = () => {
             </li>
           </ul>
         </nav>
+        <h1 className="navbar__title">{title}</h1>
       </header>
     </DivHeaderWrapperV1>
   );
