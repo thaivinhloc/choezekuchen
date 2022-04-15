@@ -1,4 +1,4 @@
-import { Button, Col, Form, Input, Row, Spin, Tabs, Tooltip } from "antd";
+import { Button, Col, Form, Input, Row, Skeleton, Tabs, Tooltip } from "antd";
 import { useForm } from "antd/lib/form/Form";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -11,7 +11,6 @@ import {
 import {
   IResponseListRetreat,
   IResponseRetreat,
-  TPostSubmitRetreat,
   User,
 } from "../../services/retreatTypes";
 import RetreatListing from "./components/RetreatListing";
@@ -120,110 +119,112 @@ const Retreat: React.FC<{}> = () => {
     <DivRetreatWrapper>
       <Tabs defaultActiveKey={tab} onChange={handleChangeTab}>
         <TabPane tab={<strong>Retreat</strong>} key={ETabPane.DETAIL}>
-          <Spin spinning={isLoading}>
-            <Row>
-              <Col span={7} className="retreat__right">
-                <div className="retreat__right-form">
-                  <div className="box-title">
-                    {dataRetreat?.name ||
-                      "Update your 100-syllable mantra recitation"}
-                  </div>
-                  <div className="retreat-submit">
-                    <Form onFinish={handleSubmit} form={form} layout="inline">
-                      {/* <div className=" retreat-submit-item"> */}
-                      <Form.Item
-                        style={{ marginRight: 0, flex: 1, marginBottom: 0 }}
-                        name="recitationNumber"
-                        rules={[
-                          {
-                            required: true,
-                            message: "Please fill out this filed",
-                          },
-                          {
-                            pattern: /^(?:\d*)$/,
-                            message: "Value should contain just number",
-                          },
-                        ]}
-                      >
-                        <Input />
-                      </Form.Item>
-                      <Button
-                        type="primary"
-                        htmlType="submit"
-                        loading={isLoadingSubmit}
-                      >
-                        <strong>Submit</strong>
-                      </Button>
-                      {/* </div> */}
-                    </Form>
-                  </div>
-                  {dataRetreat?.user && (
-                    <>
-                      <div className="box-title">{userRetreat?.name || ""}</div>
-                      <div className="box-content">
-                        <RenderItem
-                          title="Commited:"
-                          content={userRetreat?.commited || 0}
-                        />
-                        <RenderItem
-                          title="Completed:"
-                          content={userRetreat?.completed || 0}
-                        />
-                        <RenderItem
-                          title="Due:"
-                          content={userRetreat?.due || 0}
-                        />
-                        <RenderItem
-                          title="Daily Everage:"
-                          content={userRetreat?.dailyAverage || 0}
-                        />
-                        <RenderItem
-                          title="Daily Required:"
-                          content={userRetreat?.dailyRequired || 0}
-                        />
-                        <RenderItem
-                          title="Last Updated:"
-                          content={userRetreat?.lastUpdated || 0}
-                        />
-                      </div>
-                    </>
-                  )}
+          <Row>
+            <Col span={7} className="retreat__right">
+              <div className="retreat__right-form">
+                <div className="box-title">
+                  {dataRetreat?.name ||
+                    "Update your 100-syllable mantra recitation"}
+                </div>
+                <div className="retreat-submit">
+                  <Form onFinish={handleSubmit} form={form} layout="inline">
+                    {/* <div className=" retreat-submit-item"> */}
+                    <Form.Item
+                      style={{ marginRight: 0, flex: 1, marginBottom: 0 }}
+                      name="recitationNumber"
+                      rules={[
+                        {
+                          required: true,
+                          message: "Please fill out this filed",
+                        },
+                        {
+                          pattern: /^(?:\d*)$/,
+                          message: "Value should contain just number",
+                        },
+                      ]}
+                    >
+                      <Input />
+                    </Form.Item>
+                    <Button
+                      type="primary"
+                      htmlType="submit"
+                      loading={isLoadingSubmit}
+                    >
+                      <strong>Submit</strong>
+                    </Button>
+                    {/* </div> */}
+                  </Form>
+                </div>
+                {dataRetreat?.user && (
+                  <>
+                    <div className="box-title">{userRetreat?.name || ""}</div>
+                    <div className="box-content">
+                      <RenderItem
+                        title="Commited:"
+                        content={userRetreat?.commited || 0}
+                      />
+                      <RenderItem
+                        title="Completed:"
+                        content={userRetreat?.completed || 0}
+                      />
+                      <RenderItem
+                        title="Due:"
+                        content={userRetreat?.due || 0}
+                      />
+                      <RenderItem
+                        title="Daily Everage:"
+                        content={userRetreat?.dailyAverage || 0}
+                      />
+                      <RenderItem
+                        title="Daily Required:"
+                        content={userRetreat?.dailyRequired || 0}
+                      />
+                      <RenderItem
+                        title="Last Updated:"
+                        content={userRetreat?.lastUpdated || 0}
+                      />
+                    </div>
+                  </>
+                )}
 
-                  <div className="box-title">Group Commitment</div>
-                  <div className="box-content">
-                    <RenderItem
-                      title="Total Commitment:"
-                      content={dataRetreat?.totalCommitment || 0}
-                    />
-                    <RenderItem
-                      title="No. of Participants:"
-                      content={dataRetreat?.totalParticipants || 0}
-                    />
-                    <RenderItem
-                      title="Group Completed:"
-                      content={dataRetreat?.totalGroupCompleted || 0}
-                    />
-                    <RenderItem title="Due:" content={totalDue} />
-                  </div>
-                </div>
-              </Col>
-              <Col span={17} className="retreat-left">
-                <div>
-                  <h3 className="bold">{dataRetreat?.name || ""}</h3>
-                  {PATH && dataRetreat?.image && (
-                    <img src={PATH + dataRetreat?.image?.url} alt="" />
-                  )}
-                  <br />
-                  <br />
-                  <p
-                    dangerouslySetInnerHTML={{
-                      __html: dataRetreat?.description || "",
-                    }}
+                <div className="box-title">Group Commitment</div>
+                <div className="box-content">
+                  <RenderItem
+                    title="Total Commitment:"
+                    content={dataRetreat?.totalCommitment || 0}
                   />
+                  <RenderItem
+                    title="No. of Participants:"
+                    content={dataRetreat?.totalParticipants || 0}
+                  />
+                  <RenderItem
+                    title="Group Completed:"
+                    content={dataRetreat?.totalGroupCompleted || 0}
+                  />
+                  <RenderItem title="Due:" content={totalDue} />
                 </div>
-              </Col>
-            </Row>
-          </Spin>
+              </div>
+            </Col>
+            <Col span={17} className="retreat-left">
+              <div>
+                {isLoading ? (
+                  <Skeleton active />
+                ) : (
+                  <h3 className="bold">{dataRetreat?.name || ""}</h3>
+                )}
+                {PATH && dataRetreat?.image && (
+                  <img src={PATH + dataRetreat?.image?.url} alt="" />
+                )}
+                <br />
+                <br />
+                <p
+                  dangerouslySetInnerHTML={{
+                    __html: dataRetreat?.description || "",
+                  }}
+                />
+              </div>
+            </Col>
+          </Row>
         </TabPane>
         {user && (
           <TabPane
@@ -231,7 +232,7 @@ const Retreat: React.FC<{}> = () => {
             key={ETabPane.LISTING}
           >
             <div className="text-center">
-              <h3 className="bold">Winter Retreat 2021 Listing - Day 119</h3>
+              <h3 className="bold">{dataRetreat?.name}</h3>
               <RetreatListing listRetreat={listRetreat} />
             </div>
           </TabPane>

@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const DivFooterWrapper = styled.div`
   position: sticky;
   top: 100%;
-  background: #777777;
+  background: #252525;
   text-align: center;
   color: #fff;
   padding: 1rem;
@@ -13,20 +13,30 @@ export const DivFooterWrapper = styled.div`
   font-style: normal;
   font-weight: 400;
   .list-icon {
-    margin: 0 auto;
     display: flex;
-    margin: auto;
-    width: 10%;
+    align-items: center;
+    justify-content: center;
     padding-top: 20px;
-  }
-  .icon-facebook {
-    font-size: 14px !important;
-    width: 32px;
-    background-color: rgba(255, 255, 255, 0.01);
-    border: 2px solid rgb(255, 255, 255);
-    margin: 0px 8px 0px 0px;
-    font-size: 18px;
-    border-radius: 3px;
-    color: white !important;
+    .icon {
+      width: 49px;
+      height: 40px;
+      background-color: rgba(255, 255, 255, 0.01);
+      border: 2px solid rgb(255, 255, 255);
+      margin: 0px 8px 0px 0px;
+      font-size: 18px;
+      border-radius: 3px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      &:hover {
+        background: #fff;
+        > svg {
+          path {
+            fill: #000;
+          }
+        }
+      }
+    }
   }
 `;

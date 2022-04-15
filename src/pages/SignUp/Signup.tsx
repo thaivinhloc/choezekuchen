@@ -113,7 +113,7 @@ const SignUp = () => {
           <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 7 }}>
             <Button
               size="large"
-              className="button-signup"
+              className="button-signup btn-primary bold"
               htmlType="submit"
               loading={isLoading}
             >

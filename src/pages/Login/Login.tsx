@@ -77,7 +77,7 @@ const Login: React.FC<{}> = () => {
             <Button
               size="large"
               htmlType="submit"
-              className="login-form-button"
+              className="login-form-button btn-primary bold"
               loading={isLoading}
             >
               Log in
