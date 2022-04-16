@@ -46,8 +46,8 @@ const HeaderV1 = () => {
       case "/signup":
         text = "SIGN UP";
         break;
-      case "/retreat":
-        text = "RETREAT";
+      case "/profile":
+        text = "PROFILE";
         break;
       case "/retreat":
         text = "RETREAT";
