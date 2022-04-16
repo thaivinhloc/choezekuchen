@@ -14,7 +14,7 @@ const Login: React.FC<{}> = () => {
 
   useEffect(() => {
     const token = !!localStorage.getItem("token");
-    if (token) navigate("/");
+    if (token) navigate("/retreat");
   }, []);
 
   const onFinish = (values: TLogin) => {
@@ -29,6 +29,7 @@ const Login: React.FC<{}> = () => {
           form={form}
           className="login-form"
           onFinish={onFinish}
+          requiredMark={false}
         >
           <Form.Item
             label="Username"
@@ -62,15 +63,6 @@ const Login: React.FC<{}> = () => {
               type="password"
               placeholder="Password"
             />
-          </Form.Item>
-          <Form.Item>
-            <Form.Item name="remember" valuePropName="checked" noStyle>
-              <Checkbox>Remember me</Checkbox>
-            </Form.Item>
-            {/* 
-              <a className="login-form-forgot" href="#">
-                Forgot password
-              </a> */}
           </Form.Item>
 
           <Form.Item>

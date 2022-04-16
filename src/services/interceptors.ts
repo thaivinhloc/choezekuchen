@@ -5,6 +5,13 @@ export const onResponse = (response: AxiosResponse): any => {
 };
 
 export const onResponseError = (error: AxiosError): Promise<string> => {
+  const statusCode = error.response?.data?.error?.status;
+
+  if (statusCode === 401) {
+    localStorage.clear();
+    window.location.href = "/login";
+  }
+
   return Promise.reject(
     error.response?.data?.error?.message ||
       error.message ||

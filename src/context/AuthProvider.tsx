@@ -73,10 +73,7 @@ export function AuthProvider({ children }: Props) {
       console.log("result", result);
       setUser(result);
     } catch (error: any) {
-      notification.error({
-        message: "Error",
-        description: error?.error?.message || "",
-      });
+      console.log("error", error);
     }
   };
 

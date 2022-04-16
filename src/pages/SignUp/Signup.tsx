@@ -48,6 +48,7 @@ const SignUp = () => {
           // name="nest-messages"
           onFinish={onFinish}
           validateMessages={validateMessages}
+          requiredMark={false}
         >
           <Form.Item
             name={"username"}

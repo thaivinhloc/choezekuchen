@@ -51,10 +51,15 @@ const HeaderProfileDropdown = () => {
           </Link>
         </>
       ) : (
-        <Dropdown overlay={menu} trigger={["click"]}>
+        <Dropdown
+          overlay={menu}
+          trigger={["click"]}
+          overlayStyle={{ width: "140px" }}
+          placement="bottomRight"
+        >
           <Button type="text" className="ant-dropdown-link">
             <span className="bold" style={{ color: "#fff" }}>
-              {user.username} <DownOutlined />
+              {user.username} <DownOutlined style={{ fontSize: "12px" }} />
             </span>
           </Button>
         </Dropdown>

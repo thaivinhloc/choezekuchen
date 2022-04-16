@@ -77,10 +77,10 @@ const Retreat: React.FC<{}> = () => {
     setTab(key as ETabPane);
     form.resetFields();
   }
-  const handleSubmit = async (value: { recitationNumber: string }) => {
-    const recitationNumber = Number(value.recitationNumber);
-
+  const handleSubmit = async (value: string) => {
     try {
+      const values = await form.validateFields();
+      const recitationNumber = Number(values.recitationNumber);
       if (!user) {
         navigate("/login");
       } else {
@@ -143,16 +143,12 @@ const Retreat: React.FC<{}> = () => {
                         },
                       ]}
                     >
-                      <Input />
+                      <Input.Search
+                        onSearch={handleSubmit}
+                        enterButton="Submit"
+                        loading={isLoadingSubmit}
+                      />
                     </Form.Item>
-                    <Button
-                      type="primary"
-                      htmlType="submit"
-                      loading={isLoadingSubmit}
-                    >
-                      <strong>Submit</strong>
-                    </Button>
-                    {/* </div> */}
                   </Form>
                 </div>
                 {dataRetreat?.user && (
@@ -169,7 +165,11 @@ const Retreat: React.FC<{}> = () => {
                       />
                       <RenderItem
                         title="Due:"
-                        content={userRetreat?.due || 0}
+                        content={
+                          Number(userRetreat?.due) < 0
+                            ? 0
+                            : userRetreat?.due || 0
+                        }
                       />
                       <RenderItem
                         title="Daily Everage:"
@@ -201,7 +201,10 @@ const Retreat: React.FC<{}> = () => {
                     title="Group Completed:"
                     content={dataRetreat?.totalGroupCompleted || 0}
                   />
-                  <RenderItem title="Due:" content={totalDue} />
+                  <RenderItem
+                    title="Due:"
+                    content={Number(totalDue) < 0 ? 0 : totalDue}
+                  />
                 </div>
               </div>
             </Col>
