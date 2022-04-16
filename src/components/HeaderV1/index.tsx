@@ -112,186 +112,43 @@ const HeaderV1 = () => {
                 <span className="close-btn">+</span>
               </button>
             </li>
-            <li className="nav-item">
-              <a href="#" className="nav-link">
-                HOME
-              </a>
-            </li>
-            <li className="nav-item">
-              <a href="#" className="nav-link">
-                ABOUT RINPOCHE
-              </a>
-              <ul className="dropdown">
-                <li className="dropdown-nav-item nav-item">
-                  <a href="#" className="dropdown-nav-link">
-                    GURUS
-                  </a>
-                </li>
-                <li className="dropdown-nav-item nav-item">
-                  <a href="#" className="dropdown-nav-link ">
-                    HISTORY OF CHOEZE KUCHEN RINPOCHE
-                  </a>
-                </li>
-                <li className="dropdown-nav-item nav-item">
-                  <a href="#" className="dropdown-nav-link ">
-                    JIGME CHOEWANG LODRO - THE 10TH REINCARNATION OF CHOEZE
-                    KUCHEN RIPOCHE
-                  </a>
-                </li>
-
-                <li className="dropdown-nav-item nav-item">
-                  <div style={{ display: "flex" }}>
-                    <a href="#" className="dropdown-nav-link ">
-                      THE 11TH CHOEZE KUCHEN RIPOCHE
-                    </a>
-                    <div className="arrow-right"></div>
-                  </div>
-
+            {ROUTES.map((route) => (
+              <li className="nav-item" key={route.path}>
+                <a href={route.path} className="nav-link">
+                  {route.label}
+                </a>
+                {route.childrent.length > 0 && (
                   <ul className="dropdown">
-                    <li className="dropdown-nav-item nav-item">
-                      <a href="#" className="dropdown-nav-link ">
-                        YOUNG CHOEZE KUCHEN RIPOCHE - 2 YEARS OF AGE
-                      </a>
-                    </li>
-                    <li className="dropdown-nav-item nav-item">
-                      <a href="#" className="dropdown-nav-link">
-                        THE HEVAJRA RETREAT
-                      </a>
-                    </li>
+                    {route.childrent.map((childrent) => (
+                      <li className="dropdown-nav-item nav-item">
+                        <div style={{ display: "flex" }}>
+                          <a href={route.path} className="dropdown-nav-link">
+                            {childrent.label}
+                          </a>
+                          {childrent.childrent.length > 0 && (
+                            <div className="arrow-right" />
+                          )}
+                        </div>
+                        {childrent.childrent.length > 0 && (
+                          <ul className="dropdown">
+                            {childrent.childrent.map((route) => (
+                              <li className="dropdown-nav-item nav-item">
+                                <a
+                                  href={route.path}
+                                  className="dropdown-nav-link"
+                                >
+                                  {route.label}
+                                </a>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                      </li>
+                    ))}
                   </ul>
-                </li>
-              </ul>
-            </li>
-            <li className="nav-item">
-              <a href="#" className="nav-link">
-                TEACHING
-              </a>
-              <ul className="dropdown">
-                <li className="dropdown-nav-item nav-item">
-                  <div style={{ display: "flex" }}>
-                    <a href="#" className="dropdown-nav-link">
-                      DRAMA TECHING
-                    </a>
-                    <div className="arrow-right"></div>
-                  </div>
-                  <ul className="dropdown">
-                    <li className="dropdown-nav-item nav-item">
-                      <a href="#" className="dropdown-nav-link ">
-                        PURE MOTIVATION AND GREAT CONVICTION
-                      </a>
-                    </li>
-                    <li className="dropdown-nav-item nav-item">
-                      <a href="#" className="dropdown-nav-link">
-                        THE PERFECT DEDICATION
-                      </a>
-                    </li>
-                    <li className="dropdown-nav-item nav-item">
-                      <a href="#" className="dropdown-nav-link ">
-                        THE PERFECT WAY TO PRACTICE
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li className="dropdown-nav-item nav-item">
-                  <a href="#" className="dropdown-nav-link">
-                    NGONDRO
-                  </a>
-                </li>
-                <li className="dropdown-nav-item nav-item">
-                  <a href="#" className="dropdown-nav-link ">
-                    PHOWA PRACTICE
-                  </a>
-                </li>
-                <li className="dropdown-nav-item nav-item">
-                  <a href="#" className="dropdown-nav-link ">
-                    ACHI CHOKYI DROLMA
-                  </a>
-                </li>
-                <li className="dropdown-nav-item nav-item">
-                  <a href="#" className="dropdown-nav-link ">
-                    GURU RINPOCHE
-                  </a>
-                </li>
-                <li className="dropdown-nav-item nav-item">
-                  <a href="#" className="dropdown-nav-link ">
-                    VAJRASATTVA
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li className="nav-item">
-              <a href="#" className="nav-link">
-                MONASTERY
-              </a>
-              <ul className="dropdown">
-                <li className="dropdown-nav-item nav-item">
-                  <a href="#" className="dropdown-nav-link">
-                    TIBET – CHOEZE MONASTARY
-                  </a>
-                </li>
-                <li className="dropdown-nav-item nav-item">
-                  <a href="#" className="dropdown-nav-link">
-                    BUTAN PROJECTS
-                  </a>
-                </li>
-                <li className="dropdown-nav-item nav-item">
-                  <a href="#" className="dropdown-nav-link">
-                    NEPAL – PHARBING CENTER
-                  </a>
-                </li>
-                <li className="dropdown-nav-item nav-item">
-                  <a href="#" className="dropdown-nav-link">
-                    SINGAPORE CENTER
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li className="nav-item">
-              <a href="#" className="nav-link">
-                PRAYERS
-              </a>
-              <ul className="dropdown">
-                <li className="dropdown-nav-item nav-item">
-                  <a href="#" className="dropdown-nav-link">
-                    SADHANAS
-                  </a>
-                </li>
-                <li className="dropdown-nav-item nav-item">
-                  <a href="#" className="dropdown-nav-link ">
-                    CHOEZE KUCHEN RINPOCHE'S CHANTING AUTIO
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li className="nav-item">
-              <a href="#" className="nav-link">
-                EVENTS
-              </a>
-              <ul className="dropdown">
-                <li className="dropdown-nav-item nav-item">
-                  <a href="#" className="dropdown-nav-link">
-                    INFORMATION REGISTRATION
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li className="nav-item">
-              <a href="#" className="nav-link">
-                OFFERING
-              </a>
-              <ul className="dropdown">
-                <li className="dropdown-nav-item nav-item">
-                  <a href="#" className="dropdown-nav-link">
-                    THÔNG TIN ĐĂNG KÝ
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li className="nav-item">
-              <a href="#" className="nav-link">
-                BLOG
-              </a>
-            </li>
+                )}
+              </li>
+            ))}
           </ul>
         </nav>
         <h1 className="navbar__title">{title}</h1>

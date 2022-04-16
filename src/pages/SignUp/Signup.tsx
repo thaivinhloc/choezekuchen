@@ -5,7 +5,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import { TSignup } from "../../context/AuthTypes";
 import { DivSignupWrapper } from "./index.style";
-
 const layout = {
   labelCol: { span: 7 },
   wrapperCol: { span: 17 },

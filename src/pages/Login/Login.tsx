@@ -21,6 +21,10 @@ const Login: React.FC<{}> = () => {
     onLogin(values);
   };
 
+  // const onFinishFailed = (errorInfo: any) => {
+  //   console.log("Failed:", errorInfo);
+  // };
+
   return (
     <DivLoginWrapper>
       <Row justify="center" align="middle">

@@ -6,6 +6,9 @@ type TStyled = {
 };
 
 export const DivHeaderWrapperV1 = styled.div`
+  h5 {
+    background-color: red;
+  }
   .navbar-logo {
     img {
       display: block;
@@ -49,12 +52,6 @@ export const DivHeaderWrapperV1 = styled.div`
           border-radius: 2px;
           white-space: nowrap;
           margin-right: 16px;
-
-          /* color: #636363;
-          white-space: unset;
-          padding: 0;
-          text-align: right;
-          margin: 0; */
           &:hover {
             border: 2px solid #fff;
           }
@@ -80,20 +77,22 @@ export const DivHeaderWrapperV1 = styled.div`
         box-shadow: 0 0 0 2px rgba(#000, 0.36);
       }
     }
+    &__title {
+      font-size: 45px;
+      line-height: 47px;
+      font-weight: 700px;
+      letter-spacing: 4px;
+      /* margin: 0 auto; */
+      text-align: center;
+      height: 100px;
+      color: #ffffff;
+    }
   }
 
   /* Dropdown nav-item  */
   .dropdown {
     &-nav-item {
       padding: 5px 0;
-      /* .q_menu_arrow {
-        display: inline-block;
-        float: right;
-        position: relative;
-        top: 2px;
-        font-size: 12px;
-        color: #888;
-      } */
       .arrow-right {
         display: block;
         margin: 5px auto;
@@ -153,7 +152,7 @@ export const DivHeaderWrapperV1 = styled.div`
         color: ${(props: TStyled) => props.theme.default};
       }
       .dropdown {
-        top: 0;
+        top: -10px;
         left: calc(100% + 10px);
         &:before {
           top: 10px;
