@@ -23,7 +23,7 @@ const HeaderMobile = () => {
         ghost
         expandIcon={({ isActive }) => (
           <MenuOutlined
-            style={{ margin: "25px 0 20px 30px", fontSize: "17px" }}
+            style={{ margin: "25px 0 20px 0px", fontSize: "17px" }}
           />
         )}
       >
@@ -45,14 +45,42 @@ const HeaderMobile = () => {
             defaultOpenKeys={["sub1"]}
             mode="inline"
             className="headermobile__menu"
-            inlineIndent={48}
+            inlineIndent={12}
             expandIcon={(...props: any) => {
               console.log("props", props[0].isHasChildrent);
               const isHasChildrent = !!props[0]?.isHasChildrent;
               const isOpen = props[0].isOpen;
               if (!isHasChildrent) return <div />;
               return (
-                <div>{!isOpen ? <RightOutlined /> : <DownOutlined />}</div>
+                <div
+                  style={{
+                    position: "absolute",
+                    display: "flex",
+                    right: 0,
+                    padding: "10px 41px",
+                    color: "#303030",
+                    fontWeight: "900",
+                    fontSize: "12px",
+                  }}
+                >
+                  {!isOpen ? (
+                    <RightOutlined
+                      style={{
+                        fontWeight: "bold",
+                        color: "#303030",
+                        fontSize: "12px",
+                      }}
+                    />
+                  ) : (
+                    <DownOutlined
+                      style={{
+                        fontWeight: "bold",
+                        color: "#303030",
+                        fontSize: "12px",
+                      }}
+                    />
+                  )}
+                </div>
               );
             }}
           >

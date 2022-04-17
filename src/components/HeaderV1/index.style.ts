@@ -247,9 +247,7 @@ export const DivHeaderMobile = styled.div`
     background: none;
   }
   .headermobile {
-    /* justify-content: space-between; */
-    justify-content: space-between;
-    align-items: center;
+    /* align-items: center; */
     .ant-menu-root.ant-menu-inline {
       border: none;
     }
@@ -267,20 +265,27 @@ export const DivHeaderMobile = styled.div`
     }
 
     .ant-menu-title-content {
-      border-bottom: 2px solid #abb8c3;
+      border-bottom: 2px solid #eaeaea;
     }
+    .ant-menu-inline .ant-menu-submenu {
+      padding-bottom: 0px;
+    }
+    //icon outline:
+
     &-logo {
-      height: 70px;
-      width: 70px;
+      height: 50px;
+      width: 50px;
       margin: 0 auto;
       text-align: center;
+      margin-top: 10px;
     }
     &-ICTab {
       width: 20px;
       height: 20px;
     }
     &__menu {
-      min-width: 700px;
+      /* min-width: 400px; */
+      min-width: 100%;
       min-height: 374px;
       a {
         color: #303030;
