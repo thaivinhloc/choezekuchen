@@ -62,6 +62,7 @@ const HeaderV1 = () => {
     setTitle(text);
   }, [location.pathname]);
   if (isMobileOnly) return <HeaderMobile />;
+  if (isTablet) return <HeaderMobile />;
   return (
     <DivHeaderWrapperV1>
       {/* Search Popup */}
