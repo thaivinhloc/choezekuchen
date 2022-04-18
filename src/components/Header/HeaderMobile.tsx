@@ -1,11 +1,11 @@
+import { DownOutlined, MenuOutlined, RightOutlined } from "@ant-design/icons";
+import { Collapse, Menu } from "antd";
 import React from "react";
-// import { useLocation, useNavigate } from "react-router-dom";
 import { ROUTES } from "../../common/routes";
 import { DivHeaderMobile } from "./index.style";
-import { Collapse, Menu } from "antd";
-import { MenuOutlined, DownOutlined, RightOutlined } from "@ant-design/icons";
 
 const { SubMenu } = Menu;
+
 const HeaderMobile = () => {
   function callback(key: string | string[]) {
     console.log(key);
@@ -14,28 +14,32 @@ const HeaderMobile = () => {
   const handleClick = (e: any) => {
     console.log("click ", e);
   };
+
   return (
-    <DivHeaderMobile>
+    <DivHeaderMobile className="container">
       <Collapse
-        defaultActiveKey={["1"]}
         onChange={callback}
         ghost
         expandIcon={({ isActive }) => (
-          <MenuOutlined
-            style={{ margin: "25px 0 20px 0px", fontSize: "17px" }}
-          />
+          <MenuOutlined style={{ margin: "0px", fontSize: "17px" }} />
         )}
+        expandIconPosition="left"
       >
         <Panel
-          header={
-            <img
-              src="https://choezekuchen.com/wp-content/uploads/2016/02/Logo-Drikung-Rinpochen-sent.png?690ea8"
-              alt="123"
-              className="headermobile-logo"
-            />
-          }
+          header={<div />}
           className="headermobile"
           key="1"
+          extra={
+            <div>
+              <img
+                src="https://choezekuchen.com/wp-content/uploads/2016/02/Logo-Drikung-Rinpochen-sent.png?690ea8"
+                alt="logo"
+                className="headermobile-logo"
+                width="70px"
+                height="70px"
+              />
+            </div>
+          }
         >
           <Menu
             onClick={handleClick}
@@ -44,7 +48,7 @@ const HeaderMobile = () => {
             defaultOpenKeys={["sub1"]}
             mode="inline"
             className="headermobile__menu"
-            inlineIndent={12}
+            inlineIndent={0}
             expandIcon={(...props: any) => {
               console.log("props", props[0].isHasChildrent);
               const isHasChildrent = !!props[0]?.isHasChildrent;

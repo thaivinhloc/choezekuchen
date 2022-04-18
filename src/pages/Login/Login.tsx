@@ -3,14 +3,10 @@ import { Button, Checkbox, Form, Input, Row, Grid } from "antd";
 import { useForm } from "antd/lib/form/Form";
 import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../../context/AuthContext";
-import { TLogin } from "../../context/AuthTypes";
+import { useAuth } from "../../context/auth/AuthContext";
+import { TLogin } from "../../context/auth/AuthTypes";
 import { DivLoginWrapper } from "./index.styles";
 
-const layout = {
-  labelCol: { span: 4 },
-  wrapperCol: { span: 17 },
-};
 const { useBreakpoint } = Grid;
 
 const Login: React.FC<{}> = () => {
@@ -42,10 +38,9 @@ const Login: React.FC<{}> = () => {
           className="login-form"
           onFinish={onFinish}
           requiredMark={false}
-          {...layout}
         >
           <Form.Item
-            label="Email"
+            label=""
             name="identifier"
             rules={[
               {
@@ -54,14 +49,10 @@ const Login: React.FC<{}> = () => {
               },
             ]}
           >
-            <Input
-              size="large"
-              prefix={<UserOutlined className="site-form-item-icon" />}
-              placeholder="Email"
-            />
+            <Input size="large" placeholder="Email" />
           </Form.Item>
           <Form.Item
-            label="Password"
+            label=""
             name="password"
             rules={[
               {
@@ -70,15 +61,10 @@ const Login: React.FC<{}> = () => {
               },
             ]}
           >
-            <Input
-              size="large"
-              prefix={<LockOutlined className="site-form-item-icon" />}
-              type="password"
-              placeholder="Password"
-            />
+            <Input size="large" type="password" placeholder="Password" />
           </Form.Item>
 
-          <Form.Item wrapperCol={{ span: 17, offset: 4 }}>
+          <Form.Item>
             <Button
               size="large"
               htmlType="submit"
