@@ -259,8 +259,8 @@ export const DivHeaderMobile = styled.div`
     background: none;
   }
   .headermobile {
-    /* align-items: center; */
-    .ant-menu-root.ant-menu-inline {
+    padding-top: 10px;
+    */ .ant-menu-root.ant-menu-inline {
       border: none;
     }
     .ant-menu-sub.ant-menu-inline {
@@ -275,18 +275,28 @@ export const DivHeaderMobile = styled.div`
     .ant-menu-submenu-title:active {
       background: none;
     }
-
-    .ant-menu-title-content {
-      border-bottom: 2px solid #eaeaea;
+    .ant-menu-submenu-title {
+      border-bottom: 1px solid #eaeaea;
     }
+
+    .ant-menu-inline .ant-menu-submenu-title {
+      padding-right: 0;
+    }
+    .ant-menu-inline {
+      border-right: none;
+    }
+    .ant-btn-primary:focus,
+    /* .ant-menu-title-content {
+      border-bottom: 2px solid #eaeaea;
+    } */
     .ant-menu-inline .ant-menu-submenu {
       padding-bottom: 0px;
     }
     //icon outline:
 
     &-logo {
-      /* height: 70px; */
-      /* width: 70px; */
+      height: 50px;
+      width: 50px;
     }
     &-ICTab {
       width: 20px;
@@ -304,6 +314,9 @@ export const DivHeaderMobile = styled.div`
         font-weight: 700;
         letter-spacing: 1.5px;
         text-transform: uppercase;
+      }
+      &-icon {
+        padding-right: 8px;
       }
       a:active {
         color: #999999;
