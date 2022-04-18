@@ -310,7 +310,7 @@ export const DivHeaderMobile = styled.div`
       }
     }
     &__main-1 {
-      list-style-type: none !important;
+      list-style-type: none;
     }
   }
 `;
