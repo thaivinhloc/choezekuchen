@@ -287,6 +287,15 @@ export const DivHeaderMobile = styled.div`
       /* min-width: 400px; */
       min-width: 100%;
       min-height: 374px;
+      &-icon {
+        position: absolute;
+        display: flex;
+        right: 0;
+        padding: 10px 41px;
+        color: #303030;
+        font-weight: bold;
+        font-size: 12px;
+      }
       a {
         color: #303030;
         font-family: "Raleway", sans-serif;

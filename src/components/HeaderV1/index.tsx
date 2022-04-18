@@ -6,7 +6,6 @@ import { ROUTES } from "../../common/routes";
 import { useAuth } from "../../context/AuthContext";
 import HeaderProfileDropdown from "../Header/HeaderProfileDropdown";
 import { DivHeaderWrapperV1 } from "./index.style";
-import { DivHeaderMobile } from "./index.style";
 import { isMobileOnly, isTablet } from "react-device-detect";
 import HeaderMobile from "../HeaderV1/HeaderMobile";
 

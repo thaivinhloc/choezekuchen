@@ -1,9 +1,8 @@
-import { DivHeaderWrapper } from "../Header/index.style";
-import React, { Children, useEffect, useLayoutEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import React from "react";
+// import { useLocation, useNavigate } from "react-router-dom";
 import { ROUTES } from "../../common/routes";
 import { DivHeaderMobile } from "./index.style";
-import { Drawer, Button, Radio, Space, Collapse, Menu } from "antd";
+import { Collapse, Menu } from "antd";
 import { MenuOutlined, DownOutlined, RightOutlined } from "@ant-design/icons";
 
 const { SubMenu } = Menu;
@@ -52,34 +51,8 @@ const HeaderMobile = () => {
               const isOpen = props[0].isOpen;
               if (!isHasChildrent) return <div />;
               return (
-                <div
-                  style={{
-                    position: "absolute",
-                    display: "flex",
-                    right: 0,
-                    padding: "10px 41px",
-                    color: "#303030",
-                    fontWeight: "900",
-                    fontSize: "12px",
-                  }}
-                >
-                  {!isOpen ? (
-                    <RightOutlined
-                      style={{
-                        fontWeight: "bold",
-                        color: "#303030",
-                        fontSize: "12px",
-                      }}
-                    />
-                  ) : (
-                    <DownOutlined
-                      style={{
-                        fontWeight: "bold",
-                        color: "#303030",
-                        fontSize: "12px",
-                      }}
-                    />
-                  )}
+                <div className="headermobile__menu-icon">
+                  {!isOpen ? <RightOutlined /> : <DownOutlined />}
                 </div>
               );
             }}
