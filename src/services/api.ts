@@ -1,4 +1,4 @@
-import Client from "../services/client";
+import Client from "./Client";
 
 import {
   IResponseListRetreat,

@@ -1,5 +1,5 @@
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
-import { Button, Checkbox, Form, Input, Row } from "antd";
+import { Button, Checkbox, Form, Input, Row, Grid } from "antd";
 import { useForm } from "antd/lib/form/Form";
 import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -7,9 +7,17 @@ import { useAuth } from "../../context/AuthContext";
 import { TLogin } from "../../context/AuthTypes";
 import { DivLoginWrapper } from "./index.styles";
 
+const layout = {
+  labelCol: { span: 4 },
+  wrapperCol: { span: 17 },
+};
+const { useBreakpoint } = Grid;
+
 const Login: React.FC<{}> = () => {
   const [form] = useForm<TLogin>();
   const { onLogin, user, isLoading } = useAuth();
+  const screens = useBreakpoint();
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -34,21 +42,22 @@ const Login: React.FC<{}> = () => {
           className="login-form"
           onFinish={onFinish}
           requiredMark={false}
+          {...layout}
         >
           <Form.Item
-            label="Username"
+            label="Email"
             name="identifier"
             rules={[
               {
                 required: true,
-                message: "Please input your Username!",
+                message: "Please input your Email!",
               },
             ]}
           >
             <Input
               size="large"
               prefix={<UserOutlined className="site-form-item-icon" />}
-              placeholder="Username"
+              placeholder="Email"
             />
           </Form.Item>
           <Form.Item
@@ -69,7 +78,7 @@ const Login: React.FC<{}> = () => {
             />
           </Form.Item>
 
-          <Form.Item>
+          <Form.Item wrapperCol={{ span: 17, offset: 4 }}>
             <Button
               size="large"
               htmlType="submit"
