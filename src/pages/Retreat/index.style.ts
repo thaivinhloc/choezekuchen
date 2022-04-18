@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const DivRetreatWrapper = styled.div`
+  padding: 20px 0px 50px;
   color: #000;
   .ant-tabs {
     .retreat {

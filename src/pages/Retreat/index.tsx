@@ -2,7 +2,8 @@ import { Button, Col, Form, Input, Row, Skeleton, Tabs, Tooltip } from "antd";
 import { useForm } from "antd/lib/form/Form";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../../context/AuthContext";
+import { useApp } from "../../context/app/AppContext";
+import { useAuth } from "../../context/auth/AuthContext";
 import {
   getListRetreat,
   getRetreatDetail,
@@ -36,14 +37,17 @@ const Retreat: React.FC<{}> = () => {
   const [listRetreat, setListRetreat] = useState<IResponseListRetreat[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isLoadingSubmit, setIsLoadingSubmit] = useState<boolean>(false);
+  const { setTitleBanner } = useApp();
 
   useEffect(() => {
     switch (tab) {
       case ETabPane.DETAIL:
         getRetreatPublic(true);
+        setTitleBanner("RETREAT");
         break;
       case ETabPane.LISTING:
         handleGetListRetreat();
+        setTitleBanner("PARTICIPANT LISTING");
         break;
 
       default:

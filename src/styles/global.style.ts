@@ -11,7 +11,7 @@ export const GlobalStyle = createGlobalStyle`
         // font-family: $body-font;
         font-family: ${(props: TStyled) => props.theme.primaryFont};
         font-size: 14px;
-
+        background:#f6f6f6 ;
     }
     h1{
       font-size:45px ;
@@ -56,6 +56,10 @@ export const GlobalStyle = createGlobalStyle`
         border-color:#1abc9c ;
         color:#fff ;
       }
+    }
+    .btn-secondary{
+      border: 2px solid #303030;
+      color: #000;
     }
     .container{
   position:relative;
@@ -116,5 +120,8 @@ export const GlobalStyle = createGlobalStyle`
     width:1340px;
     max-width:100%
   }
+}
+.content{
+min-height:calc(100vh - 423px) ;
 }
 `;

@@ -1,8 +1,8 @@
 import React from "react";
 import { Menu, Dropdown, Button } from "antd";
 import { DownOutlined } from "@ant-design/icons";
-import { useAuth } from "../../context/AuthContext";
-import { IUser } from "../../context/AuthTypes";
+import { useAuth } from "../../context/auth/AuthContext";
+import { IUser } from "../../context/auth/AuthTypes";
 import { Link } from "react-router-dom";
 
 const HeaderProfileDropdown = () => {

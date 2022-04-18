@@ -1,14 +1,11 @@
-import { Button, Form, Input, Row } from "antd";
+import { Button, Col, Form, Input, Row, Space } from "antd";
 import { useForm } from "antd/lib/form/Form";
 import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../../context/AuthContext";
-import { TSignup } from "../../context/AuthTypes";
+import { useAuth } from "../../context/auth/AuthContext";
+import { TSignup } from "../../context/auth/AuthTypes";
 import { DivSignupWrapper } from "./index.style";
-const layout = {
-  labelCol: { span: 7 },
-  wrapperCol: { span: 17 },
-};
+
 const validateMessages = {
   required: "${label} is required!",
   types: {
@@ -43,38 +40,71 @@ const SignUp = () => {
         <Form
           form={form}
           className="signup-form"
-          {...layout}
-          // name="nest-messages"
           onFinish={onFinish}
           validateMessages={validateMessages}
           requiredMark={false}
         >
           <Form.Item
             name={"username"}
-            label="Username"
-            rules={[{ required: true }]}
+            label=""
+            rules={[
+              {
+                whitespace: true,
+                required: true,
+                message: "Please input your username",
+              },
+            ]}
           >
             <Input size="large" placeholder="Username" />
           </Form.Item>
           <Form.Item
             name={"email"}
-            label="Email"
-            rules={[{ type: "email", required: true }]}
+            label=""
+            rules={[
+              {
+                whitespace: true,
+                type: "email",
+                required: true,
+                message: "Please input your email",
+              },
+            ]}
           >
             <Input size="large" placeholder="example@gmail.com" />
           </Form.Item>
+          <Row gutter={16}>
+            <Col span={12}>
+              <Form.Item
+                name="city"
+                label=""
+                rules={[
+                  {
+                    whitespace: true,
+                    required: true,
+                    message: "Please input your City",
+                  },
+                ]}
+              >
+                <Input size="large" placeholder="City" />
+              </Form.Item>
+            </Col>
+            <Col span={12}>
+              <Form.Item
+                name={"country"}
+                label=""
+                rules={[
+                  { required: true, message: "Please input your Country" },
+                ]}
+              >
+                <Input size="large" placeholder="Country" />
+              </Form.Item>
+            </Col>
+          </Row>
           <Form.Item
-            name={"address"}
-            label="Address"
-            rules={[{ required: false }]}
-          >
-            <Input size="large" placeholder="Your address" />
-          </Form.Item>
-          <Form.Item
-            label="Password"
+            label=""
             name="password"
             rules={[
               {
+                whitespace: true,
                 required: true,
                 message: "Please input your Password!",
               },
@@ -83,10 +113,11 @@ const SignUp = () => {
             <Input size="large" type="password" placeholder="Password" />
           </Form.Item>
           <Form.Item
-            label="Confirm Password"
+            label=""
             name="confirmPassword"
             rules={[
               {
+                whitespace: true,
                 required: true,
                 message: "Please input your Confirm Password!",
               },
@@ -110,7 +141,7 @@ const SignUp = () => {
               placeholder="Confirm Password"
             />
           </Form.Item>
-          <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 7 }}>
+          <Form.Item>
             <Button
               size="large"
               className="button-signup btn-primary bold"

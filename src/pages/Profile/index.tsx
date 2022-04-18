@@ -1,16 +1,16 @@
 import { Avatar, Row, Col, Form, Input, Button } from "antd";
 import { useForm } from "antd/lib/form/Form";
 import React from "react";
-import { useAuth } from "../../context/AuthContext";
+import { useAuth } from "../../context/auth/AuthContext";
 import { DivProfileWrapper } from "./index.style";
 
 const layout = {
   labelCol: {
-    sm: { span: 24 }
+    sm: { span: 24 },
   },
   wrapperCol: {
-    sm: { span: 24 }
-  }
+    sm: { span: 24 },
+  },
 };
 
 const Profile = () => {
@@ -35,7 +35,7 @@ const Profile = () => {
               <Avatar
                 style={{
                   backgroundColor: "#f56a00",
-                  verticalAlign: "middle"
+                  verticalAlign: "middle",
                 }}
                 size={70}
               >
@@ -58,20 +58,20 @@ const Profile = () => {
                 fields={[
                   {
                     name: ["username"],
-                    value: user?.username
+                    value: user?.username,
                   },
                   {
                     name: ["email"],
-                    value: user?.email
+                    value: user?.email,
                   },
                   {
                     name: ["address"],
-                    value: ""
-                  }
+                    value: "",
+                  },
                 ]}
                 requiredMark="optional"
 
-              // validateMessages={validateMessages}
+                // validateMessages={validateMessages}
               >
                 <Form.Item
                   label="Name"
@@ -79,8 +79,8 @@ const Profile = () => {
                   rules={[
                     {
                       required: true,
-                      message: "Please input your Name !"
-                    }
+                      message: "Please input your Name !",
+                    },
                   ]}
                 >
                   <Input
@@ -95,8 +95,8 @@ const Profile = () => {
                   rules={[
                     {
                       required: true,
-                      message: "Please input your Email!"
-                    }
+                      message: "Please input your Email!",
+                    },
                   ]}
                 >
                   <Input
@@ -112,11 +112,7 @@ const Profile = () => {
                   rules={[]}
                   requiredMark="optional"
                 >
-                  <Input
-                    size="large" 
-                    placeholder="Address"
-                    readOnly={true}
-                  />
+                  <Input size="large" placeholder="Address" readOnly={true} />
                 </Form.Item>
                 {/* <Row className="city-country">
                   <Col xs={24} sm={24} md={24} lg={11}>
