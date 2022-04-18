@@ -237,8 +237,18 @@ export const DivHeaderMobile = styled.div`
     height: 90px;
     width: 100%;
   }
-  .ant-Collapse {
-    padding-top: 0;
+  .ant-collapse {
+    &-header {
+      padding: 10px 0px 0px !important;
+      display: flex;
+      align-items: center !important;
+    }
+    &-content-box {
+      padding: 0px !important;
+    }
+    &-extra {
+      margin-right: auto;
+    }
   }
   .ant-btn-primary:hover,
   .ant-btn-primary:focus {
@@ -273,11 +283,8 @@ export const DivHeaderMobile = styled.div`
     //icon outline:
 
     &-logo {
-      height: 50px;
-      width: 50px;
-      margin: 0 auto;
-      text-align: center;
-      margin-top: 10px;
+      /* height: 70px; */
+      /* width: 70px; */
     }
     &-ICTab {
       width: 20px;
