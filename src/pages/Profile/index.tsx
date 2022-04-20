@@ -1,151 +1,62 @@
 import { Avatar, Row, Col, Form, Input, Button } from "antd";
 import { useForm } from "antd/lib/form/Form";
-import React from "react";
+import React, { useEffect } from "react";
+import { updateTaggedTemplate } from "typescript";
 import { useAuth } from "../../context/AuthContext";
 import { DivProfileWrapper } from "./index.style";
 
-const layout = {
-  labelCol: {
-    sm: { span: 24 }
-  },
-  wrapperCol: {
-    sm: { span: 24 }
-  }
-};
+
 
 const Profile = () => {
   const { user } = useAuth();
   const [form] = useForm();
+  useEffect(() => {
+    let time = user ? new Date(user.updatedAt) : new Date();
 
-  type TResetPassword = {
-    currentPassword: string;
-    content: string;
-  };
-
-  const onFinish = async (value: any) => {
-    // onUpdateProfile();
-  };
-
+    console.log("date" + time.toLocaleString())
+  }, [])
   return (
     <DivProfileWrapper>
       <div className="container-inner">
         <div className="profile">
           <Row>
-            <Col xs={24} className="avatar">
-              <Avatar
-                style={{
-                  backgroundColor: "#f56a00",
-                  verticalAlign: "middle"
-                }}
-                size={70}
-              >
-                <span className="bold">
-                  {user?.username.charAt(0).toUpperCase()}
-                </span>
-              </Avatar>
-              <strong className="name">{user?.username}</strong>
-              <p>{user?.email}</p>
+            <Col xs={10} sm={10} md={10} lg={10} className="label">
+              Full name
             </Col>
-            <Col xs={24}>
-              <Form
-                form={form}
-                className="change-password"
-                {...layout}
-                name="nest-messages"
-                onFinish={onFinish}
-                labelAlign="left"
-                layout="vertical"
-                fields={[
-                  {
-                    name: ["username"],
-                    value: user?.username
-                  },
-                  {
-                    name: ["email"],
-                    value: user?.email
-                  },
-                  {
-                    name: ["address"],
-                    value: ""
-                  }
-                ]}
-                requiredMark="optional"
-
-              // validateMessages={validateMessages}
-              >
-                <Form.Item
-                  label="Name"
-                  name="username"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please input your Name !"
-                    }
-                  ]}
-                >
-                  <Input
-                    size="large"
-                    placeholder={user?.username}
-                    readOnly={true}
-                  />
-                </Form.Item>
-                <Form.Item
-                  label="Email"
-                  name="email"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Please input your Email!"
-                    }
-                  ]}
-                >
-                  <Input
-                    size="large"
-                    readOnly={true}
-                    placeholder={user?.email}
-                  />
-                </Form.Item>
-
-                <Form.Item
-                  label="Address"
-                  name="address"
-                  rules={[]}
-                  requiredMark="optional"
-                >
-                  <Input
-                    size="large" 
-                    placeholder="Address"
-                    readOnly={true}
-                  />
-                </Form.Item>
-                {/* <Row className="city-country">
-                  <Col xs={24} sm={24} md={24} lg={11}>
-                    <Form.Item
-                      label="City"
-                      name="city"
-                      rules={[]}
-                      requiredMark="optional"
-                    >
-                      <Input size="large" placeholder="City" />
-                    </Form.Item>
-                  </Col>
-                  <Col xs={24} sm={24} md={24} lg={12}>
-                    <Form.Item
-                      label="Country"
-                      name="country"
-                      rules={[]}
-                      requiredMark="optional"
-                    >
-                      <Input size="large" placeholder="Country" />
-                    </Form.Item>
-                  </Col>
-                </Row>
-                <Form.Item>
-                  <Button size="large" htmlType="submit" className="btn-submit">
-                    Update Profile
-                  </Button>
-                </Form.Item>*/}
-              </Form>
+            <Col xs={14} sm={14} md={14} lg={14} className="value">
+              {user?.username}
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={10} sm={10} md={10} lg={10} className="label">
+              City
+            </Col>
+            <Col xs={14} sm={14} md={14} lg={14} className="value">
+              {/* {user?.city} */} city...
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={10} sm={10} md={10} lg={10} className="label">
+              Country
+            </Col>
+            <Col xs={14} sm={14} md={14} lg={14} className="value">
+              {/* {user?.country} */} country...
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={10} sm={10} md={10} lg={10} className="label">
+              Email
+            </Col>
+            <Col xs={14} sm={14} md={14} lg={14} className="value">
+              {user?.email}
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={10} sm={10} md={10} lg={10} className="label">
+              Last Update
+            </Col>
+            <Col xs={14} sm={14} md={14} lg={14} className="value">
+              {user ? new Date(user.updatedAt).toLocaleString() : null}
             </Col>
           </Row>
         </div>
