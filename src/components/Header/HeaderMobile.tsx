@@ -16,7 +16,7 @@ const HeaderMobile = () => {
   };
 
   return (
-    <DivHeaderMobile className="container">
+    <DivHeaderMobile className="container" style={{ width: "100%" }}>
       <Collapse
         onChange={callback}
         ghost
