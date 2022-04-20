@@ -246,7 +246,7 @@ export const DivHeaderMobile = styled.div`
       align-items: center !important;
     }
     &-content-box {
-      padding: 0px !important;
+      /* padding: 0px !important; */
     }
     &-extra {
       margin-right: auto;
@@ -261,6 +261,10 @@ export const DivHeaderMobile = styled.div`
     */ .ant-menu-root.ant-menu-inline {
       border: none;
     }
+    .ant-menu {
+      padding: revert;
+    }
+
     .ant-menu-sub.ant-menu-inline {
       background-color: #fff;
     }
@@ -295,6 +299,7 @@ export const DivHeaderMobile = styled.div`
     &__menu {
       min-width: 100%;
       min-height: 374px;
+      padding-left: 0px !important;
       a {
         color: #303030;
         font-family: "Raleway", sans-serif;
