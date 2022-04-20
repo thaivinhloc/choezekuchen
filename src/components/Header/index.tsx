@@ -9,6 +9,7 @@ import HeaderProfileDropdown from "./HeaderProfileDropdown";
 import HeaderMobile from "./HeaderMobile";
 import { DivHeaderWrapperV1 } from "./index.style";
 import { useApp } from "../../context/app/AppContext";
+import { RightOutlined } from "@ant-design/icons";
 
 const langs = [
   // {
@@ -109,7 +110,8 @@ const Header = () => {
                             {childrent.label}
                           </a>
                           {childrent.childrent.length > 0 && (
-                            <div className="arrow-right" />
+                            // <div className="arrow-right" />
+                            <RightOutlined className="arrow-right" />
                           )}
                         </div>
                         {childrent.childrent.length > 0 && (

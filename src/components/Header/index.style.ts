@@ -95,12 +95,12 @@ export const DivHeaderWrapperV1 = styled.div`
       padding: 5px 0;
       .arrow-right {
         display: block;
-        margin: 5px auto;
-        width: 9px;
-        height: 9px;
-        border-top: 1px solid #fff;
-        border-left: 1px solid #fff;
-        transform: rotate(135deg);
+        margin: 3px auto;
+        font-size: 12px;
+        font-weight: 900;
+        color: #9d9d9d;
+        margin-right: 0;
+        padding-right: 5px;
       }
     }
     &-nav-link {
