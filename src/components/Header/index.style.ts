@@ -240,7 +240,8 @@ export const DivHeaderMobile = styled.div`
   }
   .ant-collapse {
     &-header {
-      padding: 10px 0px 0px !important;
+      padding-left: 5px;
+      height: 100px;
       display: flex;
       align-items: center !important;
     }
@@ -251,15 +252,12 @@ export const DivHeaderMobile = styled.div`
       margin-right: auto;
     }
   }
-
   .ant-btn-primary:hover,
   .ant-btn-primary:focus {
-    /* color: #fff; */
     border-color: none;
     background: none;
   }
   .headermobile {
-    padding-top: 10px;
     */ .ant-menu-root.ant-menu-inline {
       border: none;
     }
@@ -269,26 +267,18 @@ export const DivHeaderMobile = styled.div`
     .ant-menu-inline .ant-menu-item::after {
       border-right: none;
     }
-    .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
-      /* background-color: white; */
-    }
     .ant-menu-submenu-title:active {
       background: none;
     }
     .ant-menu-submenu-title {
       border-bottom: 1px solid #eaeaea;
     }
-
     .ant-menu-inline .ant-menu-submenu-title {
       padding-right: 0;
     }
     .ant-menu-inline {
       border-right: none;
     }
-    .ant-btn-primary:focus,
-    /* .ant-menu-title-content {
-      border-bottom: 2px solid #eaeaea;
-    } */
     .ant-menu-inline .ant-menu-submenu {
       padding-bottom: 0px;
     }
@@ -303,7 +293,6 @@ export const DivHeaderMobile = styled.div`
       height: 20px;
     }
     &__menu {
-      /* min-width: 400px; */
       min-width: 100%;
       min-height: 374px;
       a {
