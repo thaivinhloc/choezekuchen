@@ -3,7 +3,7 @@ import { AuthContext } from "./AuthContext";
 import { IResponseLogin, IUser, TLogin, TSignup } from "./AuthTypes";
 import { useNavigate } from "react-router-dom";
 import { notification } from "antd";
-import Client from "../services/Client";
+import Client from "../../services/Client";
 
 type Props = {
   children: ReactNode;

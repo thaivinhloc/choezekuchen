@@ -1,11 +1,17 @@
 import { Avatar, Row, Col, Form, Input, Button } from "antd";
 import { useForm } from "antd/lib/form/Form";
 import React, { useEffect } from "react";
-import { updateTaggedTemplate } from "typescript";
-import { useAuth } from "../../context/AuthContext";
+import { useAuth } from "../../context/auth/AuthContext";
 import { DivProfileWrapper } from "./index.style";
 
-
+const layout = {
+  labelCol: {
+    sm: { span: 24 },
+  },
+  wrapperCol: {
+    sm: { span: 24 },
+  },
+};
 
 const Profile = () => {
   const { user } = useAuth();
@@ -13,8 +19,8 @@ const Profile = () => {
   useEffect(() => {
     let time = user ? new Date(user.updatedAt) : new Date();
 
-    console.log("date" + time.toLocaleString())
-  }, [])
+    console.log("date" + time.toLocaleString());
+  }, []);
   return (
     <DivProfileWrapper>
       <div className="container-inner">
