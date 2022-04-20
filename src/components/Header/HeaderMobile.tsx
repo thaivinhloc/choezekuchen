@@ -16,7 +16,7 @@ const HeaderMobile = () => {
   };
 
   return (
-    <DivHeaderMobile className="container">
+    <DivHeaderMobile className="container" style={{ width: "100%" }}>
       <Collapse
         onChange={callback}
         ghost
@@ -55,34 +55,8 @@ const HeaderMobile = () => {
               const isOpen = props[0].isOpen;
               if (!isHasChildrent) return <div />;
               return (
-                <div
-                  style={{
-                    position: "absolute",
-                    display: "flex",
-                    right: 0,
-                    padding: "10px 41px",
-                    color: "#303030",
-                    fontWeight: "900",
-                    fontSize: "12px",
-                  }}
-                >
-                  {!isOpen ? (
-                    <RightOutlined
-                      style={{
-                        fontWeight: "bold",
-                        color: "#303030",
-                        fontSize: "12px",
-                      }}
-                    />
-                  ) : (
-                    <DownOutlined
-                      style={{
-                        fontWeight: "bold",
-                        color: "#303030",
-                        fontSize: "12px",
-                      }}
-                    />
-                  )}
+                <div className="headermobile__menu-icon">
+                  {!isOpen ? <RightOutlined /> : <DownOutlined />}
                 </div>
               );
             }}

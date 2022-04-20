@@ -95,12 +95,12 @@ export const DivHeaderWrapperV1 = styled.div`
       padding: 5px 0;
       .arrow-right {
         display: block;
-        margin: 5px auto;
-        width: 9px;
-        height: 9px;
-        border-top: 1px solid #fff;
-        border-left: 1px solid #fff;
-        transform: rotate(135deg);
+        margin: 3px auto;
+        font-size: 12px;
+        font-weight: 900;
+        color: #9d9d9d;
+        margin-right: 0;
+        padding-right: 5px;
       }
     }
     &-nav-link {
@@ -230,6 +230,7 @@ export const DivHeaderWrapperV1 = styled.div`
 `;
 
 export const DivHeaderMobile = styled.div`
+  background: #fff;
   button {
     background: none;
     border: none;
@@ -239,12 +240,13 @@ export const DivHeaderMobile = styled.div`
   }
   .ant-collapse {
     &-header {
-      padding: 10px 0px 0px !important;
+      padding-left: 5px;
+      height: 100px;
       display: flex;
       align-items: center !important;
     }
     &-content-box {
-      padding: 0px !important;
+      /* padding: 0px !important; */
     }
     &-extra {
       margin-right: auto;
@@ -252,30 +254,34 @@ export const DivHeaderMobile = styled.div`
   }
   .ant-btn-primary:hover,
   .ant-btn-primary:focus {
-    /* color: #fff; */
     border-color: none;
     background: none;
   }
   .headermobile {
-    /* align-items: center; */
-    .ant-menu-root.ant-menu-inline {
+    */ .ant-menu-root.ant-menu-inline {
       border: none;
     }
+    .ant-menu {
+      padding: revert;
+    }
+
     .ant-menu-sub.ant-menu-inline {
-      background-color: white;
+      background-color: #fff;
     }
     .ant-menu-inline .ant-menu-item::after {
       border-right: none;
     }
-    .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
-      background-color: white;
-    }
     .ant-menu-submenu-title:active {
       background: none;
     }
-
-    .ant-menu-title-content {
-      border-bottom: 2px solid #eaeaea;
+    .ant-menu-submenu-title {
+      border-bottom: 1px solid #eaeaea;
+    }
+    .ant-menu-inline .ant-menu-submenu-title {
+      padding-right: 0;
+    }
+    .ant-menu-inline {
+      border-right: none;
     }
     .ant-menu-inline .ant-menu-submenu {
       padding-bottom: 0px;
@@ -283,17 +289,17 @@ export const DivHeaderMobile = styled.div`
     //icon outline:
 
     &-logo {
-      /* height: 70px; */
-      /* width: 70px; */
+      height: 50px;
+      width: 50px;
     }
     &-ICTab {
       width: 20px;
       height: 20px;
     }
     &__menu {
-      /* min-width: 400px; */
       min-width: 100%;
       min-height: 374px;
+      padding-left: 0px !important;
       a {
         color: #303030;
         font-family: "Raleway", sans-serif;
@@ -302,6 +308,9 @@ export const DivHeaderMobile = styled.div`
         font-weight: 700;
         letter-spacing: 1.5px;
         text-transform: uppercase;
+      }
+      &-icon {
+        padding-right: 8px;
       }
       a:active {
         color: #999999;
