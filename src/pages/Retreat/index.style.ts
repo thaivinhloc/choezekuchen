@@ -8,6 +8,7 @@ export const DivRetreatWrapper = styled.div`
       &-left {
         padding-left: 10px;
         text-align: center;
+        margin-top: 20px;
       }
       &__right {
         &-form {

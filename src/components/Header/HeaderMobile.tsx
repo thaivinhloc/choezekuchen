@@ -1,44 +1,111 @@
-import { DownOutlined, MenuOutlined, RightOutlined } from "@ant-design/icons";
-import { Collapse, Menu } from "antd";
-import React from "react";
+import {
+  DownOutlined,
+  MenuOutlined,
+  RightOutlined,
+  UserOutlined,
+} from "@ant-design/icons";
+import { Button, Collapse, Dropdown, Menu, Space } from "antd";
+import React, { useState } from "react";
 import { ROUTES } from "../../common/routes";
 import { DivHeaderMobile } from "./index.style";
+import { Link } from "react-router-dom";
+import { IUser } from "../../context/auth/AuthTypes";
+import { useAuth } from "../../context/auth/AuthContext";
 
 const { SubMenu } = Menu;
 
 const HeaderMobile = () => {
+  const auth = useAuth();
+
+  const user = auth.user as IUser;
+
   function callback(key: string | string[]) {
     console.log(key);
   }
   const { Panel } = Collapse;
   const handleClick = (e: any) => {
-    console.log("click ", e);
+    console.log("click", e);
   };
+  const { onLogout } = useAuth();
 
+  const menu = (
+    <Menu>
+      <Menu.Item key="0">
+        <Link to="/profile">Profile</Link>
+      </Menu.Item>
+      <Menu.Item key="2">
+        <Link to="/retreat">Retreat</Link>
+      </Menu.Item>
+      <Menu.Divider />
+      <Menu.Item key="3" onClick={onLogout}>
+        Log out
+      </Menu.Item>
+    </Menu>
+  );
+
+  // //JS NAME LOGIN:
+  const text = user?.username;
+  const letter = text?.charAt(0);
+  //text :
+  const [activeKey, setactiveKey] = useState("");
+  console.log("aaaaaaaaaaa------------", { activeKey });
   return (
     <DivHeaderMobile className="container" style={{ width: "100%" }}>
       <Collapse
-        onChange={callback}
+        collapsible="header"
         ghost
-        expandIcon={({ isActive }) => (
-          <MenuOutlined style={{ margin: "0px", fontSize: "17px" }} />
-        )}
+        // defaultActiveKey={["1"]}
+        activeKey={activeKey}
+        expandIcon={({ isActive, ...props }) => {
+          return (
+            <MenuOutlined
+              onClick={() => setactiveKey(() => (activeKey ? "" : "1"))}
+              style={{ margin: "0px", fontSize: "17px" }}
+            />
+          );
+        }}
         expandIconPosition="left"
       >
         <Panel
-          header={<div />}
-          className="headermobile"
-          key="1"
-          extra={
-            <div>
+          header={
+            <div onClick={(e) => e.stopPropagation()}>
               <img
                 src="https://choezekuchen.com/wp-content/uploads/2016/02/Logo-Drikung-Rinpochen-sent.png?690ea8"
                 alt="logo"
                 className="headermobile-logo"
-                width="70px"
-                height="70px"
               />
             </div>
+          }
+          className="headermobile"
+          key="1"
+          extra={
+            !user?.username ? (
+              <div onClick={(e) => e.stopPropagation()}>
+                <Link to="/login">
+                  <UserOutlined
+                    // onClick={(event) => event.stopPropagation()}
+                    style={{ fontSize: "20px" }}
+                    className="headermobile-user"
+                  />
+                </Link>
+              </div>
+            ) : (
+              <Link to="/profile">
+                <Dropdown
+                  overlay={menu}
+                  trigger={["click"]}
+                  overlayStyle={{ width: "140px" }}
+                  placement="bottomRight"
+                >
+                  <div
+                    className="headermobile-avatar"
+                    onClick={(event) => event.stopPropagation()}
+                  >
+                    {letter}
+                  </div>
+                </Dropdown>
+              </Link>
+            )
           }
         >
           <Menu
@@ -91,7 +158,9 @@ const HeaderMobile = () => {
                     ) : (
                       <SubMenu
                         key={subRoute.path}
-                        {...{ isHasChildrent: !!subRoute.childrent.length }}
+                        {...{
+                          isHasChildrent: !!subRoute.childrent.length,
+                        }}
                         title={
                           <a
                             href={subRoute.path}
@@ -122,6 +191,7 @@ const HeaderMobile = () => {
           </Menu>
         </Panel>
       </Collapse>
+      {/* </Space> */}
     </DivHeaderMobile>
   );
 };

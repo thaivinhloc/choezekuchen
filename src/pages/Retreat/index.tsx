@@ -124,7 +124,7 @@ const Retreat: React.FC<{}> = () => {
       <Tabs defaultActiveKey={tab} onChange={handleChangeTab}>
         <TabPane tab={<strong>Retreat</strong>} key={ETabPane.DETAIL}>
           <Row>
-            <Col span={7} className="retreat__right">
+            <Col span={7} xs={24} md={7} className="retreat__right">
               <div className="retreat__right-form">
                 <div className="box-title">
                   {dataRetreat?.name ||
@@ -212,7 +212,7 @@ const Retreat: React.FC<{}> = () => {
                 </div>
               </div>
             </Col>
-            <Col span={17} className="retreat-left">
+            <Col span={17} xs={24} md={17} className="retreat-left">
               <div>
                 {isLoading ? (
                   <Skeleton active />
