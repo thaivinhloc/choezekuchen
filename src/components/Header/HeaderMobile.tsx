@@ -16,17 +16,10 @@ const { SubMenu } = Menu;
 
 const HeaderMobile = () => {
   const auth = useAuth();
-
   const user = auth.user as IUser;
-
-  function callback(key: string | string[]) {
-    console.log(key);
-  }
-  const { Panel } = Collapse;
-  const handleClick = (e: any) => {
-    console.log("click", e);
-  };
   const { onLogout } = useAuth();
+
+  const { Panel } = Collapse;
 
   const menu = (
     <Menu>
@@ -43,23 +36,22 @@ const HeaderMobile = () => {
     </Menu>
   );
 
-  // //JS NAME LOGIN:
-  const text = user?.username;
-  const letter = text?.charAt(0);
-  //text :
-  const [activeKey, setactiveKey] = useState("");
-  console.log("aaaaaaaaaaa------------", { activeKey });
+  const name = user?.username?.charAt(0).toUpperCase();
+  const [activeKey, setActiveKey] = useState<string>("");
+
+  console.log("user", user);
+
+  /* Render */
   return (
     <DivHeaderMobile className="container" style={{ width: "100%" }}>
       <Collapse
         collapsible="header"
         ghost
-        // defaultActiveKey={["1"]}
         activeKey={activeKey}
-        expandIcon={({ isActive, ...props }) => {
+        expandIcon={({ isActive }) => {
           return (
             <MenuOutlined
-              onClick={() => setactiveKey(() => (activeKey ? "" : "1"))}
+              onClick={() => setActiveKey(() => (activeKey ? "" : "1"))}
               style={{ margin: "0px", fontSize: "17px" }}
             />
           );
@@ -90,26 +82,23 @@ const HeaderMobile = () => {
                 </Link>
               </div>
             ) : (
-              <Link to="/profile">
-                <Dropdown
-                  overlay={menu}
-                  trigger={["click"]}
-                  overlayStyle={{ width: "140px" }}
-                  placement="bottomRight"
+              <Dropdown
+                overlay={menu}
+                trigger={["click"]}
+                overlayStyle={{ width: "140px" }}
+                placement="bottomRight"
+              >
+                <div
+                  className="headermobile-avatar"
+                  onClick={(event) => event.stopPropagation()}
                 >
-                  <div
-                    className="headermobile-avatar"
-                    onClick={(event) => event.stopPropagation()}
-                  >
-                    {letter}
-                  </div>
-                </Dropdown>
-              </Link>
+                  {name}
+                </div>
+              </Dropdown>
             )
           }
         >
           <Menu
-            onClick={handleClick}
             style={{ width: 256 }}
             defaultSelectedKeys={["1"]}
             defaultOpenKeys={["sub1"]}
