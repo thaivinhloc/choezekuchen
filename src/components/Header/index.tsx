@@ -1,7 +1,14 @@
 import { Button, Typography } from "antd";
 import React, { useEffect, useLayoutEffect, useState } from "react";
 import ReactCountryFlag from "react-country-flag";
-import { isDesktop } from "react-device-detect";
+import {
+  isDesktop,
+  isTablet,
+  isMobile,
+  isMobileOnly,
+  MobileView,
+  TabletView,
+} from "react-device-detect";
 import { useLocation, useNavigate } from "react-router-dom";
 import { ROUTES } from "../../common/routes";
 import { useAuth } from "../../context/auth/AuthContext";
@@ -40,6 +47,8 @@ const Header = () => {
       navigate("/");
     }
   }, [location.pathname, token, navigate]);
+
+  //console.log("----", { isDesktop, isTablet, isMobile });
 
   if (!isDesktop) return <HeaderMobile />;
 
@@ -110,7 +119,6 @@ const Header = () => {
                             {childrent.label}
                           </a>
                           {childrent.childrent.length > 0 && (
-                            // <div className="arrow-right" />
                             <RightOutlined className="arrow-right" />
                           )}
                         </div>

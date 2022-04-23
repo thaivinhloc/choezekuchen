@@ -238,59 +238,83 @@ export const DivHeaderMobile = styled.div`
     height: 90px;
     width: 100%;
   }
+  .ant-typography {
+    display: block;
+    height: 80px;
+    margin-left: 15px;
+    margin-top: 15px;
+  }
   .ant-collapse {
-    &-header {
-      padding-left: 5px;
-      height: 100px;
-      display: flex;
-      align-items: center !important;
-    }
     &-content-box {
-      /* padding: 0px !important; */
+      /* padding: 0px; */
+    }
+    &-header {
+      /* padding-left: 5px; */
+      height: 100px;
+      align-items: center !important;
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0px !important;
     }
     &-extra {
-      margin-right: auto;
+      margin-left: 0 !important;
     }
   }
-  .ant-btn-primary:hover,
-  .ant-btn-primary:focus {
-    border-color: none;
-    background: none;
-  }
+
   .headermobile {
+    &-avatar {
+      vertical-align: middle;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background-color: #303030;
+      color: #fff;
+      text-align: center;
+      justify-content: center;
+      padding-top: 3px;
+      font-weight: bold;
+    }
+
     */ .ant-menu-root.ant-menu-inline {
       border: none;
     }
     .ant-menu {
       padding: revert;
-    }
+      &-sub {
+        background-color: #fff;
+      }
+      &-inline {
+        background-color: #fff;
+        border-right: none;
+      }
+      &-item::after {
+        border-right: none;
+      }
 
-    .ant-menu-sub.ant-menu-inline {
-      background-color: #fff;
-    }
-    .ant-menu-inline .ant-menu-item::after {
-      border-right: none;
-    }
-    .ant-menu-submenu-title:active {
-      background: none;
-    }
-    .ant-menu-submenu-title {
-      border-bottom: 1px solid #eaeaea;
-    }
-    .ant-menu-inline .ant-menu-submenu-title {
-      padding-right: 0;
-    }
-    .ant-menu-inline {
-      border-right: none;
-    }
-    .ant-menu-inline .ant-menu-submenu {
-      padding-bottom: 0px;
+      &-submenu {
+        padding-bottom: 0px !important;
+
+        &-title:active {
+          background: none;
+        }
+        &-title {
+          border-bottom: 1px solid #eaeaea;
+          padding-right: 0;
+          margin-top: 2px;
+          margin-bottom: 2px;
+        }
+      }
     }
     //icon outline:
-
+    &__icon {
+      display: flex;
+      width: 100%;
+    }
     &-logo {
       height: 50px;
       width: 50px;
+    }
+    &-user {
     }
     &-ICTab {
       width: 20px;
@@ -318,6 +342,11 @@ export const DivHeaderMobile = styled.div`
     }
     &__main-1 {
       list-style-type: none !important;
+    }
+    .ant-btn-primary:hover,
+    .ant-btn-primary:focus {
+      border-color: none;
+      background: none;
     }
   }
 `;
