@@ -1,35 +1,14 @@
 import { Col, Row } from "antd";
 import { useForm } from "antd/lib/form/Form";
-import React, { useEffect } from "react";
+import React from "react";
 import { useAuth } from "../../context/auth/AuthContext";
 import { DivProfileWrapper } from "./index.style";
 
-const layout = {
-  labelCol: {
-    sm: { span: 24 },
-  },
-  wrapperCol: {
-    sm: { span: 24 },
-  },
-};
 
 const Profile = () => {
   const { user } = useAuth();
-  const [form] = useForm();
 
-  useEffect(() => {
-    let time = user ? new Date(user.updatedAt) : new Date();
-
-    console.log("date" + time.toLocaleString());
-  }, []);
-
-  const RenderItem = ({
-    title,
-    content,
-  }: {
-    title: string;
-    content: string;
-  }) => {
+  const RenderItem = ({ title, content }: { title: string; content: string }) => {
     return (
       <Row>
         <Col xs={10} sm={10} md={10} lg={10} className="label">
@@ -45,15 +24,13 @@ const Profile = () => {
   return (
     <DivProfileWrapper>
       <div className="container-inner">
-        <div className="profile">
-          <RenderItem title="Full name" content={user?.username || ""} />
-          {user?.city && <RenderItem title="City" content={user?.city || ""} />}
-          {user?.country && (
-            <RenderItem title="Country" content={user?.country || ""} />
-          )}
-          <RenderItem title="Email" content={user?.email || ""} />
+        <div className="profile ant-col ant-col-lg-8 ant-col-md-14 ant-col-sm-20 ant-col-24">
+          <RenderItem title="Full name:" content={user?.username || ""} />
+          {user?.city && <RenderItem title="City:" content={user?.city || ""} />}
+          {user?.country && <RenderItem title="Country:" content={user?.country || ""} />}
+          <RenderItem title="Email:" content={user?.email || ""} />
           <RenderItem
-            title="Last Update"
+            title="Last Update:"
             content={user ? new Date(user.updatedAt).toLocaleString() : ""}
           />
         </div>
