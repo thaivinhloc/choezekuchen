@@ -63,21 +63,22 @@ const Login: React.FC<{}> = () => {
           >
             <Input size="large" type="password" placeholder="Password" />
           </Form.Item>
-
-          <Form.Item>
+          <div className="form-footer">
+            <div>
+              Dont't have an account? {" "}
+              <Link to="/signup">
+                <strong>Register Now</strong>
+              </Link>
+            </div>
             <Button
               size="large"
               htmlType="submit"
-              className="login-form-button btn-primary bold"
+              className="  form-button-submit btn-primary bold"
               loading={isLoading}
             >
               Log in
             </Button>
-            Dont't have an account?{" "}
-            <Link to="/signup">
-              <strong>Register Now</strong>
-            </Link>
-          </Form.Item>
+          </div>
         </Form>
       </Row>
     </DivLoginWrapper>

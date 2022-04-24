@@ -14,8 +14,5 @@ export const DivLoginWrapper = styled.div`
   .ant-col-rtl .login-form-forgot {
     float: left;
   }
-  .login-form-button {
-    width: 100%;
-    margin-bottom: 14px;
-  }
+
 `;
