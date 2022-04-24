@@ -7,7 +7,9 @@ export type TSignup = {
   email: string;
   address: string;
   password: string;
-  confirmPassword: string;
+  confirmPassword?: string;
+  country?: string;
+  city?: string;
 };
 
 export interface IUser {
@@ -19,6 +21,9 @@ export interface IUser {
   blocked: boolean;
   createdAt: Date;
   updatedAt: Date;
+  address?: string;
+  city?: string;
+  country?: string;
 }
 
 export interface IResponseLogin {

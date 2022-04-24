@@ -33,7 +33,8 @@
     "build": "craco build",
     "test": "craco test",
     "eject": "react-scripts eject",
-    "deploy": "craco build  && firebase deploy --only hosting"
+    "deploy": "craco build  && firebase deploy --only hosting",
+    "deploy:preview": "craco build && firebase hosting:channel:deploy choezekuchen"
   },
   "resolutions": {
     "styled-components": "^5"

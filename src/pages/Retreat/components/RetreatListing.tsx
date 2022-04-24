@@ -12,7 +12,6 @@ const columns = [
     render: (user: IUser) => {
       return <span>{user.username}</span>;
     },
-
   },
   {
     title: "City",
@@ -61,7 +60,12 @@ const RetreatListing: React.FC<{ listRetreat: IResponseListRetreat[] }> = ({
 }) => {
   return (
     <DivTableRetreat>
-      <Table columns={columns} dataSource={listRetreat} scroll={{ x: 1300, y: 1000 }} />
+      <Table
+        columns={columns}
+        dataSource={listRetreat}
+        scroll={{ x: 1300, y: 1000 }}
+        pagination={false}
+      />
     </DivTableRetreat>
   );
 };

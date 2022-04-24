@@ -16,6 +16,8 @@ import {
 } from "../../services/retreatTypes";
 import RetreatListing from "./components/RetreatListing";
 import { DivRetreatWrapper } from "./index.style";
+import { formatNumber } from "../../helper";
+
 const { TabPane } = Tabs;
 
 const PATH = process.env.REACT_APP_API_URL;
@@ -158,21 +160,22 @@ const Retreat: React.FC<{}> = () => {
                 {dataRetreat?.user && (
                   <>
                     <div className="box-title">{userRetreat?.name || ""}</div>
+
                     <div className="box-content">
                       <RenderItem
                         title="Commited:"
-                        content={userRetreat?.commited || 0}
+                        content={formatNumber(userRetreat?.commited || 0)}
                       />
                       <RenderItem
                         title="Completed:"
-                        content={userRetreat?.completed || 0}
+                        content={formatNumber(userRetreat?.completed || 0)}
                       />
                       <RenderItem
                         title="Due:"
                         content={
                           Number(userRetreat?.due) < 0
                             ? 0
-                            : userRetreat?.due || 0
+                            : formatNumber(userRetreat?.due || 0)
                         }
                       />
                       <RenderItem
@@ -195,19 +198,21 @@ const Retreat: React.FC<{}> = () => {
                 <div className="box-content">
                   <RenderItem
                     title="Total Commitment:"
-                    content={dataRetreat?.totalCommitment || 0}
+                    content={formatNumber(dataRetreat?.totalCommitment || 0)}
                   />
                   <RenderItem
                     title="No. of Participants:"
-                    content={dataRetreat?.totalParticipants || 0}
+                    content={formatNumber(dataRetreat?.totalParticipants || 0)}
                   />
                   <RenderItem
                     title="Group Completed:"
-                    content={dataRetreat?.totalGroupCompleted || 0}
+                    content={formatNumber(
+                      dataRetreat?.totalGroupCompleted || 0
+                    )}
                   />
                   <RenderItem
                     title="Due:"
-                    content={Number(totalDue) < 0 ? 0 : totalDue}
+                    content={Number(totalDue) < 0 ? 0 : formatNumber(totalDue)}
                   />
                 </div>
               </div>

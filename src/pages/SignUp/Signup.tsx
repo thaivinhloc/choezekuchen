@@ -26,8 +26,16 @@ const SignUp = () => {
     const token = !!localStorage.getItem("token");
     if (token) navigate("/");
   }, []);
-  const onFinish = async (value: TSignup) => {
-    onRegister(value);
+
+  const onFinish = async (data: TSignup) => {
+    const { country, city, username, confirmPassword, ...values } = data;
+    const body = {
+      ...values,
+      username: username.charAt(0).toUpperCase(),
+      address: `${country}, ${city}`,
+    };
+
+    onRegister(body);
   };
 
   return (
