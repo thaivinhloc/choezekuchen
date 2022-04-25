@@ -29,10 +29,11 @@ const SignUp = () => {
 
   const onFinish = async (data: TSignup) => {
     const { country, city, username, confirmPassword, ...values } = data;
+    const name = username.trim();
     const body = {
       ...values,
-      username: username.charAt(0).toUpperCase(),
-      address: `${country}, ${city}`,
+      username: name.charAt(0).toUpperCase() + name.slice(1),
+      address: `${city}, ${country}`,
     };
 
     onRegister(body);

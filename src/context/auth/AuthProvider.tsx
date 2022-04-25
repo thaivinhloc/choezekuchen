@@ -57,7 +57,7 @@ export function AuthProvider({ children }: Props) {
     } catch (error: any) {
       notification.error({
         message: "Error",
-        description: error?.error?.message || "",
+        description: error || "",
       });
     } finally {
       setIsLoading(false);
