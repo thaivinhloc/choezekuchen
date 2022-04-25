@@ -149,20 +149,22 @@ const SignUp = () => {
               placeholder="Confirm Password"
             />
           </Form.Item>
-          <Form.Item>
+          <div className="form-footer">
+            <div>
+              Already have member?{" "}
+              <Link to="/login">
+                <strong>Log In</strong>
+              </Link>
+            </div>
             <Button
               size="large"
-              className="button-signup btn-primary bold"
+              className="btn-primary bold form-button-submit"
               htmlType="submit"
               loading={isLoading}
             >
               Sign Up
             </Button>
-            Already have member?{" "}
-            <Link to="/login">
-              <strong>Log In</strong>
-            </Link>
-          </Form.Item>
+          </div>
         </Form>
         {/* </Col> */}
       </Row>

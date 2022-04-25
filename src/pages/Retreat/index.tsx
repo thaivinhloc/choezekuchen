@@ -150,9 +150,11 @@ const Retreat: React.FC<{}> = () => {
                       ]}
                     >
                       <Input.Search
+                        size="large"
                         onSearch={handleSubmit}
                         enterButton="Submit"
                         loading={isLoadingSubmit}
+                        placeholder="Digits only, no comma or period"
                       />
                     </Form.Item>
                   </Form>
