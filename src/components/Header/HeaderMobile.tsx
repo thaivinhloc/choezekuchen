@@ -133,7 +133,7 @@ const HeaderMobile = () => {
                 {...{ isHasChildrent: !!route.childrent.length }}
               >
                 {route.childrent.map((subRoute) => (
-                  <>
+                  <React.Fragment key={subRoute.path}>
                     {subRoute.childrent.length < 0 ? (
                       <Menu.Item key={subRoute.path} icon={() => <div />}>
                         <a
@@ -173,7 +173,7 @@ const HeaderMobile = () => {
                         ))}
                       </SubMenu>
                     )}
-                  </>
+                  </React.Fragment>
                 ))}
               </SubMenu>
             ))}

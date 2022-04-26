@@ -1,4 +1,4 @@
-import { Button, Col, Form, Input, Row, Space } from "antd";
+import { Button, Col, Form, Input, Row } from "antd";
 import { useForm } from "antd/lib/form/Form";
 import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -25,7 +25,7 @@ const SignUp = () => {
   useEffect(() => {
     const token = !!localStorage.getItem("token");
     if (token) navigate("/");
-  }, []);
+  }, [navigate]);
 
   const onFinish = async (data: TSignup) => {
     const { country, city, username, confirmPassword, ...values } = data;

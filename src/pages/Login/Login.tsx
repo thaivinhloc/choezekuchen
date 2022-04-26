@@ -1,5 +1,4 @@
-import { LockOutlined, UserOutlined } from "@ant-design/icons";
-import { Button, Checkbox, Form, Input, Row, Grid } from "antd";
+import { Button, Form, Input, Row } from "antd";
 import { useForm } from "antd/lib/form/Form";
 import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -7,19 +6,16 @@ import { useAuth } from "../../context/auth/AuthContext";
 import { TLogin } from "../../context/auth/AuthTypes";
 import { DivLoginWrapper } from "./index.styles";
 
-const { useBreakpoint } = Grid;
-
 const Login: React.FC<{}> = () => {
   const [form] = useForm<TLogin>();
-  const { onLogin, user, isLoading } = useAuth();
-  const screens = useBreakpoint();
+  const { onLogin, isLoading } = useAuth();
 
   const navigate = useNavigate();
 
   useEffect(() => {
     const token = !!localStorage.getItem("token");
     if (token) navigate("/retreat");
-  }, []);
+  }, [navigate]);
 
   const onFinish = (values: TLogin) => {
     onLogin(values);
@@ -65,7 +61,7 @@ const Login: React.FC<{}> = () => {
           </Form.Item>
           <div className="form-footer">
             <div>
-              Dont't have an account? {" "}
+              Dont't have an account?{" "}
               <Link to="/signup">
                 <strong>Register Now</strong>
               </Link>
