@@ -58,7 +58,8 @@ export const DivTableRetreat = styled.div`
     &-thead {
       > tr,
       th {
-        background: #aca3a3;
+        background: #bf1111;
+        color: #fff;
         font-weight: bold;
         border-bottom: 1px solid #999;
         border-top: 1px solid #999;
