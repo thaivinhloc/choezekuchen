@@ -4,7 +4,7 @@ import {
   RightOutlined,
   UserOutlined,
 } from "@ant-design/icons";
-import { Button, Collapse, Dropdown, Menu, Space } from "antd";
+import { Collapse, Dropdown, Menu } from "antd";
 import React, { useState } from "react";
 import { ROUTES } from "../../common/routes";
 import { DivHeaderMobile } from "./index.style";
@@ -16,12 +16,10 @@ const { SubMenu } = Menu;
 
 const HeaderMobile = () => {
   const auth = useAuth();
-
   const user = auth.user as IUser;
-
-  function callback(key: string | string[]) {
-    console.log(key);
-  }
+  // function callback(key: string | string[]) {
+  //   console.log(key);
+  // }
   const { Panel } = Collapse;
   const handleClick = (e: any) => {
     console.log("click", e);

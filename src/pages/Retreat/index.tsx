@@ -1,4 +1,4 @@
-import { Button, Col, Form, Input, Row, Skeleton, Tabs, Tooltip } from "antd";
+import { Col, Form, Input, Row, Skeleton, Tabs, Tooltip } from "antd";
 import { useForm } from "antd/lib/form/Form";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -53,7 +53,7 @@ const Retreat: React.FC<{}> = () => {
       default:
         break;
     }
-  }, [tab]);
+  }, [tab, setTitleBanner]);
 
   const getRetreatPublic = async (isLoading = false) => {
     try {

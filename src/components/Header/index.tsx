@@ -1,14 +1,7 @@
 import { Button, Typography } from "antd";
-import React, { useEffect, useLayoutEffect, useState } from "react";
+import React, { useLayoutEffect } from "react";
 import ReactCountryFlag from "react-country-flag";
-import {
-  isDesktop,
-  isTablet,
-  isMobile,
-  isMobileOnly,
-  MobileView,
-  TabletView,
-} from "react-device-detect";
+import { isDesktop } from "react-device-detect";
 import { useLocation, useNavigate } from "react-router-dom";
 import { ROUTES } from "../../common/routes";
 import { useAuth } from "../../context/auth/AuthContext";
@@ -39,7 +32,7 @@ const Header = () => {
     if (token && !user) {
       onGetMe();
     }
-  }, []);
+  }, [token, onGetMe, user]);
 
   useLayoutEffect(() => {
     const isPrivateRoute = ["/login", "signup"].includes(location.pathname);
