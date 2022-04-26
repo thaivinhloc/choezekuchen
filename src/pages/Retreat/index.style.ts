@@ -7,7 +7,7 @@ export const DivRetreatWrapper = styled.div`
     .retreat {
       &-left {
         padding-left: 10px;
-        text-align: center;
+        /* text-align: center; */
         margin-top: 20px;
       }
       &__right {
