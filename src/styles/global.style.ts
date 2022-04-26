@@ -155,18 +155,20 @@ export const GlobalStyle = createGlobalStyle`${css`
   .form-footer{
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    // justify-content: space-between;
     margin: 0 0 20px;
 
     .form-button-submit{
-        line-height: 36px;
-        height: 39px;
-        width: auto;
-        padding: 0 23px;
-        margin: 0 0 20px;
-        border-radius: 4px;
-        background-color: #F6F6F6;
-        letter-spacing: 1px;
+        text-align: right;
+        button{
+          line-height: 36px;
+          height: 39px;
+          width: auto;
+          padding: 0 23px;
+          border-radius: 4px;
+          background-color: #F6F6F6;
+          letter-spacing: 1px;
+        }
     }
     .btn-primary: hover{
       background-color: #1abc9c;

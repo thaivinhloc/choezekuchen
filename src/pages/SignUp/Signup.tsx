@@ -151,13 +151,18 @@ const SignUp = () => {
             />
           </Form.Item>
           <div className="form-footer">
-            <div>
-              Already have member?{" "}
-              <Link to="/login">
-                <strong>Log In</strong>
-              </Link>
-            </div>
-            <Button
+            <Col span={14}>
+              <Row>
+                <Col>Already have member? &nbsp;</Col>
+                <Col>
+                  <Link to="/login">
+                    <strong>Log In</strong>
+                  </Link>
+                </Col>
+              </Row>
+            </Col>
+            <Col span={10} className="form-button-submit">
+              <Button
               size="large"
               className="btn-primary bold form-button-submit"
               htmlType="submit"
@@ -165,6 +170,8 @@ const SignUp = () => {
             >
               Sign Up
             </Button>
+            </Col>
+
           </div>
         </Form>
         {/* </Col> */}

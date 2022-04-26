@@ -1,5 +1,5 @@
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
-import { Button, Checkbox, Form, Input, Row, Grid } from "antd";
+import { Button, Checkbox, Form, Input, Row, Col, Grid } from "antd";
 import { useForm } from "antd/lib/form/Form";
 import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -45,8 +45,8 @@ const Login: React.FC<{}> = () => {
             rules={[
               {
                 required: true,
-                message: "Please input your Email!",
-              },
+                message: "Please input your Email!"
+              }
             ]}
           >
             <Input size="large" placeholder="Email" />
@@ -57,27 +57,33 @@ const Login: React.FC<{}> = () => {
             rules={[
               {
                 required: true,
-                message: "Please input your Password!",
-              },
+                message: "Please input your Password!"
+              }
             ]}
           >
             <Input size="large" type="password" placeholder="Password" />
           </Form.Item>
           <div className="form-footer">
-            <div>
-              Dont't have an account? {" "}
-              <Link to="/signup">
-                <strong>Register Now</strong>
-              </Link>
-            </div>
-            <Button
-              size="large"
-              htmlType="submit"
-              className="  form-button-submit btn-primary bold"
-              loading={isLoading}
-            >
-              Log in
-            </Button>
+            <Col span={14}>
+              <Row>
+                <Col>Dont't have an account? &nbsp;</Col>
+                <Col>
+                  <Link to="/signup">
+                    <strong>Register Now</strong>
+                  </Link>
+                </Col>
+              </Row>
+            </Col>
+            <Col span={10} className="form-button-submit">
+              <Button
+                size="large"
+                htmlType="submit"
+                className="btn-primary bold"
+                loading={isLoading}
+              >
+                Log in
+              </Button>
+            </Col>
           </div>
         </Form>
       </Row>
