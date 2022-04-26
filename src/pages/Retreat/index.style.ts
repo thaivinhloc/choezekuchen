@@ -15,6 +15,11 @@ export const DivRetreatWrapper = styled.div`
           box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
           color: #000;
           border: 1px solid #999;
+          .ant-input {
+            &:focus {
+              box-shadow: none;
+            }
+          }
         }
         .box-title {
           /* background: #f6f6f6; */
@@ -32,13 +37,11 @@ export const DivRetreatWrapper = styled.div`
       &-label {
         background: #f6f6f6;
         padding: 10px;
-        text-align: right;
         font-weight: bold;
         font-size: 13px;
       }
       &-content {
         padding: 10px;
-        text-align: right;
         width: 94%;
       }
       &-submit {
@@ -57,6 +60,14 @@ export const DivTableRetreat = styled.div`
       th {
         background: #aca3a3;
         font-weight: bold;
+        border-bottom: 1px solid #999;
+        border-top: 1px solid #999;
+        &:first-child {
+          border-left: 1px solid #999;
+        }
+        &:last-child {
+          border-right: 1px solid #999;
+        }
       }
       .ant-table-cell {
         &::before {
@@ -64,6 +75,18 @@ export const DivTableRetreat = styled.div`
         }
       }
       .ant-table-cell {
+      }
+    }
+    .ant-table-body {
+      > tr,
+      td {
+        border-bottom: 1px solid #999;
+        &:first-child {
+          border-left: 1px solid #999;
+        }
+        &:last-child {
+          border-right: 1px solid #999;
+        }
       }
     }
   }

@@ -57,7 +57,7 @@ export function AuthProvider({ children }: Props) {
     } catch (error: any) {
       notification.error({
         message: "Error",
-        description: error?.error?.message || "",
+        description: error || "",
       });
     } finally {
       setIsLoading(false);
@@ -70,8 +70,14 @@ export function AuthProvider({ children }: Props) {
         path: "/api/users/me",
         method: "get",
       });
-      console.log("result", result);
-      setUser(result);
+      const { address, ...values } = result;
+      const convertAddress = address?.split(",");
+      const body = {
+        ...values,
+        country: convertAddress?.[0],
+        city: convertAddress?.[convertAddress?.length - 1],
+      };
+      setUser(body);
     } catch (error: any) {
       console.log("error", error);
     }

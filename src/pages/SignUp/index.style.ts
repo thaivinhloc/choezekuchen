@@ -11,12 +11,4 @@ export const DivSignupWrapper = styled.div`
   .ant-col-rtl .login-form-forgot {
     float: left;
   }
-  .login-form-button {
-    width: 100%;
-    margin-bottom: 12px;
-  }
-  .button-signup {
-    width: 100%;
-    margin: 5px 0px 12px;
-  }
 `;

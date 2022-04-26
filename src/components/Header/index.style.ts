@@ -246,7 +246,7 @@ export const DivHeaderMobile = styled.div`
   }
   .ant-collapse {
     &-content-box {
-      /* padding: 0px; */
+      padding: 0px;
     }
     &-header {
       /* padding-left: 5px; */
@@ -263,16 +263,15 @@ export const DivHeaderMobile = styled.div`
 
   .headermobile {
     &-avatar {
-      vertical-align: middle;
       width: 30px;
       height: 30px;
       border-radius: 50%;
       background-color: #303030;
       color: #fff;
-      text-align: center;
-      justify-content: center;
-      padding-top: 3px;
       font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     */ .ant-menu-root.ant-menu-inline {
