@@ -1,0 +1,94 @@
+import styled from "styled-components";
+
+export const DivRetreatWrapper = styled.div`
+  padding: 20px 0px 50px;
+  color: #000;
+  .ant-tabs {
+    .retreat {
+      &-left {
+        padding-left: 10px;
+        /* text-align: center; */
+        margin-top: 20px;
+      }
+      &__right {
+        &-form {
+          box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+          color: #000;
+          border: 1px solid #999;
+          .ant-input {
+            &:focus {
+              box-shadow: none;
+            }
+          }
+        }
+        .box-title {
+          /* background: #f6f6f6; */
+          background: #bf1111;
+          color: #fff;
+          padding: 10px;
+          font-weight: bold;
+          border-bottom: 1px solid #999;
+          text-align: center;
+        }
+      }
+      &-row {
+        border-bottom: 1px solid #999;
+      }
+      &-label {
+        background: #f6f6f6;
+        padding: 10px;
+        font-weight: bold;
+        font-size: 13px;
+      }
+      &-content {
+        padding: 10px;
+        width: 94%;
+      }
+      &-submit {
+        padding: 10px;
+        &-form {
+        }
+      }
+    }
+  }
+`;
+
+export const DivTableRetreat = styled.div`
+  .ant-table {
+    &-thead {
+      > tr,
+      th {
+        background: #bf1111;
+        color: #fff;
+        font-weight: bold;
+        border-bottom: 1px solid #999;
+        border-top: 1px solid #999;
+        &:first-child {
+          border-left: 1px solid #999;
+        }
+        &:last-child {
+          border-right: 1px solid #999;
+        }
+      }
+      .ant-table-cell {
+        &::before {
+          height: 100% !important;
+        }
+      }
+      .ant-table-cell {
+      }
+    }
+    .ant-table-body {
+      > tr,
+      td {
+        border-bottom: 1px solid #999;
+        &:first-child {
+          border-left: 1px solid #999;
+        }
+        &:last-child {
+          border-right: 1px solid #999;
+        }
+      }
+    }
+  }
+`;
