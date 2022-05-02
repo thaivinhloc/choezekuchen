@@ -17,6 +17,7 @@ import RetreatListing from "./components/RetreatListing";
 import { DivRetreatWrapper } from "./index.style";
 import { formatNumber } from "../../helper";
 import { useRouter } from "next/router";
+import { useTranslation } from "next-i18next";
 
 const { TabPane } = Tabs;
 
@@ -34,6 +35,7 @@ const Retreat: React.FC<{}> = () => {
   const router = useRouter();
   const { user } = useAuth();
   const [form] = useForm();
+  const { i18n } = useTranslation();
   const [dataRetreat, setDataRetreat] = useState<IResponseRetreat | null>(null);
   const [tab, setTab] = useState<ETabPane>(ETabPane.DETAIL);
   const [listRetreat, setListRetreat] = useState<IResponseListRetreat[]>([]);
@@ -63,7 +65,10 @@ const Retreat: React.FC<{}> = () => {
         setIsLoading(true);
       }
       const isHasToken = !localStorage.getItem("token");
-      const result: IResponseRetreat = await getRetreatDetail(isHasToken);
+      const result: IResponseRetreat = await getRetreatDetail(
+        isHasToken,
+        i18n.language
+      );
       setDataRetreat(result);
     } catch (error) {
       console.log("----err", error);

@@ -1,4 +1,4 @@
-import Client from "./Client";
+import Client from "./client";
 
 import {
   IResponseListRetreat,
@@ -6,9 +6,12 @@ import {
   TPostSubmitRetreat,
 } from "./retreatTypes";
 
-export const getRetreatDetail = async (isHasToken = true) => {
+export const getRetreatDetail = async (
+  isHasToken = true,
+  locale: string = "en"
+) => {
   return await Client.createRequest<IResponseRetreat>({
-    path: "/api/active-retreat-detail",
+    path: `/api/active-retreat-detail?locale=${locale}`,
     method: "get",
     external: isHasToken,
   });
