@@ -72,6 +72,7 @@ const Header: FC<{}> = (...props) => {
               <Button
                 type="link"
                 onClick={() => handleChangeLocale(lang.locale)}
+                key={lang.code}
               >
                 <Typography.Paragraph style={{ color: "#fff" }}>
                   <ReactCountryFlag
@@ -99,7 +100,7 @@ const Header: FC<{}> = (...props) => {
             />
             <img
               src="https://choezekuchen.com/wp-content/uploads/2016/02/Logo-Drikung-Rinpochen-sent.png?690ea8"
-              alt=""
+              alt="logo"
             />
           </div>
           <button className="navbar-toggler">
@@ -119,7 +120,10 @@ const Header: FC<{}> = (...props) => {
                 {route.childrent.length > 0 && (
                   <ul className="dropdown">
                     {route.childrent.map((childrent) => (
-                      <li className="dropdown-nav-item nav-item">
+                      <li
+                        className="dropdown-nav-item nav-item"
+                        key={childrent.path}
+                      >
                         <div style={{ display: "flex" }}>
                           <a href={route.path} className="dropdown-nav-link">
                             {childrent.label}
@@ -131,7 +135,10 @@ const Header: FC<{}> = (...props) => {
                         {childrent.childrent.length > 0 && (
                           <ul className="dropdown">
                             {childrent.childrent.map((route) => (
-                              <li className="dropdown-nav-item nav-item">
+                              <li
+                                className="dropdown-nav-item nav-item"
+                                key={route.path}
+                              >
                                 <a
                                   href={route.path}
                                   className="dropdown-nav-link"

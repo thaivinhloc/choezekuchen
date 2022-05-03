@@ -29,19 +29,23 @@ const columns = [
     title: "Commited",
     dataIndex: "commited",
     key: "commited",
-  },
-  {
-    title: "Completed",
-    dataIndex: "completed",
-    key: "completed",
     width: 110,
   },
   {
-    title: "%",
-    dataIndex: "percent",
-    key: "percent",
-    width: 80,
+    title: "Completed (%)",
+    dataIndex: "completed",
+    key: "completed",
+    width: 140,
+    render: (text: string, opt: any) => {
+      const percent = (opt?.completed / opt?.commited) * 100;
+      return (
+        <span>
+          {text} ({percent === Infinity ? 100 : Math.abs(percent)}%)
+        </span>
+      );
+    },
   },
+
   {
     title: "Daily Average",
     dataIndex: "dailyAverage",
