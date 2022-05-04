@@ -13,7 +13,10 @@ const WithLess = withLess({
 });
 const nextConfig = {
   reactStrictMode: true,
-  i18n,
+  // i18n,
+  images: {
+    domains: ["choezekuchen.herokuapp.com"],
+  },
 };
 
 module.exports = { ...WithLess, ...nextConfig };
