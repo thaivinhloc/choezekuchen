@@ -1,8 +1,8 @@
+/* eslint-disable react/no-unescaped-entities */
 import { Button, Col, Form, Input, Row } from "antd";
 import { useForm } from "antd/lib/form/Form";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import React, { useEffect } from "react";
+import LinkComponent from "components/Link";
+import React from "react";
 import { useAuth } from "../../context/auth/AuthContext";
 import { TLogin } from "../../context/auth/AuthTypes";
 import { DivLoginWrapper } from "./index.styles";
@@ -54,9 +54,9 @@ const LoginForm: React.FC<{}> = () => {
               <Row>
                 <Col>Dont't have an account? &nbsp;</Col>
                 <Col>
-                  <Link href="/signup">
+                  <LinkComponent href="/signup">
                     <strong>Register Now</strong>
-                  </Link>
+                  </LinkComponent>
                 </Col>
               </Row>
             </Col>

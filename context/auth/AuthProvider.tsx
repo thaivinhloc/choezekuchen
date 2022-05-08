@@ -4,6 +4,8 @@ import { IResponseLogin, IUser, TLogin, TSignup } from "./AuthTypes";
 import { notification } from "antd";
 import { useRouter } from "next/router";
 import Client from "services/client";
+import i18n from "i18next";
+import { LOGIN, RETREAT } from "common/navigator";
 
 type Props = {
   children: ReactNode;
@@ -24,7 +26,7 @@ export function AuthProvider({ children }: Props) {
       });
       localStorage.setItem("token", result.jwt);
       setUser(result.user);
-      router.push("/retreat");
+      router.push("/" + i18n.language + RETREAT);
     } catch (error: any) {
       notification.error({
         message: "Error",
@@ -38,7 +40,7 @@ export function AuthProvider({ children }: Props) {
   const onLogout = () => {
     localStorage.removeItem("token");
     setUser(null);
-    router.push("/login");
+    router.push("/" + i18n.language + LOGIN);
   };
 
   const onRegister = async (data: TSignup) => {
@@ -53,7 +55,7 @@ export function AuthProvider({ children }: Props) {
 
       localStorage.setItem("token", result.jwt);
       setUser(result.user);
-      router.push("/retreat");
+      router.push("/" + i18n.language + RETREAT);
     } catch (error: any) {
       notification.error({
         message: "Error",

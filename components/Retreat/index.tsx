@@ -17,7 +17,8 @@ import RetreatListing from "./components/RetreatListing";
 import { DivRetreatWrapper } from "./index.style";
 import { formatNumber } from "../../helper";
 import { useRouter } from "next/router";
-import { useTranslation } from "next-i18next";
+import i18next from "i18next";
+import { LOGIN } from "common/navigator";
 
 const { TabPane } = Tabs;
 
@@ -35,7 +36,7 @@ const Retreat: React.FC<{}> = () => {
   const router = useRouter();
   const { user } = useAuth();
   const [form] = useForm();
-  const { i18n } = useTranslation();
+  const currentLng = i18next.language;
   const [dataRetreat, setDataRetreat] = useState<IResponseRetreat | null>(null);
   const [tab, setTab] = useState<ETabPane>(ETabPane.DETAIL);
   const [listRetreat, setListRetreat] = useState<IResponseListRetreat[]>([]);
@@ -67,7 +68,7 @@ const Retreat: React.FC<{}> = () => {
       const isHasToken = !localStorage.getItem("token");
       const result: IResponseRetreat = await getRetreatDetail(
         isHasToken,
-        i18n.language
+        currentLng
       );
       setDataRetreat(result);
     } catch (error) {
@@ -108,7 +109,7 @@ const Retreat: React.FC<{}> = () => {
       const values = await form.validateFields();
       const recitationNumber = Number(values.recitationNumber);
       if (!user) {
-        router.push("/login");
+        router.push("/" + i18next.language + LOGIN);
       } else {
         setIsLoadingSubmit(true);
         await postRetreatRecitation({ recitationNumber }).then(() =>
@@ -145,7 +146,7 @@ const Retreat: React.FC<{}> = () => {
     <DivRetreatWrapper>
       <Tabs defaultActiveKey={tab} onChange={handleChangeTab}>
         <TabPane tab={<strong>Retreat</strong>} key={ETabPane.DETAIL}>
-          <Row>
+          <Row gutter={32}>
             <Col span={7} xs={24} md={7} className="retreat__right">
               <div className="retreat__right-form">
                 <div className="box-title">
@@ -244,7 +245,9 @@ const Retreat: React.FC<{}> = () => {
                 {isLoading ? (
                   <Skeleton active />
                 ) : (
-                  <h3 className="bold">{dataRetreat?.name || ""}</h3>
+                  <h3 className="bold text-center">
+                    {dataRetreat?.name || ""}
+                  </h3>
                 )}
                 {PATH && dataRetreat?.image && (
                   <img src={PATH + dataRetreat?.image?.url} alt="" />

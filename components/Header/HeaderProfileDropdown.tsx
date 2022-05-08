@@ -1,11 +1,12 @@
-import React, { FC } from "react";
-import { Menu, Dropdown, Button } from "antd";
 import { DownOutlined } from "@ant-design/icons";
+import { Button, Dropdown, Menu } from "antd";
+import { PROFILE, RETREAT } from "common/navigator";
+import { default as Link, default as LinkComponent } from "components/Link";
+import i18next from "i18next";
+import React, { FC } from "react";
+import { TFunction } from "react-i18next";
 import { useAuth } from "../../context/auth/AuthContext";
 import { IUser } from "../../context/auth/AuthTypes";
-import Link from "next/link";
-import { useTranslation } from "next-i18next";
-import { TFunction } from "react-i18next";
 
 type THeaderProfileDropdown = {
   t: TFunction<("common" | "login")[], undefined>;
@@ -14,14 +15,15 @@ const HeaderProfileDropdown: FC<THeaderProfileDropdown> = ({ t }) => {
   const auth = useAuth();
   const { onLogout } = useAuth();
   const user = auth.user as IUser;
+  const locale = i18next.language;
 
   const menu = (
     <Menu>
       <Menu.Item key="0">
-        <Link href="/profile">Profile</Link>
+        <LinkComponent href={PROFILE}>Profile</LinkComponent>
       </Menu.Item>
       <Menu.Item key="2">
-        <Link href="/retreat">Retreat</Link>
+        <LinkComponent href={RETREAT}>Retreat</LinkComponent>
       </Menu.Item>
       <Menu.Divider />
       <Menu.Item key="3" onClick={onLogout}>
@@ -34,7 +36,7 @@ const HeaderProfileDropdown: FC<THeaderProfileDropdown> = ({ t }) => {
     <>
       {!user?.username ? (
         <>
-          <Link href="/login">
+          <Link href="/login" locale={locale}>
             <Button type="text">
               <span
                 className="bold"
@@ -44,7 +46,7 @@ const HeaderProfileDropdown: FC<THeaderProfileDropdown> = ({ t }) => {
               </span>
             </Button>
           </Link>
-          <Link href="/signup">
+          <Link href="/signup" locale={locale}>
             <Button type="text">
               <span
                 className="bold"

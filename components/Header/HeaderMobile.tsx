@@ -5,13 +5,16 @@ import {
   UserOutlined,
 } from "@ant-design/icons";
 import { Collapse, Dropdown, Menu } from "antd";
-import React, { useState } from "react";
-import { ROUTES } from "../../common/routes";
-import { DivHeaderMobile } from "./index.style";
-import { IUser } from "../../context/auth/AuthTypes";
-import { useAuth } from "../../context/auth/AuthContext";
+import { LOGIN } from "common/navigator";
+import LinkComponent from "components/Link";
+import Image from "next/image";
 import { useRouter } from "next/router";
-import Link from "next/link";
+import React, { useState } from "react";
+import Logo from "../../assets/logo.png";
+import { ROUTES } from "../../common/routes";
+import { useAuth } from "../../context/auth/AuthContext";
+import { IUser } from "../../context/auth/AuthTypes";
+import { DivHeaderMobile } from "./index.style";
 
 const { SubMenu } = Menu;
 
@@ -26,10 +29,10 @@ const HeaderMobile = () => {
   const menu = (
     <Menu>
       <Menu.Item key="0">
-        <Link href="/profile">Profile</Link>
+        <LinkComponent href="/profile">Profile</LinkComponent>
       </Menu.Item>
       <Menu.Item key="2">
-        <Link href="/retreat">Retreat</Link>
+        <LinkComponent href="/retreat">Retreat</LinkComponent>
       </Menu.Item>
       <Menu.Divider />
       <Menu.Item key="3" onClick={onLogout}>
@@ -43,7 +46,10 @@ const HeaderMobile = () => {
 
   /* Render */
   return (
-    <DivHeaderMobile className="container" style={{ width: "100%" }}>
+    <DivHeaderMobile
+      className="container header-mobile"
+      style={{ width: "100%" }}
+    >
       <Collapse
         collapsible="header"
         ghost
@@ -61,10 +67,12 @@ const HeaderMobile = () => {
         <Panel
           header={
             <div onClick={(e) => e.stopPropagation()}>
-              <img
-                src="https://choezekuchen.com/wp-content/uploads/2016/02/Logo-Drikung-Rinpochen-sent.png?690ea8"
-                alt="logo"
+              <Image
+                src={Logo}
+                alt="Logo"
                 className="headermobile-logo"
+                width={65}
+                height={65}
               />
             </div>
           }
@@ -73,13 +81,12 @@ const HeaderMobile = () => {
           extra={
             !user?.username ? (
               <div onClick={(e) => e.stopPropagation()}>
-                <Link href="/login">
+                <LinkComponent href={LOGIN}>
                   <UserOutlined
-                    // onClick={(event) => event.stopPropagation()}
                     style={{ fontSize: "20px" }}
                     className="headermobile-user"
                   />
-                </Link>
+                </LinkComponent>
               </div>
             ) : (
               <Dropdown

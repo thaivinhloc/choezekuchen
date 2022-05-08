@@ -4,7 +4,7 @@ export const onResponse = (response: AxiosResponse): any => {
   return response.data;
 };
 
-export const onResponseError = (error: AxiosError): Promise<string> => {
+export const onResponseError = (error: any): Promise<string> => {
   const statusCode = error.response?.data?.error?.status;
 
   if (statusCode === 401) {

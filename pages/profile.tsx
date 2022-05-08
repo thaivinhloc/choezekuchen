@@ -1,9 +1,17 @@
-import Profile from "components/Auth/Profile";
-import React, { FC } from "react";
+import { PROFILE } from "common/navigator";
+import i18next from "i18next";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 
-const ProfilePage: FC<{}> = () => {
-  /* Render */
-  return <Profile />;
-};
+export default function ProfilePage({ allLangsData }: any) {
+  const router = useRouter();
 
-export default ProfilePage;
+  useEffect(() => {
+    const { pathname } = router;
+    if (pathname === PROFILE) {
+      router.push("/" + i18next.language.substring(0, 2) + PROFILE);
+    }
+  }, []);
+
+  return null;
+}

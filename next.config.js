@@ -1,6 +1,5 @@
 /** @type {import('next').NextConfig} */
 const withLess = require("next-with-less");
-const { i18n } = require("./next-i18next.config");
 
 const WithLess = withLess({
   compiler: {

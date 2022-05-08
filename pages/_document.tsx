@@ -15,8 +15,6 @@ export default function Document() {
           href="https://fonts.googleapis.com/css2?family=Raleway:wght@200;700&display=swap"
           rel="stylesheet"
         />
-
-        <title>Choeze Kuchen | Life Long Tibetan Buddhism Practice</title>
       </Head>
       <body>
         <Main />

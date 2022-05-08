@@ -1,13 +1,17 @@
-import Retreat from "components/Retreat";
-import React, { FC } from "react";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
+import i18next from "i18next";
+import { RETREAT } from "common/navigator";
 
-const RetreatPage: FC<{}> = () => {
-  /* Render */
-  return <Retreat />;
-};
+export default function Retreat({ allLangsData }: any) {
+  const router = useRouter();
 
-export const getStaticProps = async ({ locale }: any) => ({
-  props: { ...(await serverSideTranslations(locale, ["common", "login"])) },
-});
-export default RetreatPage;
+  useEffect(() => {
+    const { pathname } = router;
+    if (pathname === RETREAT) {
+      router.push("/" + i18next.language.substring(0, 2) + RETREAT);
+    }
+  }, []);
+
+  return null;
+}

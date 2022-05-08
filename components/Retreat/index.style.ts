@@ -4,11 +4,12 @@ export const DivRetreatWrapper = styled.div`
   padding: 20px 0px 50px;
   color: #000;
   .ant-tabs {
+    &-tab {
+      padding: 4px 0px;
+    }
     .retreat {
       &-left {
         padding-left: 10px;
-        /* text-align: center; */
-        margin-top: 20px;
       }
       &__right {
         &-form {
