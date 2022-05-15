@@ -12,6 +12,9 @@ const WithLess = withLess({
 });
 const nextConfig = {
   reactStrictMode: true,
+  images: {
+    domains: ["https://choezekuchen-4525c--choezekuchen-mu780vyt.web.app"],
+  },
   // i18n,
   images: {
     domains: ["choezekuchen.herokuapp.com"],

@@ -10,12 +10,16 @@ export const DivRetreatWrapper = styled.div`
     .retreat {
       &-left {
         padding-left: 10px;
+        .title {
+          font-size: 24px;
+        }
       }
       &__right {
         &-form {
           box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
           color: #000;
           border: 1px solid #999;
+          margin-bottom: 30px;
           .ant-input {
             &:focus {
               box-shadow: none;

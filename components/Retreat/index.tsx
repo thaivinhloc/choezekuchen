@@ -245,7 +245,7 @@ const Retreat: React.FC<{}> = () => {
                 {isLoading ? (
                   <Skeleton active />
                 ) : (
-                  <h3 className="bold text-center">
+                  <h3 className="bold text-center title">
                     {dataRetreat?.name || ""}
                   </h3>
                 )}

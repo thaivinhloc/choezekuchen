@@ -10,7 +10,7 @@ import LinkComponent from "components/Link";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
-import Logo from "../../assets/logo.png";
+import Logo from "../../public/logo.png";
 import { ROUTES } from "../../common/routes";
 import { useAuth } from "../../context/auth/AuthContext";
 import { IUser } from "../../context/auth/AuthTypes";

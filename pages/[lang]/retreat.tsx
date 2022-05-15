@@ -2,7 +2,7 @@ import Retreat from "components/Retreat";
 import React, { FC } from "react";
 import { getAllLanguageSlugs, getLanguage } from "../../lib/lang";
 
-const RetreatPage: FC<{}> = (...props) => {
+const RetreatPage: FC<{}> = () => {
   /* Render */
   return <Retreat />;
 };
