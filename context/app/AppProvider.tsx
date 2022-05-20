@@ -25,6 +25,9 @@ export function AppProvider({ children }: Props) {
       case "retreat":
         text = "RETREAT";
         break;
+      case "retreat-history":
+        text = "RETREAT HISTORY";
+        break;
       default:
         text = "CHOEZE KUCHEN";
         break;

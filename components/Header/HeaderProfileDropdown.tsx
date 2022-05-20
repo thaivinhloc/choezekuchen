@@ -22,9 +22,6 @@ const HeaderProfileDropdown: FC<THeaderProfileDropdown> = ({ t }) => {
       <Menu.Item key="0">
         <LinkComponent href={PROFILE}>Profile</LinkComponent>
       </Menu.Item>
-      <Menu.Item key="2">
-        <LinkComponent href={RETREAT}>Retreat</LinkComponent>
-      </Menu.Item>
       <Menu.Divider />
       <Menu.Item key="3" onClick={onLogout}>
         Log out

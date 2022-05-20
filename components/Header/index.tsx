@@ -1,12 +1,13 @@
 import { RightOutlined } from "@ant-design/icons";
 import { Button, Typography } from "antd";
+import LinkComponent from "components/Link";
 import i18next from "i18next";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 import ReactCountryFlag from "react-country-flag";
 import { isDesktop } from "react-device-detect";
-import Logo from "../../assets/logo.png";
+// import Logo from "./logo.png";
 import { ROUTES } from "../../common/routes";
 import { useApp } from "../../context/app/AppContext";
 import { useAuth } from "../../context/auth/AuthContext";
@@ -101,7 +102,7 @@ const Header = ({ ...props }) => {
                 style={{ fontSize: 28, color: "$dark" }}
                 className="fa fa-whatsapp"
               />
-              <Image src={Logo} alt="Logo" width={105} height={105} />
+              <Image src={"/logo.png"} width={105} height={105} alt="Logo" />
             </div>
             <button className="navbar-toggler">
               <i className="fa fa-bars" aria-hidden="true" />
@@ -114,9 +115,9 @@ const Header = ({ ...props }) => {
               </li>
               {ROUTES.map((route) => (
                 <li className="nav-item" key={route.path}>
-                  <a href={route.path} className="nav-link">
-                    {route.label}
-                  </a>
+                  <LinkComponent href={route.path}>
+                    <a className="nav-link">{route.label}</a>
+                  </LinkComponent>
                   {route.childrent.length > 0 && (
                     <ul className="dropdown">
                       {route.childrent.map((childrent) => (
@@ -125,9 +126,12 @@ const Header = ({ ...props }) => {
                           key={childrent.path}
                         >
                           <div style={{ display: "flex" }}>
-                            <a href={route.path} className="dropdown-nav-link">
-                              {childrent.label}
-                            </a>
+                            <LinkComponent href={route.path}>
+                              <a className="dropdown-nav-link">
+                                {childrent.label}
+                              </a>
+                            </LinkComponent>
+
                             {childrent.childrent.length > 0 && (
                               <RightOutlined className="arrow-right" />
                             )}
@@ -139,12 +143,11 @@ const Header = ({ ...props }) => {
                                   className="dropdown-nav-item nav-item"
                                   key={route.path}
                                 >
-                                  <a
-                                    href={route.path}
-                                    className="dropdown-nav-link"
-                                  >
-                                    {route.label}
-                                  </a>
+                                  <LinkComponent href={route.path}>
+                                    <a className="dropdown-nav-link">
+                                      {route.label}
+                                    </a>
+                                  </LinkComponent>
                                 </li>
                               ))}
                             </ul>

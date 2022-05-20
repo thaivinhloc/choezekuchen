@@ -4,7 +4,6 @@ export const ROUTES = [
     label: "ABOUT RINPOCHE",
     path: "/about-rinpoche",
     isOpenTab: true,
-
     childrent: [
       {
         label: "GURUS",
@@ -133,6 +132,11 @@ export const ROUTES = [
         childrent: [],
       },
     ],
+  },
+  {
+    label: "RETREATS",
+    path: "/retreat",
+    childrent: [],
   },
   {
     label: "EVENT",

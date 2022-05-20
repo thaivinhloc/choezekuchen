@@ -6,6 +6,7 @@ import i18next from "i18next";
 type TLinkComponent = {
   locale?: string;
   href?: string;
+  children: React.ReactNode;
 };
 const LinkComponent: React.FC<TLinkComponent> = ({
   children,

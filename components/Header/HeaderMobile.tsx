@@ -128,14 +128,15 @@ const HeaderMobile = () => {
               <SubMenu
                 key={route.path}
                 title={
-                  <a
-                    href={route.path}
-                    rel="noreferrer"
-                    target={route.isOpenTab ? "_blank" : "_self"}
-                    className="headermobile__menu"
-                  >
-                    {route.label}
-                  </a>
+                  <LinkComponent href={route.path}>
+                    <a
+                      rel="noreferrer"
+                      target={route.isOpenTab ? "_blank" : "_self"}
+                      className="headermobile__menu"
+                    >
+                      {route.label}
+                    </a>
+                  </LinkComponent>
                 }
                 {...{ isHasChildrent: !!route.childrent.length }}
               >
@@ -143,13 +144,14 @@ const HeaderMobile = () => {
                   <React.Fragment key={subRoute.path}>
                     {subRoute.childrent.length < 0 ? (
                       <Menu.Item key={subRoute.path} icon={() => <div />}>
-                        <a
-                          target={route.isOpenTab ? "_blank" : "_self"}
-                          rel="noreferrer"
-                          href={route.path}
-                        >
-                          {subRoute.label}
-                        </a>
+                        <LinkComponent href={route.path}>
+                          <a
+                            target={route.isOpenTab ? "_blank" : "_self"}
+                            rel="noreferrer"
+                          >
+                            {subRoute.label}
+                          </a>
+                        </LinkComponent>
                       </Menu.Item>
                     ) : (
                       <SubMenu
@@ -158,24 +160,26 @@ const HeaderMobile = () => {
                           isHasChildrent: !!subRoute.childrent.length,
                         }}
                         title={
-                          <a
-                            href={subRoute.path}
-                            rel="noreferrer"
-                            target={route.isOpenTab ? "_blank" : "_self"}
-                          >
-                            {subRoute.label}
-                          </a>
+                          <LinkComponent href={subRoute.path}>
+                            <a
+                              rel="noreferrer"
+                              target={route.isOpenTab ? "_blank" : "_self"}
+                            >
+                              {subRoute.label}
+                            </a>
+                          </LinkComponent>
                         }
                       >
                         {subRoute.childrent.map((children) => (
                           <Menu.Item key={children.path}>
-                            <a
-                              target={route.isOpenTab ? "_blank" : "_self"}
-                              rel="noreferrer"
-                              href={children.path}
-                            >
-                              {children.label}
-                            </a>
+                            <LinkComponent href={children.path}>
+                              <a
+                                target={route.isOpenTab ? "_blank" : "_self"}
+                                rel="noreferrer"
+                              >
+                                {children.label}
+                              </a>
+                            </LinkComponent>
                           </Menu.Item>
                         ))}
                       </SubMenu>

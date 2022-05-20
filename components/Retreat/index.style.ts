@@ -5,7 +5,7 @@ export const DivRetreatWrapper = styled.div`
   color: #000;
   .ant-tabs {
     &-tab {
-      padding: 4px 0px;
+      padding: 4px;
     }
     .retreat {
       &-left {
@@ -33,7 +33,7 @@ export const DivRetreatWrapper = styled.div`
           padding: 10px;
           font-weight: bold;
           border-bottom: 1px solid #999;
-          text-align: center;
+          text-align: left;
         }
       }
       &-row {

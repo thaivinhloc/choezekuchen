@@ -26,6 +26,12 @@ export const GlobalStyle = createGlobalStyle`${css`
   .d-flex {
     display: flex;
   }
+  .align-items-center {
+    align-items: center;
+  }
+  .justify-content-between {
+    justify-content: space-between;
+  }
   .bold {
     font-weight: bold;
   }
@@ -47,6 +53,9 @@ export const GlobalStyle = createGlobalStyle`${css`
       text-overflow: ellipsis;
       white-space: nowrap;
     }
+  }
+  .w-100 {
+    width: 100%;
   }
   .btn-primary {
     border: 2px solid #303030;
@@ -128,6 +137,12 @@ export const GlobalStyle = createGlobalStyle`${css`
       min-height: calc(100vh - 223px);
     }
   }
+  .link-underline {
+    color: #fff;
+    font-size: 12px;
+    text-decoration: underline !important;
+    cursor: pointer;
+  }
 
   .ant-form-item {
     margin: 0 0 20px;
@@ -140,6 +155,14 @@ export const GlobalStyle = createGlobalStyle`${css`
       line-height: 17px;
       color: #000;
       font-weight: 400;
+    }
+    .ant-picker {
+      border-color: transparent;
+      &-focused,
+      &:hover {
+        border-color: transparent;
+        box-shadow: none;
+      }
     }
     .ant-input::placeholder {
       color: #818181;
