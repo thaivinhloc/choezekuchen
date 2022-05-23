@@ -12,7 +12,7 @@ export const ROUTES = [
       },
       {
         label: "HISTORY OF CHOEZE KUCHEN RINPOCHE",
-        path: "/about-rinpoche/history-of-choeze-kuchen-rinpoche",
+        path: "/history-of-choeze-kuchen-rinpoche",
         childrent: [],
       },
       {

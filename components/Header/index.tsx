@@ -59,6 +59,12 @@ const Header = ({ ...props }) => {
   /* Render */
   if (!isDesktop) return <HeaderMobile />;
 
+  const redirectToOtherPage = (path: string) => {
+    console.log("path", path);
+
+    router.replace(`/${currentLocale}${path}`);
+  };
+
   return (
     <DivHeaderWrapperV1>
       <div className="header-desktop">
@@ -114,23 +120,24 @@ const Header = ({ ...props }) => {
                 </button>
               </li>
               {ROUTES.map((route) => (
-                <li className="nav-item" key={route.path}>
-                  <LinkComponent href={route.path}>
-                    <a className="nav-link">{route.label}</a>
-                  </LinkComponent>
+                <li
+                  className="nav-item"
+                  key={route.path}
+                  onClick={() => redirectToOtherPage(route.path)}
+                >
+                  <a className="nav-link">{route.label}</a>
                   {route.childrent.length > 0 && (
                     <ul className="dropdown">
                       {route.childrent.map((childrent) => (
                         <li
                           className="dropdown-nav-item nav-item"
                           key={childrent.path}
+                          onClick={() => redirectToOtherPage(childrent.path)}
                         >
                           <div style={{ display: "flex" }}>
-                            <LinkComponent href={route.path}>
-                              <a className="dropdown-nav-link">
-                                {childrent.label}
-                              </a>
-                            </LinkComponent>
+                            <a className="dropdown-nav-link">
+                              {childrent.label}
+                            </a>
 
                             {childrent.childrent.length > 0 && (
                               <RightOutlined className="arrow-right" />
@@ -142,12 +149,13 @@ const Header = ({ ...props }) => {
                                 <li
                                   className="dropdown-nav-item nav-item"
                                   key={route.path}
+                                  onClick={() =>
+                                    redirectToOtherPage(route.path)
+                                  }
                                 >
-                                  <LinkComponent href={route.path}>
-                                    <a className="dropdown-nav-link">
-                                      {route.label}
-                                    </a>
-                                  </LinkComponent>
+                                  <a className="dropdown-nav-link">
+                                    {route.label}
+                                  </a>
                                 </li>
                               ))}
                             </ul>
