@@ -69,10 +69,10 @@ export const DivHeaderWrapperV1 = styled.div`
         line-height: 47px;
         font-weight: 700px;
         letter-spacing: 4px;
-        /* margin: 0 auto; */
         text-align: center;
         height: 100px;
         color: #ffffff;
+        height: 150px;
       }
       &-logo {
         img {
@@ -116,7 +116,7 @@ export const DivHeaderWrapperV1 = styled.div`
     /* Navbar options (bg options) */
     .bg-primary {
       background: transparent;
-      background-image: url("https://choezekuchen.com/wp-content/uploads/2022/01/title-image-3.jpeg?690ea8");
+      background-image: url("/images/title-image-3.jpeg");
       background-size: auto;
       .navbar-toggler,
       .nav-link,
