@@ -45,13 +45,15 @@ const RetreatHistory: FC<{}> = () => {
 
   return (
     <DivTableRetreat>
-      <Table
-        columns={defaultColumns}
-        dataSource={dataSource}
-        pagination={false}
-        rowKey="id"
-        loading={isLoading}
-      />
+      <div className="container">
+        <Table
+          columns={defaultColumns}
+          dataSource={dataSource}
+          pagination={false}
+          rowKey="id"
+          loading={isLoading}
+        />
+      </div>
     </DivTableRetreat>
   );
 };

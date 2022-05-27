@@ -39,137 +39,139 @@ const SignUpForm = () => {
       {/* <div className="text-center">
         <h1>SIGN UP</h1>
       </div> */}
-      <Row justify="center" align="middle">
-        {/* <Col span={10}> */}
-        <Form
-          form={form}
-          className="signup-form"
-          onFinish={onFinish}
-          validateMessages={validateMessages}
-          requiredMark={false}
-        >
-          <Form.Item
-            name={"username"}
-            label=""
-            rules={[
-              {
-                whitespace: true,
-                required: true,
-                message: "Please input your username",
-              },
-            ]}
+      <div className="container">
+        <Row justify="center" align="middle">
+          {/* <Col span={10}> */}
+          <Form
+            form={form}
+            className="signup-form"
+            onFinish={onFinish}
+            validateMessages={validateMessages}
+            requiredMark={false}
           >
-            <Input size="large" placeholder="Username" />
-          </Form.Item>
-          <Form.Item
-            name={"email"}
-            label=""
-            rules={[
-              {
-                whitespace: true,
-                type: "email",
-                required: true,
-                message: "Please input your email",
-              },
-            ]}
-          >
-            <Input size="large" placeholder="example@gmail.com" />
-          </Form.Item>
-          <Row gutter={16}>
-            <Col span={12}>
-              <Form.Item
-                name="city"
-                label=""
-                rules={[
-                  {
-                    whitespace: true,
-                    required: true,
-                    message: "Please input your City",
-                  },
-                ]}
-              >
-                <Input size="large" placeholder="City" />
-              </Form.Item>
-            </Col>
-            <Col span={12}>
-              <Form.Item
-                name={"country"}
-                label=""
-                rules={[
-                  { required: true, message: "Please input your Country" },
-                ]}
-              >
-                <Input size="large" placeholder="Country" />
-              </Form.Item>
-            </Col>
-          </Row>
-          <Form.Item
-            label=""
-            name="password"
-            rules={[
-              {
-                whitespace: true,
-                required: true,
-                message: "Please input your Password!",
-              },
-            ]}
-          >
-            <Input size="large" type="password" placeholder="Password" />
-          </Form.Item>
-          <Form.Item
-            label=""
-            name="confirmPassword"
-            rules={[
-              {
-                whitespace: true,
-                required: true,
-                message: "Please input your Confirm Password!",
-              },
-              ({ getFieldValue }) => ({
-                validator(_, value) {
-                  if (!value || getFieldValue("password") === value) {
-                    return Promise.resolve();
-                  }
-                  return Promise.reject(
-                    new Error(
-                      "The two passwords that you entered do not match!"
-                    )
-                  );
+            <Form.Item
+              name={"username"}
+              label=""
+              rules={[
+                {
+                  whitespace: true,
+                  required: true,
+                  message: "Please input your username",
                 },
-              }),
-            ]}
-          >
-            <Input
-              size="large"
-              type="password"
-              placeholder="Confirm Password"
-            />
-          </Form.Item>
-          <div className="form-footer">
-            <Col span={14}>
-              <Row>
-                <Col>Already have member? &nbsp;</Col>
-                <Col>
-                  <Link href="/login">
-                    <strong>Log In</strong>
-                  </Link>
-                </Col>
-              </Row>
-            </Col>
-            <Col span={10} className="form-button-submit">
-              <Button
+              ]}
+            >
+              <Input size="large" placeholder="Username" />
+            </Form.Item>
+            <Form.Item
+              name={"email"}
+              label=""
+              rules={[
+                {
+                  whitespace: true,
+                  type: "email",
+                  required: true,
+                  message: "Please input your email",
+                },
+              ]}
+            >
+              <Input size="large" placeholder="example@gmail.com" />
+            </Form.Item>
+            <Row gutter={16}>
+              <Col span={12}>
+                <Form.Item
+                  name="city"
+                  label=""
+                  rules={[
+                    {
+                      whitespace: true,
+                      required: true,
+                      message: "Please input your City",
+                    },
+                  ]}
+                >
+                  <Input size="large" placeholder="City" />
+                </Form.Item>
+              </Col>
+              <Col span={12}>
+                <Form.Item
+                  name={"country"}
+                  label=""
+                  rules={[
+                    { required: true, message: "Please input your Country" },
+                  ]}
+                >
+                  <Input size="large" placeholder="Country" />
+                </Form.Item>
+              </Col>
+            </Row>
+            <Form.Item
+              label=""
+              name="password"
+              rules={[
+                {
+                  whitespace: true,
+                  required: true,
+                  message: "Please input your Password!",
+                },
+              ]}
+            >
+              <Input size="large" type="password" placeholder="Password" />
+            </Form.Item>
+            <Form.Item
+              label=""
+              name="confirmPassword"
+              rules={[
+                {
+                  whitespace: true,
+                  required: true,
+                  message: "Please input your Confirm Password!",
+                },
+                ({ getFieldValue }) => ({
+                  validator(_, value) {
+                    if (!value || getFieldValue("password") === value) {
+                      return Promise.resolve();
+                    }
+                    return Promise.reject(
+                      new Error(
+                        "The two passwords that you entered do not match!"
+                      )
+                    );
+                  },
+                }),
+              ]}
+            >
+              <Input
                 size="large"
-                className="btn-primary bold form-button-submit"
-                htmlType="submit"
-                loading={isLoading}
-              >
-                Sign Up
-              </Button>
-            </Col>
-          </div>
-        </Form>
-        {/* </Col> */}
-      </Row>
+                type="password"
+                placeholder="Confirm Password"
+              />
+            </Form.Item>
+            <div className="form-footer">
+              <Col span={14}>
+                <Row>
+                  <Col>Already have member? &nbsp;</Col>
+                  <Col>
+                    <Link href="/login">
+                      <strong>Log In</strong>
+                    </Link>
+                  </Col>
+                </Row>
+              </Col>
+              <Col span={10} className="form-button-submit">
+                <Button
+                  size="large"
+                  className="btn-primary bold form-button-submit"
+                  htmlType="submit"
+                  loading={isLoading}
+                >
+                  Sign Up
+                </Button>
+              </Col>
+            </div>
+          </Form>
+          {/* </Col> */}
+        </Row>
+      </div>
     </DivSignupWrapper>
   );
 };

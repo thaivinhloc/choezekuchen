@@ -4,7 +4,7 @@ import LinkComponent from "components/Link";
 import i18next from "i18next";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import ReactCountryFlag from "react-country-flag";
 import { isDesktop } from "react-device-detect";
 // import Logo from "./logo.png";
@@ -32,7 +32,7 @@ const Header = ({ ...props }) => {
   const { onGetMe, user } = useAuth();
   const { title } = useApp();
   const { t } = i18next;
-
+  const [classHead, setClassHead] = useState("");
   const currentLocale = i18next.language;
 
   useEffect(() => {
@@ -48,6 +48,13 @@ const Header = ({ ...props }) => {
     const isPrivateRoute = ["/login", "signup"].includes(router.pathname);
     if (isPrivateRoute && token) {
       router.push("/");
+    }
+
+    if (router.pathname == "/[lang]") {
+      console.log("home page");
+      setClassHead("header-desktop homepage");
+    } else {
+      setClassHead("header-desktop");
     }
   }, [router.pathname, router]);
 
@@ -67,7 +74,7 @@ const Header = ({ ...props }) => {
 
   return (
     <DivHeaderWrapperV1>
-      <div className="header-desktop">
+      <div className={classHead}>
         <header className=" bg-primary">
           <div
             style={{

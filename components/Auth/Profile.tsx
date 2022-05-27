@@ -32,20 +32,22 @@ const Profile: FC<{}> = () => {
 
   return (
     <DivProfileWrapper>
-      <div className="container-inner">
-        <div className="profile ant-col ant-col-lg-8 ant-col-md-14 ant-col-sm-20 ant-col-24">
-          <RenderItem title="Full name:" content={user?.username || ""} />
-          {user?.city && (
-            <RenderItem title="City:" content={user?.city || ""} />
-          )}
-          {user?.country && (
-            <RenderItem title="Country:" content={user?.country || ""} />
-          )}
-          <RenderItem title="Email:" content={user?.email || ""} />
-          <RenderItem
-            title="Last Update:"
-            content={user ? new Date(user.updatedAt).toLocaleString() : ""}
-          />
+      <div className="container">
+        <div className="container-inner">
+          <div className="profile ant-col ant-col-lg-8 ant-col-md-14 ant-col-sm-20 ant-col-24">
+            <RenderItem title="Full name:" content={user?.username || ""} />
+            {user?.city && (
+              <RenderItem title="City:" content={user?.city || ""} />
+            )}
+            {user?.country && (
+              <RenderItem title="Country:" content={user?.country || ""} />
+            )}
+            <RenderItem title="Email:" content={user?.email || ""} />
+            <RenderItem
+              title="Last Update:"
+              content={user ? new Date(user.updatedAt).toLocaleString() : ""}
+            />
+          </div>
         </div>
       </div>
     </DivProfileWrapper>

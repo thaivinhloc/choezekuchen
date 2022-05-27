@@ -24,11 +24,9 @@ function MyApp({ Component, pageProps }) {
       <AppProvider>
         <AuthProvider>
           <Header />
-          <div className="container ">
             <div className="content">
               <Component {...pageProps} />
             </div>
-          </div>
           <Footer />
         </AuthProvider>
       </AppProvider>

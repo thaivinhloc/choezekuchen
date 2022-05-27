@@ -1,5 +1,5 @@
 export const ROUTES = [
-  { label: "HOME", path: "/home", childrent: [] },
+  { label: "HOME", path: "/", childrent: [] },
   {
     label: "ABOUT RINPOCHE",
     path: "/about-rinpoche",

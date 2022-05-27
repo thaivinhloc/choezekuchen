@@ -1,5 +1,5 @@
-import { createGlobalStyle, css } from "styled-components";
-import { THEME } from "../common";
+import {createGlobalStyle, css} from "styled-components";
+import {THEME} from "../common";
 
 type TStyled = {
   theme: typeof THEME;
@@ -195,5 +195,8 @@ export const GlobalStyle = createGlobalStyle`${css`
     .btn-primary: hover {
       background-color: #1abc9c;
     }
+  }
+  .ant-card {
+    background-color: transparent;
   }
 `}`;

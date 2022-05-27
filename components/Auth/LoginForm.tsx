@@ -17,62 +17,64 @@ const LoginForm: React.FC<{}> = () => {
 
   return (
     <DivLoginWrapper>
-      <Row justify="center" align="middle">
-        <Form
-          name="normal_login"
-          form={form}
-          className="login-form"
-          onFinish={onFinish}
-          requiredMark={false}
-        >
-          <Form.Item
-            label=""
-            name="identifier"
-            rules={[
-              {
-                required: true,
-                message: "Please input your Email!",
-              },
-            ]}
+      <div className="container">
+        <Row justify="center" align="middle">
+          <Form
+            name="normal_login"
+            form={form}
+            className="login-form"
+            onFinish={onFinish}
+            requiredMark={false}
           >
-            <Input size="large" placeholder="Email" />
-          </Form.Item>
-          <Form.Item
-            label=""
-            name="password"
-            rules={[
-              {
-                required: true,
-                message: "Please input your Password!",
-              },
-            ]}
-          >
-            <Input size="large" type="password" placeholder="Password" />
-          </Form.Item>
-          <div className="form-footer">
-            <Col span={14}>
-              <Row>
-                <Col>Dont't have an account? &nbsp;</Col>
-                <Col>
-                  <LinkComponent href="/signup">
-                    <strong>Register Now</strong>
-                  </LinkComponent>
-                </Col>
-              </Row>
-            </Col>
-            <Col span={10} className="form-button-submit">
-              <Button
-                size="large"
-                htmlType="submit"
-                className="btn-primary bold"
-                loading={isLoading}
-              >
-                Log in
-              </Button>
-            </Col>
-          </div>
-        </Form>
-      </Row>
+            <Form.Item
+              label=""
+              name="identifier"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your Email!",
+                },
+              ]}
+            >
+              <Input size="large" placeholder="Email" />
+            </Form.Item>
+            <Form.Item
+              label=""
+              name="password"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your Password!",
+                },
+              ]}
+            >
+              <Input size="large" type="password" placeholder="Password" />
+            </Form.Item>
+            <div className="form-footer">
+              <Col span={14}>
+                <Row>
+                  <Col>Dont't have an account? &nbsp;</Col>
+                  <Col>
+                    <LinkComponent href="/signup">
+                      <strong>Register Now</strong>
+                    </LinkComponent>
+                  </Col>
+                </Row>
+              </Col>
+              <Col span={10} className="form-button-submit">
+                <Button
+                  size="large"
+                  htmlType="submit"
+                  className="btn-primary bold"
+                  loading={isLoading}
+                >
+                  Log in
+                </Button>
+              </Col>
+            </div>
+          </Form>
+        </Row>
+      </div>
     </DivLoginWrapper>
   );
 };

@@ -221,6 +221,13 @@ export const DivHeaderWrapperV1 = styled.div`
         transform: rotate(90deg);
       }
     }
+
+    &.homepage{
+      .bg-primary {
+        background-image: url("/images/title-image-homepage.jpg");
+        background-size: cover;
+      }
+    }
   }
 
   .ant-collapse {
@@ -231,6 +238,8 @@ export const DivHeaderWrapperV1 = styled.div`
       }
     }
   }
+
+  
 `;
 
 export const DivHeaderMobile = styled.div`
