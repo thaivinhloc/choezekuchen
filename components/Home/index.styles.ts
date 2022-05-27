@@ -10,12 +10,24 @@ export const DivHomeWrapper = styled.div`
     
     font-family: Raleway, sans-serif;
     color: rgb(48, 48, 48);
-    .section-card{
-      padding-top: 30px; 
+
+    .section-large{
+      padding-top: 140px; 
       background: #fff;
+
+      .ant-card-meta-description{
+        p{
+        color: rgb(119, 119, 119);
+        font-size: 14px;
+        font-weight: 400;
+      }
+      }
+    }
+
+    .section-card{
       .section-title{
-        padding-top: 140px;
         text-align: center;
+
         h2{
           font-size: 30px;
           line-height: 40px;
@@ -23,6 +35,7 @@ export const DivHomeWrapper = styled.div`
           letter-spacing: 3px;
           margin-bottom: 20px;
         }
+
         p{
           color: rgb(119, 119, 119);
           font-size: 14px;
@@ -34,6 +47,7 @@ export const DivHomeWrapper = styled.div`
         padding-top: 65px;
         padding-bottom: 84px;
         text-align: center;
+
         .section-item{
           box-sizing: border-box;
           padding: 0 15px;
@@ -49,23 +63,19 @@ export const DivHomeWrapper = styled.div`
           margin-top: 40px
         }
 
-        .ant-card-meta-description{
-          color: rgb(119, 119, 119);
-          font-size: 14px;
-          font-weight: 400;
-        }
+        
         
       }
     }
     
     .section-count{
-      padding: 0 15px;
+      padding: 62px 0 65px;
 
       .section-item{
-        box-sizing: border-box;
         padding: 20px 40px;
         text-align: center;
         font-weight: 700;
+
         .counter{
           font-size: 57px;
           color: rgb(119, 119, 119);
@@ -82,5 +92,69 @@ export const DivHomeWrapper = styled.div`
       }
     }
 
+    .section-slide{
+      text-align: center;
+      padding: 62px 0 65px;
+
+      h2{
+        font-size: 30px;
+        line-height: 40px;
+        font-weight: 700;
+        letter-spacing: 3px;
+        margin-bottom: 30px;
+      }
+
+      .carousel{
+        margin: 15px 0;
+        line-height: 1.666666666666667em;
+
+        .quote{
+          font-size: 21px; 
+        }
+
+        .sub-text{
+          font-size: 13px;
+          margin-top: 22px;
+          font-weight: 500;
+        }
+
+        .contact{
+          color: #1abc9c;
+        }
+
+      }
+
+      .btn-arrow{
+        width: 33px;
+        height: 33px;
+        padding: unset;
+      }
+      .btn-arrow:hover{
+        background-color: #000;
+        border-color: #000;
+      }
+    }
+
+    .section-bottom{
+      padding-bottom: 90px;
+
+      .btn-contact{
+        margin-bottom: 50px;
+        margin-left: 15px
+      }
+
+      .ant-card-body{
+        padding: 0 15px 50px 15px;
+
+        .ant-card-meta-title{
+          font-size: 18px;
+          line-height: 20px;
+          font-style: normal;
+          font-weight: 700;
+          letter-spacing: 1px;
+          margin-bottom: 12px;
+        }
+      }
+    }
 
 `;
