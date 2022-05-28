@@ -16,7 +16,7 @@ import HeaderMobile from "./HeaderMobile";
 import HeaderProfileDropdown from "./HeaderProfileDropdown";
 import { DivHeaderWrapperV1 } from "./index.style";
 
-const langs = [
+export const LANGS = [
   {
     code: "GB",
     name: "English",
@@ -84,9 +84,8 @@ const Header = ({ ...props }) => {
               justifyContent: "flex-end",
             }}
           >
-            {langs
-              .filter((lang) => lang.locale !== currentLocale)
-              .map((lang) => (
+            {LANGS.filter((lang) => lang.locale !== currentLocale).map(
+              (lang) => (
                 <Button
                   type="link"
                   onClick={() => handleChangeLocale(lang.locale)}
@@ -106,7 +105,8 @@ const Header = ({ ...props }) => {
                     {lang.name}
                   </Typography.Paragraph>
                 </Button>
-              ))}
+              )
+            )}
 
             <HeaderProfileDropdown t={t} />
           </div>

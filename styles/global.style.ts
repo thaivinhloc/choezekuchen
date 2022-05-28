@@ -1,5 +1,5 @@
-import {createGlobalStyle, css} from "styled-components";
-import {THEME} from "../common";
+import { createGlobalStyle, css } from "styled-components";
+import { THEME } from "../common";
 
 type TStyled = {
   theme: typeof THEME;
@@ -22,6 +22,9 @@ export const GlobalStyle = createGlobalStyle`${css`
   }
   p {
     color: #000;
+  }
+  .h-auto {
+    height: auto !important;
   }
   .d-flex {
     display: flex;

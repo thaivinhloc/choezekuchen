@@ -5,12 +5,15 @@ import {
   RightOutlined,
   UserOutlined,
 } from "@ant-design/icons";
-import { Collapse, Dropdown, Menu } from "antd";
+import { Button, Collapse, Dropdown, Menu, Space, Typography } from "antd";
 import { LOGIN } from "common/navigator";
 import LinkComponent from "components/Link";
+import i18next from "i18next";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
+import ReactCountryFlag from "react-country-flag";
+import { LANGS } from ".";
 import { ROUTES } from "../../common/routes";
 import { useAuth } from "../../context/auth/AuthContext";
 import { IUser } from "../../context/auth/AuthTypes";
@@ -23,8 +26,14 @@ const HeaderMobile = () => {
   const user = auth.user as IUser;
   const { onLogout } = useAuth();
   const router = useRouter();
+  const currentLocale = i18next.language;
 
   const { Panel } = Collapse;
+
+  const handleChangeLocale = (locale: string) => {
+    const href = router.pathname.replace("[lang]", locale);
+    router.push(href);
+  };
 
   const menu = (
     <Menu>
@@ -79,30 +88,56 @@ const HeaderMobile = () => {
           className="headermobile"
           key="1"
           extra={
-            !user?.username ? (
-              <div onClick={(e) => e.stopPropagation()}>
-                <LinkComponent href={LOGIN}>
-                  <UserOutlined
-                    style={{ fontSize: "20px" }}
-                    className="headermobile-user"
-                  />
-                </LinkComponent>
-              </div>
-            ) : (
-              <Dropdown
-                overlay={menu}
-                trigger={["click"]}
-                overlayStyle={{ width: "140px" }}
-                placement="bottomRight"
-              >
-                <div
-                  className="headermobile-avatar"
-                  onClick={(event) => event.stopPropagation()}
-                >
-                  {name}
+            <Space size={6}>
+              {LANGS.filter((lang) => lang.locale !== currentLocale).map(
+                (lang) => (
+                  <Button
+                    className="h-auto"
+                    size="small"
+                    type="link"
+                    onClick={() => handleChangeLocale(lang.locale)}
+                    key={lang.code}
+                    style={{ marginRight: "6px" }}
+                  >
+                    <ReactCountryFlag
+                      style={{
+                        fontSize: "2em",
+                        lineHeight: "2em",
+                        marginRight: 8,
+                      }}
+                      title={lang.name}
+                      countryCode={lang.code}
+                      svg
+                    />
+                    {/* {lang.name} */}
+                  </Button>
+                )
+              )}
+              {!user?.username ? (
+                <div onClick={(e) => e.stopPropagation()}>
+                  <LinkComponent href={LOGIN}>
+                    <UserOutlined
+                      style={{ fontSize: "20px" }}
+                      className="headermobile-user"
+                    />
+                  </LinkComponent>
                 </div>
-              </Dropdown>
-            )
+              ) : (
+                <Dropdown
+                  overlay={menu}
+                  trigger={["click"]}
+                  overlayStyle={{ width: "140px" }}
+                  placement="bottomRight"
+                >
+                  <div
+                    className="headermobile-avatar"
+                    onClick={(event) => event.stopPropagation()}
+                  >
+                    {name}
+                  </div>
+                </Dropdown>
+              )}
+            </Space>
           }
         >
           <Menu
