@@ -134,7 +134,7 @@ export const ROUTES = [
     ],
   },
   {
-    label: "RETREAT NGONDRO",
+    label: "RETREAT",
     path: "/retreat",
     childrent: [],
   },

@@ -37,7 +37,7 @@ const useRetreat = (language: TLanguage) => {
   const handleGetRetreatDetail = async (retreatId: number) => {
     try {
       setIsLoading(true);
-      const response = await getRetreatDetail(retreatId, !!user, language);
+      const response = await getRetreatDetail(retreatId, language);
       setRetreatDetail(response);
     } catch (error) {
       console.log("----failed", error);

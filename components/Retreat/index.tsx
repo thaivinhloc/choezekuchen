@@ -109,7 +109,7 @@ const Retreat: React.FC<{}> = () => {
 
   useEffect(() => {
     if (!activeRetreat) return;
-    handleGetRetreatDetail(activeRetreat);
+    handleGetRetreatDetail(activeRetreat, currentLng);
   }, [activeRetreat, currentLng]);
 
   useEffect(() => {
@@ -149,10 +149,13 @@ const Retreat: React.FC<{}> = () => {
     }
   };
 
-  const handleGetRetreatDetail = async (retreatId: number) => {
+  const handleGetRetreatDetail = async (
+    retreatId: number,
+    currentLng: TLanguage
+  ) => {
     try {
       setIsLoading(true);
-      const response = await getRetreatDetail(retreatId, !!user, currentLng);
+      const response = await getRetreatDetail(retreatId, currentLng);
       setRetreatDetail(response);
     } catch (error) {
       console.log("----failed", error);
@@ -177,7 +180,7 @@ const Retreat: React.FC<{}> = () => {
           completedAt,
           retreatId: activeRetreat,
         }).then(() => {
-          handleGetRetreatDetail(activeRetreat);
+          handleGetRetreatDetail(activeRetreat, currentLng);
           form.setFieldsValue({
             recitationNumber: undefined,
           });
@@ -334,7 +337,7 @@ const Retreat: React.FC<{}> = () => {
 
                       <div className="box-content">
                         <RenderItem
-                          title={t("Commited", { ns: "retreat" }) + ":"}
+                          title={t("Committed", { ns: "retreat" }) + ":"}
                           content={formatNumber(userRetreat?.commited || 0)}
                         />
                         <RenderItem
@@ -400,13 +403,20 @@ const Retreat: React.FC<{}> = () => {
               </Col>
               <Col span={17} xs={24} lg={16} xl={17} className="retreat-left">
                 <div>
-                  {loading ? (
+                  {/* <Tabs defaultActiveKey="1">
+                    {listRetreat.map((retreat) => (
+                      <TabPane tab={retreat.name} key={retreat.id}>
+                        {retreat.name}
+                      </TabPane>
+                    ))}
+                  </Tabs> */}
+                  {/* {loading ? (
                     <Skeleton active />
                   ) : (
                     <h3 className="bold text-center title">
                       {retreatDetail?.name || ""}
                     </h3>
-                  )}
+                  )} */}
                   <div className="text-center" style={{ marginTop: "20px" }}>
                     {PATH && retreatDetail?.image && (
                       <img src={PATH + retreatDetail?.image?.url} alt="" />
