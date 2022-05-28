@@ -14,10 +14,11 @@ import {
   Tooltip,
 } from "antd";
 import { useForm } from "antd/lib/form/Form";
-import { RETREAT_HISTORY } from "common/navigator";
+import { LOGIN, RETREAT_HISTORY } from "common/navigator";
 import Link from "components/Link";
 import i18next from "i18next";
 import moment from "moment";
+import { i18n } from "next-i18next";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useApp } from "../../context/app/AppContext";
@@ -171,7 +172,7 @@ const Retreat: React.FC<{}> = () => {
       const recitationNumber = Number(values.recitationNumber);
       const completedAt = moment(values.completedAt).format("YYYY-MM-DD");
       if (!user) {
-        // navigate("/login");
+        router.push("/" + i18next.language + LOGIN);
       } else {
         setIsLoadingSubmit(true);
         await postRetreatRecitation({

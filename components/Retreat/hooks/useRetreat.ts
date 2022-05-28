@@ -25,7 +25,7 @@ const useRetreat = (language: TLanguage) => {
 
   const getActiveRetreat = async (): Promise<IResponseActiveRetreat[]> => {
     try {
-      const result = await getListRetreat();
+      const result = await getListRetreat(language as any);
       setListRetreat(result);
       return result;
     } catch (error) {

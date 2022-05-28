@@ -9,9 +9,9 @@ import {
   TPostSubmitRetreat,
 } from "./retreatTypes";
 
-export const getListRetreat = async () => {
+export const getListRetreat = async (locale: string = "en") => {
   return await Client.createRequest<IResponseActiveRetreat[]>({
-    path: "/api/active-retreats?locale=en",
+    path: `/api/active-retreats?locale=${locale}`,
     method: "get",
     external: true,
   });
