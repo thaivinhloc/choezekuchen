@@ -73,8 +73,6 @@ const Header = ({ ...props }) => {
     router.replace(`/${currentLocale}${path}`);
   };
 
-  console.log("-----", t("Home", { ns: "header" }));
-
   return (
     <DivHeaderWrapperV1>
       <div className={classHead}>
@@ -130,12 +128,13 @@ const Header = ({ ...props }) => {
                 </button>
               </li>
               {ROUTES.map((route) => (
-                <li
-                  className="nav-item"
-                  key={route.path}
-                  onClick={() => redirectToOtherPage(route.path)}
-                >
-                  <a className="nav-link">{t(route.label, { ns: "header" })}</a>
+                <li className="nav-item" key={route.path}>
+                  <a
+                    className="nav-link"
+                    onClick={() => redirectToOtherPage(route.path)}
+                  >
+                    {t(route.label, { ns: "header" })}
+                  </a>
                   {route.childrent.length > 0 && (
                     <ul className="dropdown">
                       {route.childrent.map((childrent) => (
@@ -148,7 +147,6 @@ const Header = ({ ...props }) => {
                             <a className="dropdown-nav-link">
                               {childrent.label}
                             </a>
-
                             {childrent.childrent.length > 0 && (
                               <RightOutlined className="arrow-right" />
                             )}
