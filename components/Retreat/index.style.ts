@@ -3,6 +3,11 @@ import styled from "styled-components";
 export const DivRetreatWrapper = styled.div`
   padding: 20px 0px 50px;
   color: #000;
+  .retreat-content {
+    .ant-tabs-nav {
+      margin: auto;
+    }
+  }
   .ant-tabs {
     &-tab {
       padding: 4px;

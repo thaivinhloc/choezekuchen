@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { DownOutlined } from "@ant-design/icons";
 import {
   Button,
@@ -89,8 +90,6 @@ const Retreat: React.FC<{}> = () => {
           .then((res: IResponseActiveRetreat[]) => {
             if (res) {
               const response = res.sort((a, b) => a.id - b.id);
-              console.log("response", response);
-
               setActiveRetreat(response[0].id);
             }
           })
@@ -197,8 +196,6 @@ const Retreat: React.FC<{}> = () => {
     form.resetFields();
   }
 
-  console.log("t", t("Participant List"));
-
   /* Render */
   const RenderItem = ({ title, content }: TRenderItem) => {
     return (
@@ -220,22 +217,6 @@ const Retreat: React.FC<{}> = () => {
     Number(retreatDetail?.totalCommitment || 0) -
     Number(retreatDetail?.totalGroupCompleted || 0);
 
-  const retreats = React.useMemo(() => {
-    const retreats = listRetreat.map((retreat) => ({
-      key: retreat.id,
-      label: retreat.name,
-      disabled: retreat.id === activeRetreat,
-    }));
-    return (
-      <Menu
-        onClick={(evt) => {
-          setActiveRetreat(Number(evt.key));
-        }}
-        items={retreats}
-      />
-    );
-  }, [activeRetreat, listRetreat]);
-
   return (
     <DivRetreatWrapper>
       <div className="container">
@@ -247,16 +228,9 @@ const Retreat: React.FC<{}> = () => {
             <Row gutter={32}>
               <Col span={8} xs={24} lg={8} xl={7} className="retreat__right">
                 <div className="retreat__right-form">
-                  <Dropdown
-                    overlay={retreats}
-                    trigger={["click"]}
-                    placement="bottom"
-                  >
-                    <div className="box-title d-flex justify-content-between align-items-center">
-                      {retreatDetail?.name || ""}
-                      <DownOutlined style={{ color: "#fff" }} />
-                    </div>
-                  </Dropdown>
+                  <div className="box-title d-flex justify-content-between align-items-center">
+                    {retreatDetail?.name || ""}
+                  </div>
                   <div className="retreat-submit">
                     <Form onFinish={handleSubmit} form={form}>
                       <Form.Item style={{ marginBottom: 10 }}>
@@ -403,13 +377,44 @@ const Retreat: React.FC<{}> = () => {
               </Col>
               <Col span={17} xs={24} lg={16} xl={17} className="retreat-left">
                 <div>
-                  {/* <Tabs defaultActiveKey="1">
+                  <Tabs
+                    activeKey={activeRetreat?.toString()}
+                    className="w-100 retreat-content"
+                    onChange={(key) => {
+                      setActiveRetreat(Number(key));
+                    }}
+                  >
                     {listRetreat.map((retreat) => (
-                      <TabPane tab={retreat.name} key={retreat.id}>
-                        {retreat.name}
+                      <TabPane
+                        tab={<strong>{retreat.name}</strong>}
+                        key={retreat.id}
+                      >
+                        <div
+                          className="text-center"
+                          style={{ marginTop: "20px" }}
+                        >
+                          {PATH && retreatDetail?.image && (
+                            <img
+                              src={PATH + retreatDetail?.image?.url}
+                              alt=""
+                            />
+                          )}
+                        </div>
+
+                        <br />
+                        <br />
+                        {loading ? (
+                          <Skeleton active />
+                        ) : (
+                          <p
+                            dangerouslySetInnerHTML={{
+                              __html: retreatDetail?.description || "",
+                            }}
+                          />
+                        )}
                       </TabPane>
                     ))}
-                  </Tabs> */}
+                  </Tabs>
                   {/* {loading ? (
                     <Skeleton active />
                   ) : (
@@ -417,23 +422,6 @@ const Retreat: React.FC<{}> = () => {
                       {retreatDetail?.name || ""}
                     </h3>
                   )} */}
-                  <div className="text-center" style={{ marginTop: "20px" }}>
-                    {PATH && retreatDetail?.image && (
-                      <img src={PATH + retreatDetail?.image?.url} alt="" />
-                    )}
-                  </div>
-
-                  <br />
-                  <br />
-                  {loading ? (
-                    <Skeleton active />
-                  ) : (
-                    <p
-                      dangerouslySetInnerHTML={{
-                        __html: retreatDetail?.description || "",
-                      }}
-                    />
-                  )}
                 </div>
               </Col>
             </Row>
