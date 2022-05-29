@@ -5,7 +5,7 @@ import LinkComponent from "components/Link";
 import i18next from "i18next";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import ReactCountryFlag from "react-country-flag";
 import { isDesktop } from "react-device-detect";
 // import Logo from "./logo.png";
@@ -63,13 +63,21 @@ const Header = ({ ...props }) => {
     const href = router.pathname.replace("[lang]", locale);
     router.push(href);
   };
+  const isActive = useMemo(() => {
+    if (router.asPath.split("/").length < 3) {
+      return ["/"];
+    }
+    const paths = router.asPath.split("/");
+    const pathName = paths[paths.length - 1];
+    console.log("----", { paths, pathName });
+
+    return router.asPath;
+  }, [router.asPath]);
 
   /* Render */
-  if (!isDesktop) return <HeaderMobile />;
+  if (!isDesktop) return <HeaderMobile t={t} />;
 
   const redirectToOtherPage = (path: string) => {
-    console.log("path", path);
-
     router.replace(`/${currentLocale}${path}`);
   };
 
@@ -176,7 +184,9 @@ const Header = ({ ...props }) => {
               ))}
             </ul>
           </nav>
-          <h1 className="navbar__title">{t(title)}</h1>
+          <h1 className="navbar__title">
+            {t(title, { ns: "header" }).toUpperCase()}
+          </h1>
         </header>
       </div>
     </DivHeaderWrapperV1>

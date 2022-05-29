@@ -29,7 +29,7 @@ export function AppProvider({ children }: Props) {
         text = "RETREAT HISTORY";
         break;
       default:
-        text = "CHOEZE KUCHEN";
+        text = "";
         break;
     }
     setTitle(text);

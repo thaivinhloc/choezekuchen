@@ -10,7 +10,7 @@ export const GlobalStyle = createGlobalStyle`${css`
   body {
     // font-family: $body-font;
     font-family: ${(props: TStyled) => props.theme.primaryFont};
-    font-size: 14px;
+    font-size: 16px;
     background: #f6f6f6;
   }
   h1 {
@@ -20,6 +20,7 @@ export const GlobalStyle = createGlobalStyle`${css`
   .text-center {
     text-align: center;
   }
+
   p {
     color: #000;
   }

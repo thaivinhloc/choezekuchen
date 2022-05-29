@@ -39,7 +39,8 @@ export const DivHeaderWrapperV1 = styled.div`
             border-radius: 2px;
             white-space: nowrap;
             margin-right: 16px;
-            &:hover {
+            &:hover,
+            &.active {
               border: 2px solid #fff;
             }
           }
@@ -222,10 +223,11 @@ export const DivHeaderWrapperV1 = styled.div`
       }
     }
 
-    &.homepage{
+    &.homepage {
       .bg-primary {
         background-image: url("/images/title-image-homepage.jpg");
         background-size: cover;
+        height: 100vh;
       }
     }
   }
@@ -238,12 +240,22 @@ export const DivHeaderWrapperV1 = styled.div`
       }
     }
   }
-
-  
 `;
 
 export const DivHeaderMobile = styled.div`
-  background: #fff;
+  .banner {
+    position: relative;
+    &__content {
+      position: absolute;
+      inset: 0;
+      color: #fff;
+      font-size: 28px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
   button {
     background: none;
     border: none;

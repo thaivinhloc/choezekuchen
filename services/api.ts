@@ -24,10 +24,7 @@ export const getRetreatDetailById = async (retreatId: number) => {
   });
 };
 
-export const getRetreatDetail = async (
-  retreatId: number,
-  locale: TLanguage
-) => {
+export const getRetreatDetail = async (retreatId: number, locale: string) => {
   const isPublic = !!localStorage.getItem("token");
   return await Client.createRequest<IResponseRetreatDetail>({
     path: `/api/retreat-detail/${retreatId}?locale=${locale}`,

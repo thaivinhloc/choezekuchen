@@ -6,6 +6,11 @@ export const DivRetreatWrapper = styled.div`
   .retreat-content {
     .ant-tabs-nav {
       margin: auto;
+      @media (min-width: 992px) {
+        .container {
+          width: 100%;
+        }
+      }
     }
   }
   .ant-tabs {
@@ -52,7 +57,7 @@ export const DivRetreatWrapper = styled.div`
       }
       &-content {
         padding: 10px;
-        width: 94%;
+        width: 100%;
       }
       &-submit {
         padding: 10px;

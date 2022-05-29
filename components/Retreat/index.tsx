@@ -151,7 +151,7 @@ const Retreat: React.FC<{}> = () => {
 
   const handleGetRetreatDetail = async (
     retreatId: number,
-    currentLng: TLanguage
+    currentLng: string
   ) => {
     try {
       setIsLoading(true);
