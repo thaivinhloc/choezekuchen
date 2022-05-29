@@ -16,7 +16,7 @@ export type TLanguage = {
   en: "en";
   vi: "vi";
 };
-const useRetreat = (language: TLanguage) => {
+const useRetreat = (language: string) => {
   const { user } = useAuth();
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
