@@ -15,9 +15,17 @@ const BoxContainer: FC<TBoxContainer> = ({
   /* Render */
   if (type === "vertical") {
     return (
-      <Row>
-        <Col span={12}>{contentLeft}</Col>
-        <Col span={12}>{contentRight}</Col>
+      <Row className="box-container">
+        <Col xs={24}
+          sm={24}
+          md={12}
+          lg={12}
+          xl={12} className="col-left">{contentLeft} </Col>
+        <Col xs={24}
+          sm={24}
+          md={12}
+          lg={12}
+          xl={12}>{contentRight}</Col>
       </Row>
     );
   }
