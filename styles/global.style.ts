@@ -203,4 +203,51 @@ export const GlobalStyle = createGlobalStyle`${css`
   .ant-card {
     background-color: transparent;
   }
+
+  .pdy-100{
+    padding: 100px 0;
+  }
+
+  
+  .box-container .ant-col{
+    padding: 0 15px;
+  }
+  
+  .box-container .col-left{
+    margin-bottom: 50px;
+  }
+
+  .box-container .bc-image{
+    padding: 6px;
+    background-color: #ebebeb;
+  }
+
+  .bc-image img{
+    width: 100%;
+    height: auto;
+    
+  }
+
+  .box-container .bc-text {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  } 
+  .bc-text p{
+    margin-bottom: 0.2rem;
+    color:${(props: TStyled) => props.theme.textSecondary};
+    font-size: 14px;
+    font-weight: 400;
+  }
+
+  .hr {
+    position: relative;
+    display: block;
+    height: 1px;
+    background-color: #eaeaea;
+    margin: 80px 0;
+  }
+
 `}`;
