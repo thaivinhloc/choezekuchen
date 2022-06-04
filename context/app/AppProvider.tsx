@@ -43,7 +43,12 @@ export function AppProvider({ children }: Props) {
       case "gurus":
         text = "GURUS";
         break;
-
+      case "the11th":
+        text = "THE 11TH CHOEZE KUCHEN RIPOCHE";
+        break;
+      case "thehevajra":
+        text = "THE HEVAJRA RETREAT";
+        break;
       case "jigme-choewang-lodro-the-10th-reincarnation-of-choeze-kuchen-rinpoche":
         text =
           "JIGME CHOEWANG LODRO – THE 10TH REINCARNATION OF CHOEZE KUCHEN RINPOCHE";
