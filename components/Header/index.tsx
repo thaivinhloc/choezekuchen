@@ -149,7 +149,11 @@ const Header = ({ ...props }) => {
                         <li
                           className="dropdown-nav-item nav-item"
                           key={childrent.path}
-                          onClick={() => redirectToOtherPage(childrent.path)}
+                          onClick={() =>
+                            childrent.childrent.length === 0
+                              ? redirectToOtherPage(childrent.path)
+                              : {}
+                          }
                         >
                           <div style={{ display: "flex" }}>
                             <a className="dropdown-nav-link">

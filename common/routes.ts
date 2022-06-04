@@ -1,4 +1,4 @@
-import { THEHEVAJRA } from "./navigator";
+import { HISTORY, THEHEVAJRA, THEPERFECTWAY } from "./navigator";
 import { THE11TH } from "common/navigator";
 export const ROUTES = [
   { label: "HOME", path: "/", childrent: [] },
@@ -14,7 +14,7 @@ export const ROUTES = [
       },
       {
         label: "HISTORY OF CHOEZE KUCHEN RINPOCHE",
-        path: "/history-of-choeze-kuchen-rinpoche",
+        path: HISTORY,
         childrent: [],
       },
       {
@@ -61,7 +61,7 @@ export const ROUTES = [
           },
           {
             label: "THE PERFECT WAY TO PRACTICE",
-            path: "/teaching/the-perfect-way-to-practice-2",
+            path: THEPERFECTWAY,
             childrent: [],
           },
         ],

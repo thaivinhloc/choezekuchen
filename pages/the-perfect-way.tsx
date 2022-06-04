@@ -6,7 +6,6 @@ import { THEPERFECTWAY } from "common/navigator";
 export default function Theperfectway({ allLangsData }: any) {
   const router = useRouter();
 
-  // localhost/THEPERFECTWAY -> localhost/vi/THEPERFECTWAY
   useEffect(() => {
     const { pathname } = router;
     if (pathname === THEPERFECTWAY) {

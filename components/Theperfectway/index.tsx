@@ -90,7 +90,7 @@ const Theperfectway: React.FC<{}> = () => {
               </h2>
             </Col>
           </Row>
-          <div className="motivation-hr"></div>
+          <div className="theperfectway-hr"></div>
           <Row>
             <Col
               xs={24}
@@ -98,7 +98,7 @@ const Theperfectway: React.FC<{}> = () => {
               md={24}
               lg={7}
               xl={7}
-              className="motivation-item"
+              className="theperfectway-item"
             >
               <h2>
                 RELEASE ALL THOUGHTS AND BE WITHOUT CONCEPTIONS WHEN YOU
@@ -106,7 +106,7 @@ const Theperfectway: React.FC<{}> = () => {
               </h2>
             </Col>
             <Col
-              className="motivation-wrapper"
+              className="theperfectway-wrapper"
               xs={24}
               sm={24}
               md={24}
