@@ -71,7 +71,7 @@ export const ROUTES = [
       },
       {
         label: "PHOWA PRACTICE",
-        path: "/teaching/phowa-practice",
+        path: "/phowa-practice",
         childrent: [],
       },
       {

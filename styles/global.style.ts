@@ -228,7 +228,7 @@ export const GlobalStyle = createGlobalStyle`${css`
     
   }
 
-  .box-container .bc-text {
+  .box-container .bc-text.text-center {
     height: 100%;
     display: flex;
     justify-content: center;
@@ -240,6 +240,16 @@ export const GlobalStyle = createGlobalStyle`${css`
     color:${(props: TStyled) => props.theme.textSecondary};
     font-size: 14px;
     font-weight: 400;
+  }
+
+  .bc-text h4 {
+    color:${(props: TStyled) => props.theme.dark};
+    font-size: 20px;
+    line-height: 25px;
+    font-style: normal;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
   }
 
   .hr {

@@ -37,6 +37,9 @@ export function AppProvider({ children }: Props) {
       case "jigme-choewang-lodro-the-10th-reincarnation-of-choeze-kuchen-rinpoche":
         text = "JIGME CHOEWANG LODRO – THE 10TH REINCARNATION OF CHOEZE KUCHEN RINPOCHE"
         break;
+      case "phowa-practice":
+        text = "PHOWA PRACTICE"
+        break;
       default:
         text = "";
         break;
