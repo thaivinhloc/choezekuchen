@@ -3,6 +3,13 @@ export const languages = ["en", "vi"];
 export const defaultLanguage = "en";
 
 // Locale files under /locales/[lang]/
-export const namespaces = ["common", "header", "login", "retreat", "history"];
+export const namespaces = [
+  "common",
+  "header",
+  "login",
+  "retreat",
+  "jigmechoewanglodro",
+  "history",
+];
 
 export const defaultNamespace = "common";

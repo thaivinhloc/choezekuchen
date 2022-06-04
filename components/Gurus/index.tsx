@@ -2,6 +2,8 @@ import { Card, Col, Row } from "antd";
 import React, { FC } from "react";
 import { DivGurusWrapper } from "./index.styles";
 import { IconFB, IconInstagram, IconTW } from "../../assets/svgs/index";
+import i18next from "i18next";
+import { useApp } from "context/app/AppContext";
 const { Meta } = Card;
 const GURUS = [
   {

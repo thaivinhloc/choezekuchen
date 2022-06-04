@@ -10,3 +10,5 @@ export const MONASTERY = "/monastery";
 export const THE11TH =
   "/about-rinpoche/previous-reincarnation-the-10th-choeze-kuchen-rinpoche";
 export const THEPERFECTWAY = "/the-perfect-way-to-practice-2";
+export const JIGMECHOEWANGLODRO =
+  "/jigme-choewang-lodro-the-10th-reincarnation-of-choeze-kuchen-rinpoche";
