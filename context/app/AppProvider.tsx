@@ -28,6 +28,18 @@ export function AppProvider({ children }: Props) {
       case "retreat-history":
         text = "RETREAT HISTORY";
         break;
+      case "history-of-choeze-kuchen-rinpoche":
+        text = "HISTORY OF CHOEZE KUCHEN RINPOCHE";
+        break;
+      case "the-perfect-way-to-practice-2":
+        text = "THE PERFECT WAY TO PRACTICE";
+        break;
+      case "monastery":
+        text = "MONASTERY";
+        break;
+      case "previous-reincarnation-the-10th-choeze-kuchen-rinpoche":
+        text = "Haaaaa";
+        break;
       default:
         text = "";
         break;
