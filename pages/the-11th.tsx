@@ -5,7 +5,6 @@ import { THE11TH } from "common/navigator";
 
 export default function The11th({ allLangsData }: any) {
   const router = useRouter();
-
   useEffect(() => {
     const { pathname } = router;
     if (pathname === THE11TH) {

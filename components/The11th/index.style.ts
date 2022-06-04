@@ -6,7 +6,8 @@ type TStyled = {
 
 export const DivThe11th = styled.div`
   .the11th {
-    padding: 120px 120px;
+    padding: 120px 35px;
+
     &-image {
       height: auto;
       max-width: 100%;
@@ -20,7 +21,16 @@ export const DivThe11th = styled.div`
       background-color: #eaeaea;
     }
     &-wrapper {
-      padding: 48px 0;
+      padding: 0 0;
+      h3 {
+        color: #303030;
+        font-family: "Raleway", sans-serif;
+        font-size: 20px;
+        line-height: 34px;
+        font-style: normal;
+        font-weight: 300;
+        letter-spacing: 0px;
+      }
       p {
         /* text-align: justify; */
         color: #777777;
@@ -28,6 +38,37 @@ export const DivThe11th = styled.div`
         font-style: normal;
         font-weight: 400;
       }
+      h2 {
+        color: #303030;
+        font-size: 30px;
+        line-height: 40px;
+        font-style: normal;
+        font-weight: 700;
+        letter-spacing: 3px;
+      }
+    }
+    .btn-global {
+      display: inline-block;
+      width: auto;
+      height: 41px;
+      line-height: 30px;
+      padding: 0 23px;
+      font-size: 13px;
+      border: 2px solid #303030;
+      color: #303030;
+      cursor: pointer;
+      outline: 0;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border-radius: 4px;
+      text-shadow: none;
+      background-color: transparent;
+      margin-bottom: 50px;
+    }
+    .btn-global:hover {
+      background-color: #1abc9c;
+      border-color: #1abc9c;
+      color: #fff;
     }
   }
 `;
