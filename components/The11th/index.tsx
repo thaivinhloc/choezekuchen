@@ -1,6 +1,7 @@
 import React from "react";
 import { DivThe11th } from "./index.style";
 import { Row, Col } from "antd";
+import Link from "next/link";
 const The11th: React.FC<{}> = () => {
   return (
     <DivThe11th>
