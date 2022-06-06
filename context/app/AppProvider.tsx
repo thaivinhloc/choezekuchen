@@ -50,6 +50,9 @@ export function AppProvider({ children }: Props) {
         text =
           "JIGME CHOEWANG LODRO – THE 10TH REINCARNATION OF CHOEZE KUCHEN RINPOCHE";
         break;
+      case "pure-motivation-and-great-conviction-2":
+        text = "PURE MOTIVATION AND GREAT CONVICTION";
+        break;
       default:
         text = "";
         break;

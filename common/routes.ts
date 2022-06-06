@@ -1,4 +1,4 @@
-import { HISTORY, THEHEVAJRA, THEPERFECTWAY } from "./navigator";
+import { HISTORY, MOTIVATION, THEHEVAJRA, THEPERFECTWAY } from "./navigator";
 import { THE11TH } from "common/navigator";
 export const ROUTES = [
   { label: "HOME", path: "/", childrent: [] },
@@ -51,7 +51,7 @@ export const ROUTES = [
         childrent: [
           {
             label: "PURE MOTIVATION AND GREAT CONVICTION",
-            path: "/teaching/pure-motivation-and-great-conviction-2",
+            path: MOTIVATION,
             childrent: [],
           },
           {

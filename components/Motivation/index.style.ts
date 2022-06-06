@@ -4,29 +4,35 @@ type TStyled = {
   theme: typeof THEME;
 };
 
-export const DivHistory = styled.div`
-  .history {
+export const DivMotivation = styled.div`
+  .motivation {
     padding: 120px 35px;
-    &-image {
-      height: auto;
-      max-width: 100%;
-    }
-    &-group {
-    }
     &-hr {
       //color: ${(props: TStyled) => props.theme.hr} !important;
-      margin: 80px 0;
+      margin: 50px 0;
       height: 1px;
       background-color: #eaeaea;
     }
     &-wrapper {
-      padding: 48px 0;
+      padding: 0 0;
       p {
         /* text-align: justify; */
         color: #777777;
         font-size: 15px;
         font-style: normal;
         font-weight: 400;
+      }
+    }
+    &-item {
+      background-color: #1e73be;
+      h2 {
+        padding: 20px;
+        color: #ffffff;
+        font-size: 30px;
+        line-height: 40px;
+        font-style: normal;
+        font-weight: 700;
+        letter-spacing: 3px;
       }
     }
   }
