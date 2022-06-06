@@ -13,3 +13,4 @@ export const JIGMECHOEWANGLODRO =
 export const THE11TH = "/the-11th";
 export const THEHEVAJRA = "/the-hevajra";
 export const MOTIVATION = "/pure-motivation-and-great-conviction-2";
+export const ACHI = "/achi-chokyi-drolma";
