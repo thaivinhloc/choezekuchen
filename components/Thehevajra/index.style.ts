@@ -4,8 +4,8 @@ type TStyled = {
   theme: typeof THEME;
 };
 
-export const DivThe11th = styled.div`
-  .the11th {
+export const DivThehevajra = styled.div`
+  .thehevajra {
     padding: 120px 35px;
 
     &-image {
@@ -21,30 +21,13 @@ export const DivThe11th = styled.div`
       background-color: #eaeaea;
     }
     &-wrapper {
-      padding: 0 0;
-      h3 {
-        color: #303030;
-        font-family: "Raleway", sans-serif;
-        font-size: 20px;
-        line-height: 34px;
-        font-style: normal;
-        font-weight: 300;
-        letter-spacing: 0px;
-      }
+      padding: 130px 0;
       p {
         /* text-align: justify; */
         color: #777777;
         font-size: 15px;
         font-style: normal;
         font-weight: 400;
-      }
-      h2 {
-        color: #303030;
-        font-size: 30px;
-        line-height: 40px;
-        font-style: normal;
-        font-weight: 700;
-        letter-spacing: 3px;
       }
     }
     .btn-global {
@@ -63,7 +46,6 @@ export const DivThe11th = styled.div`
       border-radius: 4px;
       text-shadow: none;
       background-color: transparent;
-      margin-bottom: 50px;
     }
     .btn-global:hover {
       background-color: #1abc9c;

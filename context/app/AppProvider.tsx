@@ -31,16 +31,20 @@ export function AppProvider({ children }: Props) {
       case "history-of-choeze-kuchen-rinpoche":
         text = "HISTORY OF CHOEZE KUCHEN RINPOCHE";
         break;
-      case "the-perfect-way-to-practice-2":
+      case "the-perfect-way":
         text = "THE PERFECT WAY TO PRACTICE";
         break;
       case "monastery":
         text = "MONASTERY";
         break;
-      case "previous-reincarnation-the-10th-choeze-kuchen-rinpoche":
-        text = "Haaaaa";
       case "gurus":
         text = "GURUS";
+        break;
+      case "the-11th":
+        text = "THE 11TH CHOEZE KUCHEN RIPOCHE";
+        break;
+      case "the-hevajra":
+        text = "THE HEVAJRA RETREAT";
         break;
       case "jigme-choewang-lodro-the-10th-reincarnation-of-choeze-kuchen-rinpoche":
         text =

@@ -1,3 +1,5 @@
+import { HISTORY, THEHEVAJRA, THEPERFECTWAY } from "./navigator";
+import { THE11TH } from "common/navigator";
 export const ROUTES = [
   { label: "HOME", path: "/", childrent: [] },
   {
@@ -12,7 +14,7 @@ export const ROUTES = [
       },
       {
         label: "HISTORY OF CHOEZE KUCHEN RINPOCHE",
-        path: "/history-of-choeze-kuchen-rinpoche",
+        path: HISTORY,
         childrent: [],
       },
       {
@@ -23,7 +25,7 @@ export const ROUTES = [
       },
       {
         label: "THE 11TH CHOEZE KUCHEN RIPOCHE",
-        path: "/about-rinpoche/previous-reincarnation-the-10th-choeze-kuchen-rinpoche",
+        path: THE11TH,
         childrent: [
           {
             label: "YOUNG CHOEZE KUCHEN RIPOCHE - 2 YEARS OF AGE",
@@ -32,7 +34,7 @@ export const ROUTES = [
           },
           {
             label: "THE HEVAJRA RETREAT",
-            path: "/about-rinpoche/tieu-su-duc-choeze-kuchen-rinpoche-doi-thu-11-2/the-11th-choeze-kuchen-rinpoche/the-hevajra-retreat",
+            path: THEHEVAJRA,
             childrent: [],
           },
         ],
@@ -59,7 +61,7 @@ export const ROUTES = [
           },
           {
             label: "THE PERFECT WAY TO PRACTICE",
-            path: "/teaching/the-perfect-way-to-practice-2",
+            path: THEPERFECTWAY,
             childrent: [],
           },
         ],
