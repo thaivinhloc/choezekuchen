@@ -12,3 +12,4 @@ export const JIGMECHOEWANGLODRO =
   "/jigme-choewang-lodro-the-10th-reincarnation-of-choeze-kuchen-rinpoche";
 export const THE11TH = "/the-11th";
 export const THEHEVAJRA = "/the-hevajra";
+export const MOTIVATION = "/pure-motivation-and-great-conviction-2";
