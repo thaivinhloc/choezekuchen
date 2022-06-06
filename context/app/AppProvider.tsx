@@ -28,14 +28,30 @@ export function AppProvider({ children }: Props) {
       case "retreat-history":
         text = "RETREAT HISTORY";
         break;
-      case "gurus":
-        text = "GURUS"
+      case "history-of-choeze-kuchen-rinpoche":
+        text = "HISTORY OF CHOEZE KUCHEN RINPOCHE";
+        break;
+      case "the-perfect-way":
+        text = "THE PERFECT WAY TO PRACTICE";
+        break;
+      case "monastery":
+        text = "MONASTERY";
         break;
       case "gurus":
-        text = "GURUS"
+        text = "GURUS";
+        break;
+      case "the-11th":
+        text = "THE 11TH CHOEZE KUCHEN RIPOCHE";
+        break;
+      case "the-hevajra":
+        text = "THE HEVAJRA RETREAT";
         break;
       case "jigme-choewang-lodro-the-10th-reincarnation-of-choeze-kuchen-rinpoche":
-        text = "JIGME CHOEWANG LODRO – THE 10TH REINCARNATION OF CHOEZE KUCHEN RINPOCHE"
+        text =
+          "JIGME CHOEWANG LODRO – THE 10TH REINCARNATION OF CHOEZE KUCHEN RINPOCHE";
+        break;
+      case "pure-motivation-and-great-conviction-2":
+        text = "PURE MOTIVATION AND GREAT CONVICTION";
         break;
       case "phowa-practice":
         text = "PHOWA PRACTICE"

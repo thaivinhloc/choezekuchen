@@ -1,9 +1,9 @@
 import React, { FC } from "react";
-import History from "components/History";
+import Theperfectway from "components/Theperfectway";
 import { getAllLanguageSlugs, getLanguage } from "../../lib/lang";
 
-const HistoryOfChoezenKuchen: FC<{}> = () => {
-  return <History />;
+const TheperfectwayOfChoezenKuchen: FC<{}> = () => {
+  return <Theperfectway />;
 };
 export async function getStaticPaths() {
   const paths = getAllLanguageSlugs();
@@ -12,7 +12,7 @@ export async function getStaticPaths() {
     fallback: false,
   };
 }
-
+// localhost:300/theperfectway
 export async function getStaticProps({ params }: any) {
   const language = getLanguage(params.lang);
   return {
@@ -21,4 +21,4 @@ export async function getStaticProps({ params }: any) {
     },
   };
 }
-export default HistoryOfChoezenKuchen;
+export default TheperfectwayOfChoezenKuchen;

@@ -1,7 +1,7 @@
 import React from "react";
-
+import About from "components/AboutRinpoche";
 const AboutRinpoche = () => {
-  return <div>AboutRinpoche</div>;
+  return <About />;
 };
 
 export default AboutRinpoche;

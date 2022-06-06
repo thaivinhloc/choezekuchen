@@ -137,24 +137,26 @@ const Header = ({ ...props }) => {
               </li>
               {ROUTES.map((route) => (
                 <li className="nav-item" key={route.path}>
-                  <a
+                  <span
                     className="nav-link"
                     onClick={() => redirectToOtherPage(route.path)}
                   >
                     {t(route.label, { ns: "header" })}
-                  </a>
+                  </span>
                   {route.childrent.length > 0 && (
                     <ul className="dropdown">
                       {route.childrent.map((childrent) => (
                         <li
                           className="dropdown-nav-item nav-item"
                           key={childrent.path}
-                          onClick={() => redirectToOtherPage(childrent.path)}
                         >
-                          <div style={{ display: "flex" }}>
-                            <a className="dropdown-nav-link">
+                          <div
+                            style={{ display: "flex" }}
+                            onClick={() => redirectToOtherPage(childrent.path)}
+                          >
+                            <span className="dropdown-nav-link">
                               {childrent.label}
-                            </a>
+                            </span>
                             {childrent.childrent.length > 0 && (
                               <RightOutlined className="arrow-right" />
                             )}
@@ -169,9 +171,11 @@ const Header = ({ ...props }) => {
                                     redirectToOtherPage(route.path)
                                   }
                                 >
-                                  <a className="dropdown-nav-link">
-                                    {route.label}
-                                  </a>
+                                  <div style={{ display: "flex" }}>
+                                    <span className="dropdown-nav-link">
+                                      {route.label}
+                                    </span>
+                                  </div>
                                 </li>
                               ))}
                             </ul>

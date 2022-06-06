@@ -1,9 +1,9 @@
 import React, { FC } from "react";
-import History from "components/History";
+import Monastery from "components/Monastery";
 import { getAllLanguageSlugs, getLanguage } from "../../lib/lang";
 
 const HistoryOfChoezenKuchen: FC<{}> = () => {
-  return <History />;
+  return <Monastery />;
 };
 export async function getStaticPaths() {
   const paths = getAllLanguageSlugs();

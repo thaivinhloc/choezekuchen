@@ -1,9 +1,9 @@
 import React, { FC } from "react";
-import History from "components/History";
+import Thehevajra from "components/Thehevajra";
 import { getAllLanguageSlugs, getLanguage } from "../../lib/lang";
 
-const HistoryOfChoezenKuchen: FC<{}> = () => {
-  return <History />;
+const ThehevajraOfChoezenKuchen: FC<{}> = () => {
+  return <Thehevajra />;
 };
 export async function getStaticPaths() {
   const paths = getAllLanguageSlugs();
@@ -21,4 +21,4 @@ export async function getStaticProps({ params }: any) {
     },
   };
 }
-export default HistoryOfChoezenKuchen;
+export default ThehevajraOfChoezenKuchen;
