@@ -53,6 +53,9 @@ export function AppProvider({ children }: Props) {
       case "pure-motivation-and-great-conviction-2":
         text = "PURE MOTIVATION AND GREAT CONVICTION";
         break;
+      case "phowa-practice":
+        text = "PHOWA PRACTICE"
+        break;
       default:
         text = "";
         break;

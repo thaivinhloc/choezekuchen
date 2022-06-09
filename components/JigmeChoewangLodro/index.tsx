@@ -42,10 +42,10 @@ const JigmeChoewangLodro: FC<{}> = () => {
 
     const Content = ({ content }: any) => {
         return (
-            <div className="bc-text">
+            <div className="bc-text text-center">
 
                 {content.map((paragraph: any, i: any) => (
-                    <p key={i}>{t(paragraph, { ns: "jigmechoewanglodro" })}</p>
+                    <p key={i}>{t(paragraph, { ns: "jigme_choewang_lodro" })}</p>
                 ))}
             </div>
         );
