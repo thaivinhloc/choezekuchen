@@ -55,6 +55,8 @@ export function AppProvider({ children }: Props) {
         break;
       case "achi-chokyi-drolma":
         text = "ACHI CHOKYI DROLMA TEACHING";
+      case "phowa-practice":
+        text = "PHOWA PRACTICE"
         break;
       default:
         text = "";
