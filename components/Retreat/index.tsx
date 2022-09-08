@@ -75,15 +75,14 @@ const Retreat: React.FC<{}> = () => {
   const [activeRetreat, setActiveRetreat] = useState<number | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isLoadingSubmit, setIsLoadingSubmit] = useState<boolean>(false);
+  const [isLoadingRetreatDetail, setIsLoadingRetreatDetail] =
+    useState<boolean>(false);
 
   const [listParticipant, setListParticipant] = useState<
     IResponseListRetreat[]
   >([]);
 
   const [retreatDetail, setRetreatDetail] = useState<IResponseRetreatDetail>();
-
-  // const [dataRetreat, setDataRetreat] = useState<IResponseRetreat | null>(null);
-  // const [listRetreat, setListRetreat] = useState<IResponseListRetreat[]>([]);
 
   useEffect(() => {
     switch (tab) {
@@ -423,10 +422,9 @@ const Retreat: React.FC<{}> = () => {
                               />
                             )}
                           </div>
-
                           <br />
                           <br />
-                          {loading ? (
+                          {isLoading ? (
                             <Skeleton active />
                           ) : (
                             <p
