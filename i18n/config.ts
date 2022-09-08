@@ -9,7 +9,7 @@ export const namespaces = [
   "header",
   "login",
   "retreat",
-  jigme_choewang_lodro",
+  "jigme_choewang_lodro",
   "history",
 ];
 

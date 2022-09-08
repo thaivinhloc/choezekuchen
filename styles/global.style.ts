@@ -13,6 +13,9 @@ export const GlobalStyle = createGlobalStyle`${css`
     font-size: 16px;
     background: #f6f6f6;
   }
+  span {
+    font-family: ${(props: TStyled) => props.theme.primaryFont} !important;
+  }
   h1 {
     font-size: 45px;
     font-weight: bold;
@@ -204,28 +207,26 @@ export const GlobalStyle = createGlobalStyle`${css`
     background-color: transparent;
   }
 
-  .pdy-100{
+  .pdy-100 {
     padding: 100px 0;
   }
 
-  
-  .box-container .ant-col{
+  .box-container .ant-col {
     padding: 0 15px;
   }
-  
-  .box-container .col-left{
+
+  .box-container .col-left {
     margin-bottom: 50px;
   }
 
-  .box-container .bc-image{
+  .box-container .bc-image {
     padding: 6px;
     background-color: #ebebeb;
   }
 
-  .bc-image img{
+  .bc-image img {
     width: 100%;
     height: auto;
-    
   }
 
   .box-container .bc-text.text-center {
@@ -234,16 +235,16 @@ export const GlobalStyle = createGlobalStyle`${css`
     justify-content: center;
     align-items: center;
     flex-direction: column;
-  } 
-  .bc-text p{
+  }
+  .bc-text p {
     margin-bottom: 0.2rem;
-    color:${(props: TStyled) => props.theme.textSecondary};
+    color: ${(props: TStyled) => props.theme.textSecondary};
     font-size: 14px;
     font-weight: 400;
   }
 
   .bc-text h4 {
-    color:${(props: TStyled) => props.theme.dark};
+    color: ${(props: TStyled) => props.theme.dark};
     font-size: 20px;
     line-height: 25px;
     font-style: normal;
@@ -259,5 +260,4 @@ export const GlobalStyle = createGlobalStyle`${css`
     background-color: #eaeaea;
     margin: 80px 0;
   }
-
 `}`;

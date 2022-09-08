@@ -8,6 +8,7 @@ import {
   Form,
   Input,
   Menu,
+  notification,
   Row,
   Skeleton,
   Tabs,
@@ -184,6 +185,10 @@ const Retreat: React.FC<{}> = () => {
           form.setFieldsValue({
             recitationNumber: undefined,
           });
+          notification.success({
+            message: "Success",
+            description: `Submit successfully`,
+          });
         });
       }
     } catch (error) {
@@ -227,7 +232,14 @@ const Retreat: React.FC<{}> = () => {
             key={ETabPane.DETAIL}
           >
             <Row gutter={32}>
-              <Col span={8} xs={24} lg={8} xl={7} className="retreat__right">
+              <Col
+                span={8}
+                xs={24}
+                lg={8}
+                xl={7}
+                className="retreat__right"
+                style={{ padding: 0 }}
+              >
                 <div className="retreat__right-form">
                   <div className="box-title d-flex justify-content-between align-items-center">
                     {retreatDetail?.name || ""}
@@ -327,14 +339,22 @@ const Retreat: React.FC<{}> = () => {
                               : formatNumber(userRetreat?.due || 0)
                           }
                         />
-                        <RenderItem
-                          title={t("Daily Everage", { ns: "retreat" }) + ":"}
-                          content={userRetreat?.dailyAverage || 0}
-                        />
-                        <RenderItem
-                          title={t("Daily Required", { ns: "retreat" }) + ":"}
-                          content={userRetreat?.dailyRequired || 0}
-                        />
+                        {retreatDetail.dateEnd && (
+                          <>
+                            <RenderItem
+                              title={
+                                t("Daily Average", { ns: "retreat" }) + ":"
+                              }
+                              content={userRetreat?.dailyAverage || 0}
+                            />
+                            <RenderItem
+                              title={
+                                t("Daily Required", { ns: "retreat" }) + ":"
+                              }
+                              content={userRetreat?.dailyRequired || 0}
+                            />
+                          </>
+                        )}
                         <RenderItem
                           title={t("Last Updated", { ns: "retreat" }) + ":"}
                           content={userRetreat?.lastUpdated || 0}
@@ -385,36 +405,38 @@ const Retreat: React.FC<{}> = () => {
                       setActiveRetreat(Number(key));
                     }}
                   >
-                    {listRetreat.map((retreat) => (
-                      <TabPane
-                        tab={<strong>{retreat.name}</strong>}
-                        key={retreat.id}
-                      >
-                        <div
-                          className="text-center"
-                          style={{ marginTop: "20px" }}
+                    {listRetreat
+                      .sort((a, b) => a.order - b.order)
+                      .map((retreat) => (
+                        <TabPane
+                          tab={<strong>{retreat.name}</strong>}
+                          key={retreat.id}
                         >
-                          {PATH && retreatDetail?.image && (
-                            <img
-                              src={PATH + retreatDetail?.image?.url}
-                              alt=""
+                          <div
+                            className="text-center"
+                            style={{ marginTop: "20px" }}
+                          >
+                            {PATH && retreatDetail?.image && (
+                              <img
+                                src={PATH + retreatDetail?.image?.url}
+                                alt=""
+                              />
+                            )}
+                          </div>
+
+                          <br />
+                          <br />
+                          {loading ? (
+                            <Skeleton active />
+                          ) : (
+                            <p
+                              dangerouslySetInnerHTML={{
+                                __html: retreatDetail?.description || "",
+                              }}
                             />
                           )}
-                        </div>
-
-                        <br />
-                        <br />
-                        {loading ? (
-                          <Skeleton active />
-                        ) : (
-                          <p
-                            dangerouslySetInnerHTML={{
-                              __html: retreatDetail?.description || "",
-                            }}
-                          />
-                        )}
-                      </TabPane>
-                    ))}
+                        </TabPane>
+                      ))}
                   </Tabs>
                   {/* {loading ? (
                     <Skeleton active />

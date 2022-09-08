@@ -1,4 +1,10 @@
-import { HISTORY, MOTIVATION, THEHEVAJRA, THEPERFECTWAY } from "./navigator";
+import {
+  HISTORY,
+  MOTIVATION,
+  TEACHING,
+  THEHEVAJRA,
+  THEPERFECTWAY,
+} from "./navigator";
 import { THE11TH } from "common/navigator";
 export const ROUTES = [
   { label: "HOME", path: "/", childrent: [] },
@@ -18,33 +24,36 @@ export const ROUTES = [
         childrent: [],
       },
       {
-        label:
-          "JIGME CHOEWANG LODRO - THE 10TH REINCARNATION OF CHOEZE KUCHEN RIPOCHE",
-        path: "/jigme-choewang-lodro-the-10th-reincarnation-of-choeze-kuchen-rinpoche",
-        childrent: [],
-      },
-      {
         label: "THE 11TH CHOEZE KUCHEN RIPOCHE",
         path: THE11TH,
-        childrent: [
-          {
-            label: "YOUNG CHOEZE KUCHEN RIPOCHE - 2 YEARS OF AGE",
-            path: "/about-rinpoche/tieu-su-duc-choeze-kuchen-rinpoche-doi-thu-11-2/the-11th-choeze-kuchen-rinpoche/young-choeze-kuchen-rinpoche-2-years-of-age",
-            childrent: [],
-          },
-          {
-            label: "THE HEVAJRA RETREAT",
-            path: THEHEVAJRA,
-            childrent: [],
-          },
-        ],
+        childrent: [],
       },
     ],
   },
   {
     label: "TEACHING",
-    path: "/teaching",
+    path: TEACHING,
     childrent: [
+      {
+        label: "NGONDRO TECHING",
+        path: "/ngondro-teching",
+        childrent: [],
+      },
+      {
+        label: "PHOWA PRACTICE",
+        path: "/phowa-practice",
+        childrent: [],
+      },
+      {
+        label: "GURU RINPOCHE TECHING",
+        path: "/guru-rinpoche",
+        childrent: [],
+      },
+      {
+        label: "ACHI CHOKYI DROLMA TECHING",
+        path: "/achi-chokyi-drolma-teching",
+        childrent: [],
+      },
       {
         label: "DRAMA TEACHING",
         path: "/dharma-teaching",
@@ -66,31 +75,6 @@ export const ROUTES = [
           },
         ],
       },
-      {
-        label: "NGONDRO",
-        path: "/ngondro",
-        childrent: [],
-      },
-      {
-        label: "PHOWA PRACTICE",
-        path: "/phowa-practice",
-        childrent: [],
-      },
-      {
-        label: "ACHI CHOKYI DROLMA",
-        path: "/achi-chokyi-drolma",
-        childrent: [],
-      },
-      {
-        label: "GURU RINPOCHE",
-        path: "/guru-rinpoche",
-        childrent: [],
-      },
-      {
-        label: "VAJRASATTVA",
-        path: "/vajrasattva",
-        childrent: [],
-      },
     ],
   },
   {
@@ -108,8 +92,8 @@ export const ROUTES = [
         childrent: [],
       },
       {
-        label: "NEPAL - PHARBING CENTER",
-        path: "/neban",
+        label: "NAMKHA THING-SANG RETREAT CENTER",
+        path: "/namkha-thing-sang-retreat-center",
         childrent: [],
       },
       {
@@ -145,8 +129,8 @@ export const ROUTES = [
     path: "/events",
     childrent: [
       {
-        label: "INFORMATION REGISTRATION",
-        path: "/information-registration",
+        label: "CHOD CHANGBU GYATSHAR PUJA",
+        path: "/chod-changbu",
         childrent: [],
       },
     ],
@@ -154,13 +138,7 @@ export const ROUTES = [
   {
     label: "OFFERING",
     path: "/offering",
-    childrent: [
-      {
-        label: "THÔNG TIN ĐĂNG KÍ",
-        path: "/thong-tin-dang-ky",
-        childrent: [],
-      },
-    ],
+    childrent: [],
   },
   {
     label: "BLOG",

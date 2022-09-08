@@ -100,6 +100,7 @@ export interface IResponseActiveRetreat {
   dateEnd: string;
   totalCommitment: string;
   localizations: ILocalization[];
+  order: number;
 }
 
 export interface Large {
