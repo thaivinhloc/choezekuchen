@@ -1,38 +1,18 @@
-import { Table } from "antd";
+import { Table, Tooltip } from "antd";
+import LinkComponent from "components/Link";
+import { useAuth } from "context/auth/AuthContext";
 import i18next from "i18next";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { getParticipants } from "services/api";
 import { IResponseListRetreat, IUser } from "../../../services/retreatTypes";
 import useRetreat from "../hooks/useRetreat";
 import { DivTableRetreat } from "../index.style";
 
-const defaultColumns = [
-  {
-    title: "Full Name",
-    dataIndex: "name",
-    fixed: true,
-  },
-  {
-    title: "City",
-    dataIndex: "city",
-    width: 120,
-  },
-  {
-    title: "Country",
-    dataIndex: "country",
-    width: 120,
-  },
-];
-
 const RetreatListing: React.FC<{
   listParticipant: IResponseListRetreat[];
   isLoading: boolean;
 }> = ({ listParticipant, isLoading }) => {
-  // const [isLoading, setIsLoading] = useState<boolean>(false);
-
-  // const [listParticipant, setListParticipant] = useState<
-  //   IResponseListRetreat[]
-  // >([]);
+  const { user } = useAuth();
 
   const { listRetreat, getActiveRetreat } = useRetreat(i18next.language as any);
 
@@ -40,7 +20,36 @@ const RetreatListing: React.FC<{
     getActiveRetreat();
   }, []);
 
-  const columns = React.useMemo(() => {
+  const DEFAULT_COLUMNS = [
+    {
+      title: "Full Name",
+      dataIndex: "name",
+      fixed: true,
+      render: (name: string, record: any) => {
+        if (record.id === user?.id) {
+          return (
+            <LinkComponent href="/retreat-history">
+              <a style={{ textDecoration: "underline" }}>{name}</a>
+            </LinkComponent>
+          );
+        } else {
+          return <span>{name}</span>;
+        }
+      },
+    },
+    {
+      title: "City",
+      dataIndex: "city",
+      width: 120,
+    },
+    {
+      title: "Country",
+      dataIndex: "country",
+      width: 120,
+    },
+  ];
+
+  const columns = useMemo(() => {
     let columnsRetreat;
     if (listRetreat.length > 1) {
       columnsRetreat = listRetreat.map((retreat) => ({
@@ -50,11 +59,10 @@ const RetreatListing: React.FC<{
         render: (retreat: any) => {
           if (!retreat) return <span>0%</span>;
           const percent = (retreat?.completed / retreat?.commited) * 100;
-
           return (
             <span>
               {retreat?.completed} (
-              {percent === Infinity ? 100 : Math.abs(percent)}%)
+              {percent === Infinity ? 100 : Math.abs(percent).toFixed(2)}%)
             </span>
           );
         },
@@ -97,7 +105,7 @@ const RetreatListing: React.FC<{
       ];
     }
     return [
-      ...defaultColumns,
+      ...DEFAULT_COLUMNS,
       ...columnsRetreat,
       {
         title: "Updated",
@@ -106,14 +114,15 @@ const RetreatListing: React.FC<{
       },
     ];
   }, [listRetreat]);
-  console.log("listParticipant", { listParticipant });
 
   /* Render */
   return (
     <DivTableRetreat>
       <Table
         columns={columns}
-        dataSource={listParticipant}
+        dataSource={listParticipant.sort((participant) =>
+          participant.id === user?.id ? -1 : 1
+        )}
         scroll={{ x: "max-content", y: 1200 }}
         pagination={false}
         rowKey="id"

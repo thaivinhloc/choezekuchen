@@ -5,11 +5,23 @@ import { getParticipantHistory } from "../../services/api";
 import { DivTableRetreat } from "../Retreat/index.style";
 import ModalRetreatDetail from "components/Retreat/components/ModalRetreatDetail";
 
-const defaultColumns = [
+type Columns = {
+  title: string;
+  dataIndex: string;
+  width?: string;
+  filters?: {
+    text: string;
+    value: string;
+  }[];
+  onFilter?: (value: string, record: any) => boolean;
+};
+const DEFAULT_COLUMNS: Columns[] = [
   {
     title: "Retreat Name",
     dataIndex: "retreatName",
     width: "30%",
+    filters: [],
+    onFilter: (value: string, record) => record.retreatName.includes(value),
   },
   {
     title: "Recitation Number",
@@ -47,12 +59,25 @@ const RetreatHistory: FC<{}> = () => {
     return dataSource.map((data, idx) => ({ ...data, id: idx }));
   }, [dataSource]);
 
+  const DefaultColumns = useMemo(() => {
+    let columns: any = DEFAULT_COLUMNS;
+    const retreatNameUniq = listDataSource
+      .map((row) => row.retreatName)
+      .filter((v, i, a) => a.indexOf(v) === i)
+      .map((retreatName: string) => ({
+        text: retreatName,
+        value: retreatName,
+      }));
+    columns[0].filters = retreatNameUniq;
+    return columns;
+  }, [listDataSource]);
+
   /* Render */
   return (
     <DivTableRetreat>
       <div className="container">
         <Table
-          columns={defaultColumns}
+          columns={DEFAULT_COLUMNS as any}
           dataSource={listDataSource}
           pagination={false}
           rowKey="id"

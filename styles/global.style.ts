@@ -260,4 +260,22 @@ export const GlobalStyle = createGlobalStyle`${css`
     background-color: #eaeaea;
     margin: 80px 0;
   }
+  .ant-dropdown {
+    .ant-table-filter-dropdown {
+      .ant-dropdown-menu-item-selected {
+        &:hover {
+          .ant-dropdown-menu-title-content {
+            span {
+              color: #000;
+            }
+          }
+        }
+        .ant-dropdown-menu-title-content {
+          span {
+            color: #fff;
+          }
+        }
+      }
+    }
+  }
 `}`;
