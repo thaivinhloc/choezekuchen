@@ -2,6 +2,7 @@
 import { Button, Col, Form, Input, Row } from "antd";
 import { useForm } from "antd/lib/form/Form";
 import LinkComponent from "components/Link";
+import i18next from "i18next";
 import React from "react";
 import { useAuth } from "../../context/auth/AuthContext";
 import { TLogin } from "../../context/auth/AuthTypes";
@@ -9,6 +10,8 @@ import { DivLoginWrapper } from "./index.styles";
 
 const LoginForm: React.FC<{}> = () => {
   const [form] = useForm<TLogin>();
+  const { t } = i18next;
+
   const { onLogin, isLoading } = useAuth();
 
   const onFinish = (values: TLogin) => {
@@ -68,7 +71,7 @@ const LoginForm: React.FC<{}> = () => {
                   className="btn-primary bold"
                   loading={isLoading}
                 >
-                  Log in
+                  {t("login", { ns: "login" })}
                 </Button>
               </Col>
             </div>

@@ -6,12 +6,14 @@ import { useRouter } from "next/router";
 import Client from "services/client";
 import i18n from "i18next";
 import { LOGIN, RETREAT } from "common/navigator";
+import { useTranslation } from "next-i18next";
 
 type Props = {
   children: ReactNode;
 };
 export function AuthProvider({ children }: Props) {
   const router = useRouter();
+  const { t } = useTranslation("login");
   const [user, setUser] = useState<IUser | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -26,11 +28,11 @@ export function AuthProvider({ children }: Props) {
       });
       localStorage.setItem("token", result.jwt);
       setUser(result.user);
-      router.push("/" + i18n.language + RETREAT);
+      router.push(RETREAT);
     } catch (error: any) {
       notification.error({
-        message: "Error",
-        description: error || "",
+        message: t("error"),
+        description: t("incorrectUserNameOrPassword", { ns: "login" }) || "",
       });
     } finally {
       setIsLoading(false);
@@ -40,7 +42,7 @@ export function AuthProvider({ children }: Props) {
   const onLogout = () => {
     localStorage.removeItem("token");
     setUser(null);
-    router.push("/" + i18n.language + LOGIN);
+    router.push(LOGIN);
   };
 
   const onRegister = async (data: TSignup) => {
@@ -55,7 +57,7 @@ export function AuthProvider({ children }: Props) {
 
       localStorage.setItem("token", result.jwt);
       setUser(result.user);
-      router.push("/" + i18n.language + RETREAT);
+      router.push(RETREAT);
     } catch (error: any) {
       notification.error({
         message: "Error",

@@ -1,17 +1,33 @@
-import { useEffect } from "react";
+import { RETREAT } from "common/navigator";
+import LoginForm from "components/Auth/LoginForm";
+import { ELanguages } from "i18n/config";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useRouter } from "next/router";
-import i18next from "i18next";
-import { LOGIN } from "common/navigator";
+import { FC, useEffect } from "react";
 
-export default function Login({ allLangsData }: any) {
+const Login: FC<{}> = ({ language }: any) => {
   const router = useRouter();
 
   useEffect(() => {
-    const { pathname } = router;
-    if (pathname === LOGIN) {
-      router.push("/" + i18next.language.substring(0, 2) + LOGIN);
-    }
-  }, []);
+    const token = !!localStorage.getItem("token");
+    if (token) router.push(RETREAT);
+  }, [router]);
 
-  return null;
+  /* Render */
+  return <LoginForm />;
+};
+
+export async function getStaticProps({ locale }: { locale: ELanguages }) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, [
+        "common",
+        "footer",
+        "header",
+        "login",
+      ])),
+    },
+  };
 }
+
+export default Login;

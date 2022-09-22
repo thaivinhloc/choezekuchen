@@ -16,10 +16,10 @@ import {
 } from "antd";
 import { useForm } from "antd/lib/form/Form";
 import { LOGIN, RETREAT_HISTORY } from "common/navigator";
-import Link from "components/Link";
 import i18next from "i18next";
 import moment from "moment";
-import { i18n } from "next-i18next";
+import { useTranslation } from "next-i18next";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useApp } from "../../context/app/AppContext";
@@ -60,9 +60,9 @@ const Retreat: React.FC<{}> = () => {
   const router = useRouter();
   const { user } = useAuth();
   const [form] = useForm<TRetreatForm>();
-  const { t } = i18next;
+  const { t } = useTranslation();
 
-  const currentLng = i18next.language as any;
+  const currentLng = router.locale as any;
   const {
     listRetreat,
     isLoading: loading,
@@ -227,7 +227,7 @@ const Retreat: React.FC<{}> = () => {
       <div className="container">
         <Tabs defaultActiveKey={tab} onChange={handleChangeTab}>
           <TabPane
-            tab={<strong>{t("Retreat Ngondro", { ns: "retreat" })}</strong>}
+            tab={<strong>{t("Retreat Ngondro", { ns: ["retreat"] })}</strong>}
             key={ETabPane.DETAIL}
           >
             <Row gutter={32}>
@@ -338,7 +338,7 @@ const Retreat: React.FC<{}> = () => {
                               : formatNumber(userRetreat?.due || 0)
                           }
                         />
-                        {retreatDetail.dateEnd && (
+                        {retreatDetail.isGroup && (
                           <>
                             <RenderItem
                               title={
@@ -399,7 +399,7 @@ const Retreat: React.FC<{}> = () => {
                 <div>
                   <Tabs
                     activeKey={activeRetreat?.toString()}
-                    className="w-100 retreat-content"
+                    // className="w-100 retreat-content"
                     onChange={(key) => {
                       setActiveRetreat(Number(key));
                     }}
@@ -436,13 +436,6 @@ const Retreat: React.FC<{}> = () => {
                         </TabPane>
                       ))}
                   </Tabs>
-                  {/* {loading ? (
-                    <Skeleton active />
-                  ) : (
-                    <h3 className="bold text-center title">
-                      {retreatDetail?.name || ""}
-                    </h3>
-                  )} */}
                 </div>
               </Col>
             </Row>
@@ -461,6 +454,9 @@ const Retreat: React.FC<{}> = () => {
               </div>
             </TabPane>
           )}
+          {/* <div style={{ position: "absolute", top: 0, right: 10 }}>
+            <strong style={{ color: "#000" }}>{retreatDetail?.name}</strong>
+          </div> */}
         </Tabs>
       </div>
     </DivRetreatWrapper>

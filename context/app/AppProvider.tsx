@@ -18,6 +18,7 @@ export function AppProvider({ children }: Props) {
         break;
       case "signup":
         text = "SIGN UP";
+        text = "Retreat Register";
         break;
       case "profile":
         text = "PROFILE";
@@ -56,7 +57,7 @@ export function AppProvider({ children }: Props) {
       case "achi-chokyi-drolma":
         text = "ACHI CHOKYI DROLMA TEACHING";
       case "phowa-practice":
-        text = "PHOWA PRACTICE"
+        text = "PHOWA PRACTICE";
         break;
       default:
         text = "";

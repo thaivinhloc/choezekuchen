@@ -11,6 +11,7 @@ import { AuthProvider } from "../context/auth/AuthProvider";
 import "../i18n/init";
 import i18next from "i18next";
 import Head from "next/head";
+import { appWithTranslation } from "next-i18next";
 
 function MyApp({ Component, pageProps }) {
   i18next.changeLanguage(pageProps.language);
@@ -24,9 +25,9 @@ function MyApp({ Component, pageProps }) {
       <AppProvider>
         <AuthProvider>
           <Header />
-            <div className="content">
-              <Component {...pageProps} />
-            </div>
+          <div className="content">
+            <Component {...pageProps} />
+          </div>
           <Footer />
         </AuthProvider>
       </AppProvider>
@@ -34,4 +35,4 @@ function MyApp({ Component, pageProps }) {
   );
 }
 
-export default MyApp;
+export default appWithTranslation(MyApp);

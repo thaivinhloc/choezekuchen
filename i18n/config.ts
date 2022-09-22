@@ -2,6 +2,10 @@ export const languages = ["en", "vi"];
 
 export const defaultLanguage = "en";
 
+export enum ELanguages {
+  VI = "vi",
+  EN = "en",
+}
 // Locale files under /locales/[lang]/
 
 export const namespaces = [

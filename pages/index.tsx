@@ -1,27 +1,15 @@
-import { useEffect } from "react";
-import { useRouter } from "next/router";
-import i18next from "i18next";
-import { HOME } from "common/navigator";
-// import { getSortedLangsData } from "../lib/lang";
+import Home from "components/Home";
+import { ELanguages } from "i18n/config";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
-export default function Home({ allLangsData }: any) {
-  const router = useRouter();
-
-  useEffect(() => {
-    const { pathname } = router;
-    if (pathname === HOME) {
-      router.push("/" + i18next.language.substring(0, 2));
-    }
-  }, []);
-
-  return null;
+export default function HomePage({ allLangsData }: any) {
+  return <Home />;
 }
 
-// export async function getStaticProps() {
-//   const allLangsData = getSortedLangsData();
-//   return {
-//     props: {
-//       allLangsData,
-//     },
-//   };
-// }
+export async function getStaticProps({ locale }: { locale: ELanguages }) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ["common", "footer", "header"])),
+    },
+  };
+}

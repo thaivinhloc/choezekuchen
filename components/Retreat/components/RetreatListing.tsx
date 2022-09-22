@@ -24,7 +24,6 @@ const RetreatListing: React.FC<{
     {
       title: "Full Name",
       dataIndex: "name",
-      fixed: true,
       render: (name: string, record: any) => {
         if (record.id === user?.id) {
           return (
@@ -123,7 +122,7 @@ const RetreatListing: React.FC<{
         dataSource={listParticipant.sort((participant) =>
           participant.id === user?.id ? -1 : 1
         )}
-        scroll={{ x: "max-content", y: 1200 }}
+        // scroll={{ x: "max-content", y: 1200 }}
         pagination={false}
         rowKey="id"
         loading={isLoading}

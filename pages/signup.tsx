@@ -1,17 +1,27 @@
-import { useEffect } from "react";
+import SignUpForm from "components/Auth/SignUpForm";
+import { ELanguages } from "i18n/config";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { useRouter } from "next/router";
-import i18next from "i18next";
-import { HOME, SIGNUP } from "common/navigator";
+import { FC, useEffect } from "react";
 
-export default function SingUp({ allLangsData }: any) {
+const SignUpPage: FC<{}> = () => {
   const router = useRouter();
 
   useEffect(() => {
-    const { pathname } = router;
-    if (pathname === SIGNUP) {
-      router.push(HOME + i18next.language.substring(0, 2) + SIGNUP);
-    }
-  }, []);
+    const token = !!localStorage.getItem("token");
+    if (token) router.push("/");
+  }, [router]);
 
-  return null;
+  /* Render */
+  return <SignUpForm />;
+};
+
+export async function getStaticProps({ locale }: { locale: ELanguages }) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ["common", "footer", "header"])),
+    },
+  };
 }
+
+export default SignUpPage;

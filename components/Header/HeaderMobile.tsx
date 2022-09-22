@@ -33,9 +33,9 @@ const HeaderMobile = ({ t }: { t: TFunction }) => {
 
   const { Panel } = Collapse;
 
-  const handleChangeLocale = (locale: string) => {
-    const href = router.pathname.replace("[lang]", locale);
-    router.push(href);
+  const handleChangeLocale = (newLocale: string) => {
+    const { pathname, asPath, query } = router;
+    router.push({ pathname, query }, asPath, { locale: newLocale });
   };
 
   const menu = (

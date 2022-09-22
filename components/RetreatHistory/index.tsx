@@ -1,4 +1,4 @@
-import { Table } from "antd";
+import { Button, Table } from "antd";
 import { useAuth } from "../../context/auth/AuthContext";
 import React, { FC, useEffect, useMemo, useState } from "react";
 import { getParticipantHistory } from "../../services/api";
@@ -20,8 +20,6 @@ const DEFAULT_COLUMNS: Columns[] = [
     title: "Retreat Name",
     dataIndex: "retreatName",
     width: "30%",
-    filters: [],
-    onFilter: (value: string, record) => record.retreatName.includes(value),
   },
   {
     title: "Recitation Number",
@@ -38,6 +36,7 @@ const RetreatHistory: FC<{}> = () => {
   const { user } = useAuth();
   const [dataSource, setDataSource] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [activeRetreat, setActiveRetreat] = useState<string>("");
 
   useEffect(() => {
     if (!user?.id) return;
@@ -61,24 +60,55 @@ const RetreatHistory: FC<{}> = () => {
 
   const DefaultColumns = useMemo(() => {
     let columns: any = DEFAULT_COLUMNS;
-    const retreatNameUniq = listDataSource
-      .map((row) => row.retreatName)
-      .filter((v, i, a) => a.indexOf(v) === i)
-      .map((retreatName: string) => ({
-        text: retreatName,
-        value: retreatName,
-      }));
-    columns[0].filters = retreatNameUniq;
+    // const retreatNameUniq = listDataSource
+    //   .map((row) => row.retreatName)
+    //   .filter((v, i, a) => a.indexOf(v) === i)
+    //   .map((retreatName: string) => ({
+    //     text: retreatName,
+    //     value: retreatName,
+    //   }));
+    // columns[0].filters = retreatNameUniq;
     return columns;
   }, [listDataSource]);
+
+  const retreatNameUniq = listDataSource
+    .map((row) => row.retreatName)
+    .filter((v, i, a) => a.indexOf(v) === i);
+
+  console.log("listDataSource", listDataSource);
 
   /* Render */
   return (
     <DivTableRetreat>
-      <div className="container">
+      <div className="container" style={{ marginBottom: 30 }}>
+        <div style={{ marginBottom: 16 }}>
+          {retreatNameUniq.map((retreatName) => (
+            <Button
+              size="large"
+              key={retreatName}
+              style={{
+                marginRight: 14,
+                backgroundColor:
+                  retreatName === activeRetreat ? "#0d0c0c" : "transparent",
+                color: retreatName === activeRetreat ? "#fff" : "#000",
+              }}
+              onClick={() =>
+                setActiveRetreat(
+                  retreatName === activeRetreat ? "" : retreatName
+                )
+              }
+            >
+              {retreatName}
+            </Button>
+          ))}
+        </div>
         <Table
           columns={DEFAULT_COLUMNS as any}
-          dataSource={listDataSource}
+          dataSource={[...listDataSource].filter((retreat) =>
+            activeRetreat
+              ? retreat.retreatName === activeRetreat
+              : retreat.retreatName !== activeRetreat
+          )}
           pagination={false}
           rowKey="id"
           loading={isLoading}

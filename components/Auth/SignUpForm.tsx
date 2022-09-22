@@ -27,6 +27,8 @@ const SignUpForm = () => {
     const name = username.trim();
     const body = {
       ...values,
+      email: values.email.trim(),
+      password: values.password.trim(),
       username: name.charAt(0).toUpperCase() + name.slice(1),
       address: `${city}, ${country}`,
     };
@@ -113,6 +115,10 @@ const SignUpForm = () => {
                   required: true,
                   message: "Please input your Password!",
                 },
+                {
+                  min: 8,
+                  message: "Password must be at least 8 characters",
+                },
               ]}
             >
               <Input size="large" type="password" placeholder="Password" />
@@ -125,6 +131,10 @@ const SignUpForm = () => {
                   whitespace: true,
                   required: true,
                   message: "Please input your Confirm Password!",
+                },
+                {
+                  min: 8,
+                  message: "Password must be at least 8 characters",
                 },
                 ({ getFieldValue }) => ({
                   validator(_, value) {

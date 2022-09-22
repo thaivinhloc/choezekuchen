@@ -24,6 +24,7 @@ export const DivHeaderWrapperV1 = styled.div`
       &-nav {
         display: flex;
         list-style: none;
+        flex-wrap: wrap;
         .nav {
           &-link {
             color: #ffffff;

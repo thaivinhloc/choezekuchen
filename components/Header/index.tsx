@@ -3,6 +3,7 @@ import { RightOutlined } from "@ant-design/icons";
 import { Button, Typography } from "antd";
 import LinkComponent from "components/Link";
 import i18next from "i18next";
+import { useTranslation } from "next-i18next";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useEffect, useState, useMemo } from "react";
@@ -32,9 +33,9 @@ const Header = ({ ...props }) => {
   const router = useRouter();
   const { onGetMe, user } = useAuth();
   const { title } = useApp();
-  const { t } = i18next;
+  const { t } = useTranslation(["common", "header"]);
   const [classHead, setClassHead] = useState("");
-  const currentLocale = i18next.language;
+  const currentLocale = router.locale;
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -59,9 +60,11 @@ const Header = ({ ...props }) => {
     }
   }, [router.pathname, router]);
 
-  const handleChangeLocale = (locale: string) => {
-    const href = router.pathname.replace("[lang]", locale);
-    router.push(href);
+  const handleChangeLocale = (newLocale: string) => {
+    const { pathname, asPath, query } = router;
+    console.log("newLocale", newLocale);
+
+    router.push({ pathname, query }, asPath, { locale: newLocale });
   };
   const isActive = useMemo(() => {
     if (router.asPath.split("/").length < 3) {
@@ -189,7 +192,7 @@ const Header = ({ ...props }) => {
             </ul>
           </nav>
           <h1 className="navbar__title">
-            {t(title, { ns: "header" }).toUpperCase()}
+            {t(title, { ns: ["header", "login"] }).toUpperCase()}
           </h1>
         </header>
       </div>

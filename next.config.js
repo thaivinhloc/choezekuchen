@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const withLess = require("next-with-less");
-
+const { i18n } = require("./next-i18next.config");
 const WithLess = withLess({
   compiler: {
     // ssr and displayName are configured by default
@@ -15,10 +15,10 @@ const nextConfig = {
   images: {
     domains: ["choezekuchen-4525c--choezekuchen-mu780vyt.web.app/"],
   },
-  // i18n,
   images: {
     domains: ["choezekuchen.herokuapp.com"],
   },
+  i18n,
 };
 
 module.exports = { ...WithLess, ...nextConfig };

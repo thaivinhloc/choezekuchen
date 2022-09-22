@@ -1,17 +1,17 @@
-import { useEffect } from "react";
-import { useRouter } from "next/router";
-import i18next from "i18next";
-import { ACHI } from "common/navigator";
+import React, { FC } from "react";
+import Achi from "components/Achi";
+import { getAllLanguageSlugs, getLanguage } from "lib/lang";
+import { ELanguages } from "i18n/config";
+import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
-export default function Achi({ allLangsData }: any) {
-  const router = useRouter();
-
-  useEffect(() => {
-    const { pathname } = router;
-    if (pathname === ACHI) {
-      router.push("/" + i18next.language.substring(0, 2) + ACHI);
-    }
-  }, []);
-
-  return null;
+const AchiOfChoezenKuchen: FC<{}> = () => {
+  return <Achi />;
+};
+export async function getStaticProps({ locale }: { locale: ELanguages }) {
+  return {
+    props: {
+      ...(await serverSideTranslations(locale, ["common", "footer", "header"])),
+    },
+  };
 }
+export default AchiOfChoezenKuchen;
