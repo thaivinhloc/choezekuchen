@@ -224,240 +224,257 @@ const Retreat: React.FC<{}> = () => {
 
   return (
     <DivRetreatWrapper>
-      <div className="container">
-        <Tabs defaultActiveKey={tab} onChange={handleChangeTab}>
-          <TabPane
-            tab={<strong>{t("Retreat Ngondro", { ns: ["retreat"] })}</strong>}
-            key={ETabPane.DETAIL}
-          >
-            <Row gutter={32}>
-              <Col
-                span={8}
-                xs={24}
-                lg={8}
-                xl={7}
-                className="retreat__right"
-                style={{ padding: 0 }}
-              >
-                <div className="retreat__right-form">
-                  <div className="box-title d-flex justify-content-between align-items-center">
-                    {retreatDetail?.name || ""}
-                  </div>
-                  <div className="retreat-submit">
-                    <Form onFinish={handleSubmit} form={form}>
-                      <Form.Item style={{ marginBottom: 10 }}>
-                        <Form.Item
-                          style={{
-                            display: "inline-block",
-                            width: "60%",
-                            marginBottom: 0,
-                          }}
-                          name="recitationNumber"
-                          rules={[
-                            {
-                              required: true,
-                              message: "Recitation is Number",
-                            },
-                            {
-                              pattern: /^(?:\d*)$/,
-                              message: "Value should contain just number",
-                            },
-                          ]}
-                        >
-                          <Input
-                            size="large"
-                            placeholder={t("Digits only, no comma or period", {
-                              ns: "retreat",
-                            })}
-                          />
-                        </Form.Item>
-                        <Form.Item
-                          name="completedAt"
-                          label=""
-                          style={{
-                            display: "inline-block",
-                            width: "40%",
-                            marginBottom: 0,
-                            paddingLeft: "4px",
-                          }}
-                          initialValue={moment()}
-                        >
-                          <DatePicker
-                            className="h-100"
-                            size="large"
-                            style={{ height: "47px" }}
-                            format="MM/DD/YYYY"
-                            allowClear={false}
-                            disabledDate={(current) => {
-                              return (
-                                moment(retreatDetail?.dateStart) >= current ||
-                                moment(retreatDetail?.dateEnd) <= current
-                              );
-                            }}
-                          />
-                        </Form.Item>
-                      </Form.Item>
-                      <Row>
-                        <Button
-                          type="primary"
-                          className="w-100"
-                          htmlType="submit"
-                          size="large"
-                          loading={isLoadingSubmit}
-                        >
-                          {t("Submit", { ns: "retreat" })}
-                        </Button>
-                      </Row>
-                    </Form>
-                  </div>
-                  {retreatDetail?.user && (
-                    <>
-                      <Row className="box-title d-flex justify-content-between">
-                        {userRetreat?.name || ""}
-                        <Link href={RETREAT_HISTORY}>
-                          <a className="link-underline">
-                            {t("View history", { ns: "retreat" })}
-                          </a>
-                        </Link>
-                      </Row>
-
-                      <div className="box-content">
-                        <RenderItem
-                          title={t("Committed", { ns: "retreat" }) + ":"}
-                          content={formatNumber(userRetreat?.commited || 0)}
-                        />
-                        <RenderItem
-                          title={t("Completed", { ns: "retreat" }) + ":"}
-                          content={formatNumber(userRetreat?.completed || 0)}
-                        />
-                        <RenderItem
-                          title={t("Due", { ns: "retreat" }) + ":"}
-                          content={
-                            Number(userRetreat?.due) < 0
-                              ? 0
-                              : formatNumber(userRetreat?.due || 0)
-                          }
-                        />
-                        {retreatDetail.isGroup && (
-                          <>
-                            <RenderItem
-                              title={
-                                t("Daily Average", { ns: "retreat" }) + ":"
-                              }
-                              content={userRetreat?.dailyAverage || 0}
-                            />
-                            <RenderItem
-                              title={
-                                t("Daily Required", { ns: "retreat" }) + ":"
-                              }
-                              content={userRetreat?.dailyRequired || 0}
-                            />
-                          </>
-                        )}
-                        <RenderItem
-                          title={t("Last Updated", { ns: "retreat" }) + ":"}
-                          content={userRetreat?.lastUpdated || 0}
-                        />
-                      </div>
-                    </>
-                  )}
-
-                  {retreatDetail?.isGroup && (
-                    <div>
-                      <div className="box-title">Group Commitment</div>
-                      <div className="box-content">
-                        <RenderItem
-                          title={t("Total commitment", { ns: "retreat" }) + ":"}
-                          content={formatNumber(
-                            retreatDetail?.totalCommitment || 0
-                          )}
-                        />
-                        <RenderItem
-                          title="No. of Participants:"
-                          content={formatNumber(
-                            retreatDetail?.totalParticipants || 0
-                          )}
-                        />
-                        <RenderItem
-                          title="Group Completed:"
-                          content={formatNumber(
-                            retreatDetail?.totalGroupCompleted || 0
-                          )}
-                        />
-                        <RenderItem
-                          title="Due:"
-                          content={
-                            Number(totalDue) < 0 ? 0 : formatNumber(totalDue)
-                          }
-                        />
-                      </div>
+      <div className="container position-relative">
+        <div className="">
+          <Tabs defaultActiveKey={tab} onChange={handleChangeTab}>
+            <TabPane
+              tab={<strong>{t("Retreat Ngondro", { ns: ["retreat"] })}</strong>}
+              key={ETabPane.DETAIL}
+            >
+              <Row gutter={32}>
+                <Col
+                  span={8}
+                  xs={24}
+                  lg={8}
+                  xl={7}
+                  className="retreat__right"
+                  style={{ padding: 0 }}
+                >
+                  <div className="retreat__right-form">
+                    <div className="box-title d-flex justify-content-between align-items-center">
+                      {retreatDetail?.name || ""}
                     </div>
-                  )}
-                </div>
-              </Col>
-              <Col span={17} xs={24} lg={16} xl={17} className="retreat-left">
-                <div>
-                  <Tabs
-                    activeKey={activeRetreat?.toString()}
-                    // className="w-100 retreat-content"
-                    onChange={(key) => {
-                      setActiveRetreat(Number(key));
-                    }}
-                  >
-                    {listRetreat
-                      .sort((a, b) => a.order - b.order)
-                      .map((retreat) => (
-                        <TabPane
-                          tab={<strong>{retreat.name}</strong>}
-                          key={retreat.id}
-                        >
-                          <div
-                            className="text-center"
-                            style={{ marginTop: "20px" }}
+                    <div className="retreat-submit">
+                      <Form onFinish={handleSubmit} form={form}>
+                        <Form.Item style={{ marginBottom: 10 }}>
+                          <Form.Item
+                            style={{
+                              display: "inline-block",
+                              width: "60%",
+                              marginBottom: 0,
+                            }}
+                            name="recitationNumber"
+                            rules={[
+                              {
+                                required: true,
+                                message: "Recitation is Number",
+                              },
+                              {
+                                pattern: /^(?:\d*)$/,
+                                message: "Value should contain just number",
+                              },
+                            ]}
                           >
-                            {PATH && retreatDetail?.image && (
-                              <img
-                                src={PATH + retreatDetail?.image?.url}
-                                alt=""
-                              />
-                            )}
-                          </div>
-                          <br />
-                          <br />
-                          {isLoading ? (
-                            <Skeleton active />
-                          ) : (
-                            <p
-                              dangerouslySetInnerHTML={{
-                                __html: retreatDetail?.description || "",
+                            <Input
+                              size="large"
+                              placeholder={t(
+                                "Digits only, no comma or period",
+                                {
+                                  ns: "retreat",
+                                }
+                              )}
+                            />
+                          </Form.Item>
+                          <Form.Item
+                            name="completedAt"
+                            label=""
+                            style={{
+                              display: "inline-block",
+                              width: "40%",
+                              marginBottom: 0,
+                              paddingLeft: "4px",
+                            }}
+                            initialValue={moment()}
+                          >
+                            <DatePicker
+                              className="h-100"
+                              size="large"
+                              style={{ height: "47px" }}
+                              format="MM/DD/YYYY"
+                              allowClear={false}
+                              disabledDate={(current) => {
+                                return (
+                                  moment(retreatDetail?.dateStart) >= current ||
+                                  moment(retreatDetail?.dateEnd) <= current
+                                );
                               }}
                             />
+                          </Form.Item>
+                        </Form.Item>
+                        <Row>
+                          <Button
+                            type="primary"
+                            className="w-100"
+                            htmlType="submit"
+                            size="large"
+                            loading={isLoadingSubmit}
+                          >
+                            {t("Submit", { ns: "retreat" })}
+                          </Button>
+                        </Row>
+                      </Form>
+                    </div>
+                    {retreatDetail?.user && (
+                      <>
+                        <Row className="box-title d-flex justify-content-between">
+                          {userRetreat?.name || ""}
+                          <Link href={RETREAT_HISTORY}>
+                            <a className="link-underline">
+                              {t("View history", { ns: "retreat" })}
+                            </a>
+                          </Link>
+                        </Row>
+
+                        <div className="box-content">
+                          <RenderItem
+                            title={t("Committed", { ns: "retreat" }) + ":"}
+                            content={formatNumber(userRetreat?.commited || 0)}
+                          />
+                          <RenderItem
+                            title={t("Completed", { ns: "retreat" }) + ":"}
+                            content={formatNumber(userRetreat?.completed || 0)}
+                          />
+                          <RenderItem
+                            title={t("Due", { ns: "retreat" }) + ":"}
+                            content={
+                              Number(userRetreat?.due) < 0
+                                ? 0
+                                : formatNumber(userRetreat?.due || 0)
+                            }
+                          />
+                          {retreatDetail.isGroup && (
+                            <>
+                              <RenderItem
+                                title={
+                                  t("Daily Average", { ns: "retreat" }) + ":"
+                                }
+                                content={userRetreat?.dailyAverage || 0}
+                              />
+                              <RenderItem
+                                title={
+                                  t("Daily Required", { ns: "retreat" }) + ":"
+                                }
+                                content={userRetreat?.dailyRequired || 0}
+                              />
+                            </>
                           )}
-                        </TabPane>
-                      ))}
-                  </Tabs>
-                </div>
-              </Col>
-            </Row>
-          </TabPane>
-          {user && (
-            <TabPane
-              tab={<strong>{t("Participant List", { ns: "retreat" })}</strong>}
-              key={ETabPane.LISTING}
-            >
-              <div className="text-center">
-                <h3 className="bold">{retreatDetail?.name}</h3>
-                <RetreatListing
-                  listParticipant={listParticipant}
-                  isLoading={isLoading}
-                />
-              </div>
+                          <RenderItem
+                            title={t("Last Updated", { ns: "retreat" }) + ":"}
+                            content={userRetreat?.lastUpdated || 0}
+                          />
+                        </div>
+                      </>
+                    )}
+
+                    {retreatDetail?.isGroup && (
+                      <div>
+                        <div className="box-title">Group Commitment</div>
+                        <div className="box-content">
+                          <RenderItem
+                            title={
+                              t("Total commitment", { ns: "retreat" }) + ":"
+                            }
+                            content={formatNumber(
+                              retreatDetail?.totalCommitment || 0
+                            )}
+                          />
+                          <RenderItem
+                            title="No. of Participants:"
+                            content={formatNumber(
+                              retreatDetail?.totalParticipants || 0
+                            )}
+                          />
+                          <RenderItem
+                            title="Group Completed:"
+                            content={formatNumber(
+                              retreatDetail?.totalGroupCompleted || 0
+                            )}
+                          />
+                          <RenderItem
+                            title="Due:"
+                            content={
+                              Number(totalDue) < 0 ? 0 : formatNumber(totalDue)
+                            }
+                          />
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </Col>
+                <Col span={17} xs={24} lg={16} xl={17} className="retreat-left">
+                  <div>
+                    <Tabs
+                      activeKey={activeRetreat?.toString()}
+                      // className="w-100 retreat-content"
+                      onChange={(key) => {
+                        setActiveRetreat(Number(key));
+                      }}
+                    >
+                      {listRetreat
+                        .sort((a, b) => a.order - b.order)
+                        .map((retreat) => (
+                          <TabPane
+                            tab={<strong>{retreat.name}</strong>}
+                            key={retreat.id}
+                          >
+                            <div
+                              className="text-center"
+                              style={{ marginTop: "20px" }}
+                            >
+                              {PATH && retreatDetail?.image && (
+                                <img
+                                  src={PATH + retreatDetail?.image?.url}
+                                  alt=""
+                                />
+                              )}
+                            </div>
+                            <br />
+                            <br />
+                            {isLoading ? (
+                              <Skeleton active />
+                            ) : (
+                              <p
+                                dangerouslySetInnerHTML={{
+                                  __html: retreatDetail?.description || "",
+                                }}
+                              />
+                            )}
+                          </TabPane>
+                        ))}
+                    </Tabs>
+                  </div>
+                </Col>
+              </Row>
             </TabPane>
-          )}
-          {/* <div style={{ position: "absolute", top: 0, right: 10 }}>
+            {user && (
+              <TabPane
+                tab={
+                  <strong>{t("Participant List", { ns: "retreat" })}</strong>
+                }
+                key={ETabPane.LISTING}
+              >
+                <div className="text-center">
+                  <h3 className="bold">{retreatDetail?.name}</h3>
+                  <RetreatListing
+                    listParticipant={listParticipant}
+                    isLoading={isLoading}
+                  />
+                </div>
+              </TabPane>
+            )}
+            {/* <div style={{ position: "absolute", top: 0, right: 10 }}>
             <strong style={{ color: "#000" }}>{retreatDetail?.name}</strong>
           </div> */}
-        </Tabs>
+          </Tabs>
+          <div
+            className="d-none d-lg-block"
+            style={{ position: "absolute", top: 0, right: 20 }}
+          >
+            <span className="bold">
+              {t("Retreat Ngondro", { ns: "retreat" }).toUpperCase()}
+            </span>
+          </div>
+        </div>
       </div>
     </DivRetreatWrapper>
   );

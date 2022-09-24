@@ -132,7 +132,7 @@ const Header = ({ ...props }) => {
             <button className="navbar-toggler">
               <i className="fa fa-bars" aria-hidden="true" />
             </button>
-            <ul className="navbar-nav">
+            <ul className="navbar-nav flex-row">
               <li className="nav-close">
                 <button className="btn-nav-close">
                   <span className="close-btn">+</span>
