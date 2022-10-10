@@ -126,7 +126,6 @@ export default function SingUp({ allLangsData }: any) {
             <button className="button">DISCOVERI MORE</button>
           </Col>
         </Row>
-        <div className="hr" style={{ backgroundColor: "transparent" }}></div>
       </div>
     </div>
   );

@@ -36,7 +36,7 @@ export const ROUTES = [
     childrent: [
       {
         label: "NGONDRO TECHING",
-        path: "/ngondroTeching",
+        path: "/ngondro-teching",
         childrent: [],
       },
       {

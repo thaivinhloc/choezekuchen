@@ -96,7 +96,6 @@ export default function SingUp({ allLangsData }: any) {
               It is very important to visualize one-pointedly in the generation
               stage
             </p>
-            <button className="button">DISCOVERI MORE</button>
           </Col>
         </Row>
         <div className="hr"></div>
@@ -126,7 +125,6 @@ export default function SingUp({ allLangsData }: any) {
             <button className="button">DISCOVERI MORE</button>
           </Col>
         </Row>
-        <div className="hr" style={{ backgroundColor: "transparent" }}></div>
       </div>
     </div>
   );

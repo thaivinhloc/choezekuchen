@@ -68,7 +68,7 @@ export default function SingUp({ allLangsData }: any) {
             className="teaching-image"
           >
             <Image
-              src="/images/teaching/teachingImg2.png"
+              src="/images/teaching/teachingImg1.png"
               alt="bb"
               className="teaching-image"
             />
@@ -81,22 +81,22 @@ export default function SingUp({ allLangsData }: any) {
             lg={{ span: 11, offset: 1 }}
             xl={{ span: 11, offset: 1 }}
           >
-            <h3>THE PERFECT WAY TO PRACTICE</h3>
+            <h3>Namkha Thing-Sang Retreat Center</h3>
             <p>
-              All types of Buddhist practice are included within the Vajrayana
-              way of practice, the creation and completion stages. The
-              generation stage practice is to do visualization. We visualize our
-              body as a form of wisdom body or that of a deity. We also
-              visualize Samantabhadra’s form of offerings to Buddhas and
-              Bodhisattvas of the 10 directions. If visualization is done with
-              concentration, it brings the same benefit as doing Shamatha
-              (stabilization/ concentration) meditation.
+              Namkha Thing-sang Retreat Centre is located near the holy cave of
+              Guru Padmasambhava at Pharphing.
             </p>
             <p>
-              It is very important to visualize one-pointedly in the generation
-              stage
+              It was established with an aim of practicing various Vajrayana
+              teachings especially; the Mahamudra and Dzogchen teachings from
+              their foundations. Many great Gurus including His Holiness Drikung
+              Chetshang Rinpoche, Kyabje Penor Rinpoche and Kyabje Jadral
+              Rinpoche have consecrated and blessed this retreat.
             </p>
-            <button className="button">DISCOVERI MORE</button>
+            <p>
+              His Eminence Choeze Kuchen Rinpoche himself has done many
+              important Retreats and Pujas in this Centre.
+            </p>
           </Col>
         </Row>
         <div className="hr"></div>
@@ -109,24 +109,31 @@ export default function SingUp({ allLangsData }: any) {
             lg={12}
             xl={12}
           >
-            <h3>THE PERFECT DEDICATION</h3>
+            <h3>Singapore Center</h3>
             <p>
-              After practising, we accumulate merit and we should dedicate this
-              merit. This teaching explains how to do perfect dedication.
-              Without dedication, even if you have accumulated merits for
-              thousands of aeons, all of the merits may be destroyed by a single
-              negative thought. Merit is like a drop of water.
+              His Eminence 11th Choeze Kuchen Rinpoche establish his first
+              center named Dharma Treasure Center in Singapore in June 2019. The
+              center’s vision is to benefit to all sentient beings in all ways
+              via dharma and to guide all to foster a harmonious environment.
             </p>
             <p>
-              If you put it on a dry ground, it will evaporate in a short period
-              of time. If you do dedication, it will be like putting the drop of
-              water in an ocean, the drop of water will last as long as the
-              ocean is still around.
+              The mission of Dharma Treasure Center is:
+              <br />
+              • To teach its members Buddhism and strict observance of its
+              practices;
+              <br />
+              • To train and encourage its members to promote Buddhism;
+              <br />
+              • To train and encourage its members in acts of charity and
+              general helpfulness to all fellow-beings in the fields of social,
+              educational, cultural and other humanitarian services;
+              <br />
+              • To afford its members healthy and decent recreations; and
+              <br />• To work in conjunction with other Buddhist organizations
+              to foster peace, harmony and happiness for all beings.
             </p>
-            <button className="button">DISCOVERI MORE</button>
           </Col>
         </Row>
-        <div className="hr" style={{ backgroundColor: "transparent" }}></div>
       </div>
     </div>
   );

@@ -20,7 +20,10 @@ export const GlobalStyle = createGlobalStyle`${css`
     font-size: 45px;
     font-weight: bold;
   }
-
+  h3 {
+    font-size: 100px;
+    font-weight: bold;
+  }
   .text-center {
     text-align: center;
   }
@@ -260,30 +263,6 @@ export const GlobalStyle = createGlobalStyle`${css`
     height: 1px;
     background-color: #eaeaea;
     margin: 80px 0;
-  }
-  .teaching {
-    & h3 {
-      font-size: 30px;
-      font-weight: bold;
-      letter-spacing: 3px;
-    }
-    & p {
-      font-weight: 400;
-      margin: 40px 0;
-    }
-    .button {
-      color: black;
-      font-weight: bold;
-      background-color: transparent;
-      padding: 10px 20px;
-      border-radius: 5px;
-      transition: all 0.3s;
-      &:hover {
-        background-color: #1abc9c;
-        border-color: #1abc9c;
-        color: white;
-      }
-    }
   }
   .ant-dropdown {
     .ant-table-filter-dropdown {

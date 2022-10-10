@@ -96,7 +96,6 @@ export default function SingUp({ allLangsData }: any) {
               It is very important to visualize one-pointedly in the generation
               stage
             </p>
-            <button className="button">DISCOVERI MORE</button>
           </Col>
         </Row>
         <div className="hr"></div>
@@ -109,24 +108,31 @@ export default function SingUp({ allLangsData }: any) {
             lg={12}
             xl={12}
           >
-            <h3>THE PERFECT DEDICATION</h3>
+            <h3>Singapore Center</h3>
             <p>
-              After practising, we accumulate merit and we should dedicate this
-              merit. This teaching explains how to do perfect dedication.
-              Without dedication, even if you have accumulated merits for
-              thousands of aeons, all of the merits may be destroyed by a single
-              negative thought. Merit is like a drop of water.
+              His Eminence 11th Choeze Kuchen Rinpoche establish his first
+              center named Dharma Treasure Center in Singapore in June 2019. The
+              center’s vision is to benefit to all sentient beings in all ways
+              via dharma and to guide all to foster a harmonious environment.
             </p>
             <p>
-              If you put it on a dry ground, it will evaporate in a short period
-              of time. If you do dedication, it will be like putting the drop of
-              water in an ocean, the drop of water will last as long as the
-              ocean is still around.
+              The mission of Dharma Treasure Center is:
+              <br />
+              • To teach its members Buddhism and strict observance of its
+              practices;
+              <br />
+              • To train and encourage its members to promote Buddhism;
+              <br />
+              • To train and encourage its members in acts of charity and
+              general helpfulness to all fellow-beings in the fields of social,
+              educational, cultural and other humanitarian services;
+              <br />
+              • To afford its members healthy and decent recreations; and
+              <br />• To work in conjunction with other Buddhist organizations
+              to foster peace, harmony and happiness for all beings.
             </p>
-            <button className="button">DISCOVERI MORE</button>
           </Col>
         </Row>
-        <div className="hr" style={{ backgroundColor: "transparent" }}></div>
       </div>
     </div>
   );
