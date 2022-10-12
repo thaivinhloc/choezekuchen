@@ -5,8 +5,8 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { ELanguages } from "i18n/config";
 import { useTranslation } from "react-i18next";
 
-export default function tibetanMonastery() {
-  const { t, i18n } = useTranslation(["content"]);
+export default function TibetanMonastery() {
+  const { t, i18n } = useTranslation();
 
   return (
     <div className="tibetanMonastery">

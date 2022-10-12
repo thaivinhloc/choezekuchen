@@ -4,7 +4,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { ELanguages } from "i18n/config";
 import { useTranslation } from "react-i18next";
 
-export default function achiChokyiDrolmaTeching() {
+export default function AchiChokyiDrolmaTeching() {
   const { t, i18n } = useTranslation(["content"]);
 
   return (

@@ -6,7 +6,7 @@ import { ELanguages } from "i18n/config";
 import { useTranslation } from "react-i18next";
 import { text } from "stream/consumers";
 
-export default function namkhaThingSanRetreatCenter() {
+export default function NamkhaThingSanRetreatCenter() {
   const { t, i18n } = useTranslation(["content"]);
 
   return (

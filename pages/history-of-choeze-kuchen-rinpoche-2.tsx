@@ -5,7 +5,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { ELanguages } from "i18n/config";
 import { useTranslation } from "react-i18next";
 
-export default function historyOfChoezeKuchenRinpoche2() {
+export default function HistoryOfChoezeKuchenRinpoche2() {
   const { t, i18n } = useTranslation(["content"]);
 
   return (

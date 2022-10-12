@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import { ELanguages } from "i18n/config";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
-export default function theBlog() {
+export default function TheBlog() {
   const { t, i18n } = useTranslation(["content"]);
 
   const listBlog = [

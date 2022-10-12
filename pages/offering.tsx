@@ -6,7 +6,7 @@ import { ELanguages } from "i18n/config";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { ButtonStyle } from "components/Button/ButtonStyle";
 
-export default function offering() {
+export default function Offering() {
   //   const { t } = i18next;
   const { t, i18n } = useTranslation(["content"]);
 

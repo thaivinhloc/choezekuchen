@@ -4,14 +4,13 @@ import { useTranslation } from "react-i18next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { ELanguages } from "i18n/config";
 
-export default function thePerfectDedication2() {
+export default function ThePerfectDedication2() {
   const { t, i18n } = useTranslation(["content"]);
 
   return (
     <div className="thePerfectDedication2">
       <div className="container">
         <div className="hr bg-transparent mt-0"></div>
-
         <Row className="thePerfectDedication2-group" align="middle">
           <Col
             className="thePerfectDedication2-wrapper"
@@ -60,7 +59,6 @@ export default function thePerfectDedication2() {
             </h2>
           </Col>
         </Row>
-
         <div className="hr bg-transparent"></div>
       </div>
     </div>

@@ -5,7 +5,7 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { ELanguages } from "i18n/config";
 import { useTranslation } from "react-i18next";
 
-export default function singaporeCenter() {
+export default function SingaporeCenter() {
   const { t, i18n } = useTranslation(["content"]);
 
   return (
