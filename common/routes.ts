@@ -135,11 +135,11 @@ export const ROUTES = [
       },
     ],
   },
-  {
-    label: "OFFERINGS",
-    path: "/offering",
-    childrent: [],
-  },
+  // {
+  //   label: "OFFERINGS",
+  //   path: "/offering",
+  //   childrent: [],
+  // },
   {
     label: "BLOG",
     path: "/the-blog",
