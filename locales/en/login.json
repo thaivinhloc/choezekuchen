@@ -2,5 +2,15 @@
   "login": "LOG IN",
   "incorrectUserNameOrPassword": "The email or password your entered is incorrect",
   "error": "Error",
-  "RETREAT REGISTER": "RETREAT REGISTER"
+  "RETREAT REGISTER": "RETREAT REGISTER",
+  "City": "City",
+  "Please input your City": "Please input your City",
+  "Country": "Country",
+  "Password": "Password",
+  "Please input your Password": "Please input your Password",
+  "Confirm Password": "Confirm Password",
+  "Please input your Confirm Password": "Please input your Confirm Password",
+  "Please input your": "Please input your",
+  "fistName": "FistName",
+  "lastName": "LastName"
 }

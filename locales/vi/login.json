@@ -2,5 +2,15 @@
   "login": "ĐĂNG NHẬP",
   "incorrectUserNameOrPassword": "Tài khoản hoặc mật khẩu không chính xác",
   "error": "Lỗi",
-  "RETREAT REGISTER": "QUAY LẠI ĐĂNG KÝ"
+  "RETREAT REGISTER": "Đăng ký nhập thất",
+  "City": "Thành Phố",
+  "Please input your City": "Vui lòng nhập thành phố của bạn",
+  "Country": "Quốc gia",
+  "Password": "Mật khẩu",
+  "Please input your Password": "Vui lòng nhập mật khẩu",
+  "Confirm Password": "Xác nhận mật khẩu",
+  "Please input your Confirm Password": "Vui lòng xác nhận mật khẩu",
+  "Please input your": "Vui lòng nhập",
+  "firstName": "Họ",
+  "lastName": "Tên"
 }

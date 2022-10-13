@@ -9,6 +9,7 @@ export const DivHeaderWrapperV1 = styled.div`
   .header-desktop {
     /* Main CSS */
     .navbar {
+      flex-wrap: nowrap;
       ul {
         list-style: none;
         a {

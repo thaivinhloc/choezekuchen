@@ -405,7 +405,7 @@ const Retreat: React.FC<{}> = () => {
                   <div>
                     <Tabs
                       activeKey={activeRetreat?.toString()}
-                      // className="w-100 retreat-content"
+                      className="w-100 retreat-content"
                       onChange={(key) => {
                         setActiveRetreat(Number(key));
                       }}
@@ -466,14 +466,14 @@ const Retreat: React.FC<{}> = () => {
             <strong style={{ color: "#000" }}>{retreatDetail?.name}</strong>
           </div> */}
           </Tabs>
-          <div
+          {/* <div
             className="d-none d-lg-block"
             style={{ position: "absolute", top: 0, right: 20 }}
           >
             <span className="bold">
               {t("Retreat Ngondro", { ns: "retreat" }).toUpperCase()}
             </span>
-          </div>
+          </div> */}
         </div>
       </div>
     </DivRetreatWrapper>

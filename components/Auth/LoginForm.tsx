@@ -36,7 +36,7 @@ const LoginForm: React.FC<{}> = () => {
               rules={[
                 {
                   required: true,
-                  message: "Please input your Email!",
+                  message: t("Please input your", { ns: "login" }) + " Email!",
                 },
               ]}
             >
@@ -48,11 +48,17 @@ const LoginForm: React.FC<{}> = () => {
               rules={[
                 {
                   required: true,
-                  message: "Please input your Password!",
+                  message:
+                    t("Please input your", { ns: "login" }) +
+                    ` ${t("Password", { ns: "login" })}!`,
                 },
               ]}
             >
-              <Input size="large" type="password" placeholder="Password" />
+              <Input
+                size="large"
+                type="password"
+                placeholder={t("Password", { ns: "login" })}
+              />
             </Form.Item>
             <div className="form-footer">
               <Col span={14}>

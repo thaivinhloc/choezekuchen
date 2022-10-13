@@ -19,15 +19,27 @@ const validateMessages = {
   },
 };
 
-const SignUpForm = () => {
-  const { t, i18n } = useTranslation(["content"]);
+type TFrom = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  address: string;
+  password: string;
+  confirmPassword?: string;
+  country?: string;
+  city?: string;
+};
 
-  const [form] = useForm<TSignup>();
+const SignUpForm = () => {
+  const { t, i18n } = useTranslation(["login"]);
+
+  const [form] = useForm<TFrom>();
   const { onRegister, isLoading } = useAuth();
 
-  const onFinish = async (data: TSignup) => {
-    const { country, city, username, confirmPassword, ...values } = data;
-    const name = username.trim();
+  const onFinish = async (data: TFrom) => {
+    const { country, city, firstName, lastName, confirmPassword, ...values } =
+      data;
+    const name = firstName.trim() + lastName.trim();
     const body = {
       ...values,
       email: values.email.trim(),
@@ -54,19 +66,40 @@ const SignUpForm = () => {
             validateMessages={validateMessages}
             requiredMark={false}
           >
-            <Form.Item
-              name={"username"}
-              label=""
-              rules={[
-                {
-                  whitespace: true,
-                  required: true,
-                  message: "Please input your username",
-                },
-              ]}
-            >
-              <Input size="large" placeholder="Username" />
-            </Form.Item>
+            <Row gutter={16}>
+              <Col span={12}>
+                <Form.Item
+                  name="firstName"
+                  label=""
+                  rules={[
+                    {
+                      whitespace: true,
+                      required: true,
+                      message: t("Please input your") + ` ${t("firstName")}`,
+                    },
+                  ]}
+                >
+                  <Input
+                    size="large"
+                    placeholder={t("firstName", { ns: "login" })}
+                  />
+                </Form.Item>
+              </Col>
+              <Col span={12}>
+                <Form.Item
+                  name={"lastName"}
+                  label=""
+                  rules={[
+                    {
+                      required: true,
+                      message: t("Please input your") + ` ${t("lastName")}`,
+                    },
+                  ]}
+                >
+                  <Input size="large" placeholder={t("lastName")} />
+                </Form.Item>
+              </Col>
+            </Row>
             <Form.Item
               name={"email"}
               label=""
@@ -75,7 +108,7 @@ const SignUpForm = () => {
                   whitespace: true,
                   type: "email",
                   required: true,
-                  message: "Please input your email",
+                  message: t("Please input your") + " email",
                 },
               ]}
             >
@@ -90,11 +123,14 @@ const SignUpForm = () => {
                     {
                       whitespace: true,
                       required: true,
-                      message: "Please input your City",
+                      message: t("Please input your") + ` ${t("City")}`,
                     },
                   ]}
                 >
-                  <Input size="large" placeholder="City" />
+                  <Input
+                    size="large"
+                    placeholder={t("City", { ns: "login" })}
+                  />
                 </Form.Item>
               </Col>
               <Col span={12}>
@@ -102,10 +138,13 @@ const SignUpForm = () => {
                   name={"country"}
                   label=""
                   rules={[
-                    { required: true, message: "Please input your Country" },
+                    {
+                      required: true,
+                      message: t("Please input your") + ` ${t("Country")}`,
+                    },
                   ]}
                 >
-                  <Input size="large" placeholder="Country" />
+                  <Input size="large" placeholder={t("Country")} />
                 </Form.Item>
               </Col>
             </Row>
@@ -116,15 +155,15 @@ const SignUpForm = () => {
                 {
                   whitespace: true,
                   required: true,
-                  message: "Please input your Password!",
+                  message: t("Please input your Password") + "!",
                 },
-                {
-                  min: 8,
-                  message: "Password must be at least 8 characters",
-                },
+                // {
+                //   min: 8,
+                //   message: "Password must be at least 8 characters",
+                // },
               ]}
             >
-              <Input size="large" type="password" placeholder="Password" />
+              <Input size="large" type="password" placeholder={t("Password")} />
             </Form.Item>
             <Form.Item
               label=""
@@ -133,30 +172,26 @@ const SignUpForm = () => {
                 {
                   whitespace: true,
                   required: true,
-                  message: "Please input your Confirm Password!",
+                  message: t("Please input your Confirm Password") + "!",
                 },
-                {
-                  min: 8,
-                  message: "Password must be at least 8 characters",
-                },
-                ({ getFieldValue }) => ({
-                  validator(_, value) {
-                    if (!value || getFieldValue("password") === value) {
-                      return Promise.resolve();
-                    }
-                    return Promise.reject(
-                      new Error(
-                        "The two passwords that you entered do not match!"
-                      )
-                    );
-                  },
-                }),
+                // ({ getFieldValue }) => ({
+                //   validator(_, value) {
+                //     if (!value || getFieldValue("password") === value) {
+                //       return Promise.resolve();
+                //     }
+                //     return Promise.reject(
+                //       new Error(
+                //         "The two passwords that you entered do not match!"
+                //       )
+                //     );
+                //   },
+                // }),
               ]}
             >
               <Input
                 size="large"
                 type="password"
-                placeholder="Confirm Password"
+                placeholder={t("Confirm Password")}
               />
             </Form.Item>
             <div className="form-footer">

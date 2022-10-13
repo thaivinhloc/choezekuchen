@@ -18,13 +18,13 @@ export function AppProvider({ children }: Props) {
         break;
       case "signup":
         text = "SIGN UP";
-        text = "Retreat Register";
+        text = "RETREAT REGISTER";
         break;
       case "profile":
         text = "PROFILE";
         break;
       case "retreat":
-        text = "RETREAT";
+        text = "Ngondro Retreat";
         break;
       case "retreat-history":
         text = "RETREAT HISTORY";

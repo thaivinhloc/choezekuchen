@@ -33,7 +33,7 @@ const Header = ({ ...props }) => {
   const router = useRouter();
   const { onGetMe, user } = useAuth();
   const { title } = useApp();
-  const { t } = useTranslation(["common", "header"]);
+  const { t } = useTranslation(["common", "header", "login"]);
   const [classHead, setClassHead] = useState("");
   const currentLocale = router.locale;
 
@@ -83,6 +83,11 @@ const Header = ({ ...props }) => {
   const redirectToOtherPage = (path: string) => {
     router.replace(`/${currentLocale}${path}`);
   };
+
+  console.log(
+    't(title, { ns: ["header", "login"] })',
+    t(title, { ns: ["header", "login"] })
+  );
 
   return (
     <DivHeaderWrapperV1>
