@@ -52,7 +52,7 @@ const Header = ({ ...props }) => {
       router.push("/");
     }
 
-    if (router.pathname == "/[lang]") {
+    if (router.pathname == "/") {
       console.log("home page");
       setClassHead("header-desktop homepage");
     } else {
@@ -62,8 +62,6 @@ const Header = ({ ...props }) => {
 
   const handleChangeLocale = (newLocale: string) => {
     const { pathname, asPath, query } = router;
-    console.log("newLocale", newLocale);
-
     router.push({ pathname, query }, asPath, { locale: newLocale });
   };
   const isActive = useMemo(() => {
@@ -83,11 +81,6 @@ const Header = ({ ...props }) => {
   const redirectToOtherPage = (path: string) => {
     router.replace(`/${currentLocale}${path}`);
   };
-
-  console.log(
-    't(title, { ns: ["header", "login"] })',
-    t(title, { ns: ["header", "login"] })
-  );
 
   return (
     <DivHeaderWrapperV1>
