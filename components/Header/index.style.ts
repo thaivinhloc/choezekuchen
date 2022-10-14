@@ -118,7 +118,7 @@ export const DivHeaderWrapperV1 = styled.div`
     }
     /* Navbar options (bg options) */
     .bg-primary {
-      background: transparent;
+      background-color: transparent !important;
       background-image: url("/images/title-image-3.jpeg");
       background-size: auto;
       .navbar-toggler,

@@ -5,12 +5,11 @@ import {
   RightOutlined,
   UserOutlined,
 } from "@ant-design/icons";
-import { Button, Collapse, Dropdown, Menu, Space, Typography } from "antd";
+import { Button, Collapse, Dropdown, Menu, Space } from "antd";
 import { LOGIN } from "common/navigator";
-import LinkComponent from "components/Link";
 import { useApp } from "context/app/AppContext";
-import i18next, { t, TFunction } from "i18next";
-import Image from "next/image";
+import { TFunction } from "i18next";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import ReactCountryFlag from "react-country-flag";
@@ -29,7 +28,7 @@ const HeaderMobile = ({ t }: { t: TFunction }) => {
   const { title } = useApp();
 
   const router = useRouter();
-  const currentLocale = i18next.language;
+  const currentLocale = router.locale;
 
   const { Panel } = Collapse;
 
@@ -41,10 +40,10 @@ const HeaderMobile = ({ t }: { t: TFunction }) => {
   const menu = (
     <Menu>
       <Menu.Item key="0">
-        <LinkComponent href="/profile">Profile</LinkComponent>
+        <Link href="/profile">Profile</Link>
       </Menu.Item>
       <Menu.Item key="2">
-        <LinkComponent href="/retreat">Retreat</LinkComponent>
+        <Link href="/retreat">Retreat</Link>
       </Menu.Item>
       <Menu.Divider />
       <Menu.Item key="3" onClick={onLogout}>
@@ -55,6 +54,8 @@ const HeaderMobile = ({ t }: { t: TFunction }) => {
 
   const name = user?.username?.charAt(0).toUpperCase();
   const [activeKey, setActiveKey] = useState<string>("");
+
+  console.log("title", title);
 
   /* Render */
   return (
@@ -117,12 +118,12 @@ const HeaderMobile = ({ t }: { t: TFunction }) => {
                   )}
                   {!user?.username ? (
                     <div onClick={(e) => e.stopPropagation()}>
-                      <LinkComponent href={LOGIN}>
+                      <Link passHref href={LOGIN}>
                         <UserOutlined
                           style={{ fontSize: "20px" }}
                           className="headermobile-user"
                         />
-                      </LinkComponent>
+                      </Link>
                     </div>
                   ) : (
                     <Dropdown
@@ -165,7 +166,7 @@ const HeaderMobile = ({ t }: { t: TFunction }) => {
                   <SubMenu
                     key={route.path}
                     title={
-                      <LinkComponent href={route.path}>
+                      <Link href={route.path}>
                         <a
                           rel="noreferrer"
                           target={route.isOpenTab ? "_blank" : "_self"}
@@ -173,7 +174,7 @@ const HeaderMobile = ({ t }: { t: TFunction }) => {
                         >
                           {route.label}
                         </a>
-                      </LinkComponent>
+                      </Link>
                     }
                     {...{ isHasChildrent: !!route.childrent.length }}
                   >
@@ -181,14 +182,14 @@ const HeaderMobile = ({ t }: { t: TFunction }) => {
                       <React.Fragment key={subRoute.path}>
                         {subRoute.childrent.length < 0 ? (
                           <Menu.Item key={subRoute.path} icon={() => <div />}>
-                            <LinkComponent href={route.path}>
+                            <Link href={route.path}>
                               <a
                                 target={route.isOpenTab ? "_blank" : "_self"}
                                 rel="noreferrer"
                               >
                                 {subRoute.label}
                               </a>
-                            </LinkComponent>
+                            </Link>
                           </Menu.Item>
                         ) : (
                           <SubMenu
@@ -197,19 +198,19 @@ const HeaderMobile = ({ t }: { t: TFunction }) => {
                               isHasChildrent: !!subRoute.childrent.length,
                             }}
                             title={
-                              <LinkComponent href={subRoute.path}>
+                              <Link href={subRoute.path}>
                                 <a
                                   rel="noreferrer"
                                   target={route.isOpenTab ? "_blank" : "_self"}
                                 >
                                   {subRoute.label}
                                 </a>
-                              </LinkComponent>
+                              </Link>
                             }
                           >
                             {subRoute.childrent.map((children) => (
                               <Menu.Item key={children.path}>
-                                <LinkComponent href={children.path}>
+                                <Link href={children.path}>
                                   <a
                                     target={
                                       route.isOpenTab ? "_blank" : "_self"
@@ -218,7 +219,7 @@ const HeaderMobile = ({ t }: { t: TFunction }) => {
                                   >
                                     {children.label}
                                   </a>
-                                </LinkComponent>
+                                </Link>
                               </Menu.Item>
                             ))}
                           </SubMenu>
@@ -232,11 +233,20 @@ const HeaderMobile = ({ t }: { t: TFunction }) => {
           </Collapse>
         </div>
         <div className="w-100 banner">
-          <img
-            className="w-100 "
-            src="/images/title-image-3.jpeg"
-            alt="banner"
-          />
+          {router.pathname === "/" ? (
+            <img
+              className="w-100"
+              src="/images/title-image-homepage.jpg"
+              alt="banner"
+            />
+          ) : (
+            <img
+              className="w-100 "
+              src="/images/title-image-3.jpeg"
+              alt="banner"
+              style={{ height: "160px", objectFit: "cover" }}
+            />
+          )}
           <div className="banner__content" style={{ top: 0 }}>
             {t(title, { ns: "header" }).toUpperCase()}
           </div>

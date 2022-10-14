@@ -9,10 +9,17 @@ export function AppProvider({ children }: Props) {
   const [title, setTitle] = useState<string>("");
   const router = useRouter();
 
+  const replaceTitle = (title: string) => {
+    if (!title) return "";
+    return title.replaceAll("-", " ");
+  };
+
   useEffect(() => {
     let text: string = "";
     const path = router.pathname.split("/");
-    switch (path[path.length - 1]) {
+    const pathName = path[path.length - 1];
+
+    switch (pathName) {
       case "login":
         text = "login";
         break;
@@ -60,7 +67,7 @@ export function AppProvider({ children }: Props) {
         text = "PHOWA PRACTICE";
         break;
       default:
-        text = "";
+        text = replaceTitle(pathName);
         break;
     }
     setTitle(text);
