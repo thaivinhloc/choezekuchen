@@ -62,10 +62,10 @@ const Gurus: FC<{}> = () => {
         <div className="container">
           <Row>
             <Col span={24} className="section-title">
-              <h2>{t("Meet the leaders", { ns: "content" })}</h2>
+              <h2>{t("Meet the Gurus", { ns: "content" })}</h2>
               <h4>
                 {t(
-                  "CHOEZE KUCHEN RINPOCHE BUDDHISM PRACTICES ARE GREATLY INFLUENCED BY HIS GURUS.",
+                  "choeze kuchen rinpoche buddhism practices are greatly influenced by his gurus.",
                   { ns: "content" }
                 )}
               </h4>

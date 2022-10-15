@@ -35,27 +35,27 @@ export const ROUTES = [
     path: TEACHING,
     childrent: [
       {
-        label: "NGONDRO TECHING",
+        label: "NGONDRO TEACHING",
         path: "/ngondro-teching",
         childrent: [],
       },
       {
-        label: "PHOWA PRACTICE",
+        label: "PHOWA TEACHING",
         path: "/phowa-practice",
         childrent: [],
       },
       {
-        label: "GURU RINPOCHE TECHING",
+        label: "GURU RINPOCHE TEACHING",
         path: "/guru-rinpoche",
         childrent: [],
       },
       {
-        label: "ACHI CHOKYI DROLMA TECHING",
+        label: "ACHI CHOKYI DROLMA TEACHING",
         path: "/achi-chokyi-drolma-teching",
         childrent: [],
       },
       {
-        label: "DRAMA TEACHING",
+        label: "DHARMA TEACHING",
         path: "/dharma-teaching",
         childrent: [
           {

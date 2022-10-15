@@ -18,13 +18,17 @@ const AboutRinpoche = () => {
             <h2>
               {t("CHOEZE KUCHEN RINPOCHE’S BIOGRAPHY", { ns: "content" })}
             </h2>
-            <p className="mb-0 font-weight-bold text-center">
-              {t(
-                "Choeze Kuchen Rinpoche is one of the prominent Lamas of Choeze Thupten Dhargyeling Monastery located in the eastern part of Tibet in Kham under the Yushu, Qinghai Province, China",
-                { ns: "content" }
-              )}
-              .
-            </p>
+            <div className="row justify-content-center">
+              <div className="col-12 col-lg-8">
+                <p className="mb-0 font-weight-bold text-center">
+                  {t(
+                    "Choeze Kuchen Rinpoche is one of the prominent Lamas of Choeze Thupten Dhargyeling Monastery located in the eastern part of Tibet in Kham under the Yushu, Qinghai Province, China",
+                    { ns: "content" }
+                  )}
+                  .
+                </p>
+              </div>
+            </div>
             <p className="mb-0 font-weight-bold text-center">
               {t(
                 "He is regarded as the manifestation of Yamantaka (a wrathful aspect of Manjushri)",
@@ -98,72 +102,6 @@ const AboutRinpoche = () => {
                 </p>
                 <ButtonStyle className="aboutButton">LEARN MORE</ButtonStyle>
               </Col>
-            </Row>
-            <Row align="middle" className="mb-5">
-              <Col
-                xs={12}
-                sm={12}
-                md={12}
-                xl={{ span: 5, offset: 1 }}
-                lg={{ span: 5, offset: 1 }}
-                className="mb-3 about_Item"
-              >
-                <Image src="/images/about/about3.jpg" alt="about" />
-              </Col>
-              <Col
-                className="mb-3 about_Item"
-                xs={{ span: 11, offset: 1 }}
-                sm={{ span: 11, offset: 1 }}
-                md={{ span: 11, offset: 1 }}
-                lg={{ span: 5, offset: 1 }}
-                xl={{ span: 5, offset: 1 }}
-              >
-                <h3 className="font-weight-bold">
-                  {t("BIOGRAPHY– THE 11TH CHOEZE KUCHEN RINPOCHE", {
-                    ns: "content",
-                  })}
-                </h3>
-                <p>
-                  {t(
-                    "Kunchok Thrinley Lhundup Namgyal was born in Kathmandu, Nepal in 1984 as the eldest son of yogi Lama Jorjel and Yangchen Dolkar from Kham, Tibet",
-                    { ns: "content" }
-                  )}
-                  .
-                </p>
-                <ButtonStyle className="aboutButton">LEARN MORE</ButtonStyle>
-              </Col>
-              <Col
-                xs={12}
-                sm={12}
-                md={12}
-                xl={{ span: 5, offset: 1 }}
-                lg={{ span: 5, offset: 1 }}
-                className="mb-3 about_Item"
-              >
-                <Image src="/images/about/about4.jpg" alt="about" />
-              </Col>
-              <Col
-                className="mb-3 about_Item"
-                xs={{ span: 11, offset: 1 }}
-                sm={{ span: 11, offset: 1 }}
-                md={{ span: 11, offset: 1 }}
-                lg={{ span: 5, offset: 1 }}
-                xl={{ span: 5, offset: 1 }}
-              >
-                <h3 className="font-weight-bold">
-                  {t("YOUNGER DAYS", { ns: "content" })}
-                </h3>
-                <p>
-                  {t(
-                    "Rinpoche first met with His Holiness Chetsang Rinpoche just 3 days after he was born and was recognized as a Tulku when he was only 1 year old",
-                    { ns: "content" }
-                  )}
-                  .
-                </p>
-                <ButtonStyle className="aboutButton">LEARN MORE</ButtonStyle>
-              </Col>
-            </Row>
-            <Row align="middle" className="mb-5">
               <Col
                 xs={12}
                 sm={12}
@@ -218,6 +156,68 @@ const AboutRinpoche = () => {
                 <p>
                   {t(
                     "The golden statues of Yamantaka (central statue) and other deities belonging to the 10th incarnation of Choeze Kuchen Rinpoche",
+                    { ns: "content" }
+                  )}
+                  .
+                </p>
+                <ButtonStyle className="aboutButton">LEARN MORE</ButtonStyle>
+              </Col>
+              <Col
+                xs={12}
+                sm={12}
+                md={12}
+                xl={{ span: 5, offset: 1 }}
+                lg={{ span: 5, offset: 1 }}
+                className="mb-3 about_Item"
+              >
+                <Image src="/images/about/about4.jpg" alt="about" />
+              </Col>
+              <Col
+                className="mb-3 about_Item"
+                xs={{ span: 11, offset: 1 }}
+                sm={{ span: 11, offset: 1 }}
+                md={{ span: 11, offset: 1 }}
+                lg={{ span: 5, offset: 1 }}
+                xl={{ span: 5, offset: 1 }}
+              >
+                <h3 className="font-weight-bold">
+                  {t("YOUNGER DAYS", { ns: "content" })}
+                </h3>
+                <p>
+                  {t(
+                    "Rinpoche first met with His Holiness Chetsang Rinpoche just 3 days after he was born and was recognized as a Tulku when he was only 1 year old",
+                    { ns: "content" }
+                  )}
+                  .
+                </p>
+                <ButtonStyle className="aboutButton">LEARN MORE</ButtonStyle>
+              </Col>
+              <Col
+                xs={12}
+                sm={12}
+                md={12}
+                xl={{ span: 5, offset: 1 }}
+                lg={{ span: 5, offset: 1 }}
+                className="mb-3 about_Item"
+              >
+                <Image src="/images/about/about3.jpg" alt="about" />
+              </Col>
+              <Col
+                className="mb-3 about_Item"
+                xs={{ span: 11, offset: 1 }}
+                sm={{ span: 11, offset: 1 }}
+                md={{ span: 11, offset: 1 }}
+                lg={{ span: 5, offset: 1 }}
+                xl={{ span: 5, offset: 1 }}
+              >
+                <h3 className="font-weight-bold">
+                  {t("BIOGRAPHY– THE 11TH CHOEZE KUCHEN RINPOCHE", {
+                    ns: "content",
+                  })}
+                </h3>
+                <p>
+                  {t(
+                    "Kunchok Thrinley Lhundup Namgyal was born in Kathmandu, Nepal in 1984 as the eldest son of yogi Lama Jorjel and Yangchen Dolkar from Kham, Tibet",
                     { ns: "content" }
                   )}
                   .
