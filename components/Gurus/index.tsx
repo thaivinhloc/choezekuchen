@@ -8,15 +8,8 @@ import { useTranslation } from "react-i18next";
 const { Meta } = Card;
 const GURUS = [
   {
-    imgURL: "/images/gurus/ChoezeRinpoche.png",
-    name: "Choeze Kuchen Rinpoche",
-    des: "Born as Kunchok Thrinley Lhundup Namgyal in Kathmandu, Nepal in 1984. At the age of two, His Holiness Drikung Kyabgon Chetsang Rinpoche and His Holiness Drikung Kyabgon Chungtsang Rinpoche recognized him as the 11th incarnation of Choeze Kuchen Rinpoche.",
-    fb: "https://www.facebook.com/choezekuchen/",
-    ins: "https://www.instagram.com/choezekuchen/",
-  },
-  {
     imgURL: "/images/gurus/H.H-Chetsang.png",
-    name: "Kyabgon Chetsang Rinpoche",
+    name: "H.H Kyabgon Chetsang Rinpoche",
     des: "His Holiness Drikung Kyabgon Chetsang Rinpoche, the thirty-seventh in the line of throne holders in the Drikung Kagyu lineage and current Drikung Kyabgon, and author to several Buddhism publications.",
     fb: "",
     ins: "",
@@ -25,7 +18,14 @@ const GURUS = [
     imgURL: "/images/gurus/LamaJorjel.png",
     name: "Lama Jorjel Rinpoche",
     des: "The late biological father to Choeze Kuchen Rinpoche, Lama Jorjel has been regarded as one of the experience yogi in the Tibetan Buddhism space. He was also the long time spiritual teacher to Choeze Kuchen Rinpoche.",
-    fb: "https://www.facebook.com/drikungkyabgon/",
+    fb: "",
+    ins: "",
+  },
+  {
+    imgURL: "/images/gurus/ChoezeRinpoche.png",
+    name: "Choeze Kuchen Rinpoche",
+    des: "Born as Kunchok Thrinley Lhundup Namgyal in Kathmandu, Nepal in 1984. At the age of two, His Holiness Drikung Kyabgon Chetsang Rinpoche and His Holiness Drikung Kyabgon Chungtsang Rinpoche recognized him as the 11th incarnation of Choeze Kuchen Rinpoche.",
+    fb: "",
     ins: "",
   },
 ];
@@ -71,29 +71,63 @@ const Gurus: FC<{}> = () => {
               </h4>
             </Col>
             <Col span={24}>
-              <Row className="section-group">
-                {GURUS.map((item, i) => (
-                  <Col
-                    key={i}
-                    className="section-item"
-                    xs={24}
-                    sm={24}
-                    md={24}
-                    lg={8}
-                    xl={8}
-                  >
-                    <Card
-                      // style={{ width:  }}
-                      bordered={false}
-                      cover={<img src={item.imgURL} alt="gurus" />}
+              <Row className="section-group" justify="center">
+                {GURUS.map((item, i) => {
+                  if (i === 0) {
+                    return (
+                      <Row key={i} className="section-item" justify="center">
+                        <Col span={24} md={10}>
+                          <Card
+                            // style={{ width:  }}
+                            bordered={false}
+                            cover={
+                              <img
+                                src={item.imgURL}
+                                alt="gurus"
+                                height={400}
+                                style={{ objectFit: "contain" }}
+                              />
+                            }
+                          >
+                            <Meta
+                              title={<h4>{t(item.name, { ns: "content" })}</h4>}
+                              description={<Description item={item} />}
+                            />
+                          </Card>
+                        </Col>
+                      </Row>
+                    );
+                  }
+                  return (
+                    <Col
+                      key={i}
+                      className="section-item"
+                      xs={24}
+                      sm={24}
+                      md={24}
+                      lg={12}
+                      xl={10}
                     >
-                      <Meta
-                        title={<h4>{t(item.name, { ns: "content" })}</h4>}
-                        description={<Description item={item} />}
-                      />
-                    </Card>
-                  </Col>
-                ))}
+                      <Card
+                        // style={{ width:  }}
+                        bordered={false}
+                        cover={
+                          <img
+                            src={item.imgURL}
+                            alt="gurus"
+                            height={300}
+                            style={{ objectFit: "contain" }}
+                          />
+                        }
+                      >
+                        <Meta
+                          title={<h4>{t(item.name, { ns: "content" })}</h4>}
+                          description={<Description item={item} />}
+                        />
+                      </Card>
+                    </Col>
+                  );
+                })}
               </Row>
             </Col>
           </Row>
