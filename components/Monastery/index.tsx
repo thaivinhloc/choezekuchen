@@ -169,7 +169,7 @@ const Monastery: React.FC<{}> = () => {
               lg={12}
               xl={12}
             >
-              <h3>{t("Singapore Center", { ns: "content" })}</h3>
+              <h3>{t("Dharma Treasure Center", { ns: "content" })}</h3>
               <p>
                 {t(
                   "His Eminence 11th Choeze Kuchen Rinpoche establish his first center named Dharma Treasure Center in Singapore in June 2019. The center’s vision is to benefit to all sentient beings in all ways via dharma and to guide all to foster a harmonious environment.",

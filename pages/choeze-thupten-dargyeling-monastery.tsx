@@ -1,21 +1,21 @@
-import { LeftCircleOutlined, RightCircleOutlined } from "@ant-design/icons";
-import { Col, Image, Row } from "antd";
-import { ELanguages } from "i18n/config";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import Carousel from "react-bootstrap/Carousel";
-import { useTranslation } from "react-i18next";
+import { LeftCircleOutlined, RightCircleOutlined } from "@ant-design/icons"
+import { Col, Image, Row } from "antd"
+import { ELanguages } from "i18n/config"
+import { serverSideTranslations } from "next-i18next/serverSideTranslations"
+import Carousel from "react-bootstrap/Carousel"
+import { useTranslation } from "react-i18next"
 
 export default function HistoryOfChoezeKuchenRinpoche2() {
-  const { t, i18n } = useTranslation(["content"]);
-  const IMAGES = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13];
+  const { t, i18n } = useTranslation(["content"])
+  const IMAGES = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
 
   return (
-    <div className="historyOfChoezeKuchenRinpoche2">
-      <div className="container">
-        <div className="hr bg-transparent mt-0"></div>
-        <Row className="historyOfChoezeKuchenRinpoche2-group" align="middle">
+    <div className='historyOfChoezeKuchenRinpoche2'>
+      <div className='container'>
+        <div className='hr bg-transparent mt-0'></div>
+        <Row className='historyOfChoezeKuchenRinpoche2-group' align='middle'>
           <Col
-            className="historyOfChoezeKuchenRinpoche2-wrapper"
+            className='historyOfChoezeKuchenRinpoche2-wrapper'
             xs={24}
             sm={24}
             md={24}
@@ -23,9 +23,11 @@ export default function HistoryOfChoezeKuchenRinpoche2() {
             xl={12}
           >
             <img
-              src="/images/historyOfChoezeKuchenRinpoche2/historyOfChoezeKuchenRinpoche2.png"
-              className="ngondroTeching-image"
-              alt="main"
+              src='/images/historyOfChoezeKuchenRinpoche2/historyOfChoezeKuchenRinpoche2.png'
+              className='ngondroTeching-image'
+              alt='main'
+              width='100%'
+              height='auto'
             />
           </Col>
           <Col
@@ -34,7 +36,7 @@ export default function HistoryOfChoezeKuchenRinpoche2() {
             md={24}
             lg={{ span: 11, offset: 1 }}
             xl={{ span: 11, offset: 1 }}
-            className="historyOfChoezeKuchenRinpoche2-item"
+            className='historyOfChoezeKuchenRinpoche2-item'
           >
             <p>
               {t(
@@ -65,13 +67,13 @@ export default function HistoryOfChoezeKuchenRinpoche2() {
           </Col>
         </Row>
         <div
-          className="xs:d-none
+          className='xs:d-none
             d-sm-none
             d-md-none
             d-lg-block
             d-xl-block
           mt-5
-          "
+          '
         >
           <Carousel
             indicators={false}
@@ -81,15 +83,15 @@ export default function HistoryOfChoezeKuchenRinpoche2() {
             nextIcon={
               <RightCircleOutlined style={{ color: "#000", fontSize: 40 }} />
             }
-            prevLabel=""
-            nextLabel=""
+            prevLabel=''
+            nextLabel=''
           >
             {IMAGES.map((img) => (
               <Carousel.Item key={img}>
                 <img
-                  className="d-block w-100"
+                  className='d-block w-100'
                   src={`/images/historyOfChoezeKuchenRinpoche2/historyOfChoezeKuchenRinpoche2-${img}.png`}
-                  alt="First slide"
+                  alt='First slide'
                   height={500}
                   style={{ objectFit: "contain" }}
                 />
@@ -98,84 +100,84 @@ export default function HistoryOfChoezeKuchenRinpoche2() {
           </Carousel>
         </div>
         <div
-          className="xs:d-none
+          className='xs:d-none
             d-sm-block
             d-md-block
             d-lg-none
             d-xl-none
           mt-5
-          "
+          '
         >
           <Image
             width={"100%"}
-            src="/images/historyOfChoezeKuchenRinpoche2/historyOfChoezeKuchenRinpoche2-1.png"
-            alt="historyOfChoezeKuchenRinpoche2"
+            src='/images/historyOfChoezeKuchenRinpoche2/historyOfChoezeKuchenRinpoche2-1.png'
+            alt='historyOfChoezeKuchenRinpoche2'
           />
           <Image
             width={"100%"}
-            src="/images/historyOfChoezeKuchenRinpoche2/historyOfChoezeKuchenRinpoche2-2.png"
-            alt="historyOfChoezeKuchenRinpoche2"
+            src='/images/historyOfChoezeKuchenRinpoche2/historyOfChoezeKuchenRinpoche2-2.png'
+            alt='historyOfChoezeKuchenRinpoche2'
           />
           <Image
             width={"100%"}
-            src="/images/historyOfChoezeKuchenRinpoche2/historyOfChoezeKuchenRinpoche2-3.png"
-            alt="historyOfChoezeKuchenRinpoche2"
+            src='/images/historyOfChoezeKuchenRinpoche2/historyOfChoezeKuchenRinpoche2-3.png'
+            alt='historyOfChoezeKuchenRinpoche2'
           />
           <Image
             width={"100%"}
-            src="/images/historyOfChoezeKuchenRinpoche2/historyOfChoezeKuchenRinpoche2-4.png"
-            alt="historyOfChoezeKuchenRinpoche2"
+            src='/images/historyOfChoezeKuchenRinpoche2/historyOfChoezeKuchenRinpoche2-4.png'
+            alt='historyOfChoezeKuchenRinpoche2'
           />
           <Image
             width={"100%"}
-            src="/images/historyOfChoezeKuchenRinpoche2/historyOfChoezeKuchenRinpoche2-5.png"
-            alt="historyOfChoezeKuchenRinpoche2"
+            src='/images/historyOfChoezeKuchenRinpoche2/historyOfChoezeKuchenRinpoche2-5.png'
+            alt='historyOfChoezeKuchenRinpoche2'
           />
           <Image
             width={"100%"}
-            src="/images/historyOfChoezeKuchenRinpoche2/historyOfChoezeKuchenRinpoche2-6.png"
-            alt="historyOfChoezeKuchenRinpoche2"
+            src='/images/historyOfChoezeKuchenRinpoche2/historyOfChoezeKuchenRinpoche2-6.png'
+            alt='historyOfChoezeKuchenRinpoche2'
           />
           <Image
             width={"100%"}
-            src="/images/historyOfChoezeKuchenRinpoche2/historyOfChoezeKuchenRinpoche2-7.png"
-            alt="historyOfChoezeKuchenRinpoche2"
+            src='/images/historyOfChoezeKuchenRinpoche2/historyOfChoezeKuchenRinpoche2-7.png'
+            alt='historyOfChoezeKuchenRinpoche2'
           />
           <Image
             width={"100%"}
-            src="/images/historyOfChoezeKuchenRinpoche2/historyOfChoezeKuchenRinpoche2-8.png"
-            alt="historyOfChoezeKuchenRinpoche2"
+            src='/images/historyOfChoezeKuchenRinpoche2/historyOfChoezeKuchenRinpoche2-8.png'
+            alt='historyOfChoezeKuchenRinpoche2'
           />
           <Image
             width={"100%"}
-            src="/images/historyOfChoezeKuchenRinpoche2/historyOfChoezeKuchenRinpoche2-9.png"
-            alt="historyOfChoezeKuchenRinpoche2"
+            src='/images/historyOfChoezeKuchenRinpoche2/historyOfChoezeKuchenRinpoche2-9.png'
+            alt='historyOfChoezeKuchenRinpoche2'
           />
           <Image
             width={"100%"}
-            src="/images/historyOfChoezeKuchenRinpoche2/historyOfChoezeKuchenRinpoche2-10.png"
-            alt="historyOfChoezeKuchenRinpoche2"
+            src='/images/historyOfChoezeKuchenRinpoche2/historyOfChoezeKuchenRinpoche2-10.png'
+            alt='historyOfChoezeKuchenRinpoche2'
           />
           <Image
             width={"100%"}
-            src="/images/historyOfChoezeKuchenRinpoche2/historyOfChoezeKuchenRinpoche2-11.png"
-            alt="historyOfChoezeKuchenRinpoche2"
+            src='/images/historyOfChoezeKuchenRinpoche2/historyOfChoezeKuchenRinpoche2-11.png'
+            alt='historyOfChoezeKuchenRinpoche2'
           />
           <Image
             width={"100%"}
-            src="/images/historyOfChoezeKuchenRinpoche2/historyOfChoezeKuchenRinpoche2-12.png"
-            alt="historyOfChoezeKuchenRinpoche2"
+            src='/images/historyOfChoezeKuchenRinpoche2/historyOfChoezeKuchenRinpoche2-12.png'
+            alt='historyOfChoezeKuchenRinpoche2'
           />
           <Image
             width={"100%"}
-            src="/images/historyOfChoezeKuchenRinpoche2/historyOfChoezeKuchenRinpoche2-13.png"
-            alt="historyOfChoezeKuchenRinpoche2"
+            src='/images/historyOfChoezeKuchenRinpoche2/historyOfChoezeKuchenRinpoche2-13.png'
+            alt='historyOfChoezeKuchenRinpoche2'
           />
         </div>
-        <div className="hr bg-transparent"></div>
+        <div className='hr bg-transparent'></div>
       </div>
     </div>
-  );
+  )
 }
 export async function getStaticProps({ locale }: { locale: ELanguages }) {
   return {
@@ -185,8 +187,8 @@ export async function getStaticProps({ locale }: { locale: ELanguages }) {
         "footer",
         "header",
         "login",
-        "content",
-      ])),
-    },
-  };
+        "content"
+      ]))
+    }
+  }
 }

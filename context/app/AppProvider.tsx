@@ -49,7 +49,7 @@ export function AppProvider({ children }: Props) {
         text = "GURUS";
         break;
       case "the-11th":
-        text = "THE 11TH CHOEZE KUCHEN RIPOCHE";
+        text = "11TH CHOEZE KUCHEN RINPOCHE";
         break;
       case "the-hevajra":
         text = "THE HEVAJRA RETREAT";

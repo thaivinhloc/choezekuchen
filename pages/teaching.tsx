@@ -43,7 +43,7 @@ export default function SingUp({ allLangsData }: any) {
               )}
               .
             </p>
-            <ButtonStyle className="button">DISCOVERI MORE</ButtonStyle>
+            <ButtonStyle className="button">DISCOVER MORE</ButtonStyle>
           </Col>
           <Col
             xs={24}
@@ -99,7 +99,7 @@ export default function SingUp({ allLangsData }: any) {
                 { ns: "content" }
               )}
             </p>
-            <ButtonStyle className="button">DISCOVERI MORE</ButtonStyle>
+            <ButtonStyle className="button">DISCOVER MORE</ButtonStyle>
           </Col>
         </Row>
         <div className="hr"></div>
@@ -127,7 +127,7 @@ export default function SingUp({ allLangsData }: any) {
               )}
               .
             </p>
-            <ButtonStyle className="button">DISCOVERI MORE</ButtonStyle>
+            <ButtonStyle className="button">DISCOVER MORE</ButtonStyle>
           </Col>
         </Row>
         <div className="hr" style={{ backgroundColor: "transparent" }}></div>

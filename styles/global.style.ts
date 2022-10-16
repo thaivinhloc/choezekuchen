@@ -1,9 +1,9 @@
-import { createGlobalStyle, css } from "styled-components";
-import { THEME } from "../common";
+import { createGlobalStyle, css } from "styled-components"
+import { THEME } from "../common"
 
 type TStyled = {
-  theme: typeof THEME;
-};
+  theme: typeof THEME
+}
 
 export const GlobalStyle = createGlobalStyle`${css`
   html,
@@ -315,6 +315,7 @@ export const GlobalStyle = createGlobalStyle`${css`
       padding: 10px 20px;
       border-radius: 5px;
       transition: all 0.3s;
+      font-size: 15px;
       &:hover {
         background-color: #1abc9c;
         border-color: #1abc9c;
@@ -451,4 +452,4 @@ export const GlobalStyle = createGlobalStyle`${css`
       }
     }
   }
-`}`;
+`}`

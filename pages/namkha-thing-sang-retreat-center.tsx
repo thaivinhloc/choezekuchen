@@ -1,22 +1,30 @@
-import React from "react";
-import { Row, Col, Image } from "antd";
-import Carousel from "react-bootstrap/Carousel";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { ELanguages } from "i18n/config";
-import { useTranslation } from "react-i18next";
-import { text } from "stream/consumers";
+import React from "react"
+import { Row, Col, Image } from "antd"
+import Carousel from "react-bootstrap/Carousel"
+import { serverSideTranslations } from "next-i18next/serverSideTranslations"
+import { ELanguages } from "i18n/config"
+import { useTranslation } from "react-i18next"
+import { text } from "stream/consumers"
+import styled from "styled-components"
+
+const ImageRatioWrapper = styled.img`
+  text-align: center;
+  width: 100%;
+  height: calc(100vw / 2);
+  object-fit: cover;
+`
 
 export default function NamkhaThingSanRetreatCenter() {
-  const { t, i18n } = useTranslation(["content"]);
+  const { t, i18n } = useTranslation(["content"])
 
   return (
-    <div className="namkhaThingSanRetreatCenter">
-      <div className="container">
-        <div className="hr bg-transparent mt-0"></div>
+    <div className='namkhaThingSanRetreatCenter'>
+      <div className='container'>
+        <div className='hr bg-transparent mt-0'></div>
 
-        <Row className="namkhaThingSanRetreatCenter-group" align="middle">
+        <Row className='namkhaThingSanRetreatCenter-group' align='middle'>
           <Col
-            className="namkhaThingSanRetreatCenter-wrapper"
+            className='namkhaThingSanRetreatCenter-wrapper'
             xs={24}
             sm={24}
             md={24}
@@ -24,9 +32,11 @@ export default function NamkhaThingSanRetreatCenter() {
             xl={12}
           >
             <Image
-              src="/images/namkhaThingSanRetreatCenter/namkhaThingSanRetreatCenter1.jpg"
-              alt="main"
-              className="namkhaThingSanRetreatCenter-image"
+              src='/images/namkhaThingSanRetreatCenter/namkhaThingSanRetreatCenter1.jpg'
+              alt='main'
+              className='namkhaThingSanRetreatCenter-image'
+              width='100%'
+              height='auto'
             />
           </Col>
           <Col
@@ -35,7 +45,7 @@ export default function NamkhaThingSanRetreatCenter() {
             md={24}
             lg={{ span: 11, offset: 1 }}
             xl={{ span: 11, offset: 1 }}
-            className="namkhaThingSanRetreatCenter-item"
+            className='namkhaThingSanRetreatCenter-item'
           >
             <p>
               {t(
@@ -61,96 +71,56 @@ export default function NamkhaThingSanRetreatCenter() {
           </Col>
         </Row>
         <div
-          className="xs:d-none
+          className='xs:d-none
         d-sm-none
         d-md-none
         d-lg-block
         d-xl-block
       mt-5
-      "
+      '
         >
           <Carousel indicators={false}>
             <Carousel.Item>
-              <img
-                style={{ height: "800px" }}
-                className="d-block w-100"
-                src="/images/namkhaThingSanRetreatCenter/namkhaThingSanRetreatCenter1.jpg"
-                alt="First slide"
+              <ImageRatioWrapper
+                className='d-block'
+                src='/images/namkhaThingSanRetreatCenter/namkhaThingSanRetreatCenter1.jpg'
+                alt='First slide'
               />
             </Carousel.Item>
             <Carousel.Item>
-              <img
-                style={{ height: "800px" }}
-                className="d-block w-100"
-                src="/images/namkhaThingSanRetreatCenter/namkhaThingSanRetreatCenter2.jpg"
-                alt="Second slide"
+              <ImageRatioWrapper
+                className='d-block'
+                src='/images/namkhaThingSanRetreatCenter/namkhaThingSanRetreatCenter2.jpg'
+                alt='Second slide'
               />
             </Carousel.Item>
             <Carousel.Item>
-              <img
-                style={{ height: "800px" }}
-                className="d-block w-100"
-                src="/images/namkhaThingSanRetreatCenter/namkhaThingSanRetreatCenter3.jpg"
-                alt="Third slide"
+              <ImageRatioWrapper
+                className='d-block'
+                src='/images/namkhaThingSanRetreatCenter/namkhaThingSanRetreatCenter3.jpg'
+                alt='Third slide'
               />
             </Carousel.Item>
             <Carousel.Item>
-              <img
-                style={{ height: "800px" }}
-                className="d-block w-100"
-                src="/images/namkhaThingSanRetreatCenter/namkhaThingSanRetreatCenter4.jpg"
-                alt="Second slide"
+              <ImageRatioWrapper
+                className='d-block'
+                src='/images/namkhaThingSanRetreatCenter/namkhaThingSanRetreatCenter4.jpg'
+                alt='Second slide'
               />
             </Carousel.Item>
             <Carousel.Item>
-              <img
-                style={{ height: "800px" }}
-                className="d-block w-100"
-                src="/images/namkhaThingSanRetreatCenter/namkhaThingSanRetreatCenter5.jpg"
-                alt="Second slide"
+              <ImageRatioWrapper
+                className='d-block'
+                src='/images/namkhaThingSanRetreatCenter/namkhaThingSanRetreatCenter5.jpg'
+                alt='Second slide'
               />
             </Carousel.Item>
           </Carousel>
         </div>
-        <div
-          className="xs:d-none
-        d-sm-block
-        d-md-block
-        d-lg-none
-        d-xl-none
-      mt-5
-      "
-        >
-          <Image
-            width={"100%"}
-            src="/images/namkhaThingSanRetreatCenter/namkhaThingSanRetreatCenter1.jpg"
-            alt="First slide"
-          />
-          <Image
-            width={"100%"}
-            src="/images/namkhaThingSanRetreatCenter/namkhaThingSanRetreatCenter2.jpg"
-            alt="First slide"
-          />
-          <Image
-            width={"100%"}
-            src="/images/namkhaThingSanRetreatCenter/namkhaThingSanRetreatCenter3.jpg"
-            alt="First slide"
-          />
-          <Image
-            width={"100%"}
-            src="/images/namkhaThingSanRetreatCenter/namkhaThingSanRetreatCenter4.jpg"
-            alt="First slide"
-          />
-          <Image
-            width={"100%"}
-            src="/images/namkhaThingSanRetreatCenter/namkhaThingSanRetreatCenter5.jpg"
-            alt="First slide"
-          />
-        </div>
-        <div className="hr bg-transparent"></div>
+        <div className='hr bg-transparent'></div>
       </div>
     </div>
-  );
+  )
 }
 export async function getStaticProps({ locale }: { locale: ELanguages }) {
   return {
@@ -160,8 +130,8 @@ export async function getStaticProps({ locale }: { locale: ELanguages }) {
         "footer",
         "header",
         "login",
-        "content",
-      ])),
-    },
-  };
+        "content"
+      ]))
+    }
+  }
 }

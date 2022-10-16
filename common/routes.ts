@@ -24,7 +24,7 @@ export const ROUTES = [
         childrent: [],
       },
       {
-        label: "THE 11TH CHOEZE KUCHEN RIPOCHE",
+        label: "11TH CHOEZE KUCHEN RINPOCHE",
         path: THE11TH,
         childrent: [],
       },
@@ -36,12 +36,12 @@ export const ROUTES = [
     childrent: [
       {
         label: "NGONDRO TEACHING",
-        path: "/ngondro-teching",
+        path: "/ngondro-teaching",
         childrent: [],
       },
       {
         label: "PHOWA TEACHING",
-        path: "/phowa-practice",
+        path: "/phowa-teaching",
         childrent: [],
       },
       {
@@ -51,7 +51,7 @@ export const ROUTES = [
       },
       {
         label: "ACHI CHOKYI DROLMA TEACHING",
-        path: "/achi-chokyi-drolma-teching",
+        path: "/achi-chokyi-drolma-teaching",
         childrent: [],
       },
       {
@@ -65,7 +65,7 @@ export const ROUTES = [
           },
           {
             label: "THE PERFECT DEDICATION",
-            path: "/the-perfect-dedication-2",
+            path: "/the-perfect-dedication",
             childrent: [],
           },
           {
@@ -82,13 +82,13 @@ export const ROUTES = [
     path: "/monastery",
     childrent: [
       {
-        label: "TIBET - CHOEZE MONASTARY",
-        path: "/history-of-choeze-kuchen-rinpoche-2",
+        label: "Choeze Thupten Dargyeling Monastery",
+        path: "/choeze-thupten-dargyeling-monastery",
         childrent: [],
       },
       {
         label: "BUTAN PROJECTS",
-        path: "/tibetan-monastery",
+        path: "/butan-projects",
         childrent: [],
       },
       {
@@ -97,8 +97,8 @@ export const ROUTES = [
         childrent: [],
       },
       {
-        label: "SINGAPORE CENTER",
-        path: "/singapore-center",
+        label: "Dharma Treasure Center",
+        path: "/dharma-treasure-center",
         childrent: [],
       },
     ],

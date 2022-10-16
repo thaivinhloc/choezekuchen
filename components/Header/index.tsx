@@ -85,7 +85,7 @@ const Header = ({ ...props }) => {
   return (
     <DivHeaderWrapperV1>
       <div className={classHead}>
-        <header className=" bg-primary">
+        <header className="site-header">
           <div
             style={{
               padding: "5px 45px",
