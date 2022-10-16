@@ -1,33 +1,33 @@
-import React from "react";
-import { Row, Col, Button, Image } from "antd";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { ELanguages } from "i18n/config";
-import { useTranslation } from "react-i18next";
+import React from "react"
+import { Row, Col, Button, Image } from "antd"
+import { serverSideTranslations } from "next-i18next/serverSideTranslations"
+import { ELanguages } from "i18n/config"
+import { useTranslation } from "react-i18next"
 
 export default function NgondroTeching() {
-  const { t, i18n } = useTranslation(["content"]);
+  const { t, i18n } = useTranslation(["content"])
 
   return (
-    <div className="ngondroTeching">
-      <div className="container">
-        <div className="hr bg-transparent" />
-        <Row align="middle">
+    <div className='ngondroTeching'>
+      <div className='container'>
+        <div className='hr bg-transparent' />
+        <Row align='middle'>
           <Col
             xs={24}
             sm={24}
             md={24}
             xl={12}
             lg={12}
-            className="ngondroTeching-image"
+            className='ngondroTeching-image'
           >
             <Image
-              src="/images/ngondro-teching/ngondroTechingImg1.png"
-              alt="bb"
-              className="ngondroTeching-image"
+              src='/images/ngondro-teching/ngondroTechingImg1.png'
+              alt='bb'
+              className='ngondroTeching-image'
             />
           </Col>
           <Col
-            className="ngondroTeching-wrapper"
+            className='ngondroTeching-wrapper'
             xs={24}
             sm={24}
             md={24}
@@ -35,10 +35,13 @@ export default function NgondroTeching() {
             xl={{ span: 11, offset: 1 }}
           >
             <h3>
-              {t(
-                "DRIKUNG KAGYU NGONDRO PRELIMINARY PRACTICES CONDUCTED BY HIS EMINENCE 11TH CHOEZE KUCHEN RINPOCHE",
-                { ns: "content" }
-              )}
+              {t("DRIKUNG KAGYU NGONDRO PRELIMINARY PRACTICES CONDUCTED", {
+                ns: "content"
+              })}{" "}
+              <br />
+              {t("BY HIS EMINENCE 11TH CHOEZE KUCHEN RINPOCHE", {
+                ns: "content"
+              })}
             </h3>
             <p>
               {t(
@@ -69,7 +72,7 @@ export default function NgondroTeching() {
               <br />
               4.
               {t("The Guru Yoga that Brings the Blessings of the Lineage", {
-                ns: "content",
+                ns: "content"
               })}
               <br />
               {t(
@@ -80,10 +83,10 @@ export default function NgondroTeching() {
             </p>
           </Col>
         </Row>
-        <div className="hr bg-transparent" />
+        <div className='hr bg-transparent' />
       </div>
     </div>
-  );
+  )
 }
 export async function getStaticProps({ locale }: { locale: ELanguages }) {
   return {
@@ -93,8 +96,8 @@ export async function getStaticProps({ locale }: { locale: ELanguages }) {
         "footer",
         "header",
         "login",
-        "content",
-      ])),
-    },
-  };
+        "content"
+      ]))
+    }
+  }
 }

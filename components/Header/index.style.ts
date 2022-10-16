@@ -1,13 +1,36 @@
-import styled from "styled-components";
-import { THEME } from "../../common";
+import styled from "styled-components"
+import { THEME } from "../../common"
 
 type TStyled = {
-  theme: typeof THEME;
-};
+  theme: typeof THEME
+}
 
 export const DivHeaderWrapperV1 = styled.div`
   .header-desktop {
     /* Main CSS */
+    background-color: transparent !important;
+    background-image: url("/images/title-image-3.jpeg");
+    background-size: auto;
+    position: relative;
+    header {
+      position: relative;
+      z-index: 2;
+    }
+    &:after {
+      content: "";
+      display: none;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: rgba(0, 0, 0, 0.2);
+      @media (min-width: 1200px) {
+        display: block;
+      }
+      z-index: 1;
+    }
+
     .navbar {
       flex-wrap: nowrap;
       ul {
@@ -44,6 +67,7 @@ export const DivHeaderWrapperV1 = styled.div`
             &:hover,
             &.active {
               border: 2px solid #fff;
+              cursor: pointer;
             }
           }
           &-item {
@@ -68,14 +92,16 @@ export const DivHeaderWrapperV1 = styled.div`
         }
       }
       &__title {
-        font-size: 45px;
-        line-height: 47px;
+        font-size: 36px;
+        line-height: 40px;
         font-weight: 700px;
         letter-spacing: 4px;
         text-align: center;
         height: 100px;
         color: #ffffff;
         height: 150px;
+        margin-bottom: 0;
+        margin-top: 24px;
       }
       &-logo {
         img {
@@ -102,6 +128,9 @@ export const DivHeaderWrapperV1 = styled.div`
           margin-right: 0;
           padding-right: 5px;
         }
+        &:hover {
+          cursor: pointer;
+        }
       }
       &-nav-link {
         color: #9d9d9d;
@@ -111,16 +140,14 @@ export const DivHeaderWrapperV1 = styled.div`
         /* line-height: 10px; */
         margin: 0;
         padding: 0 0;
-        :hover {
+        &:hover {
           color: #ffffff;
+          cursor: pointer;
         }
       }
     }
     /* Navbar options (bg options) */
-    .bg-primary {
-      background-color: transparent !important;
-      background-image: url("/images/title-image-3.jpeg");
-      background-size: auto;
+    .site-header {
       .navbar-toggler,
       .nav-link,
       .utils-search {
@@ -169,6 +196,7 @@ export const DivHeaderWrapperV1 = styled.div`
         }
         > .nav-item:hover > .nav-link {
           color: ${(props: TStyled) => props.theme.primary};
+          cursor: pointer;
         }
       }
       &:hover > .dropdown {
@@ -178,6 +206,9 @@ export const DivHeaderWrapperV1 = styled.div`
       }
       &:hover > a::before {
         transform: rotate(90deg);
+      }
+      .dropdown-nav-link {
+        text-transform: uppercase;
       }
     }
     .nav-close {
@@ -226,7 +257,7 @@ export const DivHeaderWrapperV1 = styled.div`
     }
 
     &.homepage {
-      .bg-primary {
+      .site-header {
         background-image: url("/images/title-image-homepage.jpg");
         background-size: cover;
         height: 100vh;
@@ -242,20 +273,23 @@ export const DivHeaderWrapperV1 = styled.div`
       }
     }
   }
-`;
+`
 
 export const DivHeaderMobile = styled.div`
   .banner {
     position: relative;
     &__content {
       position: absolute;
+      height: 100%;
+      width: 100%;
       inset: 0;
       color: #fff;
-      font-size: 28px;
+      font-size: 20px;
       font-weight: bold;
       display: flex;
       align-items: center;
       justify-content: center;
+      text-align: center;
     }
   }
   button {
@@ -379,4 +413,4 @@ export const DivHeaderMobile = styled.div`
       background: none;
     }
   }
-`;
+`

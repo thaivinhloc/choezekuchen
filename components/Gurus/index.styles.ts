@@ -9,9 +9,8 @@ export const DivGurusWrapper = styled.div`
   font-family: ${(props: TStyled) => props.theme.primaryFont};
 
   .section {
-    padding-top: 90px;
+    padding-top: 60px;
     padding-bottom: 100px;
-    background: #fff;
     text-align: center;
     color: ${(props: TStyled) => props.theme.dark};
 
@@ -23,13 +22,6 @@ export const DivGurusWrapper = styled.div`
         letter-spacing: 3px;
         margin-bottom: 20px;
         text-transform: uppercase;
-      }
-
-      h4 {
-        font-size: 18px;
-        font-weight: 700;
-        line-height: 20px;
-        letter-spacing: 1px;
       }
     }
 
@@ -84,7 +76,7 @@ export const DivGurusWrapper = styled.div`
           }
           p {
             color: ${(props: TStyled) => props.theme.textSecondary};
-            font-size: 14px;
+            font-size: 16px;
             font-weight: 400;
             margin-bottom: 30px;
           }

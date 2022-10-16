@@ -1,16 +1,16 @@
-import styled from "styled-components";
-import { THEME } from "../../common";
+import styled from "styled-components"
+import { THEME } from "../../common"
 
 type TStyled = {
-  theme: typeof THEME;
-};
+  theme: typeof THEME
+}
 
 export const DivHomeWrapper = styled.div`
   font-family: Raleway, sans-serif;
   color: rgb(48, 48, 48);
 
   .section-large {
-    padding-top: 140px;
+    padding-top: 60px;
     background: #fff;
 
     .ant-card-meta-description {
@@ -18,6 +18,17 @@ export const DivHomeWrapper = styled.div`
         color: rgb(119, 119, 119);
         font-size: 14px;
         font-weight: 400;
+      }
+    }
+    .section-title {
+      text-align: left;
+
+      h2 {
+        font-size: 30px;
+        line-height: 40px;
+        font-weight: 700;
+        letter-spacing: 3px;
+        margin-bottom: 20px;
       }
     }
   }
@@ -42,8 +53,8 @@ export const DivHomeWrapper = styled.div`
     }
 
     .section-group {
-      padding-top: 65px;
-      padding-bottom: 84px;
+      padding-top: 42px;
+      padding-bottom: 50px;
       text-align: center;
 
       .section-item {
@@ -57,17 +68,15 @@ export const DivHomeWrapper = styled.div`
         font-style: normal;
         font-weight: 700;
         letter-spacing: 1px;
-        margin-bottom: 25px;
-        margin-top: 40px;
       }
     }
   }
 
   .section-count {
-    padding: 62px 0 65px;
+    padding: 32px 0;
 
     .section-item {
-      padding: 20px 40px;
+      padding: 16px;
       text-align: center;
       font-weight: 700;
 
@@ -81,7 +90,7 @@ export const DivHomeWrapper = styled.div`
         text-transform: uppercase;
         color: rgb(119, 119, 119);
         letter-spacing: 1px;
-        font-size: 28px;
+        font-size: 20px;
         line-height: 26px;
       }
     }
@@ -138,7 +147,7 @@ export const DivHomeWrapper = styled.div`
     }
 
     .ant-card-body {
-      padding: 0 15px 50px 15px;
+      padding: 0 15px 32px 15px;
 
       .ant-card-meta-title {
         font-size: 18px;
@@ -150,4 +159,4 @@ export const DivHomeWrapper = styled.div`
       }
     }
   }
-`;
+`

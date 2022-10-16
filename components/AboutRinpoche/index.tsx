@@ -1,63 +1,54 @@
-import React from "react";
-import { useTranslation } from "react-i18next";
-import { DivAboutRinppche } from "./index.style";
-import { Row, Col, Button, Image } from "antd";
-import { ButtonStyle } from "components/Button/ButtonStyle";
+import React from "react"
+import { useTranslation } from "react-i18next"
+import { DivAboutRinppche } from "./index.style"
+import { Row, Col, Button, Image } from "antd"
+import { ButtonStyle } from "components/Button/ButtonStyle"
 
 const AboutRinpoche = () => {
-  const { t, i18n } = useTranslation(["content"]);
+  const { t, i18n } = useTranslation(["content"])
 
   return (
     <DivAboutRinppche>
-      <div className="about">
-        <div className="container">
+      <div className='about'>
+        <div className='container'>
           <div
-            className="about-title d-flex justify-center"
+            className='about-title d-flex justify-center'
             style={{ flexDirection: "column", alignItems: "center" }}
           >
             <h2>
               {t("CHOEZE KUCHEN RINPOCHE’S BIOGRAPHY", { ns: "content" })}
             </h2>
-            <div className="row justify-content-center">
-              <div className="col-12 col-lg-8">
-                <p className="mb-0 font-weight-bold text-center">
-                  {t(
-                    "Choeze Kuchen Rinpoche is one of the prominent Lamas of Choeze Thupten Dhargyeling Monastery located in the eastern part of Tibet in Kham under the Yushu, Qinghai Province, China",
-                    { ns: "content" }
-                  )}
-                  .
-                </p>
-              </div>
-            </div>
-            <p className="mb-0 font-weight-bold text-center">
+            <p
+              className='mb-0 mx-auto text-center'
+              style={{ maxWidth: 800, fontSize: 18 }}
+            >
               {t(
-                "He is regarded as the manifestation of Yamantaka (a wrathful aspect of Manjushri)",
+                "Choeze Kuchen Rinpoche is one of the prominent Lamas of Choeze Thupten Dhargyeling Monastery located in the eastern part of Tibet in Kham under the Yushu, Qinghai Province, China. He is regarded as the manifestation of Yamantaka (a wrathful aspect of Manjushri).",
                 { ns: "content" }
               )}
-              .
             </p>
           </div>
-          <div className="mt-5 mb-5">
-            <Row align="middle" className="mb-5">
+          <div className='mt-5 mb-5'>
+            <Row className='mb-5'>
               <Col
-                className="mb-3 about_Item"
+                className='mb-3 about_Item'
                 xs={12}
                 sm={12}
                 md={12}
                 xl={{ span: 5, offset: 1 }}
                 lg={{ span: 5, offset: 1 }}
               >
-                <Image src="/images/about/about1.jpg" alt="about" />
+                <Image src='/images/about/about1.jpg' alt='about' />
               </Col>
               <Col
-                className="mb-3 about_Item"
+                className='mb-3 about_Item'
                 xs={{ span: 11, offset: 1 }}
                 sm={{ span: 11, offset: 1 }}
                 md={{ span: 11, offset: 1 }}
                 lg={{ span: 5, offset: 1 }}
                 xl={{ span: 5, offset: 1 }}
               >
-                <h3 className="font-weight-bold ">
+                <h3 className='font-weight-bold'>
                   {t("HISTORY OF CHOEZE KUCHEN RINPOCHE", { ns: "content" })}
                 </h3>
                 <p>
@@ -67,7 +58,7 @@ const AboutRinpoche = () => {
                   )}
                   .
                 </p>
-                <ButtonStyle className="aboutButton">LEARN MORE</ButtonStyle>
+                <ButtonStyle className='aboutButton'>LEARN MORE</ButtonStyle>
               </Col>
               <Col
                 xs={12}
@@ -75,19 +66,19 @@ const AboutRinpoche = () => {
                 md={12}
                 xl={{ span: 5, offset: 1 }}
                 lg={{ span: 5, offset: 1 }}
-                className="mb-3 about_Item"
+                className='mb-3 about_Item'
               >
-                <Image src="/images/about/about2.jpg" alt="about" />
+                <Image src='/images/about/about2.jpg' alt='about' />
               </Col>
               <Col
-                className="mb-3 about_Item"
+                className='mb-3 about_Item'
                 xs={{ span: 11, offset: 1 }}
                 sm={{ span: 11, offset: 1 }}
                 md={{ span: 11, offset: 1 }}
                 xl={{ span: 5, offset: 1 }}
                 lg={{ span: 5, offset: 1 }}
               >
-                <h3 className="font-weight-bold">
+                <h3 className='font-weight-bold'>
                   {t(
                     "PREVIOUS REINCARNATION – THE 10TH CHOEZE KUCHEN RINPOCHE",
                     { ns: "content" }
@@ -100,7 +91,7 @@ const AboutRinpoche = () => {
                   )}
                   .
                 </p>
-                <ButtonStyle className="aboutButton">LEARN MORE</ButtonStyle>
+                <ButtonStyle className='aboutButton'>LEARN MORE</ButtonStyle>
               </Col>
               <Col
                 xs={12}
@@ -108,19 +99,19 @@ const AboutRinpoche = () => {
                 md={12}
                 xl={{ span: 5, offset: 1 }}
                 lg={{ span: 5, offset: 1 }}
-                className="mb-3 about_Item"
+                className='mb-3 about_Item'
               >
-                <Image src="/images/about/about5.jpg" alt="about" />
+                <Image src='/images/about/about5.jpg' alt='about' />
               </Col>
               <Col
-                className="mb-3 about_Item"
+                className='mb-3 about_Item'
                 xs={{ span: 11, offset: 1 }}
                 sm={{ span: 11, offset: 1 }}
                 md={{ span: 11, offset: 1 }}
                 lg={{ span: 5, offset: 1 }}
                 xl={{ span: 5, offset: 1 }}
               >
-                <h3 className="font-weight-bold">
+                <h3 className='font-weight-bold'>
                   {t("REBORN AS THONMI SAMBHOTA", { ns: "content" })}
                 </h3>
                 <p>
@@ -130,7 +121,7 @@ const AboutRinpoche = () => {
                   )}
                   .
                 </p>
-                <ButtonStyle className="aboutButton">LEARN MORE</ButtonStyle>
+                <ButtonStyle className='aboutButton'>LEARN MORE</ButtonStyle>
               </Col>
               <Col
                 xs={12}
@@ -138,19 +129,19 @@ const AboutRinpoche = () => {
                 md={12}
                 xl={{ span: 5, offset: 1 }}
                 lg={{ span: 5, offset: 1 }}
-                className="mb-3 about_Item"
+                className='mb-3 about_Item'
               >
-                <Image src="/images/about/about6.jpg" alt="about" />
+                <Image src='/images/about/about6.jpg' alt='about' />
               </Col>
               <Col
-                className="mb-3 about_Item"
+                className='mb-3 about_Item'
                 xs={{ span: 11, offset: 1 }}
                 sm={{ span: 11, offset: 1 }}
                 md={{ span: 11, offset: 1 }}
                 lg={{ span: 5, offset: 1 }}
                 xl={{ span: 5, offset: 1 }}
               >
-                <h3 className="font-weight-bold">
+                <h3 className='font-weight-bold'>
                   {t("BELONGINGS FROM THE PAST LIVES", { ns: "content" })}
                 </h3>
                 <p>
@@ -160,7 +151,7 @@ const AboutRinpoche = () => {
                   )}
                   .
                 </p>
-                <ButtonStyle className="aboutButton">LEARN MORE</ButtonStyle>
+                <ButtonStyle className='aboutButton'>LEARN MORE</ButtonStyle>
               </Col>
               <Col
                 xs={12}
@@ -168,19 +159,19 @@ const AboutRinpoche = () => {
                 md={12}
                 xl={{ span: 5, offset: 1 }}
                 lg={{ span: 5, offset: 1 }}
-                className="mb-3 about_Item"
+                className='mb-3 about_Item'
               >
-                <Image src="/images/about/about4.jpg" alt="about" />
+                <Image src='/images/about/about4.jpg' alt='about' />
               </Col>
               <Col
-                className="mb-3 about_Item"
+                className='mb-3 about_Item'
                 xs={{ span: 11, offset: 1 }}
                 sm={{ span: 11, offset: 1 }}
                 md={{ span: 11, offset: 1 }}
                 lg={{ span: 5, offset: 1 }}
                 xl={{ span: 5, offset: 1 }}
               >
-                <h3 className="font-weight-bold">
+                <h3 className='font-weight-bold'>
                   {t("YOUNGER DAYS", { ns: "content" })}
                 </h3>
                 <p>
@@ -190,7 +181,7 @@ const AboutRinpoche = () => {
                   )}
                   .
                 </p>
-                <ButtonStyle className="aboutButton">LEARN MORE</ButtonStyle>
+                <ButtonStyle className='aboutButton'>LEARN MORE</ButtonStyle>
               </Col>
               <Col
                 xs={12}
@@ -198,21 +189,21 @@ const AboutRinpoche = () => {
                 md={12}
                 xl={{ span: 5, offset: 1 }}
                 lg={{ span: 5, offset: 1 }}
-                className="mb-3 about_Item"
+                className='mb-3 about_Item'
               >
-                <Image src="/images/about/about3.jpg" alt="about" />
+                <Image src='/images/about/about3.jpg' alt='about' />
               </Col>
               <Col
-                className="mb-3 about_Item"
+                className='mb-3 about_Item'
                 xs={{ span: 11, offset: 1 }}
                 sm={{ span: 11, offset: 1 }}
                 md={{ span: 11, offset: 1 }}
                 lg={{ span: 5, offset: 1 }}
                 xl={{ span: 5, offset: 1 }}
               >
-                <h3 className="font-weight-bold">
+                <h3 className='font-weight-bold'>
                   {t("BIOGRAPHY– THE 11TH CHOEZE KUCHEN RINPOCHE", {
-                    ns: "content",
+                    ns: "content"
                   })}
                 </h3>
                 <p>
@@ -222,14 +213,14 @@ const AboutRinpoche = () => {
                   )}
                   .
                 </p>
-                <ButtonStyle className="aboutButton">LEARN MORE</ButtonStyle>
+                <ButtonStyle className='aboutButton'>LEARN MORE</ButtonStyle>
               </Col>
             </Row>
           </div>
         </div>
       </div>
     </DivAboutRinppche>
-  );
-};
+  )
+}
 
-export default AboutRinpoche;
+export default AboutRinpoche

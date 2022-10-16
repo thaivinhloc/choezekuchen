@@ -5,6 +5,15 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { ELanguages } from "i18n/config";
 import { useTranslation } from "react-i18next";
 
+import styled from "styled-components"
+
+const ImageRatioWrapper = styled.img`
+  text-align: center;
+  width: 100%;
+  height: calc(100vw / 2);
+  object-fit: cover;
+`
+
 export default function SingaporeCenter() {
   const { t, i18n } = useTranslation(["content"]);
 
@@ -89,133 +98,60 @@ export default function SingaporeCenter() {
         >
           <Carousel indicators={false}>
             <Carousel.Item>
-              <img
-                style={{ height: "800px" }}
-                className="d-block w-100"
+              <ImageRatioWrapper
                 src="/images/singaporeCenter/singapoCenter1.jpg"
                 alt="First slide"
               />
             </Carousel.Item>
             <Carousel.Item>
-              <img
-                style={{ height: "800px" }}
-                className="d-block w-100"
+              <ImageRatioWrapper
                 src="/images/singaporeCenter/singapoCenter2.jpg"
                 alt="Second slide"
               />
             </Carousel.Item>
             <Carousel.Item>
-              <img
-                style={{ height: "800px" }}
-                className="d-block w-100"
+              <ImageRatioWrapper
                 src="/images/singaporeCenter/singapoCenter3.jpg"
                 alt="Third slide"
               />
             </Carousel.Item>
             <Carousel.Item>
-              <img
-                style={{ height: "800px" }}
-                className="d-block w-100"
+              <ImageRatioWrapper
                 src="/images/singaporeCenter/singapoCenter4.jpg"
                 alt="Second slide"
               />
             </Carousel.Item>
             <Carousel.Item>
-              <img
-                style={{ height: "800px" }}
-                className="d-block w-100"
+              <ImageRatioWrapper
                 src="/images/singaporeCenter/singapoCenter5.jpg"
                 alt="Second slide"
               />
             </Carousel.Item>
             <Carousel.Item>
-              <img
-                style={{ height: "800px" }}
-                className="d-block w-100"
+              <ImageRatioWrapper
                 src="/images/singaporeCenter/singapoCenter6.jpg"
                 alt="Second slide"
               />
             </Carousel.Item>
             <Carousel.Item>
-              <img
-                style={{ height: "800px" }}
-                className="d-block w-100"
+              <ImageRatioWrapper
                 src="/images/singaporeCenter/singapoCenter7.jpg"
                 alt="Second slide"
               />
             </Carousel.Item>
             <Carousel.Item>
-              <img
-                style={{ height: "800px" }}
-                className="d-block w-100"
+              <ImageRatioWrapper
                 src="/images/singaporeCenter/singapoCenter8.jpg"
                 alt="Second slide"
               />
             </Carousel.Item>
             <Carousel.Item>
-              <img
-                style={{ height: "800px" }}
-                className="d-block w-100"
+              <ImageRatioWrapper
                 src="/images/singaporeCenter/singapoCenter9.jpg"
                 alt="Second slide"
               />
             </Carousel.Item>
           </Carousel>
-        </div>
-        <div
-          className="xs:d-none
-    d-sm-block
-    d-md-block
-    d-lg-none
-    d-xl-none
-  mt-5
-  "
-        >
-          <Image
-            width={"100%"}
-            src="/images/singaporeCenter/singapoCenter1.jpg"
-            alt="First slide"
-          />
-          <Image
-            width={"100%"}
-            src="/images/singaporeCenter/singapoCenter2.jpg"
-            alt="First slide"
-          />
-          <Image
-            width={"100%"}
-            src="/images/singaporeCenter/singapoCenter3.jpg"
-            alt="First slide"
-          />
-          <Image
-            width={"100%"}
-            src="/images/singaporeCenter/singapoCenter4.jpg"
-            alt="First slide"
-          />
-          <Image
-            width={"100%"}
-            src="/images/singaporeCenter/singapoCenter5.jpg"
-            alt="First slide"
-          />
-          <Image
-            width={"100%"}
-            src="/images/singaporeCenter/singapoCenter6.jpg"
-            alt="First slide"
-          />
-          <Image
-            width={"100%"}
-            src="/images/singaporeCenter/singapoCenter7.jpg"
-            alt="First slide"
-          />
-          <Image
-            width={"100%"}
-            src="/images/singaporeCenter/singapoCenter8.jpg"
-            alt="First slide"
-          />
-          <Image
-            width={"100%"}
-            src="/images/singaporeCenter/singapoCenter9.jpg"
-            alt="First slide"
-          />
         </div>
         <div className="hr bg-transparent"></div>
       </div>

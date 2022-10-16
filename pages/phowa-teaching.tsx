@@ -14,7 +14,7 @@ export async function getStaticProps({ locale }: { locale: ELanguages }) {
         "header",
         "login",
         "content",
-        "phowa_practice",
+        "phowa_teaching",
       ])),
     },
   };
