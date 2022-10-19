@@ -15,9 +15,11 @@ const Footer: React.FC<{}> = () => {
         <div className='icon'>
           <IconTW />
         </div>
-        <div className='icon'>
-          <IconInstagram />
-        </div>
+        <Link href='https://instagram.com/choeze_rinpoche_?igshid=YmMyMTA2M2Y='>
+          <a className='icon' target='_blank'>
+            <IconInstagram />
+          </a>
+        </Link>
       </div>
     </DivFooterWrapper>
   )
