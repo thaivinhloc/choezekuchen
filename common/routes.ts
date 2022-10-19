@@ -35,8 +35,8 @@ export const ROUTES = [
     path: TEACHING,
     childrent: [
       {
-        label: "NGONDRO TEACHING",
-        path: "/ngondro-teaching",
+        label: "YANGZAB NGONDRO TEACHING",
+        path: "/yangzab-ngondro-teaching",
         childrent: [],
       },
       {

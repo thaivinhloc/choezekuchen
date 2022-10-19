@@ -228,7 +228,7 @@ const Retreat: React.FC<{}> = () => {
         <div className="">
           <Tabs defaultActiveKey={tab} onChange={handleChangeTab}>
             <TabPane
-              tab={<strong>{t("Retreat Ngondro", { ns: ["retreat"] })}</strong>}
+              tab={<strong>{t("Yangzab Ngondro Retreat", { ns: ["retreat"] })}</strong>}
               key={ETabPane.DETAIL}
             >
               <Row gutter={32}>
@@ -405,7 +405,7 @@ const Retreat: React.FC<{}> = () => {
                   <div>
                     <Tabs
                       activeKey={activeRetreat?.toString()}
-                      className="w-100 retreat-content"
+                      className="w-100 center-tabs"
                       onChange={(key) => {
                         setActiveRetreat(Number(key));
                       }}

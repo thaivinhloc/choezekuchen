@@ -40,7 +40,7 @@ const LoginForm: React.FC<{}> = () => {
                 },
               ]}
             >
-              <Input size="large" placeholder="Email" />
+              <Input size="large" placeholder="Email Address" />
             </Form.Item>
             <Form.Item
               label=""
