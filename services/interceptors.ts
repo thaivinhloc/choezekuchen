@@ -1,6 +1,6 @@
 import { AxiosError, AxiosResponse } from "axios";
 
-export const onResponse = (response: AxiosResponse): any => {
+export const onResponse = (response: AxiosResponse): AxiosResponse => {
   return response.data;
 };
 
