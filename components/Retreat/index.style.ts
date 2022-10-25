@@ -13,6 +13,17 @@ export const DivRetreatWrapper = styled.div`
       }
     }
   }
+  .center-tabs {
+    @media (min-width: 992px) {
+      width: 100%;
+      .ant-tabs-nav {
+        margin: auto;
+        .container {
+          width: 100%;
+        }
+      }
+    }
+  }
   .ant-tabs {
     &-tab {
       padding: 4px;

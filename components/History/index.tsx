@@ -37,7 +37,7 @@ const History: React.FC<{}> = () => {
             >
               <p>
                 {t(
-                  "Choeze Kuchen Rinpoche is one of the prominent Lamas of Choeze Thupten Dhargyeling Monastery located in the eastern part of Tibet in Kham under the Yushu, Qinghai Province, China. Choeze Monastery in Kham was founded by the 8th incarnation of Choeze Kuchen Rinpoche, also known as Choeze Denma Shathri Tulku almost 500 years ago. He is regarded as the manifestation of Yamantaka (a wrathful aspect of Manjushri).",
+                  "Choeze Kuchen Rinpoche is the founder of Choeze Thupten Dhargyeling Monastery located in the eastern part of Tibet in Kham under the Yushu, Qinghai Province, China. Choeze Monastery in Kham was founded by the 8th incarnation of Choeze Kuchen Rinpoche, also known as Choeze Denma Shathri Tulku almost 500 years ago. Rinpoche is regarded as the manifestation of Yamantaka (a wrathful aspect of Manjushri).",
                   { ns: "content" }
                 )}
               </p>

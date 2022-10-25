@@ -31,7 +31,7 @@ export function AppProvider({ children }: Props) {
         text = "PROFILE";
         break;
       case "retreat":
-        text = "Ngondro Retreat";
+        text = "Yangzab Ngondro Retreat";
         break;
       case "retreat-history":
         text = "RETREAT HISTORY";
