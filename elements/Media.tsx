@@ -21,17 +21,18 @@ type MediaProps = {
   name?: string
   mediaData: TMedia
   cover?: TMedia
+  ratioHeight: number
 }
 
 type ExtendedImageProps = ImageProps & {
   src?: string
 }
 
-const AudioWrapper = styled.div`
+const AudioWrapper = styled.div<Partial<MediaProps>>`
   border-radius: 5px 5px 0 0;
   position: relative;
   width: 100%;
-  min-height: 240px;
+  min-height: ${(props) => props.ratioHeight ?? 240}px;
   &:after {
     border-radius: 5px 5px 0 0;
     content: "";
@@ -63,12 +64,12 @@ const AudioWrapper = styled.div`
   }
 `
 
-const MediaWrapper = styled.div`
+const MediaWrapper = styled.div<Partial<MediaProps>>`
   .react-pdf {
     &__Page {
       &__canvas {
         border-radius: 2px 2px 0 0;
-        height: 240px !important;
+        height: ${(props) => props.ratioHeight ?? 240}px !important;
         width: 100% !important;
         @supports (aspect-ratio: 3/2) {
           aspect-ratio: 3/2;
@@ -158,7 +159,12 @@ const DownloadButtonWrapper = styled(Button)`
   color: ${(props) => props.theme.primary};
 `
 
-export const Media: React.FC<MediaProps> = ({ mediaData, name, cover }) => {
+export const Media: React.FC<MediaProps> = ({
+  mediaData,
+  name,
+  cover,
+  ratioHeight
+}) => {
   const { t } = useTranslation("common")
   const [numPages, setNumPages] = useState(1)
   const [pageNumber, setPageNumber] = useState(1)
@@ -202,7 +208,7 @@ export const Media: React.FC<MediaProps> = ({ mediaData, name, cover }) => {
       {type === EMediaType.FILE ? (
         <>
           <div style={{ position: "relative" }}>
-            <MediaWrapper>
+            <MediaWrapper ratioHeight={ratioHeight}>
               {cover ? (
                 <Image
                   layout='responsive'
@@ -358,7 +364,7 @@ export const Media: React.FC<MediaProps> = ({ mediaData, name, cover }) => {
         </>
       ) : type === EMediaType.AUDIO ? (
         <>
-          <AudioWrapper>
+          <AudioWrapper ratioHeight={ratioHeight}>
             {cover ? (
               <Image
                 layout='responsive'

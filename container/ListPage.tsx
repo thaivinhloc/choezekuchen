@@ -28,7 +28,6 @@ function GridContent({
   return (
     <Row gutter={[24, 32]}>
       {dataList.map(({ title, content, media, slug, cover }, idx) => {
-        const { type } = getMediaType(media.data)
         return (
           <Col
             key={`page-list-col-${idx}`}
@@ -36,7 +35,12 @@ function GridContent({
             lg={{ span: 24 / listItemCount }}
           >
             <ListItemWrapper>
-              <Media mediaData={media.data} name={title} cover={cover?.data} />
+              <Media
+                mediaData={media.data}
+                name={title}
+                cover={cover?.data}
+                ratioHeight={720 / listItemCount}
+              />
               <div className='p-3'>
                 {slug ? (
                   <Link href={slug}>
@@ -55,7 +59,10 @@ function GridContent({
   )
 }
 
-function GridReverse({ dataList = [] }: Partial<TListPageAttributes>) {
+function GridReverse({
+  dataList = [],
+  listItemCount
+}: Partial<TListPageAttributes>) {
   return (
     <Row gutter={[24, 32]}>
       {dataList.map(({ title, content, media, slug }, idx) => {
@@ -64,7 +71,11 @@ function GridReverse({ dataList = [] }: Partial<TListPageAttributes>) {
           <Col span={24} key={`page-list-col-${idx}`}>
             <Row>
               <Col order={mediaOrder}>
-                <Media mediaData={media.data} name={title} />
+                <Media
+                  mediaData={media.data}
+                  name={title}
+                  ratioHeight={720 / (listItemCount ?? 1)}
+                />
               </Col>
               <Col>
                 {slug ? (
@@ -84,7 +95,10 @@ function GridReverse({ dataList = [] }: Partial<TListPageAttributes>) {
   )
 }
 
-function GridBlog({ dataList = [] }: Partial<TListPageAttributes>) {
+function GridBlog({
+  dataList = [],
+  listItemCount
+}: Partial<TListPageAttributes>) {
   return (
     <Row gutter={[24, 32]}>
       {dataList.map(({ title, content, media, slug }, idx) => {
@@ -92,7 +106,11 @@ function GridBlog({ dataList = [] }: Partial<TListPageAttributes>) {
           <Col span={24} key={`page-list-col-${idx}`}>
             <Row>
               <Col span={24}>
-                <Media mediaData={media.data} name={title} />
+                <Media
+                  mediaData={media.data}
+                  name={title}
+                  ratioHeight={720 / (listItemCount ?? 1)}
+                />
               </Col>
               <Col>
                 {slug ? (
