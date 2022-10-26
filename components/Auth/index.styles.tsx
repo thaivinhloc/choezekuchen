@@ -31,7 +31,7 @@ export const DivSignupWrapper = styled.div`
 `;
 
 export const DivProfileWrapper = styled.div`
-  background-color: #f6f6f6;
+  background-color: #f9f9f9;
 
   .container-inner {
     padding: 120px 0;

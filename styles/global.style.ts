@@ -8,10 +8,9 @@ type TStyled = {
 export const GlobalStyle = createGlobalStyle`${css`
   html,
   body {
-    // font-family: $body-font;
     font-family: ${(props: TStyled) => props.theme.primaryFont};
     font-size: 16px;
-    background: #f6f6f6;
+    background: #f9f9f9;
   }
   span {
     font-family: ${(props: TStyled) => props.theme.primaryFont} !important;
@@ -19,6 +18,16 @@ export const GlobalStyle = createGlobalStyle`${css`
   h1 {
     font-size: 45px;
     font-weight: bold;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: ${(props: TStyled) => props.theme.titleFont};
+    font-weight: 700;
   }
 
   .text-center {
@@ -216,7 +225,7 @@ export const GlobalStyle = createGlobalStyle`${css`
         width: auto;
         padding: 0 23px;
         border-radius: 4px;
-        background-color: #f6f6f6;
+        background-color: #f9f9f9;
         letter-spacing: 1px;
       }
     }

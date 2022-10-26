@@ -9,6 +9,8 @@ export const getPrayerPage = ({ locale }: { locale: string }) => {
     params: {
       "populate[0]": "dataList",
       "populate[1]": "dataList.media",
+      "populate[2]": "dataList.cover",
+      "populate[3]": "banner",
       locale: locale
     }
   })

@@ -1,5 +1,5 @@
 import { Col, Row } from "antd"
-import { EListType, TListPageAttributes } from "definition"
+import { EListType, EMediaType, TListPageAttributes } from "definition"
 import { Media } from "elements/Media"
 import { RichText } from "elements/RichText"
 import { getMediaType } from "helper"
@@ -9,11 +9,13 @@ import styled from "styled-components"
 
 const ListItemTitleWrapper = styled.h2`
   transition: color 0.1s linear;
-  color: #303030;
-  font-size: 20px;
-  line-height: 1.384615384615385em;
-  letter-spacing: 1px;
-  font-weight: 600;
+  font-size: 18px;
+  padding: 12px;
+`
+
+const ListItemWrapper = styled.div`
+  border-radius: 2px;
+  background-color: #fff;
 `
 
 function GridContent({
@@ -25,22 +27,27 @@ function GridContent({
   }
   return (
     <Row gutter={[24, 32]}>
-      {dataList.map(({ title, content, media, slug }, idx) => {
+      {dataList.map(({ title, content, media, slug, cover }, idx) => {
+        const { type } = getMediaType(media.data)
         return (
           <Col
             key={`page-list-col-${idx}`}
             span={24}
             lg={{ span: 24 / listItemCount }}
           >
-            <Media mediaData={media.data} name={title} />
-            {slug ? (
-              <Link href={slug}>
-                <ListItemTitleWrapper as='a'>{title}</ListItemTitleWrapper>
-              </Link>
-            ) : (
-              <ListItemTitleWrapper>{title}</ListItemTitleWrapper>
-            )}
-            {content && <RichText>{content}</RichText>}
+            <ListItemWrapper>
+              <Media mediaData={media.data} name={title} cover={cover?.data} />
+              <div className='p-3'>
+                {slug ? (
+                  <Link href={slug}>
+                    <ListItemTitleWrapper as='a'>{title}</ListItemTitleWrapper>
+                  </Link>
+                ) : (
+                  <ListItemTitleWrapper>{title}</ListItemTitleWrapper>
+                )}
+                {content && <RichText>{content}</RichText>}
+              </div>
+            </ListItemWrapper>
           </Col>
         )
       })}
@@ -108,8 +115,8 @@ function GridBlog({ dataList = [] }: Partial<TListPageAttributes>) {
 }
 
 const ListPageWrapper = styled(Container)`
-  padding-top: 60px;
-  padding-bottom: 100px;
+  padding-top: 48px;
+  padding-bottom: 80px;
 `
 
 const ListPage: React.FC<TListPageAttributes> = ({
@@ -132,13 +139,13 @@ const ListPage: React.FC<TListPageAttributes> = ({
     <ListPageWrapper>
       {hasCategory ? (
         <Row gutter={32}>
-          <Col span={5}>{category}</Col>
-          <Col span={19}>
+          <Col span={18}>
             <ContentComponent
               dataList={dataList}
               listItemCount={listItemCount}
             />
           </Col>
+          <Col span={6}>{category}</Col>
         </Row>
       ) : (
         <ContentComponent dataList={dataList} listItemCount={listItemCount} />

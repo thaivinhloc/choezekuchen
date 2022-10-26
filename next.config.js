@@ -13,10 +13,11 @@ const WithLess = withLess({
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ["choezekuchen-4525c--choezekuchen-mu780vyt.web.app/"]
-  },
-  images: {
-    domains: ["choezekuchen.herokuapp.com", "*.amazonaws.com"]
+    domains: [
+      "choezekuchen.herokuapp.com",
+      "*.amazonaws.com",
+      "s3.ap-southeast-1.amazonaws.com"
+    ]
   },
   i18n
 }

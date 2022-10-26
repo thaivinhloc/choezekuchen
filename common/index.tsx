@@ -1,6 +1,7 @@
 export const THEME = {
-  primaryFont: "Raleway",
-  primary: "#0081ff",
+  primaryFont: "Inter",
+  titleFont: "Raleway",
+  primary: "#f15b43",
   dark: "#363636",
   default: "#636363",
   textSecondary: "#777777",

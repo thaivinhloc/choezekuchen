@@ -49,8 +49,8 @@ export const DivRetreatWrapper = styled.div`
         }
         .box-title {
           /* background: #f6f6f6; */
-          background: #bf1111;
-          color: #fff;
+          background: #fff;
+          color: #f15b43;
           padding: 10px;
           font-weight: bold;
           border-bottom: 1px solid #999;
@@ -61,7 +61,7 @@ export const DivRetreatWrapper = styled.div`
         border-bottom: 1px solid #999;
       }
       &-label {
-        background: #f6f6f6;
+        background: #f9f9f9;
         padding: 10px;
         font-weight: bold;
         font-size: 13px;
@@ -84,7 +84,7 @@ export const DivTableRetreat = styled.div`
     &-thead {
       > tr,
       th {
-        background: #bf1111;
+        background: #f15b43;
         color: #fff;
         font-weight: bold;
         border-bottom: 1px solid #999;

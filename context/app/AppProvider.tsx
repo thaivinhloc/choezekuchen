@@ -1,3 +1,4 @@
+import { TMedia } from "definition";
 import { useRouter } from "next/router";
 import { ReactNode, useEffect, useState } from "react";
 import { AppContext } from "./AppContext";
@@ -7,6 +8,7 @@ type Props = {
 };
 export function AppProvider({ children }: Props) {
   const [title, setTitle] = useState<string>("");
+  const [banner, setBanner] = useState<TMedia>()
   const router = useRouter();
 
   const replaceTitle = (title: string) => {
@@ -82,6 +84,8 @@ export function AppProvider({ children }: Props) {
       value={{
         title,
         setTitleBanner,
+        banner,
+        setBanner
       }}
     >
       {children}

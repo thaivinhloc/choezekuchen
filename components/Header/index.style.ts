@@ -1,3 +1,4 @@
+import { TMedia } from "definition"
 import styled from "styled-components"
 import { THEME } from "../../common"
 
@@ -5,11 +6,16 @@ type TStyled = {
   theme: typeof THEME
 }
 
-export const DivHeaderWrapperV1 = styled.div`
+type HeaderProps = {
+  banner?: TMedia
+}
+
+export const DivHeaderWrapperV1 = styled.div<HeaderProps>`
   .header-desktop {
     /* Main CSS */
     background-color: transparent !important;
-    background-image: url("/images/title-image-3.jpeg");
+    background-image: url(${(props) =>
+      props.banner?.attributes.url ?? "/images/title-image-3.jpeg"});
     background-size: auto;
     position: relative;
     header {

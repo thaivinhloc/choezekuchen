@@ -7,27 +7,118 @@ import { getMediaType } from "helper"
 import NextImage, { ImageProps } from "next/image"
 import { useTranslation } from "react-i18next"
 import styled from "styled-components"
+import {
+  DownloadOutlined,
+  LeftOutlined,
+  RightOutlined,
+  ZoomInOutlined
+} from "@ant-design/icons"
+import { Space } from "antd"
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`
 
 type MediaProps = {
   name?: string
   mediaData: TMedia
+  cover?: TMedia
 }
 
 type ExtendedImageProps = ImageProps & {
   src?: string
 }
 
+const AudioWrapper = styled.div`
+  border-radius: 5px 5px 0 0;
+  position: relative;
+  width: 100%;
+  min-height: 240px;
+  &:after {
+    border-radius: 5px 5px 0 0;
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      to bottom,
+      transparent 0%,
+      transparent 8.1%,
+      rgba(0, 0, 0, 0.001) 15.5%,
+      rgba(0, 0, 0, 0.003) 22.5%,
+      rgba(0, 0, 0, 0.005) 29%,
+      rgba(0, 0, 0, 0.008) 35.3%,
+      rgba(0, 0, 0, 0.011) 41.2%,
+      rgba(0, 0, 0, 0.014) 47.1%,
+      rgba(0, 0, 0, 0.016) 52.9%,
+      rgba(0, 0, 0, 0.019) 58.8%,
+      rgba(0, 0, 0, 0.022) 64.7%,
+      rgba(0, 0, 0, 0.025) 71%,
+      rgba(0, 0, 0, 0.027) 77.5%,
+      rgba(0, 0, 0, 0.029) 84.5%,
+      rgba(0, 0, 0, 0.032) 91.9%,
+      rgba(0, 0, 0, 0.04) 100%
+    );
+  }
+`
+
 const MediaWrapper = styled.div`
   .react-pdf {
     &__Page {
       &__canvas {
+        border-radius: 2px 2px 0 0;
+        height: 240px !important;
         width: 100% !important;
-        height: auto !important;
-        aspect-ratio: 3/4 !important;
+        @supports (aspect-ratio: 3/2) {
+          aspect-ratio: 3/2;
+          width: 100% !important;
+          height: auto !important;
+        }
+      }
+      &__textContent {
+        display: none;
       }
     }
+  }
+  position: relative;
+  border-radius: 2px 2px 0 0;
+  &:after {
+    border-radius: 2px 2px 0 0;
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      to bottom,
+      transparent 0%,
+      transparent 8.1%,
+      rgba(0, 0, 0, 0.001) 15.5%,
+      rgba(0, 0, 0, 0.003) 22.5%,
+      rgba(0, 0, 0, 0.005) 29%,
+      rgba(0, 0, 0, 0.008) 35.3%,
+      rgba(0, 0, 0, 0.011) 41.2%,
+      rgba(0, 0, 0, 0.014) 47.1%,
+      rgba(0, 0, 0, 0.016) 52.9%,
+      rgba(0, 0, 0, 0.019) 58.8%,
+      rgba(0, 0, 0, 0.022) 64.7%,
+      rgba(0, 0, 0, 0.025) 71%,
+      rgba(0, 0, 0, 0.027) 77.5%,
+      rgba(0, 0, 0, 0.029) 84.5%,
+      rgba(0, 0, 0, 0.032) 91.9%,
+      rgba(0, 0, 0, 0.04) 100%
+    );
+  }
+`
+
+const Wrapper = styled.div`
+  video,
+  img,
+  audio {
+    border-radius: 2px 2px 0 0;
   }
 `
 
@@ -53,10 +144,21 @@ export const Image: React.FC<ExtendedImageProps> = ({ src, alt, ...props }) => {
 }
 
 const DownloadButtonWrapper = styled(Button)`
-  padding: 0;
+  border-radius: 5px;
+  background-color: #fff;
+  border: 0;
+  font-weight: 500;
+  font-size: 12px !important;
+  padding-left: 19px;
+  padding-right: 19px;
+  line-height: 24px !important;
+  svg {
+    margin-top: -7px;
+  }
+  color: ${(props) => props.theme.primary};
 `
 
-export const Media: React.FC<MediaProps> = ({ mediaData, name }) => {
+export const Media: React.FC<MediaProps> = ({ mediaData, name, cover }) => {
   const { t } = useTranslation("common")
   const [numPages, setNumPages] = useState(1)
   const [pageNumber, setPageNumber] = useState(1)
@@ -96,70 +198,223 @@ export const Media: React.FC<MediaProps> = ({ mediaData, name }) => {
   }
 
   return (
-    <div style={{ marginBottom: 16 }}>
+    <Wrapper>
       {type === EMediaType.FILE ? (
         <>
           <div style={{ position: "relative" }}>
             <MediaWrapper>
-              <Document file={url} onLoadSuccess={onLoadSuccess}>
-                <Page pageNumber={pageNumber} />
-              </Document>
+              {cover ? (
+                <Image
+                  layout='responsive'
+                  src={cover.attributes.url}
+                  alt={name}
+                  width={600}
+                  height={400}
+                />
+              ) : (
+                <Document file={url} onLoadSuccess={onLoadSuccess}>
+                  <Page pageNumber={pageNumber} />
+                </Document>
+              )}
             </MediaWrapper>
 
-            <div
-              style={{ position: "absolute", bottom: 4, right: 12, zIndex: 10 }}
+            <Space
+              style={{
+                position: "absolute",
+                top: 16,
+                right: 16,
+                zIndex: 10
+              }}
             >
               <DownloadButtonWrapper
-                className='mr-4'
-                type='link'
+                size='small'
                 onClick={onOpenPDFViewer}
+                icon={<ZoomInOutlined />}
               >
-                {t("View")}
+                {t("Preview")}
               </DownloadButtonWrapper>
-              <DownloadButtonWrapper type='link' onClick={onDownload}>
+
+              <DownloadButtonWrapper
+                size='small'
+                onClick={onDownload}
+                icon={<DownloadOutlined />}
+              >
                 {t("Download")}
               </DownloadButtonWrapper>
-            </div>
+            </Space>
           </div>
           <Modal ref={viewModalRef} width='768px'>
             <PreviewMediaWrapper>
               <Document file={url} onLoadSuccess={onLoadSuccess}>
-                {Array.from(new Array(numPages), (el, index) => (
-                  <Page key={`page_${index + 1}`} pageNumber={index + 1} />
-                ))}
+                <Page pageNumber={pageNumber} />
               </Document>
+              <div className='d-flex justify-content-center'>
+                <Button
+                  type='text'
+                  icon={<LeftOutlined />}
+                  onClick={() => {
+                    if (pageNumber > 1) {
+                      setPageNumber(pageNumber - 1)
+                    }
+                  }}
+                />
+                <p className='mx-2'>
+                  {pageNumber}/{numPages}
+                </p>
+                <Button
+                  type='text'
+                  icon={<RightOutlined />}
+                  onClick={() => {
+                    if (pageNumber < numPages) {
+                      setPageNumber(pageNumber + 1)
+                    }
+                  }}
+                />
+              </div>
             </PreviewMediaWrapper>
           </Modal>
         </>
       ) : type === EMediaType.VIDEO ? (
         <>
-          <video width='100%' controls>
-            <source src={url} type='video/mp4' />
-            Your browser does not support HTML video.
-          </video>
-          <div style={{ textAlign: "right" }}>
-            <DownloadButtonWrapper type='link' onClick={onDownload}>
-              {t("Download")}
-            </DownloadButtonWrapper>
+          <div style={{ position: "relative" }}>
+            {cover ? (
+              <>
+                <Image
+                  layout='responsive'
+                  src={cover.attributes.url}
+                  alt={name}
+                  width={600}
+                  height={400}
+                />
+                <div
+                  onClick={onOpenPDFViewer}
+                  style={{
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    width: "100%",
+                    height: "100%",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    cursor: "pointer",
+                    backgroundColor: "rgba(0,0,0,0.2)"
+                  }}
+                >
+                  <svg
+                    width='130'
+                    height='130'
+                    viewBox='0 0 130 130'
+                    fill='none'
+                    xmlns='http://www.w3.org/2000/svg'
+                  >
+                    <path
+                      fill-rule='evenodd'
+                      clip-rule='evenodd'
+                      d='M65 119.166C94.9155 119.166 119.167 94.9151 119.167 64.9997C119.167 35.0842 94.9155 10.833 65 10.833C35.0846 10.833 10.8334 35.0842 10.8334 64.9997C10.8334 94.9151 35.0846 119.166 65 119.166Z'
+                      fill='#000000'
+                      fill-opacity='0.5'
+                    />
+                    <path
+                      d='M52.1433 44.1484C50.1399 45.2219 48.75 47.2321 48.75 50.0731V79.8648C48.75 85.5469 54.4181 88.2714 59.0981 85.6173L81.1569 73.094C88.6384 68.4627 88.3669 61.3127 81.1569 56.844L59.0981 44.3179C56.7581 42.9914 54.1466 43.0753 52.1433 44.1484Z'
+                      fill='#F8F8F8'
+                    />
+                  </svg>
+                </div>
+                <Modal
+                  ref={viewModalRef}
+                  width='768px'
+                  bodyStyle={{ padding: 0 }}
+                >
+                  <video width='100%' controls>
+                    <source src={url} type='video/mp4' />
+                    Your browser does not support HTML video.
+                  </video>
+                </Modal>
+              </>
+            ) : (
+              <video width='100%' controls>
+                <source src={url} type='video/mp4' />
+                Your browser does not support HTML video.
+              </video>
+            )}
+            <Space
+              style={{
+                position: "absolute",
+                top: 16,
+                right: 16,
+                zIndex: 10
+              }}
+            >
+              <DownloadButtonWrapper
+                size='small'
+                onClick={onDownload}
+                icon={<DownloadOutlined />}
+              >
+                {t("Download")}
+              </DownloadButtonWrapper>
+            </Space>
           </div>
         </>
       ) : type === EMediaType.AUDIO ? (
         <>
-          <audio style={{ display: "block", width: "100%" }} controls>
-            <source src={url} type='audio/mpeg' />
-            Your browser does not support the audio element.
-          </audio>
-          <div style={{ textAlign: "right" }}>
-            <DownloadButtonWrapper type='link' onClick={onDownload}>
-              {t("Download")}
-            </DownloadButtonWrapper>
-          </div>
+          <AudioWrapper>
+            {cover ? (
+              <Image
+                layout='responsive'
+                src={cover.attributes.url}
+                alt={name}
+                width={600}
+                height={400}
+              />
+            ) : null}
+            <div
+              style={{
+                position: "absolute",
+                bottom: 16,
+                left: 0,
+                width: "100%",
+                display: "flex",
+                alignItems: "flex-end",
+                justifyContent: "center",
+                zIndex: 20,
+                padding: "0 16px"
+              }}
+            >
+              <audio
+                style={{
+                  display: "block",
+                  width: "100%"
+                }}
+                controls
+              >
+                <source src={url} type='audio/mpeg' />
+                Your browser does not support the audio element.
+              </audio>
+            </div>
+            <div
+              style={{
+                position: "absolute",
+                top: 16,
+                right: 16,
+                zIndex: 10
+              }}
+            >
+              <DownloadButtonWrapper
+                size='small'
+                onClick={onDownload}
+                icon={<DownloadOutlined />}
+              >
+                {t("Download")}
+              </DownloadButtonWrapper>
+            </div>
+          </AudioWrapper>
         </>
       ) : (
         <>
           <Image src={url} alt={name} />
         </>
       )}
-    </div>
+    </Wrapper>
   )
 }

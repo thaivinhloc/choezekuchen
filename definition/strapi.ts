@@ -47,6 +47,9 @@ export interface ListItem {
   media: {
     data: TMedia
   }
+  cover: {
+    data: TMedia
+  }
   slug?: string
   category?: number
 }
@@ -72,6 +75,9 @@ export type TListPageAttributes = {
     }
   }
   category?: ReactElement
+  banner?: {
+    data: TMedia
+  }
 }
 
 export type TListPage = TSingleTypeResponse<TListPageAttributes>
