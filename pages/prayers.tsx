@@ -79,7 +79,7 @@ export default function PrayersPage({ id, attributes, meta }: TListPage) {
               {mediaTypes.map(({ name, type }) => {
                 const items = getLengthByType(type)
                 return (
-                  <Radio.Button value={type}>
+                  <Radio.Button key={`${type}-${name}`} value={type}>
                     {name} ({items})
                   </Radio.Button>
                 )
