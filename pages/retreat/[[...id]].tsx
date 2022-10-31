@@ -16,9 +16,7 @@ const RetreatPage: FC<{ retreats: TRetreat[]; parent: TRetreat }> = ({
 }) => {
   const { setTitleBanner, setBanner } = useApp()
   const router = useRouter()
-  const { getActiveRetreats } = useRetreat(
-    router.locale || "en"
-  )
+  const { getActiveRetreats } = useRetreat(router.locale || "en")
   console.log({ parent, retreats })
 
   useEffect(() => {
@@ -81,14 +79,16 @@ export async function getStaticProps({
 }: GetStaticPropsContext) {
   try {
     const { id: parentId } = params || {}
-    const { retreats, parent } = await getChildRetreats({
+    const result = await getChildRetreats({
       parentId: parseInt(`${parentId}`),
       locale: locale || "en"
     })
 
-    if (!retreats) {
+    if (!result) {
       throw Error("Data not found")
     }
+
+    const { retreats, parent } = result
     return {
       props: {
         ...(await serverSideTranslations(locale ?? "en", [

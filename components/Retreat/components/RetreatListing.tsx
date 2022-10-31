@@ -12,15 +12,9 @@ import { DivTableRetreat } from "../index.style"
 const RetreatListing: React.FC<{
   listParticipant: IResponseListRetreat[]
   isLoading: boolean
-  onGetRetreats: () => Promise<TRetreat[]>
-}> = ({ listParticipant, isLoading, onGetRetreats }) => {
+  retreats: TRetreat[]
+}> = ({ listParticipant, isLoading, retreats }) => {
   const { user } = useAuth()
-
-  const { listRetreat } = useRetreat(i18next.language as any)
-
-  useEffect(() => {
-    onGetRetreats()
-  }, [])
 
   const DEFAULT_COLUMNS = [
     {
@@ -50,8 +44,8 @@ const RetreatListing: React.FC<{
 
   const columns = useMemo(() => {
     let columnsRetreat
-    if (listRetreat.length > 1) {
-      columnsRetreat = listRetreat.map((retreat) => ({
+    if (retreats.length > 1) {
+      columnsRetreat = retreats.map((retreat) => ({
         title: retreat.name,
         dataIndex: retreat.name,
         width: 200,
@@ -112,7 +106,7 @@ const RetreatListing: React.FC<{
         key: "lastUpdated"
       }
     ]
-  }, [listRetreat])
+  }, [retreats])
 
   /* Render */
   return (

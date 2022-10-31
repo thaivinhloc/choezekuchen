@@ -61,7 +61,7 @@ const Retreat: React.FC<{
   retreats: TRetreat[]
   onGetRetreats: () => Promise<TRetreat[]>
   parent: TRetreat
-}> = ({ retreats, onGetRetreats }) => {
+}> = ({ retreats, onGetRetreats, parent }) => {
   const router = useRouter()
   const { user } = useAuth()
   const [form] = useForm<TRetreatForm>()
@@ -121,7 +121,7 @@ const Retreat: React.FC<{
   const getListParticipant = async () => {
     try {
       setIsLoading(true)
-      const result = await getParticipants()
+      const result = await getParticipants({ parentId: parent?.id })
       const data = result.map((item) => {
         const address = item.address?.split(",")
 
@@ -221,6 +221,8 @@ const Retreat: React.FC<{
   const totalDue =
     Number(retreatDetail?.totalCommitment || 0) -
     Number(retreatDetail?.totalGroupCompleted || 0)
+
+  console.log({ listParticipant })
 
   return (
     <DivRetreatWrapper>
@@ -470,7 +472,7 @@ const Retreat: React.FC<{
                   <RetreatListing
                     listParticipant={listParticipant}
                     isLoading={isLoading}
-                    onGetRetreats={onGetRetreats}
+                    retreats={retreats}
                   />
                 </div>
               </TabPane>
