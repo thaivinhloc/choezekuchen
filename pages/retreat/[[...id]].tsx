@@ -98,7 +98,7 @@ export async function getStaticProps({
           "retreat"
         ])),
         retreats,
-        parent
+        parent: parent ?? {}
       }
     }
   } catch (error) {
