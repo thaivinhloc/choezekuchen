@@ -8,7 +8,6 @@ export const DivFooterWrapper = styled.div`
   color: #fff;
   padding: 1rem;
   padding-bottom: 50px;
-  font-family: "Raleway", sans-serif;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;

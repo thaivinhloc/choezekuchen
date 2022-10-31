@@ -17,12 +17,17 @@ import { Space } from "antd"
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`
 
-type MediaProps = {
+export type MediaProps = {
   name?: string
   mediaData: TMedia
   cover?: TMedia
-  ratioHeight: number
-}
+  ratioHeight?: number
+  previewable?: boolean
+  downloadable?: boolean
+  ratio?: string
+  width?: number
+  height?: number
+} & React.HTMLProps<HTMLDivElement>
 
 type ExtendedImageProps = ImageProps & {
   src?: string
@@ -71,8 +76,8 @@ const MediaWrapper = styled.div<Partial<MediaProps>>`
         border-radius: 2px 2px 0 0;
         height: ${(props) => props.ratioHeight ?? 240}px !important;
         width: 100% !important;
-        @supports (aspect-ratio: 3/2) {
-          aspect-ratio: 3/2;
+        @supports (aspect-ratio: ${(props) => props.ratio ?? "3/2"}) {
+          aspect-ratio: ${(props) => props.ratio ?? "3/2"};
           width: 100% !important;
           height: auto !important;
         }
@@ -84,43 +89,17 @@ const MediaWrapper = styled.div<Partial<MediaProps>>`
   }
   position: relative;
   border-radius: 2px 2px 0 0;
-  &:after {
-    border-radius: 2px 2px 0 0;
-    content: "";
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-      to bottom,
-      transparent 0%,
-      transparent 8.1%,
-      rgba(0, 0, 0, 0.001) 15.5%,
-      rgba(0, 0, 0, 0.003) 22.5%,
-      rgba(0, 0, 0, 0.005) 29%,
-      rgba(0, 0, 0, 0.008) 35.3%,
-      rgba(0, 0, 0, 0.011) 41.2%,
-      rgba(0, 0, 0, 0.014) 47.1%,
-      rgba(0, 0, 0, 0.016) 52.9%,
-      rgba(0, 0, 0, 0.019) 58.8%,
-      rgba(0, 0, 0, 0.022) 64.7%,
-      rgba(0, 0, 0, 0.025) 71%,
-      rgba(0, 0, 0, 0.027) 77.5%,
-      rgba(0, 0, 0, 0.029) 84.5%,
-      rgba(0, 0, 0, 0.032) 91.9%,
-      rgba(0, 0, 0, 0.04) 100%
-    );
-  }
 `
 
 const Wrapper = styled.div`
   video,
-  img,
   audio {
     border-radius: 2px 2px 0 0;
   }
+  img {
+    border-radius: 2px;
+  }
+  position: relative;
 `
 
 const PreviewMediaWrapper = styled.div`
@@ -145,7 +124,7 @@ export const Image: React.FC<ExtendedImageProps> = ({ src, alt, ...props }) => {
 }
 
 const DownloadButtonWrapper = styled(Button)`
-  border-radius: 5px;
+  border-radius: 0;
   background-color: #fff;
   border: 0;
   font-weight: 500;
@@ -163,7 +142,12 @@ export const Media: React.FC<MediaProps> = ({
   mediaData,
   name,
   cover,
-  ratioHeight
+  width = 600,
+  height = 400,
+  ratioHeight,
+  previewable,
+  downloadable,
+  style
 }) => {
   const { t } = useTranslation("common")
   const [numPages, setNumPages] = useState(1)
@@ -208,14 +192,17 @@ export const Media: React.FC<MediaProps> = ({
       {type === EMediaType.FILE ? (
         <>
           <div style={{ position: "relative" }}>
-            <MediaWrapper ratioHeight={ratioHeight}>
+            <MediaWrapper
+              style={style}
+              ratioHeight={ratioHeight}
+            >
               {cover ? (
                 <Image
                   layout='responsive'
                   src={cover.attributes.url}
                   alt={name}
-                  width={600}
-                  height={400}
+                  width={width}
+                  height={height}
                 />
               ) : (
                 <Document file={url} onLoadSuccess={onLoadSuccess}>
@@ -224,29 +211,26 @@ export const Media: React.FC<MediaProps> = ({
               )}
             </MediaWrapper>
 
-            <Space
-              style={{
-                position: "absolute",
-                top: 16,
-                right: 16,
-                zIndex: 10
-              }}
-            >
-              <DownloadButtonWrapper
-                size='small'
-                onClick={onOpenPDFViewer}
-                icon={<ZoomInOutlined />}
-              >
-                {t("Preview")}
-              </DownloadButtonWrapper>
+            <Space style={{ width: "100%", justifyContent: "flex-end" }}>
+              {previewable && (
+                <DownloadButtonWrapper
+                  size='small'
+                  onClick={onOpenPDFViewer}
+                  icon={<ZoomInOutlined />}
+                >
+                  {t("Preview")}
+                </DownloadButtonWrapper>
+              )}
 
-              <DownloadButtonWrapper
-                size='small'
-                onClick={onDownload}
-                icon={<DownloadOutlined />}
-              >
-                {t("Download")}
-              </DownloadButtonWrapper>
+              {downloadable && (
+                <DownloadButtonWrapper
+                  size='small'
+                  onClick={onDownload}
+                  icon={<DownloadOutlined />}
+                >
+                  {t("Download")}
+                </DownloadButtonWrapper>
+              )}
             </Space>
           </div>
           <Modal ref={viewModalRef} width='768px'>
@@ -289,8 +273,8 @@ export const Media: React.FC<MediaProps> = ({
                   layout='responsive'
                   src={cover.attributes.url}
                   alt={name}
-                  width={600}
-                  height={400}
+                  width={width}
+                  height={height}
                 />
                 <div
                   onClick={onOpenPDFViewer}
@@ -352,13 +336,15 @@ export const Media: React.FC<MediaProps> = ({
                 zIndex: 10
               }}
             >
-              <DownloadButtonWrapper
-                size='small'
-                onClick={onDownload}
-                icon={<DownloadOutlined />}
-              >
-                {t("Download")}
-              </DownloadButtonWrapper>
+              {downloadable && (
+                <DownloadButtonWrapper
+                  size='small'
+                  onClick={onDownload}
+                  icon={<DownloadOutlined />}
+                >
+                  {t("Download")}
+                </DownloadButtonWrapper>
+              )}
             </Space>
           </div>
         </>
@@ -370,8 +356,8 @@ export const Media: React.FC<MediaProps> = ({
                 layout='responsive'
                 src={cover.attributes.url}
                 alt={name}
-                width={600}
-                height={400}
+                width={width}
+                height={height}
               />
             ) : null}
             <div
@@ -406,19 +392,28 @@ export const Media: React.FC<MediaProps> = ({
                 zIndex: 10
               }}
             >
-              <DownloadButtonWrapper
-                size='small'
-                onClick={onDownload}
-                icon={<DownloadOutlined />}
-              >
-                {t("Download")}
-              </DownloadButtonWrapper>
+              {downloadable && (
+                <DownloadButtonWrapper
+                  size='small'
+                  onClick={onDownload}
+                  icon={<DownloadOutlined />}
+                >
+                  {t("Download")}
+                </DownloadButtonWrapper>
+              )}
             </div>
           </AudioWrapper>
         </>
       ) : (
         <>
-          <Image src={url} alt={name} />
+          <Image
+            objectFit='cover'
+            src={url}
+            alt={name}
+            layout='responsive'
+            width={width}
+            height={height}
+          />
         </>
       )}
     </Wrapper>

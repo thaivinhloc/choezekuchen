@@ -8,12 +8,14 @@ type TStyled = {
 export const GlobalStyle = createGlobalStyle`${css`
   html,
   body {
-    font-family: ${(props: TStyled) => props.theme.primaryFont};
+    font-family: "${(props: TStyled) => props.theme.primaryFont}", sans-serif;
     font-size: 16px;
     background: #f9f9f9;
   }
-  span {
-    font-family: ${(props: TStyled) => props.theme.primaryFont} !important;
+  span,
+  p {
+    font-family: "${(props: TStyled) => props.theme.primaryFont}", sans-serif !important;
+    background: transparent !important;
   }
   h1 {
     font-size: 45px;
@@ -26,8 +28,9 @@ export const GlobalStyle = createGlobalStyle`${css`
   h4,
   h5,
   h6 {
-    font-family: ${(props: TStyled) => props.theme.titleFont};
+    font-family: ${(props: TStyled) => props.theme.titleFont} !important;
     font-weight: 700;
+    letter-spacing: 0.5px;
   }
 
   .text-center {
@@ -199,6 +202,11 @@ export const GlobalStyle = createGlobalStyle`${css`
       &:hover {
         border-color: transparent;
         box-shadow: none;
+      }
+      &-input {
+        > input {
+          font-size: 13px !important;
+        }
       }
     }
     .ant-input::placeholder {

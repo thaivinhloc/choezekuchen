@@ -1,22 +1,51 @@
-import React from "react";
-import About from "components/AboutRinpoche";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { ELanguages } from "i18n/config";
-const AboutRinpoche = () => {
-  return <About />;
-};
+import React, { useEffect } from "react"
+import About from "components/AboutRinpoche"
+import { ELanguages } from "i18n/config"
+import { getAboutPage } from "services/about"
+import { TListPage } from "definition"
+import { useApp } from "context/app/AppContext"
+const AboutRinpoche = (pageProps: TListPage) => {
+  const { setTitleBanner, setBanner } = useApp()
+  const { attributes } = pageProps
+  useEffect(() => {
+    if (attributes.title) {
+      setTitleBanner(attributes.title)
+    }
+  }, [attributes.title])
 
-export default AboutRinpoche;
-export async function getStaticProps({ locale }: { locale: ELanguages }) {
-  return {
-    props: {
-      ...(await serverSideTranslations(locale, [
-        "common",
-        "footer",
-        "header",
-        "login",
-        "content",
-      ])),
-    },
-  };
+  useEffect(() => {
+    if (attributes.banner) {
+      setBanner(attributes.banner.data)
+    }
+  }, [attributes.banner])
+
+  return <About {...pageProps} />
 }
+export async function getStaticProps({ locale }: { locale: ELanguages }) {
+  try {
+    const aboutPage = await getAboutPage({ locale })
+    if (!aboutPage?.data) {
+      throw Error("Data Not Found")
+    }
+
+    return {
+      props: {
+        ...aboutPage.data,
+        attributes: {
+          ...aboutPage.data.attributes,
+          ...(aboutPage.data.attributes.data ?? {})
+        }
+      }
+    }
+  } catch (error) {
+    return {
+      props: {
+        attributes: {
+          dataList: []
+        }
+      }
+    }
+  }
+}
+
+export default AboutRinpoche

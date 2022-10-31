@@ -58,7 +58,6 @@ export const DivHeaderWrapperV1 = styled.div<HeaderProps>`
         .nav {
           &-link {
             color: #ffffff;
-            font-family: "Raleway", sans-serif;
             font-size: 12px;
             font-style: normal;
             font-weight: 700;
@@ -396,7 +395,6 @@ export const DivHeaderMobile = styled.div`
       padding-left: 0px !important;
       a {
         color: #303030;
-        font-family: "Raleway", sans-serif;
         font-size: 11px;
         font-style: normal;
         font-weight: 700;

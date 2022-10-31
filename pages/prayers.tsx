@@ -1,6 +1,5 @@
-import { Divider, Modal, Radio } from "antd"
-import ListPage from "container/ListPage"
-import SideCategory from "container/SideCategory"
+import { Radio } from "antd"
+import ListLayout from "container/ListLayout"
 import { useApp } from "context/app/AppContext"
 import { EMediaType, ListItem, TListPage } from "definition"
 import { TopCategoryWrapper } from "elements/styled/TopCategory"
@@ -9,13 +8,13 @@ import { ELanguages } from "i18n/config"
 import Head from "next/head"
 import React, { useEffect, useState } from "react"
 import { Container } from "react-bootstrap"
+import { useTranslation } from "react-i18next"
 import { getPrayerPage } from "services/prayers"
-import styled from "styled-components"
 
 const mediaTypes = [
   {
     type: EMediaType.FILE,
-    name: "File"
+    name: "Sadhana"
   },
   {
     type: EMediaType.AUDIO,
@@ -27,7 +26,8 @@ const mediaTypes = [
   }
 ]
 
-export default function PrayersPage({ id, attributes, meta }: TListPage) {
+export default function PrayersPage({ id, attributes }: TListPage) {
+  const { t } = useTranslation("common")
   const [mediaType, setMediaType] = useState(EMediaType.FILE)
   const [mediaList, setMediaList] = useState<ListItem[]>([])
   const { setTitleBanner, setBanner } = useApp()
@@ -57,8 +57,6 @@ export default function PrayersPage({ id, attributes, meta }: TListPage) {
     ).length
   }
 
-  console.log({ attributes })
-
   return (
     <>
       <Head>
@@ -80,14 +78,27 @@ export default function PrayersPage({ id, attributes, meta }: TListPage) {
                 const items = getLengthByType(type)
                 return (
                   <Radio.Button key={`${type}-${name}`} value={type}>
-                    {name} ({items})
+                    {t(name)} ({items})
                   </Radio.Button>
                 )
               })}
             </Radio.Group>
           </TopCategoryWrapper>
         </Container>
-        <ListPage {...attributes} dataList={mediaList} meta={meta} />
+        <ListLayout
+          {...attributes}
+          dataList={mediaList}
+          previewable
+          downloadable
+          mediaProps={{
+            style: {
+              backgroundColor: "#fff",
+              padding: 10,
+              border: "1px solid #DFE2E7",
+              marginBottom: 2
+            }
+          }}
+        />
       </div>
     </>
   )

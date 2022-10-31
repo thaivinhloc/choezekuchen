@@ -6,7 +6,6 @@ type TStyled = {
 }
 
 export const DivHomeWrapper = styled.div`
-  font-family: Raleway, sans-serif;
   color: rgb(48, 48, 48);
 
   .section-large {

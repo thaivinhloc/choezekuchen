@@ -1,6 +1,10 @@
-import styled from "styled-components";
+import styled from "styled-components"
 
 export const DivRetreatWrapper = styled.div`
+  h2 {
+    color: ${(props) => props.theme.primary};
+    font-size: 32px;
+  }
   padding: 20px 0px 50px;
   color: #000;
   .retreat-content {
@@ -37,9 +41,9 @@ export const DivRetreatWrapper = styled.div`
       }
       &__right {
         &-form {
-          box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
           color: #000;
-          border: 1px solid #999;
+          border: 1px solid ${(props) => props.theme.border};
+          border-radius: 8px;
           margin-bottom: 30px;
           .ant-input {
             &:focus {
@@ -50,15 +54,18 @@ export const DivRetreatWrapper = styled.div`
         .box-title {
           /* background: #f6f6f6; */
           background: #fff;
-          color: #f15b43;
+          color: #C00000;
           padding: 10px;
           font-weight: bold;
-          border-bottom: 1px solid #999;
+          border-bottom: 1px solid ${(props) => props.theme.border};
+          border-radius: 8px 8px 0 0;
           text-align: left;
         }
       }
       &-row {
-        border-bottom: 1px solid #999;
+        &:not(:last-of-type) {
+          border-bottom: 1px solid ${(props) => props.theme.border};
+        }
       }
       &-label {
         background: #f9f9f9;
@@ -77,23 +84,25 @@ export const DivRetreatWrapper = styled.div`
       }
     }
   }
-`;
+`
 
 export const DivTableRetreat = styled.div`
+  overflow-x: auto;
   .ant-table {
     &-thead {
       > tr,
       th {
-        background: #f15b43;
+        font-size: 14px;
+        background: #C00000;
         color: #fff;
-        font-weight: bold;
-        border-bottom: 1px solid #999;
-        border-top: 1px solid #999;
+        font-weight: 600;
+        border-bottom: 1px solid ${(props) => props.theme.border};
+        border-top: 1px solid ${(props) => props.theme.border};
         &:first-child {
-          border-left: 1px solid #999;
+          border-left: 1px solid ${(props) => props.theme.border};
         }
         &:last-child {
-          border-right: 1px solid #999;
+          border-right: 1px solid ${(props) => props.theme.border};
         }
       }
       .ant-table-cell {
@@ -101,20 +110,19 @@ export const DivTableRetreat = styled.div`
           height: 100% !important;
         }
       }
-      .ant-table-cell {
-      }
     }
-    .ant-table-body {
+    &-body {
+      background: #fff;
       > tr,
       td {
-        border-bottom: 1px solid #999;
+        border-bottom: 1px solid ${(props) => props.theme.border};
         &:first-child {
-          border-left: 1px solid #999;
+          border-left: 1px solid ${(props) => props.theme.border};
         }
         &:last-child {
-          border-right: 1px solid #999;
+          border-right: 1px solid ${(props) => props.theme.border};
         }
       }
     }
   }
-`;
+`

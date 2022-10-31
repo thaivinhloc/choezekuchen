@@ -15,7 +15,6 @@ export const DivAboutRinppche = styled.div`
       line-height: 40px;
       font-style: normal;
       font-weight: 700;
-      letter-spacing: 3px;
     }
     h3 {
       color: #303030;
@@ -23,7 +22,6 @@ export const DivAboutRinppche = styled.div`
       line-height: 24px;
       font-style: normal;
       font-weight: 300;
-      letter-spacing: 0px;
       text-transform: none;
     }
   }

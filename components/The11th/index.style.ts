@@ -24,7 +24,7 @@ export const DivThe11th = styled.div`
       padding: 0 0;
       h3 {
         color: #303030;
-        font-family: "Raleway", sans-serif;
+        font-family: "Libre Baskerville", sans-serif;
         font-size: 20px;
         line-height: 34px;
         font-style: normal;

@@ -2,6 +2,7 @@ import styled from "styled-components"
 
 export const TopCategoryWrapper = styled.div`
   margin-top: 60px;
+  margin-bottom: 32px;
   text-align: center;
   .ant-radio-button-wrapper {
     border: 0;
@@ -12,10 +13,10 @@ export const TopCategoryWrapper = styled.div`
     }
     &:hover {
       background: rgba(255, 255, 255);
-      color: #f15b43;
+      color: #C00000;
     }
     &-checked {
-      background: #f15b43;
+      background: #C00000;
     }
   }
 `

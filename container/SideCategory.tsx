@@ -1,4 +1,3 @@
-import { Space } from "antd"
 import styled from "styled-components"
 
 const SideCategoryWrapper = styled.div`
@@ -13,8 +12,53 @@ const SideCategoryWrapper = styled.div`
   background: #fff;
 `
 
-const SideCategory: React.FC = ({ children, ...props }) => {
-  return <SideCategoryWrapper {...props}>{children}</SideCategoryWrapper>
+type TSideCategory = {
+  categories: TSideCategoryItem[]
+  selectedId?: number
+  onSelect?: ({
+    id,
+    slug,
+    name
+  }: {
+    id?: number
+    slug?: string
+    name?: string
+  }) => void
+}
+
+type TSideCategoryItem = {
+  id: number
+  name: string
+  count?: number
+  slug?: string
+  subCategories?: TSideCategoryItem[]
+}
+
+const CategoryList = ({ categories, selectedId, onSelect }: TSideCategory) => {
+  return (
+    <>
+      {categories.map(({ id, name, slug, count, subCategories }) =>
+        subCategories?.length ? (
+          <li>
+            {name} ({count})
+            <CategoryList categories={subCategories} />
+          </li>
+        ) : (
+          <li onClick={() => onSelect?.({ id, slug, name })}>
+            {name} ({count})
+          </li>
+        )
+      )}
+    </>
+  )
+}
+
+const SideCategory: React.FC<TSideCategory> = ({ ...props }) => {
+  return (
+    <SideCategoryWrapper as='ul'>
+      <CategoryList {...props} />
+    </SideCategoryWrapper>
+  )
 }
 
 export default SideCategory

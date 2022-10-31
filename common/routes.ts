@@ -1,6 +1,7 @@
 import {
   HISTORY,
   MOTIVATION,
+  RETREAT,
   TEACHING,
   THEHEVAJRA,
   THEPERFECTWAY,
@@ -121,7 +122,7 @@ export const ROUTES = [
   // },
   {
     label: "RETREAT",
-    path: "/retreat",
+    path: RETREAT,
     childrent: [],
   },
   {

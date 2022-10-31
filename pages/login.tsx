@@ -1,4 +1,4 @@
-import { RETREAT } from "common/navigator";
+import { HOME, RETREAT } from "common/navigator";
 import LoginForm from "components/Auth/LoginForm";
 import { ELanguages } from "i18n/config";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
@@ -10,7 +10,7 @@ const Login: FC<{}> = ({ language }: any) => {
 
   useEffect(() => {
     const token = !!localStorage.getItem("token");
-    if (token) router.push(RETREAT);
+    if (token) router.push(HOME);
   }, [router]);
 
   /* Render */

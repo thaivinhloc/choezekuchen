@@ -3,9 +3,13 @@ import { useTranslation } from "react-i18next"
 import { DivAboutRinppche } from "./index.style"
 import { Row, Col, Button, Image } from "antd"
 import { ButtonStyle } from "components/Button/ButtonStyle"
+import { TListPage } from "definition"
+import { RichText } from "elements/RichText"
+import ListLayout from "container/ListLayout"
 
-const AboutRinpoche = () => {
-  const { t, i18n } = useTranslation(["content"])
+const AboutRinpoche = ({ id, attributes }: TListPage) => {
+  const { section_title, description } = attributes
+  console.log({ attributes })
 
   return (
     <DivAboutRinppche>
@@ -15,207 +19,14 @@ const AboutRinpoche = () => {
             className='about-title d-flex justify-center'
             style={{ flexDirection: "column", alignItems: "center" }}
           >
-            <h2>
-              {t("CHOEZE KUCHEN RINPOCHE’S BIOGRAPHY", { ns: "content" })}
-            </h2>
-            <p
-              className='mb-0 mx-auto text-center'
-              style={{ maxWidth: 800, fontSize: 18 }}
-            >
-              {t(
-                "Choeze Kuchen Rinpoche is the founder of Choeze Thupten Dhargyeling Monastery located in the eastern part of Tibet in Kham under the Yushu, Qinghai Province, China. Choeze Monastery in Kham was founded by the 8th incarnation of Choeze Kuchen Rinpoche, also known as Choeze Denma Shathri Tulku almost 500 years ago. Rinpoche is regarded as the manifestation of Yamantaka (a wrathful aspect of Manjushri).",
-                { ns: "content" }
-              )}
-            </p>
+            <h2>{section_title}</h2>
+            <RichText
+              content={description}
+              style={{ maxWidth: 800, margin: "0 auto", textAlign: "center" }}
+            />
           </div>
           <div className='mt-5 mb-5'>
-            <Row className='mb-5'>
-              <Col
-                className='mb-3 about_Item'
-                xs={12}
-                sm={12}
-                md={12}
-                xl={{ span: 5, offset: 1 }}
-                lg={{ span: 5, offset: 1 }}
-              >
-                <Image src='/images/about/about1.jpg' alt='about' />
-              </Col>
-              <Col
-                className='mb-3 about_Item'
-                xs={{ span: 11, offset: 1 }}
-                sm={{ span: 11, offset: 1 }}
-                md={{ span: 11, offset: 1 }}
-                lg={{ span: 5, offset: 1 }}
-                xl={{ span: 5, offset: 1 }}
-              >
-                <h3 className='font-weight-bold'>
-                  {t("HISTORY OF CHOEZE KUCHEN RINPOCHE", { ns: "content" })}
-                </h3>
-                <p>
-                  {t(
-                    "Choeze Kuchen Rinpoche is the founder of Choeze Thupten Dhargyeling Monastery located in the eastern part of Tibet in Kham under the Yushu, Qinghai Province, China.",
-                    { ns: "content" }
-                  )}
-                  .
-                </p>
-                <ButtonStyle className='aboutButton'>LEARN MORE</ButtonStyle>
-              </Col>
-              <Col
-                xs={12}
-                sm={12}
-                md={12}
-                xl={{ span: 5, offset: 1 }}
-                lg={{ span: 5, offset: 1 }}
-                className='mb-3 about_Item'
-              >
-                <Image src='/images/about/about2.jpg' alt='about' />
-              </Col>
-              <Col
-                className='mb-3 about_Item'
-                xs={{ span: 11, offset: 1 }}
-                sm={{ span: 11, offset: 1 }}
-                md={{ span: 11, offset: 1 }}
-                xl={{ span: 5, offset: 1 }}
-                lg={{ span: 5, offset: 1 }}
-              >
-                <h3 className='font-weight-bold'>
-                  {t(
-                    "PREVIOUS REINCARNATION – THE 10TH CHOEZE KUCHEN RINPOCHE",
-                    { ns: "content" }
-                  )}
-                </h3>
-                <p>
-                  {t(
-                    "Jigme Choewang Lodro was born in Kham Dzachukha to father Jampa Zangpo and mother Dolo from Kham",
-                    { ns: "content" }
-                  )}
-                  .
-                </p>
-                <ButtonStyle className='aboutButton'>LEARN MORE</ButtonStyle>
-              </Col>
-              <Col
-                xs={12}
-                sm={12}
-                md={12}
-                xl={{ span: 5, offset: 1 }}
-                lg={{ span: 5, offset: 1 }}
-                className='mb-3 about_Item'
-              >
-                <Image src='/images/about/about5.jpg' alt='about' />
-              </Col>
-              <Col
-                className='mb-3 about_Item'
-                xs={{ span: 11, offset: 1 }}
-                sm={{ span: 11, offset: 1 }}
-                md={{ span: 11, offset: 1 }}
-                lg={{ span: 5, offset: 1 }}
-                xl={{ span: 5, offset: 1 }}
-              >
-                <h3 className='font-weight-bold'>
-                  {t("REBORN AS THONMI SAMBHOTA", { ns: "content" })}
-                </h3>
-                <p>
-                  {t(
-                    "In one of Choeze Kuchen Rinpoche's previous lives, he was born as a bright Brahmin named Salwa (Prabha) during the times of Buddha Dipankara",
-                    { ns: "content" }
-                  )}
-                  .
-                </p>
-                <ButtonStyle className='aboutButton'>LEARN MORE</ButtonStyle>
-              </Col>
-              <Col
-                xs={12}
-                sm={12}
-                md={12}
-                xl={{ span: 5, offset: 1 }}
-                lg={{ span: 5, offset: 1 }}
-                className='mb-3 about_Item'
-              >
-                <Image src='/images/about/about6.jpg' alt='about' />
-              </Col>
-              <Col
-                className='mb-3 about_Item'
-                xs={{ span: 11, offset: 1 }}
-                sm={{ span: 11, offset: 1 }}
-                md={{ span: 11, offset: 1 }}
-                lg={{ span: 5, offset: 1 }}
-                xl={{ span: 5, offset: 1 }}
-              >
-                <h3 className='font-weight-bold'>
-                  {t("BELONGINGS FROM THE PAST LIVES", { ns: "content" })}
-                </h3>
-                <p>
-                  {t(
-                    "The golden statues of Yamantaka (central statue) and other deities belonging to the 10th incarnation of Choeze Kuchen Rinpoche",
-                    { ns: "content" }
-                  )}
-                  .
-                </p>
-                <ButtonStyle className='aboutButton'>LEARN MORE</ButtonStyle>
-              </Col>
-              <Col
-                xs={12}
-                sm={12}
-                md={12}
-                xl={{ span: 5, offset: 1 }}
-                lg={{ span: 5, offset: 1 }}
-                className='mb-3 about_Item'
-              >
-                <Image src='/images/about/about4.jpg' alt='about' />
-              </Col>
-              <Col
-                className='mb-3 about_Item'
-                xs={{ span: 11, offset: 1 }}
-                sm={{ span: 11, offset: 1 }}
-                md={{ span: 11, offset: 1 }}
-                lg={{ span: 5, offset: 1 }}
-                xl={{ span: 5, offset: 1 }}
-              >
-                <h3 className='font-weight-bold'>
-                  {t("YOUNGER DAYS", { ns: "content" })}
-                </h3>
-                <p>
-                  {t(
-                    "Rinpoche first met with His Holiness Chetsang Rinpoche just 3 days after he was born and was recognized as a Tulku when he was only 1 year old",
-                    { ns: "content" }
-                  )}
-                  .
-                </p>
-                <ButtonStyle className='aboutButton'>LEARN MORE</ButtonStyle>
-              </Col>
-              <Col
-                xs={12}
-                sm={12}
-                md={12}
-                xl={{ span: 5, offset: 1 }}
-                lg={{ span: 5, offset: 1 }}
-                className='mb-3 about_Item'
-              >
-                <Image src='/images/about/about3.jpg' alt='about' />
-              </Col>
-              <Col
-                className='mb-3 about_Item'
-                xs={{ span: 11, offset: 1 }}
-                sm={{ span: 11, offset: 1 }}
-                md={{ span: 11, offset: 1 }}
-                lg={{ span: 5, offset: 1 }}
-                xl={{ span: 5, offset: 1 }}
-              >
-                <h3 className='font-weight-bold'>
-                  {t("BIOGRAPHY– THE 11TH CHOEZE KUCHEN RINPOCHE", {
-                    ns: "content"
-                  })}
-                </h3>
-                <p>
-                  {t(
-                    "Kunchok Thrinley Lhundup Namgyal was born in Kathmandu, Nepal in 1984 as the eldest son of yogi Lama Jorjel and Yangchen Dolkar from Kham, Tibet",
-                    { ns: "content" }
-                  )}
-                  .
-                </p>
-                <ButtonStyle className='aboutButton'>LEARN MORE</ButtonStyle>
-              </Col>
-            </Row>
+            <ListLayout {...attributes} />
           </div>
         </div>
       </div>

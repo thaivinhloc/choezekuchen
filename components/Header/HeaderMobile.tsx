@@ -6,7 +6,7 @@ import {
   UserOutlined,
 } from "@ant-design/icons";
 import { Button, Collapse, Dropdown, Menu, Space } from "antd";
-import { LOGIN } from "common/navigator";
+import { LOGIN, RETREAT } from "common/navigator";
 import { useApp } from "context/app/AppContext";
 import { TFunction } from "i18next";
 import Link from "next/link";
@@ -43,7 +43,7 @@ const HeaderMobile = ({ t }: { t: TFunction }) => {
         <Link href="/profile">Profile</Link>
       </Menu.Item>
       <Menu.Item key="2">
-        <Link href="/retreat">Retreat</Link>
+        <Link href={RETREAT}>Retreat</Link>
       </Menu.Item>
       <Menu.Divider />
       <Menu.Item key="3" onClick={onLogout}>
