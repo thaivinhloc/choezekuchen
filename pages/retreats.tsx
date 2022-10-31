@@ -63,7 +63,8 @@ export async function getStaticProps({ locale }: { locale: ELanguages }) {
           "retreat"
         ])),
         retreats
-      }
+      },
+      revalidate: 60
     }
   } catch (error) {
     return {
@@ -74,7 +75,8 @@ export async function getStaticProps({ locale }: { locale: ELanguages }) {
           "header",
           "retreat"
         ]))
-      }
+      },
+      revalidate: 60
     }
   }
 }

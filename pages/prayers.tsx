@@ -114,7 +114,8 @@ export async function getStaticProps({ locale }: { locale: ELanguages }) {
     return {
       props: {
         ...prayerPage.data
-      }
+      },
+      revalidate: 60
     }
   } catch (error) {
     return {
@@ -122,7 +123,8 @@ export async function getStaticProps({ locale }: { locale: ELanguages }) {
         attributes: {
           dataList: []
         }
-      }
+      },
+      revalidate: 60
     }
   }
 }

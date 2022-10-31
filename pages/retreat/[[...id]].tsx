@@ -99,7 +99,8 @@ export async function getStaticProps({
         ])),
         retreats,
         parent: parent ?? {}
-      }
+      },
+      revalidate: 60
     }
   } catch (error) {
     return {
@@ -112,7 +113,8 @@ export async function getStaticProps({
         ])),
         retreats: [],
         parent: {}
-      }
+      },
+      revalidate: 60
     }
   }
 }
