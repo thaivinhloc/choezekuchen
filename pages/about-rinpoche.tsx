@@ -36,7 +36,7 @@ export async function getStaticProps({ locale }: { locale: ELanguages }) {
           ...(aboutPage.data.attributes.data ?? {})
         }
       },
-      revalidate: 60
+      revalidate: 10
     }
   } catch (error) {
     return {
@@ -45,7 +45,7 @@ export async function getStaticProps({ locale }: { locale: ELanguages }) {
           dataList: []
         }
       },
-      revalidate: 60
+      revalidate: 10
     }
   }
 }
