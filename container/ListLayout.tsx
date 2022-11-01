@@ -28,7 +28,7 @@ function GridContent({
   previewable,
   downloadable,
   mediaProps
-}: Partial<TListPageAttributes>) {
+}: Partial<TListPageAttributes & { listItemStyle: Record<string, any> }>) {
   if (!listItemCount) {
     listItemCount = 1
   }
@@ -85,7 +85,7 @@ function GridReverse({
   dataList = [],
   previewable,
   downloadable
-}: Partial<TListPageAttributes>) {
+}: Partial<TListPageAttributes & { listItemStyle: Record<string, any> }>) {
   return (
     <>
       {dataList.map(({ title, description, media, slug }, idx) => {
@@ -128,14 +128,16 @@ function GridBlog({
   downloadable,
   onRowClick,
   mediaProps = {},
-  action_title
-}: Partial<TListPageAttributes>) {
+  action_title,
+  listItemStyle
+}: Partial<TListPageAttributes & { listItemStyle: Record<string, any> }>) {
   const titleStyle = {
     textAlign: "left",
     fontSize: 18,
     lineHeight: "24px"
   }
-  const { t } = useTranslation("common")
+  console.log({ action_title })
+
   return (
     <Row gutter={[24, 32]}>
       {dataList.map(({ id, title, description, media, slug }, idx) => {
@@ -143,6 +145,7 @@ function GridBlog({
           <Col
             lg={{ span: 24 / (listItemCount ?? 1) }}
             key={`page-list-col-${idx}`}
+            style={listItemStyle ?? {}}
           >
             <Row>
               <Col span={24} lg={{ span: 10 }}>
@@ -176,7 +179,17 @@ function GridBlog({
                   </ListItemTitleWrapper>
                 )}
                 {description && <RichText content={description} />}
-                {!onRowClick && slug && action_title && (
+
+                {onRowClick && slug && action_title ? (
+                  <Button
+                    style={{ padding: 0, marginTop: 12, color: "#8d90a9" }}
+                    size='large'
+                    type='link'
+                    onClick={() => onRowClick?.({ id, slug: slug ?? "" })}
+                  >
+                    {action_title} <ArrowRightOutlined />
+                  </Button>
+                ) : slug && action_title ? (
                   <Button
                     style={{ padding: 0, marginTop: 12, color: "#8d90a9" }}
                     size='large'
@@ -185,7 +198,7 @@ function GridBlog({
                   >
                     {action_title} <ArrowRightOutlined />
                   </Button>
-                )}
+                ) : null}
               </Col>
             </Row>
           </Col>
@@ -200,7 +213,9 @@ const ListLayoutWrapper = styled(Container)`
   padding-bottom: 80px;
 `
 
-const ListLayout: React.FC<TListPageAttributes> = ({
+const ListLayout: React.FC<
+  TListPageAttributes & { listItemStyle?: Record<string, any> }
+> = ({
   listType,
   dataList = [],
   listItemCount,
@@ -209,7 +224,9 @@ const ListLayout: React.FC<TListPageAttributes> = ({
   previewable,
   downloadable,
   onRowClick,
-  mediaProps
+  mediaProps,
+  listItemStyle,
+  action_title
 }) => {
   const hasCategory = !!category
   const ContentComponent =
@@ -231,6 +248,8 @@ const ListLayout: React.FC<TListPageAttributes> = ({
               downloadable={downloadable}
               onRowClick={onRowClick}
               mediaProps={mediaProps}
+              listItemStyle={listItemStyle}
+              action_title={action_title}
             />
           </Col>
           <Col span={6}>{category}</Col>
@@ -243,6 +262,8 @@ const ListLayout: React.FC<TListPageAttributes> = ({
           listItemCount={listItemCount}
           onRowClick={onRowClick}
           mediaProps={mediaProps}
+          listItemStyle={listItemStyle}
+          action_title={action_title}
         />
       )}
       {meta?.pagination && <div>Pagination here</div>}

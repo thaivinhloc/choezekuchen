@@ -95,6 +95,15 @@ export type TListPageAttributes = {
 
 export type TListPage = TSingleTypeResponse<TListPageAttributes>
 
+export type TPageConfigurationAttributes = {
+  title?: string
+  banner?: {
+    data: TMedia
+  }
+  background?: string
+  action_title?: string
+}
+
 export type TRetreat = {
   id: number
   name: string

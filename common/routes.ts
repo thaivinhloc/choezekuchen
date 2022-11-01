@@ -12,7 +12,6 @@ export const ROUTES = [
   {
     label: "ABOUT RINPOCHE",
     path: "/about-rinpoche",
-    isOpenTab: true,
     childrent: [
       {
         label: "GURUS",

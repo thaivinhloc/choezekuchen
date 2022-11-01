@@ -17,6 +17,7 @@ import {
 import { useForm } from "antd/lib/form/Form"
 import { LOGIN, RETREAT_HISTORY } from "common/navigator"
 import { TRetreat } from "definition"
+import { RichText } from "elements/RichText"
 import i18next from "i18next"
 import moment from "moment"
 import { useTranslation } from "next-i18next"
@@ -448,10 +449,8 @@ const Retreat: React.FC<{
                             {isLoading ? (
                               <Skeleton active />
                             ) : (
-                              <p
-                                dangerouslySetInnerHTML={{
-                                  __html: retreatDetail?.description || ""
-                                }}
+                              <RichText
+                                content={retreatDetail?.description || ""}
                               />
                             )}
                           </TabPane>

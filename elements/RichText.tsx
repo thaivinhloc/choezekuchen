@@ -8,8 +8,8 @@ interface RichTextProps extends React.HTMLProps<HTMLDivElement> {
 
 const RichTextWrapper = styled.div<RichTextProps>`
   img {
-    width: 100%;
-    height: auto;
+    width: 100% !important;
+    height: auto !important;
   }
 `
 

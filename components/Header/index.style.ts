@@ -321,13 +321,17 @@ export const DivHeaderMobile = styled.div`
       display: flex;
       justify-content: space-between;
       padding: 10px 0px !important;
+      > div {
+        flex: 1;
+      }
       &-text {
         width: 100px;
         text-align: center;
       }
     }
     &-extra {
-      margin-left: 0 !important;
+      margin: 0 !important;
+      text-align: right;
     }
   }
 
@@ -353,7 +357,7 @@ export const DivHeaderMobile = styled.div`
         background-color: #fff;
       }
       &-inline {
-        background-color: #fff;
+        background-color: transparent;
         border-right: none;
       }
       &-item::after {
