@@ -173,7 +173,7 @@ const Retreat: React.FC<{
       const recitationNumber = Number(values.recitationNumber)
       const completedAt = moment(values.completedAt).format("YYYY-MM-DD")
       if (!user) {
-        router.push("/" + i18next.language + LOGIN)
+        router.push(LOGIN, undefined, { locale: currentLng })
       } else {
         setIsLoadingSubmit(true)
         await postRetreatRecitation({
