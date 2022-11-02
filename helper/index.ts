@@ -52,8 +52,8 @@ export const transformRetreatToListItem = (retreat: TRetreat): ListItem => {
     description: retreat.description,
     media: {
       data: {
-        attributes: retreat.image,
-        id: retreat.image.id
+        attributes: retreat.image ?? {},
+        id: retreat.image?.id
       }
     },
     slug: retreat.slug,
