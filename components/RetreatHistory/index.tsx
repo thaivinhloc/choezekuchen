@@ -37,7 +37,7 @@ const DEFAULT_COLUMNS: Columns[] = [
   }
 ]
 
-const RetreatHistory: FC<{}> = () => {
+const RetreatHistory: FC<{retreatId: number}> = ({ retreatId }) => {
   const router = useRouter()
   const { user } = useAuth()
   const { t } = useTranslation("common")
@@ -47,13 +47,13 @@ const RetreatHistory: FC<{}> = () => {
 
   useEffect(() => {
     if (!user?.id) return
-    handleGetParticipantsHistory(user.id)
+    handleGetParticipantsHistory(user.id, retreatId)
   }, [user])
 
-  const handleGetParticipantsHistory = async (userId: number) => {
+  const handleGetParticipantsHistory = async (userId: number, retreatParentId: number) => {
     try {
       setIsLoading(true)
-      const result: any[] = await getParticipantHistory(userId)
+      const result: any[] = await getParticipantHistory(userId, retreatParentId)
       setDataSource(result)
     } catch (error) {
     } finally {

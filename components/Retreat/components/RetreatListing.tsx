@@ -13,7 +13,8 @@ const RetreatListing: React.FC<{
   listParticipant: IResponseListRetreat[]
   isLoading: boolean
   retreats: TRetreat[]
-}> = ({ listParticipant, isLoading, retreats }) => {
+  parentRetreatId: number
+}> = ({ listParticipant, isLoading, retreats, parentRetreatId }) => {
   const { user } = useAuth()
 
   const DEFAULT_COLUMNS = [
@@ -23,7 +24,7 @@ const RetreatListing: React.FC<{
       render: (name: string, record: any) => {
         if (record.id === user?.id) {
           return (
-            <LinkComponent href='/retreat-history'>
+            <LinkComponent href={`/retreat-history/${parentRetreatId}`}>
               <a style={{ textDecoration: "underline" }}>{name}</a>
             </LinkComponent>
           )

@@ -147,9 +147,9 @@ function GridBlog({
             key={`page-list-col-${idx}`}
             style={listItemStyle ?? {}}
           >
-            <Row>
+            <Row gutter={{ xl: 32 }}>
               <Col span={24} lg={{ span: 10 }}>
-                <div style={{ marginRight: 32, marginBottom: 16 }}>
+                <div style={{ marginBottom: 16 }}>
                   <Media
                     mediaData={media.data}
                     name={title}

@@ -52,10 +52,16 @@ export const postRetreatRecitation = async (data: TPostSubmitRetreat) => {
   })
 }
 
-export const getParticipantHistory = async (userId: number) => {
+export const getParticipantHistory = async (
+  userId: number,
+  retreatParentId: number
+) => {
   return await Client.createRequest<any[]>({
     path: `/api/participants/${userId}`,
     method: "get",
-    external: false
+    external: false,
+    params: {
+      retreatParentId
+    }
   })
 }

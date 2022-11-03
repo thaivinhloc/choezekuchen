@@ -15,6 +15,7 @@ import {
   Tooltip
 } from "antd"
 import { useForm } from "antd/lib/form/Form"
+import { THEME } from "common"
 import { LOGIN, RETREAT_HISTORY } from "common/navigator"
 import { TRetreat } from "definition"
 import { RichText } from "elements/RichText"
@@ -326,7 +327,7 @@ const Retreat: React.FC<{
                         <Row className='box-title d-flex justify-content-between'>
                           {userRetreat?.name || ""}
                           <Link href={RETREAT_HISTORY}>
-                            <a className='link-underline'>
+                            <a className='link-underline' style={{ color: THEME.primary }}>
                               {t("View history", { ns: "retreat" })}
                             </a>
                           </Link>
@@ -472,6 +473,7 @@ const Retreat: React.FC<{
                     listParticipant={listParticipant}
                     isLoading={isLoading}
                     retreats={retreats}
+                    parentRetreatId={parent?.id}
                   />
                 </div>
               </TabPane>
