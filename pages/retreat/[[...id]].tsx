@@ -51,11 +51,13 @@ export async function getStaticPaths({ defaultLocale }: GetStaticPathsContext) {
         id: [id.toString()]
       }
     }))
-    paths.push({
-      params: {
-        id: []
-      }
-    })
+    if (!paths.length) {
+      paths.push({
+        params: {
+          id: []
+        }
+      })
+    }
 
     return {
       paths,

@@ -15,17 +15,18 @@ const RetreatHistoryPage: FC<{ retreatId: number }> = ({ retreatId }) => {
 export async function getStaticPaths({ defaultLocale }: GetStaticPathsContext) {
   try {
     const retreats = await getParentRetreats({ locale: defaultLocale || "en" })
-
     const paths = retreats.map(({ id }: { id: number }) => ({
       params: {
         id: [id.toString()]
       }
     }))
-    paths.push({
-      params: {
-        id: []
-      }
-    })
+    if (!paths.length) {
+      paths.push({
+        params: {
+          id: []
+        }
+      })
+    }
 
     return {
       paths,
@@ -57,7 +58,8 @@ export async function getStaticProps({
         "retreat"
       ])),
       retreatId
-    }
+    },
+    revalidate: 10
   }
 }
 
