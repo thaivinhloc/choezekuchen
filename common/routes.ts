@@ -1,5 +1,6 @@
 import {
   HISTORY,
+  LIBRARY,
   MOTIVATION,
   RETREAT,
   TEACHING,
@@ -103,22 +104,11 @@ export const ROUTES = [
       },
     ],
   },
-  // {
-  //   label: "PRAYERS",
-  //   path: "/prayers",
-  //   childrent: [
-  //     {
-  //       label: "SADHANAS",
-  //       path: "/sadhanas",
-  //       childrent: [],
-  //     },
-  //     {
-  //       label: "CHOEZE KUCHEN RINPOCHES CHANTING AUTIO",
-  //       path: "/choeze-kuchen-rinpoches-chanting-audio",
-  //       childrent: [],
-  //     },
-  //   ],
-  // },
+  {
+    label: "LIBRARY",
+    path: LIBRARY,
+    childrent: [],
+  },
   {
     label: "RETREAT",
     path: RETREAT,
