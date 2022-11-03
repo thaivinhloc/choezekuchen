@@ -1,83 +1,88 @@
 /* eslint-disable react/no-unescaped-entities */
-import { Button, Col, Form, Input, Row } from "antd";
-import { useForm } from "antd/lib/form/Form";
-import LinkComponent from "components/Link";
-import i18next from "i18next";
-import React from "react";
-import { useTranslation } from "react-i18next";
-import { useAuth } from "../../context/auth/AuthContext";
-import { TLogin } from "../../context/auth/AuthTypes";
-import { DivLoginWrapper } from "./index.styles";
+import { Button, Col, Form, Input, Row } from "antd"
+import { useForm } from "antd/lib/form/Form"
+import { RETREAT } from "common/navigator"
+import LinkComponent from "components/Link"
+import i18next from "i18next"
+import { useRouter } from "next/router"
+import React from "react"
+import { useTranslation } from "react-i18next"
+import { useAuth } from "../../context/auth/AuthContext"
+import { TLogin } from "../../context/auth/AuthTypes"
+import { DivLoginWrapper } from "./index.styles"
 
 const LoginForm: React.FC<{}> = () => {
-  const [form] = useForm<TLogin>();
-  const { t, i18n } = useTranslation(["content"]);
+  const router = useRouter()
+  const [form] = useForm<TLogin>()
+  const { t, i18n } = useTranslation(["content"])
 
-  const { onLogin, isLoading } = useAuth();
+  const { onLogin, isLoading } = useAuth()
 
   const onFinish = (values: TLogin) => {
-    onLogin(values);
-  };
+    onLogin(values, () => {
+      router.push(router.query.referer ? `/${router.query.referer}` : RETREAT)
+    })
+  }
 
   return (
     <DivLoginWrapper>
-      <div className="container">
-        <Row justify="center" align="middle">
+      <div className='container'>
+        <Row justify='center' align='middle'>
           <Form
-            name="normal_login"
+            name='normal_login'
             form={form}
-            className="login-form"
+            className='login-form'
             onFinish={onFinish}
             requiredMark={false}
           >
             <Form.Item
-              label=""
-              name="identifier"
+              label=''
+              name='identifier'
               rules={[
                 {
                   required: true,
-                  message: t("Please input your", { ns: "login" }) + " Email!",
-                },
+                  message: t("Please input your", { ns: "login" }) + " Email!"
+                }
               ]}
             >
-              <Input size="large" placeholder="Email Address" />
+              <Input size='large' placeholder='Email Address' />
             </Form.Item>
             <Form.Item
-              label=""
-              name="password"
+              label=''
+              name='password'
               rules={[
                 {
                   required: true,
                   message:
                     t("Please input your", { ns: "login" }) +
-                    ` ${t("Password", { ns: "login" })}!`,
-                },
+                    ` ${t("Password", { ns: "login" })}!`
+                }
               ]}
             >
               <Input
-                size="large"
-                type="password"
+                size='large'
+                type='password'
                 placeholder={t("Password", { ns: "login" })}
               />
             </Form.Item>
-            <div className="form-footer">
+            <div className='form-footer'>
               <Col span={14}>
                 <Row>
                   <Col>
                     {t("Dont't have an account?", { ns: "content" })} &nbsp;
                   </Col>
                   <Col>
-                    <LinkComponent href="/signup">
+                    <LinkComponent href='/signup'>
                       <strong>{t("Register Now", { ns: "content" })}</strong>
                     </LinkComponent>
                   </Col>
                 </Row>
               </Col>
-              <Col span={10} className="form-button-submit">
+              <Col span={10} className='form-button-submit'>
                 <Button
-                  size="large"
-                  htmlType="submit"
-                  className="btn-primary bold"
+                  size='large'
+                  htmlType='submit'
+                  className='btn-primary bold'
                   loading={isLoading}
                 >
                   {t("login", { ns: "login" })}
@@ -88,7 +93,7 @@ const LoginForm: React.FC<{}> = () => {
         </Row>
       </div>
     </DivLoginWrapper>
-  );
-};
+  )
+}
 
-export default LoginForm;
+export default LoginForm

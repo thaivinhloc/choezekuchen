@@ -4,7 +4,7 @@ import { IUser, TLogin, TSignup } from "./AuthTypes";
 type authContextType = {
   isLoading: boolean;
   user: IUser | null;
-  onLogin: (data: TLogin) => any;
+  onLogin: (data: TLogin, callback?: () => void) => any;
   onRegister: (data: TSignup) => any;
   onLogout: () => any;
   onGetMe: () => any;

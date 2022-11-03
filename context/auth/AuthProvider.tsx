@@ -17,7 +17,7 @@ export function AuthProvider({ children }: Props) {
   const [user, setUser] = useState<IUser | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const onLogin = async (data: TLogin) => {
+  const onLogin = async (data: TLogin, callback?: () => void) => {
     try {
       setIsLoading(true);
       const result: IResponseLogin = await Client.createRequest({
@@ -28,7 +28,7 @@ export function AuthProvider({ children }: Props) {
       });
       localStorage.setItem("token", result.jwt);
       setUser(result.user);
-      router.push(RETREAT);
+      callback?.()
     } catch (error: any) {
       notification.error({
         message: t("error"),

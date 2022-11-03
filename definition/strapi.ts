@@ -91,6 +91,7 @@ export type TListPageAttributes = {
   onRowClick?: ({ id, slug }: { id: number; slug: string }) => void
   mediaProps?: Partial<MediaProps>
   action_title?: string
+  background?: string
 }
 
 export type TListPage = TSingleTypeResponse<TListPageAttributes>

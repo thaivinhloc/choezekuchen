@@ -65,7 +65,7 @@ export default function PrayersPage({ id, attributes }: TListPage) {
           <meta name='description' content={attributes.description} />
         )}
       </Head>
-      <div>
+      <div style={{ background: attributes.background ?? "transparent" }}>
         <Container>
           <TopCategoryWrapper>
             <Radio.Group

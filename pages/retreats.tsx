@@ -1,7 +1,9 @@
+import { LOGIN } from "common/navigator"
 import Retreat from "components/Retreat"
 import { DivRetreatWrapper } from "components/Retreat/index.style"
 import ListLayout from "container/ListLayout"
 import { useApp } from "context/app/AppContext"
+import { useAuth } from "context/auth/AuthContext"
 import {
   EListType,
   TMedia,
@@ -27,6 +29,7 @@ const RetreatPage: FC<RetreatPageProps & TPageConfigurationAttributes> = ({
   background,
   action_title
 }) => {
+  const { user } = useAuth()
   const { setTitleBanner, setBanner } = useApp()
   const router = useRouter()
   const dataList = (retreats ?? []).map((retreat) =>
@@ -57,7 +60,11 @@ const RetreatPage: FC<RetreatPageProps & TPageConfigurationAttributes> = ({
           listType={EListType.BLOG}
           dataList={dataList}
           onRowClick={({ id, slug }) =>
-            router.push(getRetreatPathFromSlug(id, slug))
+            router.push(
+              user
+                ? getRetreatPathFromSlug(id, slug)
+                : `${LOGIN}?referer=${getRetreatPathFromSlug(id, slug)}`
+            )
           }
           mediaProps={{
             width: 600,
