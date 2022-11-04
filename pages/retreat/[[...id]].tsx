@@ -30,7 +30,7 @@ const RetreatPage: FC<{ retreats: TRetreat[]; parent: TRetreat }> = ({
 
   return (
     <Retreat
-      retreats={retreats}
+      retreats={retreats ?? []}
       parent={parent}
       onGetRetreats={() =>
         getActiveRetreats({
