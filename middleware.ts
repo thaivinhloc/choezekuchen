@@ -12,7 +12,7 @@ export function middleware(request: NextRequest) {
 
   if (id && type === "retreat") {
     return NextResponse.rewrite(
-      new URL(`/${locale ?? "en"}/retreat/${id}`, request.url)
+      new URL(`/retreat/${id}`, request.url)
     )
   }
 
