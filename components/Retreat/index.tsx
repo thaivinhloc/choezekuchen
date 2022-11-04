@@ -70,7 +70,6 @@ const Retreat: React.FC<{
   const { t } = useTranslation("retreat")
 
   const currentLng = router.locale as any
-  const { setTitleBanner } = useApp()
 
   /* All State */
   const [tab, setTab] = useState<ETabPane>(ETabPane.DETAIL)
@@ -97,14 +96,10 @@ const Retreat: React.FC<{
             }
           })
           .catch((error) => console.log("---error", error))
-        setTitleBanner(parent?.name ?? "RETREAT")
         break
       case ETabPane.LISTING:
         onGetRetreats()
         getListParticipant()
-        setTitleBanner(
-          t("Participant List")
-        )
         break
       default:
         break
@@ -324,7 +319,7 @@ const Retreat: React.FC<{
                       <>
                         <Row className='box-title d-flex justify-content-between'>
                           {userRetreat?.name || ""}
-                          <Link href={RETREAT_HISTORY}>
+                          <Link href={`/retreat-history/${parent?.id}`}>
                             <a
                               className='link-underline'
                               style={{ color: THEME.primary }}
