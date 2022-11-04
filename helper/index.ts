@@ -1,4 +1,4 @@
-import { ListItem, TRetreat } from "definition"
+import { ListItem, TEvent, TRetreat } from "definition"
 
 export * from "./strapi"
 
@@ -58,5 +58,15 @@ export const transformRetreatToListItem = (retreat: TRetreat): ListItem => {
     },
     slug: retreat.slug,
     id: retreat.id
+  }
+}
+
+export const transformEventToListItem = (event: TEvent): ListItem => {
+  return {
+    title: event.title ?? "",
+    description: event.description,
+    media: event.image,
+    slug: event.slug,
+    id: event.id
   }
 }

@@ -67,7 +67,7 @@ const Retreat: React.FC<{
   const router = useRouter()
   const { user } = useAuth()
   const [form] = useForm<TRetreatForm>()
-  const { t } = useTranslation()
+  const { t } = useTranslation("retreat")
 
   const currentLng = router.locale as any
   const { setTitleBanner } = useApp()
@@ -102,7 +102,9 @@ const Retreat: React.FC<{
       case ETabPane.LISTING:
         onGetRetreats()
         getListParticipant()
-        setTitleBanner(retreatDetail?.name || "PARTICIPANT LIST")
+        setTitleBanner(
+          t("Participant List")
+        )
         break
       default:
         break
@@ -224,7 +226,7 @@ const Retreat: React.FC<{
     Number(retreatDetail?.totalCommitment || 0) -
     Number(retreatDetail?.totalGroupCompleted || 0)
 
-  console.log({ listParticipant })
+  console.log({ listParticipant, parent })
 
   return (
     <DivRetreatWrapper>
@@ -232,11 +234,7 @@ const Retreat: React.FC<{
         <div className=''>
           <Tabs defaultActiveKey={tab} onChange={handleChangeTab}>
             <TabPane
-              tab={
-                <strong>
-                  {t("Yangzab Ngondro Retreat", { ns: ["retreat"] })}
-                </strong>
-              }
+              tab={<strong>{parent?.name}</strong>}
               key={ETabPane.DETAIL}
             >
               <Row gutter={36}>
@@ -327,7 +325,10 @@ const Retreat: React.FC<{
                         <Row className='box-title d-flex justify-content-between'>
                           {userRetreat?.name || ""}
                           <Link href={RETREAT_HISTORY}>
-                            <a className='link-underline' style={{ color: THEME.primary }}>
+                            <a
+                              className='link-underline'
+                              style={{ color: THEME.primary }}
+                            >
                               {t("View history", { ns: "retreat" })}
                             </a>
                           </Link>

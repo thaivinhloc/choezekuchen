@@ -7,8 +7,8 @@ import ModalRetreatDetail from "components/Retreat/components/ModalRetreatDetail
 import { TopCategoryWrapper } from "elements/styled/TopCategory"
 import { Button } from "elements/Button"
 import { ArrowLeftOutlined } from "@ant-design/icons"
-import { useTranslation } from "react-i18next"
 import { useRouter } from "next/router"
+import { useTranslation } from "next-i18next"
 
 type Columns = {
   title: string
@@ -37,10 +37,10 @@ const DEFAULT_COLUMNS: Columns[] = [
   }
 ]
 
-const RetreatHistory: FC<{retreatId: number}> = ({ retreatId }) => {
+const RetreatHistory: FC<{ retreatId: number }> = ({ retreatId }) => {
   const router = useRouter()
   const { user } = useAuth()
-  const { t } = useTranslation("common")
+  const { t } = useTranslation()
   const [dataSource, setDataSource] = useState<any[]>([])
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [activeRetreat, setActiveRetreat] = useState<string>("")
@@ -50,10 +50,17 @@ const RetreatHistory: FC<{retreatId: number}> = ({ retreatId }) => {
     handleGetParticipantsHistory(user.id, retreatId)
   }, [user])
 
-  const handleGetParticipantsHistory = async (userId: number, retreatParentId: number) => {
+  const handleGetParticipantsHistory = async (
+    userId: number,
+    retreatParentId: number
+  ) => {
     try {
       setIsLoading(true)
-      const result: any[] = await getParticipantHistory(userId, retreatParentId)
+      const result: any[] = await getParticipantHistory(
+        userId,
+        retreatParentId,
+        router.locale
+      )
       setDataSource(result)
     } catch (error) {
     } finally {
@@ -94,7 +101,7 @@ const RetreatHistory: FC<{retreatId: number}> = ({ retreatId }) => {
           icon={<ArrowLeftOutlined />}
           onClick={() => router.back()}
         >
-          {t("Back")}
+          {t("Back", { ns: "common" })}
         </Button>
         {retreatNameUniq.length > 1 ? (
           <TopCategoryWrapper style={{ marginBottom: 32 }}>
@@ -124,7 +131,11 @@ const RetreatHistory: FC<{retreatId: number}> = ({ retreatId }) => {
         ) : null}
         <Table
           style={{ marginTop: 16 }}
-          columns={DEFAULT_COLUMNS as any}
+          // @ts-ignore
+          columns={DEFAULT_COLUMNS.map((item) => ({
+            ...item,
+            title: t(item.title)
+          }))}
           dataSource={[...listDataSource].filter((retreat) =>
             activeRetreat ? retreat.retreatName === activeRetreat : true
           )}

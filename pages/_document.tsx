@@ -6,7 +6,7 @@ export default function Document() {
       <Head>
         {/* App Configs */}
         {/* <link rel="manifest" href="/manifest.json" /> */}
-        <link href='/icon.ico' rel='icon' type='image/png' sizes='48x48' />
+        <link href='/favicon.ico' rel='icon' type='image/png' sizes='48x48' />
         <link rel='preconnect' href='https://fonts.googleapis.com' />
         <link rel='preconnect' href='https://fonts.gstatic.com' />
         <link

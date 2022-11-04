@@ -54,14 +54,17 @@ export const postRetreatRecitation = async (data: TPostSubmitRetreat) => {
 
 export const getParticipantHistory = async (
   userId: number,
-  retreatParentId: number
+  retreatParentId: number,
+  locale: any
 ) => {
+  console.log("-----------------------------", { userId, retreatParentId })
   return await Client.createRequest<any[]>({
     path: `/api/participants/${userId}`,
     method: "get",
     external: false,
     params: {
-      retreatParentId
+      retreatParentId,
+      locale: locale || "en"
     }
   })
 }

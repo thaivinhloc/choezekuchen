@@ -12,9 +12,12 @@ export function middleware(request: NextRequest) {
 
   if (id && type === "retreat") {
     return NextResponse.rewrite(
-      new URL(`/retreat/${id}`, request.url)
+      new URL(`${locale ? "/" + locale : ""}/retreat/${id}`, request.url)
     )
   }
-
   return NextResponse.next()
+}
+
+export const config = {
+  matcher: ["/((?!api|_next/static|favicon.ico|logo.png|images).*)"]
 }
