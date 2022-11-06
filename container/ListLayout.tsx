@@ -182,7 +182,14 @@ function GridBlog({
 
                 {onRowClick && slug && action_title ? (
                   <Button
-                    style={{ padding: 0, marginTop: 12, color: "#8d90a9" }}
+                    style={{
+                      padding: 0,
+                      marginTop: 12,
+                      color: "#1c1c70",
+                      whiteSpace: "normal",
+                      height: "fit-content",
+                      fontSize: 14
+                    }}
                     size='large'
                     type='link'
                     onClick={() => onRowClick?.({ id, slug: slug ?? "" })}
@@ -191,7 +198,14 @@ function GridBlog({
                   </Button>
                 ) : slug && action_title ? (
                   <Button
-                    style={{ padding: 0, marginTop: 12, color: "#8d90a9" }}
+                    style={{
+                      padding: 0,
+                      marginTop: 12,
+                      color: "#1c1c70",
+                      whiteSpace: "normal",
+                      height: "fit-content",
+                      fontSize: 14
+                    }}
                     size='large'
                     type='link'
                     href={slug}
