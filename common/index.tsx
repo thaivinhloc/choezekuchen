@@ -1,6 +1,6 @@
 export const THEME = {
   primaryFont: "Inter",
-  titleFont: "Libre Baskerville",
+  titleFont: "Inter",
   primary: "#C00000",
   dark: "#363636",
   default: "#636363",

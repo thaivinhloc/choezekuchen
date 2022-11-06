@@ -229,7 +229,11 @@ const Retreat: React.FC<{
         <div className=''>
           <Tabs defaultActiveKey={tab} onChange={handleChangeTab}>
             <TabPane
-              tab={<strong>{parent?.name}</strong>}
+              tab={
+                <strong style={{ textTransform: "uppercase" }}>
+                  {parent?.name}
+                </strong>
+              }
               key={ETabPane.DETAIL}
             >
               <Row gutter={36}>
@@ -460,7 +464,9 @@ const Retreat: React.FC<{
             {user && (
               <TabPane
                 tab={
-                  <strong>{t("Participant List", { ns: "retreat" })}</strong>
+                  <strong style={{ textTransform: "uppercase" }}>
+                    {t("Participant List", { ns: "retreat" })}
+                  </strong>
                 }
                 key={ETabPane.LISTING}
               >
