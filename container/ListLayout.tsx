@@ -15,6 +15,9 @@ const ListItemTitleWrapper = styled.h2<any>`
   font-size: 16px !important;
   cursor: pointer;
   color: ${(props) => props.theme.primary} !important;
+  a {
+    color: ${(props) => props.theme.primary};
+  }
 `
 
 const ListItemWrapper = styled.div`

@@ -33,13 +33,20 @@ export const getRetreatDetail = async (retreatId: number, locale: string) => {
   })
 }
 
-export const getParticipants = async ({ parentId }: { parentId: number }) => {
+export const getParticipants = async ({
+  parentId,
+  locale
+}: {
+  parentId: number
+  locale: string
+}) => {
   return await Client.createRequest<IResponseListRetreat[]>({
     path: "/api/participants",
     method: "get",
     external: false,
     params: {
-      parentId
+      parentId,
+      locale
     }
   })
 }

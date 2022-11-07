@@ -121,7 +121,7 @@ const Retreat: React.FC<{
   const getListParticipant = async () => {
     try {
       setIsLoading(true)
-      const result = await getParticipants({ parentId: parent?.id })
+      const result = await getParticipants({ parentId: parent?.id, locale: router.locale || "en" })
       const data = result.map((item) => {
         const address = item.address?.split(",")
 
