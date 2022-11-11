@@ -9,6 +9,7 @@ import { Button } from "elements/Button"
 import { ArrowLeftOutlined } from "@ant-design/icons"
 import { useRouter } from "next/router"
 import { useTranslation } from "next-i18next"
+import { formatNumber } from "helper"
 
 type Columns = {
   title: string
@@ -61,6 +62,8 @@ const RetreatHistory: FC<{ retreatId: number }> = ({ retreatId }) => {
         retreatParentId,
         router.locale
       )
+      console.log({ result })
+
       setDataSource(result)
     } catch (error) {
     } finally {
@@ -69,7 +72,11 @@ const RetreatHistory: FC<{ retreatId: number }> = ({ retreatId }) => {
   }
 
   const listDataSource = useMemo(() => {
-    return dataSource.map((data, idx) => ({ ...data, id: idx }))
+    return dataSource.map((data, idx) => ({
+      ...data,
+      id: idx,
+      recitationNumber: formatNumber(data.recitationNumber)
+    }))
   }, [dataSource])
 
   const DefaultColumns = useMemo(() => {

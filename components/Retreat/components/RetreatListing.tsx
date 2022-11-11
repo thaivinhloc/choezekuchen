@@ -26,7 +26,7 @@ const RetreatListing: React.FC<{
         if (record.id === user?.id) {
           return (
             <LinkComponent href={`/retreat-history/${parentRetreatId}`}>
-              <a style={{ textDecoration: "underline" }}>{name}</a>
+              <a style={{ textDecoration: "underline", fontWeight: 600, color: "#C00000" }}>{name}</a>
             </LinkComponent>
           )
         } else {
@@ -36,7 +36,10 @@ const RetreatListing: React.FC<{
     },
     {
       title: t("City"),
-      dataIndex: "city"
+      dataIndex: "city",
+      render: (text: string) => {
+        return <span style={{ whiteSpace: "nowrap" }}>{text}</span>
+      }
     },
     {
       title: t("Country"),
@@ -55,8 +58,8 @@ const RetreatListing: React.FC<{
           if (!retreat) return <span>0%</span>
           const percent = (retreat?.completed / retreat?.commited) * 100
           return (
-            <span>
-              {retreat?.completed} (
+            <span style={{ whiteSpace: "nowrap" }}>
+              {retreat?.completed_fm} (
               {percent === Infinity ? 100 : Math.abs(percent).toFixed(2)}%)
             </span>
           )
@@ -66,20 +69,20 @@ const RetreatListing: React.FC<{
       columnsRetreat = [
         {
           title: "Commited",
-          dataIndex: "commited",
+          dataIndex: "commited_fm",
           key: "commited",
           width: 110
         },
         {
           title: "Completed (%)",
-          dataIndex: "completed",
+          dataIndex: "completed_fm",
           key: "completed",
           width: 140,
           render: (text: string, opt: any) => {
             if (Array.isArray(opt.completed)) return <span />
             const percent = (opt?.completed / opt?.commited) * 100
             return (
-              <span>
+              <span style={{ whiteSpace: "nowrap" }}>
                 {text} ({percent === Infinity ? 100 : Math.abs(percent)}%)
               </span>
             )
@@ -112,7 +115,7 @@ const RetreatListing: React.FC<{
 
   /* Render */
   return (
-    <DivTableRetreat>
+    <DivTableRetreat className='participant-list'>
       <Table
         columns={columns}
         dataSource={listParticipant.sort((participant) =>

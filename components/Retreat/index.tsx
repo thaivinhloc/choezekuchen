@@ -121,13 +121,18 @@ const Retreat: React.FC<{
   const getListParticipant = async () => {
     try {
       setIsLoading(true)
-      const result = await getParticipants({ parentId: parent?.id, locale: router.locale || "en" })
+      const result = await getParticipants({
+        parentId: parent?.id,
+        locale: router.locale || "en"
+      })
       const data = result.map((item) => {
         const address = item.address?.split(",")
 
         const retreats = item.completed.reduce((prev: any, curr) => {
           prev[curr.retreatName] = {
             name: curr.retreatName,
+            completed_fm: formatNumber(curr.completed),
+            commited_fm: formatNumber(curr.commited),
             ...curr
           }
           return prev
@@ -140,6 +145,7 @@ const Retreat: React.FC<{
           ...item
         }
       })
+      console.log("getListParticipant", { data })
 
       setListParticipant(data)
       return data
