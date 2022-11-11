@@ -298,7 +298,7 @@ const Retreat: React.FC<{
                               className='h-100'
                               size='large'
                               style={{ height: "47px" }}
-                              format='MM/DD/YYYY'
+                              format='DD/MM/YYYY'
                               allowClear={false}
                               disabledDate={(current) => {
                                 return (
