@@ -88,7 +88,18 @@ export const DivRetreatWrapper = styled.div`
 
 export const DivTableRetreat = styled.div`
   overflow-x: auto;
+  &.participant-list {
+    .ant-table {
+      &-row {
+        &:first-of-type {
+          background: #C0000010;
+          color: #C00000;
+        }
+      }
+    }
+  }
   .ant-table {
+    color: #000;
     &-thead {
       > tr,
       th {
@@ -123,6 +134,9 @@ export const DivTableRetreat = styled.div`
           border-right: 1px solid ${(props) => props.theme.border};
         }
       }
+    }
+    &-row {
+      background: #fff;
     }
   }
 `
