@@ -4,6 +4,7 @@ import { useAuth } from "context/auth/AuthContext"
 import { TRetreat } from "definition"
 import i18next from "i18next"
 import React, { useEffect, useMemo, useState } from "react"
+import { useTranslation } from "next-i18next"
 import { getParticipants } from "services/api"
 import { IResponseListRetreat, IUser } from "../../../services/retreatTypes"
 import useRetreat from "../hooks/useRetreat"
@@ -16,10 +17,10 @@ const RetreatListing: React.FC<{
   parentRetreatId: number
 }> = ({ listParticipant, isLoading, retreats, parentRetreatId }) => {
   const { user } = useAuth()
-
+  const { t } = useTranslation()
   const DEFAULT_COLUMNS = [
     {
-      title: "Full Name",
+      title: t("Full Name"),
       dataIndex: "name",
       render: (name: string, record: any) => {
         if (record.id === user?.id) {
@@ -34,11 +35,11 @@ const RetreatListing: React.FC<{
       }
     },
     {
-      title: "City",
+      title: t("City"),
       dataIndex: "city"
     },
     {
-      title: "Country",
+      title: t("Country"),
       dataIndex: "country"
     }
   ]

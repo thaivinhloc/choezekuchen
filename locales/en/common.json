@@ -3,5 +3,12 @@
   "signUp": "SIGN UP",
   "linkLogin": "Login",
   "linkSignUp": "Register",
-  "Retreat Register": "Retreat Register"
+  "Retreat Register": "Retreat Register",
+  "Back": "Back",
+  "Retreat Name": "Retreat Name",
+  "Recitation Number": "Recitation Number",
+  "Completed Date": "Completed Date",
+  "Full Name": "Full Name",
+  "City": "City",
+  "Country": "Country"
 }

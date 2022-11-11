@@ -34,39 +34,11 @@ type ExtendedImageProps = ImageProps & {
 }
 
 const AudioWrapper = styled.div<Partial<MediaProps>>`
-  border-radius: 5px 5px 0 0;
+  border-radius: 8px;
+  overflow: hidden;
   position: relative;
   width: 100%;
   min-height: ${(props) => props.ratioHeight ?? 240}px;
-  &:after {
-    border-radius: 5px 5px 0 0;
-    content: "";
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-      to bottom,
-      transparent 0%,
-      transparent 8.1%,
-      rgba(0, 0, 0, 0.001) 15.5%,
-      rgba(0, 0, 0, 0.003) 22.5%,
-      rgba(0, 0, 0, 0.005) 29%,
-      rgba(0, 0, 0, 0.008) 35.3%,
-      rgba(0, 0, 0, 0.011) 41.2%,
-      rgba(0, 0, 0, 0.014) 47.1%,
-      rgba(0, 0, 0, 0.016) 52.9%,
-      rgba(0, 0, 0, 0.019) 58.8%,
-      rgba(0, 0, 0, 0.022) 64.7%,
-      rgba(0, 0, 0, 0.025) 71%,
-      rgba(0, 0, 0, 0.027) 77.5%,
-      rgba(0, 0, 0, 0.029) 84.5%,
-      rgba(0, 0, 0, 0.032) 91.9%,
-      rgba(0, 0, 0, 0.04) 100%
-    );
-  }
 `
 
 const MediaWrapper = styled.div<Partial<MediaProps>>`
@@ -132,6 +104,7 @@ const DownloadButtonWrapper = styled(Button)`
   padding-left: 19px;
   padding-right: 19px;
   line-height: 24px !important;
+  box-shadow: none;
   svg {
     margin-top: -7px;
   }
@@ -192,10 +165,7 @@ export const Media: React.FC<MediaProps> = ({
       {type === EMediaType.FILE ? (
         <>
           <div style={{ position: "relative" }}>
-            <MediaWrapper
-              style={style}
-              ratioHeight={ratioHeight}
-            >
+            <MediaWrapper style={style} ratioHeight={ratioHeight}>
               {cover ? (
                 <Image
                   layout='responsive'
@@ -217,6 +187,7 @@ export const Media: React.FC<MediaProps> = ({
                   size='small'
                   onClick={onOpenPDFViewer}
                   icon={<ZoomInOutlined />}
+                  style={{ background: "transparent" }}
                 >
                   {t("Preview")}
                 </DownloadButtonWrapper>
@@ -227,6 +198,7 @@ export const Media: React.FC<MediaProps> = ({
                   size='small'
                   onClick={onDownload}
                   icon={<DownloadOutlined />}
+                  style={{ background: "transparent" }}
                 >
                   {t("Download")}
                 </DownloadButtonWrapper>
@@ -362,15 +334,10 @@ export const Media: React.FC<MediaProps> = ({
             ) : null}
             <div
               style={{
-                position: "absolute",
-                bottom: 16,
-                left: 0,
                 width: "100%",
-                display: "flex",
-                alignItems: "flex-end",
-                justifyContent: "center",
-                zIndex: 20,
-                padding: "0 16px"
+                marginTop: 4,
+                position: "relative",
+                zIndex: 20
               }}
             >
               <audio

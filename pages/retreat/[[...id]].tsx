@@ -2,9 +2,12 @@ import Retreat from "components/Retreat"
 import useRetreat from "components/Retreat/hooks/useRetreat"
 import { useApp } from "context/app/AppContext"
 import { TRetreat } from "definition"
-import { ELanguages } from "i18n/config"
 import { getAllLanguageSlugs, getLanguage } from "lib/lang"
-import { GetStaticPathsContext, GetStaticPropsContext } from "next"
+import {
+  GetServerSidePropsContext,
+  GetStaticPathsContext,
+  GetStaticPropsContext
+} from "next"
 import { serverSideTranslations } from "next-i18next/serverSideTranslations"
 import { useRouter } from "next/router"
 import React, { FC, useEffect } from "react"
@@ -28,7 +31,7 @@ const RetreatPage: FC<{ retreats: TRetreat[]; parent: TRetreat }> = ({
     }
   }, [parent])
 
-  return (
+  return retreats && parent ? (
     <Retreat
       retreats={retreats}
       parent={parent}
@@ -39,48 +42,18 @@ const RetreatPage: FC<{ retreats: TRetreat[]; parent: TRetreat }> = ({
         })
       }
     />
+  ) : (
+    <div />
   )
 }
 
-export async function getStaticPaths({ defaultLocale }: GetStaticPathsContext) {
-  try {
-    const retreats = await getParentRetreats({ locale: defaultLocale || "en" })
-
-    const paths = retreats.map(({ id }: { id: number }) => ({
-      params: {
-        id: [id.toString()]
-      }
-    }))
-    if (!paths.length) {
-      paths.push({
-        params: {
-          id: []
-        }
-      })
-    }
-
-    return {
-      paths,
-      fallback: false // can also be true or 'blocking'
-    }
-  } catch (error) {
-    return {
-      paths: [
-        {
-          params: {}
-        }
-      ],
-      fallback: false // can also be true or 'blocking'
-    }
-  }
-}
-
-export async function getStaticProps({
+export async function getServerSideProps({
   locale,
   params
-}: GetStaticPropsContext) {
+}: GetServerSidePropsContext) {
   try {
     const { id: parentId } = params || {}
+
     const result = await getChildRetreats({
       parentId: parseInt(`${parentId}`),
       locale: locale || "en"
@@ -93,7 +66,7 @@ export async function getStaticProps({
     const { retreats, parent } = result
     return {
       props: {
-        ...(await serverSideTranslations(locale ?? "en", [
+        ...(await serverSideTranslations(locale || "en", [
           "common",
           "footer",
           "header",
@@ -101,13 +74,12 @@ export async function getStaticProps({
         ])),
         retreats,
         parent: parent ?? {}
-      },
-      revalidate: 10
+      }
     }
   } catch (error) {
     return {
       props: {
-        ...(await serverSideTranslations(locale ?? "en", [
+        ...(await serverSideTranslations(locale || "en", [
           "common",
           "footer",
           "header",
@@ -115,8 +87,7 @@ export async function getStaticProps({
         ])),
         retreats: [],
         parent: {}
-      },
-      revalidate: 10
+      }
     }
   }
 }

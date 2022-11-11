@@ -11,7 +11,6 @@ import {
   TRetreat
 } from "definition"
 import { getRetreatPathFromSlug, transformRetreatToListItem } from "helper"
-import { ELanguages } from "i18n/config"
 import { getAllLanguageSlugs, getLanguage } from "lib/lang"
 import { serverSideTranslations } from "next-i18next/serverSideTranslations"
 import { useRouter } from "next/router"
@@ -77,7 +76,7 @@ const RetreatPage: FC<RetreatPageProps & TPageConfigurationAttributes> = ({
   )
 }
 
-export async function getStaticProps({ locale }: { locale: ELanguages }) {
+export async function getStaticProps({ locale }: { locale: string }) {
   try {
     const retreats = await getParentRetreats({ locale })
 

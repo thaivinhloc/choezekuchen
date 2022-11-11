@@ -1,5 +1,12 @@
 import React, { ReactChild, ReactElement } from "react"
 
+export type TPagination = {
+  page: number
+  pageSize: number
+  pageCount: number
+  total: number
+}
+
 export type TAttributesResponse<A> = {
   createdAt: string
   updatedAt: string
@@ -128,4 +135,23 @@ export type TRetreat = {
   isGroup?: boolean
   order?: number
   slug?: string
+  locale?: string
+}
+
+export type TEvent = {
+  id: number
+  title?: string
+  description?: string
+  content?: string
+  slug?: string
+  image: {
+    data: TMedia
+  }
+}
+
+export type TEventCategory = {}
+
+export type TRecordResponse<T> = {
+  id: number
+  attributes: TAttributesResponse<T>
 }

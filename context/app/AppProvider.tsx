@@ -22,7 +22,13 @@ export function AppProvider({ children }: Props) {
     const pathName = path[path.length - 1]
     console.log({ pathName })
 
-    const IGNORE_PAGES = ["retreats", "about-rinpoche", "library", "[[...id]]"]
+    const IGNORE_PAGES = [
+      "retreats",
+      "about-rinpoche",
+      "library",
+      "[[...id]]",
+      "events"
+    ]
     if (!IGNORE_PAGES.includes(pathName)) {
       switch (pathName) {
         case "login":
