@@ -4,12 +4,14 @@ import { useApp } from "context/app/AppContext"
 import { EMediaType, ListItem, TListPage } from "definition"
 import { TopCategoryWrapper } from "elements/styled/TopCategory"
 import { getMediaType } from "helper"
-import { ELanguages } from "i18n/config"
+import withGlobalData from "hoc/withGlobalData"
+import withLibrary from "hoc/withLibrary"
+import { withNavigator } from "hoc/withNavigator"
+import withTrans from "hoc/withTrans"
 import Head from "next/head"
 import React, { useEffect, useState } from "react"
 import { Container } from "react-bootstrap"
 import { useTranslation } from "react-i18next"
-import { getPrayerPage } from "services/prayers"
 
 const mediaTypes = [
   {
@@ -26,7 +28,7 @@ const mediaTypes = [
   }
 ]
 
-export default function PrayersPage({ id, attributes }: TListPage) {
+function PrayersPage({ id, attributes }: TListPage) {
   const { t } = useTranslation("common")
   const [mediaType, setMediaType] = useState(EMediaType.FILE)
   const [mediaList, setMediaList] = useState<ListItem[]>([])
@@ -104,27 +106,6 @@ export default function PrayersPage({ id, attributes }: TListPage) {
   )
 }
 
-export async function getStaticProps({ locale }: { locale: ELanguages }) {
-  try {
-    const prayerPage = await getPrayerPage({ locale })
-    if (!prayerPage?.data) {
-      throw Error("Data Not Found")
-    }
+export const getServerSideProps = withGlobalData(withLibrary(withTrans))
 
-    return {
-      props: {
-        ...prayerPage.data
-      },
-      revalidate: 10
-    }
-  } catch (error) {
-    return {
-      props: {
-        attributes: {
-          dataList: []
-        }
-      },
-      revalidate: 10
-    }
-  }
-}
+export default withNavigator(PrayersPage)

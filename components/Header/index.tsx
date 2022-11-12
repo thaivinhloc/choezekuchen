@@ -1,16 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
 import { RightOutlined } from "@ant-design/icons"
 import { Button, Typography } from "antd"
-import LinkComponent from "components/Link"
-import i18next from "i18next"
+import { TNavigatorItem } from "definition"
 import { useTranslation } from "next-i18next"
-import Image from "next/image"
 import { useRouter } from "next/router"
 import React, { useEffect, useState, useMemo } from "react"
 import ReactCountryFlag from "react-country-flag"
 import { isDesktop } from "react-device-detect"
-// import Logo from "./logo.png";
-import { ROUTES } from "../../common/routes"
 import { useApp } from "../../context/app/AppContext"
 import { useAuth } from "../../context/auth/AuthContext"
 import HeaderMobile from "./HeaderMobile"
@@ -29,7 +25,7 @@ export const LANGS = [
     locale: "vi"
   }
 ]
-const Header = ({ ...props }) => {
+const Header = ({ data }: { data: TNavigatorItem[] }) => {
   const router = useRouter()
   const { onGetMe, user } = useAuth()
   const { title, banner } = useApp()
@@ -138,45 +134,55 @@ const Header = ({ ...props }) => {
                   <span className='close-btn'>+</span>
                 </button>
               </li>
-              {ROUTES.map((route) => (
-                <li className='nav-item' key={route.path}>
+              {data.map((route) => (
+                <li className='nav-item' key={`nav-root-${route.related.slug}`}>
                   <span
                     className='nav-link'
-                    onClick={() => redirectToOtherPage(route.path)}
+                    onClick={() =>
+                      redirectToOtherPage(route.related.slug ?? route.path)
+                    }
                   >
-                    {t(route.label, { ns: "header" })}
+                    {route.related.title}
                   </span>
-                  {route.childrent.length > 0 && (
+                  {route.items.length > 0 && (
                     <ul className='dropdown'>
-                      {route.childrent.map((childrent) => (
+                      {route.items.map((item) => (
                         <li
                           className='dropdown-nav-item nav-item'
-                          key={childrent.path}
+                          key={`nav-children-${item.related.slug ?? item.path}`}
                         >
                           <div
                             style={{ display: "flex" }}
-                            onClick={() => redirectToOtherPage(childrent.path)}
+                            onClick={() =>
+                              redirectToOtherPage(
+                                item.related.slug ?? item.path
+                              )
+                            }
                           >
                             <span className='dropdown-nav-link'>
-                              {t(childrent.label, { ns: "header" })}
+                              {item.related.title}
                             </span>
-                            {childrent.childrent.length > 0 && (
+                            {item.items.length > 0 && (
                               <RightOutlined className='arrow-right' />
                             )}
                           </div>
-                          {childrent.childrent.length > 0 && (
+                          {item.items.length > 0 && (
                             <ul className='dropdown'>
-                              {childrent.childrent.map((route) => (
+                              {item.items.map((subItem) => (
                                 <li
                                   className='dropdown-nav-item nav-item'
-                                  key={route.path}
+                                  key={`nav-children-${
+                                    subItem.related.slug ?? subItem.path
+                                  }`}
                                   onClick={() =>
-                                    redirectToOtherPage(route.path)
+                                    redirectToOtherPage(
+                                      subItem.related.slug ?? subItem.path
+                                    )
                                   }
                                 >
                                   <div style={{ display: "flex" }}>
                                     <span className='dropdown-nav-link'>
-                                      {t(route.label, { ns: "header" })}
+                                      {subItem.related.title}
                                     </span>
                                   </div>
                                 </li>

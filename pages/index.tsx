@@ -1,20 +1,21 @@
-import Home from "components/Home";
-import { ELanguages } from "i18n/config";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import Home from "components/Home"
+import { TPage } from "definition"
+import withGlobalData from "hoc/withGlobalData"
+import withHome from "hoc/withHome"
+import { withNavigator } from "hoc/withNavigator"
+import withTrans from "hoc/withTrans"
 
-export default function HomePage({ allLangsData }: any) {
-  return <Home />;
+function HomePage({
+  data,
+  content
+}: {
+  data: TPage
+  content: Record<string, any>
+}) {
+  console.log("HomePage", { data, content })
+  return <Home />
 }
 
-export async function getStaticProps({ locale }: { locale: ELanguages }) {
-  return {
-    props: {
-      ...(await serverSideTranslations(locale, [
-        "common",
-        "footer",
-        "header",
-        "content",
-      ])),
-    },
-  };
-}
+export const getServerSideProps = withGlobalData(withHome(withTrans))
+
+export default withNavigator(HomePage)

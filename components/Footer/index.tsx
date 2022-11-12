@@ -3,7 +3,7 @@ import Link from "next/link"
 import { DivFooterWrapper } from "./index.style"
 import { IconFB, IconInstagram, IconTW } from "../../assets/svgs/index"
 
-const Footer: React.FC<{}> = () => {
+const Footer = ({ ...props }) => {
   return (
     <DivFooterWrapper>
       <div className='list-icon'>

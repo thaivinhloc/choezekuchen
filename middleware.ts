@@ -15,6 +15,13 @@ export function middleware(request: NextRequest) {
       new URL(`${locale ? "/" + locale : ""}/retreat/${id}`, request.url)
     )
   }
+
+  if (pathname.endsWith(".html")) {
+    return NextResponse.rewrite(
+      new URL(`${locale ? "/" + locale : ""}/page${pathname}`, request.url)
+    )
+  }
+
   return NextResponse.next()
 }
 

@@ -171,12 +171,6 @@ export const GlobalStyle = createGlobalStyle`${css`
       }
     }
   }
-  .content {
-    min-height: calc(100vh - 423px);
-    @media (max-width: 991.98px) {
-      min-height: calc(100vh - 223px);
-    }
-  }
   .link-underline {
     color: #fff;
     font-size: 12px;

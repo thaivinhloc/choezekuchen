@@ -155,3 +155,82 @@ export type TRecordResponse<T> = {
   id: number
   attributes: TAttributesResponse<T>
 }
+
+enum ENavigatorItemType {
+  INTERNAL = "INTERNAL",
+  EXTERNAL = "EXTERNAL"
+}
+
+export type TNavigatorItem = {
+  type: ENavigatorItemType
+  path: string
+  order: number
+  related: {
+    title: string
+    slug: string
+  }
+  items: TNavigatorItem[]
+}
+
+enum EPageType {
+  SINGLE = "single",
+  LIST = "list"
+}
+
+export enum EListPageLayout {
+  VERTICAL_GRID = "VERTICAL_GRID",
+  HORIZONTAL_GRID = "HORIZONTAL_GRID",
+  REVERSE = "REVERSE",
+  REVERSE_WITH_TITLE = "REVERSE_WITH_TITLE",
+  BLOG = "BLOG",
+  EVENT = "EVENT",
+  LIBRARY = "LIBRARY"
+}
+
+export enum ESinglePageLayout {
+  VERTICAL = "VERTICAL",
+  HORIZONTAL = "HORIZONTAL",
+  HOME = "HOME",
+  GURUS = "GURUS",
+  MONASTERY = "MONASTERY"
+}
+
+type TContentListItem = {
+  title?: string
+  description?: string
+  media: {
+    data: TMedia
+  }
+  cover?: {
+    data: TMedia
+  }
+  redirectPage?: TPage
+  redirectTitle?: string
+  redirectLink?: string
+}
+
+export type TPage = {
+  id: number
+  title: string
+  topDesciption?: string
+  slug: string
+  background: string
+  pageType: EPageType
+  pageContent: string
+  pageContentListLayout: EListPageLayout
+  pageContentLayout: ESinglePageLayout
+  topTitle?: string
+  createdAt: string
+  updatedAt: string
+  pageContentEndpoint: string
+  cover?: {
+    data: TMedia
+  }
+  pageContentBanner?: TAttributesResponse<{
+    id: number
+    name: string
+    url: string
+    ext: string
+  }>
+  pageContentList?: TContentListItem[]
+}

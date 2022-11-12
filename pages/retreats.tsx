@@ -1,22 +1,17 @@
 import { LOGIN } from "common/navigator"
-import Retreat from "components/Retreat"
 import { DivRetreatWrapper } from "components/Retreat/index.style"
 import ListLayout from "container/ListLayout"
 import { useApp } from "context/app/AppContext"
 import { useAuth } from "context/auth/AuthContext"
-import {
-  EListType,
-  TMedia,
-  TPageConfigurationAttributes,
-  TRetreat
-} from "definition"
+import { EListType, TPageConfigurationAttributes, TRetreat } from "definition"
 import { getRetreatPathFromSlug, transformRetreatToListItem } from "helper"
-import { getAllLanguageSlugs, getLanguage } from "lib/lang"
-import { serverSideTranslations } from "next-i18next/serverSideTranslations"
+import withGlobalData from "hoc/withGlobalData"
+import { withNavigator } from "hoc/withNavigator"
+import withRetreats from "hoc/withRetreats"
+import withTrans from "hoc/withTrans"
 import { useRouter } from "next/router"
 import React, { FC, useEffect } from "react"
 import { Container } from "react-bootstrap"
-import { getParentRetreats, getRetreatPage } from "services/retreat"
 
 interface RetreatPageProps {
   retreats: TRetreat[]
@@ -76,42 +71,6 @@ const RetreatPage: FC<RetreatPageProps & TPageConfigurationAttributes> = ({
   )
 }
 
-export async function getStaticProps({ locale }: { locale: string }) {
-  try {
-    const retreats = await getParentRetreats({ locale })
+export const getServerSideProps = withGlobalData(withRetreats(withTrans))
 
-    if (!retreats) {
-      throw Error("Data Not Found")
-    }
-
-    const pageRes = await getRetreatPage({ locale })
-
-    return {
-      props: {
-        ...(await serverSideTranslations(locale, [
-          "common",
-          "footer",
-          "header",
-          "retreat"
-        ])),
-        retreats,
-        ...(pageRes?.data?.attributes || {})
-      },
-      revalidate: 10
-    }
-  } catch (error) {
-    return {
-      props: {
-        ...(await serverSideTranslations(locale, [
-          "common",
-          "footer",
-          "header",
-          "retreat"
-        ]))
-      },
-      revalidate: 10
-    }
-  }
-}
-
-export default RetreatPage
+export default withNavigator(RetreatPage)
