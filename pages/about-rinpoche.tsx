@@ -4,6 +4,7 @@ import { ELanguages } from "i18n/config"
 import { getAboutPage } from "services/about"
 import { TListPage } from "definition"
 import { useApp } from "context/app/AppContext"
+import { serverSideTranslations } from "next-i18next/serverSideTranslations"
 const AboutRinpoche = (pageProps: TListPage) => {
   const { setTitleBanner, setBanner } = useApp()
   const { attributes } = pageProps
@@ -30,6 +31,12 @@ export async function getStaticProps({ locale }: { locale: ELanguages }) {
 
     return {
       props: {
+        ...(await serverSideTranslations(locale || "en", [
+          "common",
+          "footer",
+          "header",
+          "retreat"
+        ])),
         ...aboutPage.data,
         attributes: {
           ...aboutPage.data.attributes,
@@ -41,6 +48,12 @@ export async function getStaticProps({ locale }: { locale: ELanguages }) {
   } catch (error) {
     return {
       props: {
+        ...(await serverSideTranslations(locale || "en", [
+          "common",
+          "footer",
+          "header",
+          "retreat"
+        ])),
         attributes: {
           dataList: []
         }

@@ -158,7 +158,7 @@ const Header = ({ ...props }) => {
                             onClick={() => redirectToOtherPage(childrent.path)}
                           >
                             <span className='dropdown-nav-link'>
-                              {childrent.label}
+                              {t(childrent.label, { ns: "header" })}
                             </span>
                             {childrent.childrent.length > 0 && (
                               <RightOutlined className='arrow-right' />
@@ -176,7 +176,7 @@ const Header = ({ ...props }) => {
                                 >
                                   <div style={{ display: "flex" }}>
                                     <span className='dropdown-nav-link'>
-                                      {route.label}
+                                      {t(route.label, { ns: "header" })}
                                     </span>
                                   </div>
                                 </li>

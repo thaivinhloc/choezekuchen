@@ -8,5 +8,5 @@ export const THEME = {
   secondary: "#8d90a9",
   hr: "#eaeaea",
   border: "#DFE2E7",
-  link: "#1c1c70"
+  link: "#C00000"
 }

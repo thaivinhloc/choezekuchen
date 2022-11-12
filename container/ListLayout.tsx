@@ -187,11 +187,11 @@ function GridBlog({
                   <Button
                     style={{
                       padding: 0,
-                      marginTop: 12,
-                      color: "#1c1c70",
+                      color: "#C00000",
                       whiteSpace: "normal",
                       height: "fit-content",
-                      fontSize: 14
+                      fontSize: 15,
+                      fontWeight: 400
                     }}
                     size='large'
                     type='link'
@@ -203,11 +203,11 @@ function GridBlog({
                   <Button
                     style={{
                       padding: 0,
-                      marginTop: 12,
-                      color: "#1c1c70",
+                      color: "#C00000",
                       whiteSpace: "normal",
                       height: "fit-content",
-                      fontSize: 14
+                      fontSize: 15,
+                      fontWeight: 400
                     }}
                     size='large'
                     type='link'
