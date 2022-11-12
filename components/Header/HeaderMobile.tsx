@@ -40,14 +40,14 @@ const HeaderMobile = ({ t }: { t: TFunction }) => {
   const menu = (
     <Menu>
       <Menu.Item key='0'>
-        <Link href='/profile'>Profile</Link>
+        <Link href='/profile'>{t("Profile", { ns: "header" })}</Link>
       </Menu.Item>
       <Menu.Item key='2'>
-        <Link href={RETREAT}>Retreat</Link>
+        <Link href={RETREAT}>{t("Retreat", { ns: "header" })}</Link>
       </Menu.Item>
       <Menu.Divider />
       <Menu.Item key='3' onClick={onLogout}>
-        Log out
+        {t("Log out", { ns: "header" })}
       </Menu.Item>
     </Menu>
   )
@@ -173,7 +173,7 @@ const HeaderMobile = ({ t }: { t: TFunction }) => {
                           className='headermobile__menu'
                           onClick={() => setActiveKey("")}
                         >
-                          {route.label}
+                          {t(route.label, { ns: "header" })}
                         </a>
                       </Link>
                     }
@@ -189,7 +189,7 @@ const HeaderMobile = ({ t }: { t: TFunction }) => {
                                 rel='noreferrer'
                                 onClick={() => setActiveKey("")}
                               >
-                                {subRoute.label}
+                                {t(subRoute.label, { ns: "header" })}
                               </a>
                             </Link>
                           </Menu.Item>
@@ -206,7 +206,7 @@ const HeaderMobile = ({ t }: { t: TFunction }) => {
                                   rel='noreferrer'
                                   target={"_self"}
                                 >
-                                  {subRoute.label}
+                                  {t(subRoute.label, { ns: "header" })}
                                 </a>
                               </Link>
                             }
@@ -216,12 +216,10 @@ const HeaderMobile = ({ t }: { t: TFunction }) => {
                                 <Link href={children.path}>
                                   <a
                                     onClick={() => setActiveKey("")}
-                                    target={
-                                      "_self"
-                                    }
+                                    target={"_self"}
                                     rel='noreferrer'
                                   >
-                                    {children.label}
+                                    {t(children.label, { ns: "header" })}
                                   </a>
                                 </Link>
                               </Menu.Item>
