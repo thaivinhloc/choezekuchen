@@ -20,13 +20,25 @@ const RetreatListing: React.FC<{
   const { t } = useTranslation()
   const DEFAULT_COLUMNS = [
     {
+      title: t("No."),
+      dataIndex: "no"
+    },
+    {
       title: t("Full Name"),
       dataIndex: "name",
       render: (name: string, record: any) => {
         if (record.id === user?.id) {
           return (
             <LinkComponent href={`/retreat-history/${parentRetreatId}`}>
-              <a style={{ textDecoration: "underline", fontWeight: 600, color: "#C00000" }}>{name}</a>
+              <a
+                style={{
+                  textDecoration: "underline",
+                  fontWeight: 600,
+                  color: "#C00000"
+                }}
+              >
+                {name}
+              </a>
             </LinkComponent>
           )
         } else {
@@ -118,9 +130,9 @@ const RetreatListing: React.FC<{
     <DivTableRetreat className='participant-list'>
       <Table
         columns={columns}
-        dataSource={listParticipant.sort((participant) =>
-          participant.id === user?.id ? -1 : 1
-        )}
+        dataSource={listParticipant
+          .sort((participant) => (participant.id === user?.id ? -1 : 1))
+          .map((item, idx) => ({ ...item, no: idx + 1 }))}
         // scroll={{ x: "max-content", y: 1200 }}
         pagination={false}
         rowKey='id'
