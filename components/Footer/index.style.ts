@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "styled-components"
 
 export const DivFooterWrapper = styled.div`
   position: sticky;
@@ -28,14 +28,6 @@ export const DivFooterWrapper = styled.div`
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      &:hover {
-        background: #fff;
-        > svg {
-          path {
-            fill: #000;
-          }
-        }
-      }
     }
   }
-`;
+`

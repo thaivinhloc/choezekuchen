@@ -1,4 +1,5 @@
 import RetreatHistory from "components/RetreatHistory"
+import withDetectDevice from "hoc/withDetectDevice"
 import withGlobalData from "hoc/withGlobalData"
 import { withNavigator } from "hoc/withNavigator"
 import withRetreatHistory from "hoc/withRetreatHistory"
@@ -10,6 +11,6 @@ const RetreatHistoryPage: FC<{ retreatId: number }> = ({ retreatId }) => {
   return <RetreatHistory retreatId={retreatId} />
 }
 
-export const getServerSideProps = withGlobalData(withRetreatHistory(withTrans))
+export const getServerSideProps = withDetectDevice(withGlobalData(withRetreatHistory(withTrans)))
 
 export default withNavigator(RetreatHistoryPage)

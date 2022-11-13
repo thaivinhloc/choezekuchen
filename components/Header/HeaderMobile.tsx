@@ -8,6 +8,7 @@ import {
 import { Button, Collapse, Dropdown, Menu, Space } from "antd"
 import { LOGIN, RETREAT } from "common/navigator"
 import { useApp } from "context/app/AppContext"
+import { TNavigatorItem } from "definition"
 import { TFunction } from "i18next"
 import Link from "next/link"
 import { useRouter } from "next/router"
@@ -21,7 +22,13 @@ import { DivHeaderMobile } from "./index.style"
 
 const { SubMenu } = Menu
 
-const HeaderMobile = ({ t }: { t: TFunction }) => {
+const HeaderMobile = ({
+  t,
+  data
+}: {
+  t: TFunction
+  data: TNavigatorItem[]
+}) => {
   const auth = useAuth()
   const user = auth.user as IUser
   const { onLogout } = useAuth()
@@ -60,7 +67,7 @@ const HeaderMobile = ({ t }: { t: TFunction }) => {
   /* Render */
   return (
     <div>
-      <DivHeaderMobile className='header-mobile' style={{ width: "100%" }}>
+      <DivHeaderMobile className='headermobile' style={{ width: "100%" }}>
         <div className='container'>
           <Collapse
             collapsible='header'
@@ -151,10 +158,10 @@ const HeaderMobile = ({ t }: { t: TFunction }) => {
                 className='headermobile__menu'
                 inlineIndent={0}
                 expandIcon={(...props: any) => {
-                  console.log("props", props[0].isHasChildrent)
-                  const isHasChildrent = !!props[0]?.isHasChildrent
+                  console.log("props", props[0].isHasChildren)
+                  const isHasChildren = !!props[0]?.isHasChildren
                   const isOpen = props[0].isOpen
-                  if (!isHasChildrent) return <div />
+                  if (!isHasChildren) return <div />
                   return (
                     <div className='headermobile__menu-icon'>
                       {!isOpen ? <RightOutlined /> : <DownOutlined />}
@@ -162,66 +169,67 @@ const HeaderMobile = ({ t }: { t: TFunction }) => {
                   )
                 }}
               >
-                {ROUTES.map((route) => (
+                {data.map((route) => (
                   <SubMenu
-                    key={route.path}
+                    key={route.related.slug}
                     title={
-                      <Link href={route.path}>
+                      <Link href={route.related.slug}>
                         <a
                           rel='noreferrer'
                           target={"_self"}
                           className='headermobile__menu'
                           onClick={() => setActiveKey("")}
                         >
-                          {route.label}
+                          {route.related.title}
                         </a>
                       </Link>
                     }
-                    {...{ isHasChildrent: !!route.childrent.length }}
+                    {...{ isHasChildren: !!route.items.length }}
                   >
-                    {route.childrent.map((subRoute) => (
-                      <React.Fragment key={subRoute.path}>
-                        {subRoute.childrent.length < 0 ? (
-                          <Menu.Item key={subRoute.path} icon={() => <div />}>
-                            <Link href={route.path}>
+                    {route.items.map((subRoute) => (
+                      <React.Fragment key={subRoute.related.slug}>
+                        {subRoute.items.length < 0 ? (
+                          <Menu.Item
+                            key={subRoute.related.slug}
+                            icon={() => <div />}
+                          >
+                            <Link href={route.related.slug}>
                               <a
                                 target={"_self"}
                                 rel='noreferrer'
                                 onClick={() => setActiveKey("")}
                               >
-                                {subRoute.label}
+                                {subRoute.related.title}
                               </a>
                             </Link>
                           </Menu.Item>
                         ) : (
                           <SubMenu
-                            key={subRoute.path}
+                            key={subRoute.related.slug}
                             {...{
-                              isHasChildrent: !!subRoute.childrent.length
+                              isHasChildren: !!subRoute.items.length
                             }}
                             title={
-                              <Link href={subRoute.path}>
+                              <Link href={subRoute.related.slug}>
                                 <a
                                   onClick={() => setActiveKey("")}
                                   rel='noreferrer'
                                   target={"_self"}
                                 >
-                                  {subRoute.label}
+                                  {subRoute.related.title}
                                 </a>
                               </Link>
                             }
                           >
-                            {subRoute.childrent.map((children) => (
-                              <Menu.Item key={children.path}>
-                                <Link href={children.path}>
+                            {subRoute.items.map((children) => (
+                              <Menu.Item key={children.related.slug}>
+                                <Link href={children.related.slug}>
                                   <a
                                     onClick={() => setActiveKey("")}
-                                    target={
-                                      "_self"
-                                    }
+                                    target={"_self"}
                                     rel='noreferrer'
                                   >
-                                    {children.label}
+                                    {children.related.title}
                                   </a>
                                 </Link>
                               </Menu.Item>
@@ -252,7 +260,7 @@ const HeaderMobile = ({ t }: { t: TFunction }) => {
             />
           )}
           <div className='banner__content' style={{ top: 0 }}>
-            {t(title, { ns: "header" }).toUpperCase()}
+            {title}
           </div>
         </div>
       </DivHeaderMobile>

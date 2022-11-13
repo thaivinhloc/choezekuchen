@@ -10,21 +10,39 @@ export const formatNumber = (num: number) => {
 }
 
 const retreatRegex = /^([a-z0-9-\/]*)-r([0-9]*).html$/
+const eventRegex = /^([a-z0-9-\/]*)-e([0-9]*).html$/
+const blogRegex = /^([a-z0-9-\/]*)-b([0-9]*).html$/
 
 export const getPathType = (path: string) => {
   if (retreatRegex.test(path)) {
     return "retreat"
+  }
+  if (eventRegex.test(path)) {
+    return "event"
+  }
+  if (blogRegex.test(path)) {
+    return "blog"
   }
 
   return ""
 }
 
 export const isValidPath = (path: string) => {
-  return retreatRegex.test(path)
+  return (
+    retreatRegex.test(path) || eventRegex.test(path) || blogRegex.test(path)
+  )
 }
 
 export const getRetreatPathFromSlug = (id: number, slug = ""): string => {
   return `/${slug || ""}-r${id}.html`
+}
+
+export const getEventPathFromSlug = (id: number, slug = ""): string => {
+  return `/${slug || ""}-e${id}.html`
+}
+
+export const getBlogPathFromSlug = (id: number, slug = ""): string => {
+  return `/${slug || ""}-b${id}.html`
 }
 
 export const getSlugFromPath = (pathname: string) => {

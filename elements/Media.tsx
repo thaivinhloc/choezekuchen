@@ -386,3 +386,26 @@ export const Media: React.FC<MediaProps> = ({
     </Wrapper>
   )
 }
+
+export const GridMedia = ({
+  url,
+  name,
+  width = 600,
+  height = 300
+}: {
+  url?: string
+  name?: string
+  width?: number
+  height?: number
+}) => {
+  return (
+    <Image
+      objectFit='cover'
+      src={url ?? ""}
+      alt={name ?? "-"}
+      layout='responsive'
+      width={width}
+      height={height}
+    />
+  )
+}

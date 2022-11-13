@@ -1,6 +1,9 @@
 import { EMediaType, TMedia } from "definition"
 
-export const getMediaType = (media: TMedia) => {
+export const getMediaType = (media?: TMedia) => {
+  if (!media) {
+    return { type: EMediaType.IMAGE, name: "Image" }
+  }
   const imgExt = [
     ".jpeg",
     ".jpg",

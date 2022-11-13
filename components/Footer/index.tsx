@@ -1,25 +1,28 @@
+// @ts-nocheck
 import React from "react"
 import Link from "next/link"
 import { DivFooterWrapper } from "./index.style"
-import { IconFB, IconInstagram, IconTW } from "../../assets/svgs/index"
 
-const Footer = ({ ...props }) => {
+const Footer = ({ data, isMobile }) => {
+  console.log("Footer", data.attributes)
+  const { Socials = [] } = data?.attributes || {}
+
   return (
     <DivFooterWrapper>
       <div className='list-icon'>
-        <Link href='https://www.facebook.com/choeze.kuchenrinpoche'>
-          <a className='icon' target='_blank'>
-            <IconFB />
-          </a>
-        </Link>
-        <div className='icon'>
-          <IconTW />
-        </div>
-        <Link href='https://instagram.com/choeze_rinpoche_?igshid=YmMyMTA2M2Y='>
-          <a className='icon' target='_blank'>
-            <IconInstagram />
-          </a>
-        </Link>
+        {Socials.map(({ link, icon }) =>
+          link ? (
+            <Link href={link}>
+              <a className='icon' target='_blank'>
+                <img src={icon.data.attributes.url} />
+              </a>
+            </Link>
+          ) : (
+            <div className='icon'>
+              <img src={icon.data.attributes.url} />
+            </div>
+          )
+        )}
       </div>
     </DivFooterWrapper>
   )

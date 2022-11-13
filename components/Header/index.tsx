@@ -6,7 +6,6 @@ import { useTranslation } from "next-i18next"
 import { useRouter } from "next/router"
 import React, { useEffect, useState, useMemo } from "react"
 import ReactCountryFlag from "react-country-flag"
-import { isDesktop } from "react-device-detect"
 import { useApp } from "../../context/app/AppContext"
 import { useAuth } from "../../context/auth/AuthContext"
 import HeaderMobile from "./HeaderMobile"
@@ -25,7 +24,13 @@ export const LANGS = [
     locale: "vi"
   }
 ]
-const Header = ({ data }: { data: TNavigatorItem[] }) => {
+const Header = ({
+  data,
+  isMobile
+}: {
+  data: TNavigatorItem[]
+  isMobile: boolean
+}) => {
   const router = useRouter()
   const { onGetMe, user } = useAuth()
   const { title, banner } = useApp()
@@ -72,7 +77,7 @@ const Header = ({ data }: { data: TNavigatorItem[] }) => {
   }, [router.asPath])
 
   /* Render */
-  if (!isDesktop) return <HeaderMobile t={t} />
+  if (isMobile) return <HeaderMobile data={data} t={t} />
 
   const redirectToOtherPage = (path: string) => {
     router.replace(`/${currentLocale}${path}`)

@@ -2,6 +2,7 @@ import Retreat from "components/Retreat"
 import useRetreat from "components/Retreat/hooks/useRetreat"
 import { useApp } from "context/app/AppContext"
 import { TRetreat } from "definition"
+import withDetectDevice from "hoc/withDetectDevice"
 import withGlobalData from "hoc/withGlobalData"
 import { withNavigator } from "hoc/withNavigator"
 import withRetreat from "hoc/withRetreat"
@@ -44,6 +45,6 @@ const RetreatPage: FC<{ retreats: TRetreat[]; parent: TRetreat }> = ({
   )
 }
 
-export const getServerSideProps = withGlobalData(withRetreat(withTrans))
+export const getServerSideProps = withDetectDevice(withGlobalData(withRetreat(withTrans)))
 
 export default withNavigator(RetreatPage)

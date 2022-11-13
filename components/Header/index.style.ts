@@ -16,7 +16,8 @@ export const DivHeaderWrapperV1 = styled.div<HeaderProps>`
     background-color: transparent !important;
     background-image: url(${(props) =>
       props.banner?.attributes.url ?? "/images/title-image-3.jpeg"});
-    background-size: auto;
+    background-size: cover;
+    background-position: center center;
     position: relative;
     header {
       position: relative;

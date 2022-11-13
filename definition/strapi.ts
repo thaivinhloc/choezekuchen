@@ -25,6 +25,8 @@ export type TMedia = {
     name: string
     url: string
     ext: string
+    width: number
+    height: number
   }>
 }
 
@@ -125,12 +127,16 @@ export type TRetreat = {
     name: string
     url: string
     ext: string
+    width: number
+    height: number
   }>
   banner?: TAttributesResponse<{
     id: number
     name: string
     url: string
     ext: string
+    width: number
+    height: number
   }>
   isGroup?: boolean
   order?: number
@@ -172,7 +178,7 @@ export type TNavigatorItem = {
   items: TNavigatorItem[]
 }
 
-enum EPageType {
+export enum EPageType {
   SINGLE = "single",
   LIST = "list"
 }
@@ -184,7 +190,8 @@ export enum EListPageLayout {
   REVERSE_WITH_TITLE = "REVERSE_WITH_TITLE",
   BLOG = "BLOG",
   EVENT = "EVENT",
-  LIBRARY = "LIBRARY"
+  LIBRARY = "LIBRARY",
+  RETREAT = "RETREAT"
 }
 
 export enum ESinglePageLayout {
@@ -197,13 +204,18 @@ export enum ESinglePageLayout {
 
 type TContentListItem = {
   title?: string
+  gridTitle?: string
   description?: string
-  media: {
-    data: TMedia
-  }
-  cover?: {
-    data: TMedia
-  }
+  media: TAttributesResponse<{
+    name: string
+    url: string
+    ext: string
+  }>
+  cover?: TAttributesResponse<{
+    name: string
+    url: string
+    ext: string
+  }>
   redirectPage?: TPage
   redirectTitle?: string
   redirectLink?: string
@@ -231,6 +243,9 @@ export type TPage = {
     name: string
     url: string
     ext: string
+    width: number
+    height: number
   }>
   pageContentList?: TContentListItem[]
+  locale?: string
 }

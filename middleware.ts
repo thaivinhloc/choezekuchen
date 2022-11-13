@@ -16,6 +16,18 @@ export function middleware(request: NextRequest) {
     )
   }
 
+  if (id && type === "event") {
+    return NextResponse.rewrite(
+      new URL(`${locale ? "/" + locale : ""}/event/${id}`, request.url)
+    )
+  }
+
+  if (id && type === "blog") {
+    return NextResponse.rewrite(
+      new URL(`${locale ? "/" + locale : ""}/blog/${id}`, request.url)
+    )
+  }
+
   if (pathname.endsWith(".html")) {
     return NextResponse.rewrite(
       new URL(`${locale ? "/" + locale : ""}/page${pathname}`, request.url)

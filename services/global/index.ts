@@ -7,7 +7,8 @@ export const globalDataReq = () => {
     path: "/api/global",
     params: {
       "populate[0]": "logo",
-      "populate[1]": "Socials"
+      "populate[1]": "Socials",
+      "populate[2]": "Socials.icon"
     }
   })
 }

@@ -26,7 +26,7 @@ export default function withHome(getServerSidePropsFunc) {
         return {
           props: {
             data: result,
-            content: content ?? {},
+            content: content?.data ?? {},
             ...ownProps
           }
         }
@@ -35,7 +35,7 @@ export default function withHome(getServerSidePropsFunc) {
       return {
         props: {
           data: result,
-          content: content ?? {}
+          content: content?.data ?? {}
         }
       }
     } catch (error) {

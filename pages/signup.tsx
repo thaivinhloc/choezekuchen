@@ -1,33 +1,25 @@
-import SignUpForm from "components/Auth/SignUpForm";
-import { ELanguages } from "i18n/config";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { useRouter } from "next/router";
-import { FC, useEffect } from "react";
+import SignUpForm from "components/Auth/SignUpForm"
+import withDetectDevice from "hoc/withDetectDevice"
+import withGlobalData from "hoc/withGlobalData"
+import { withNavigator } from "hoc/withNavigator"
+import withTrans from "hoc/withTrans"
+import { ELanguages } from "i18n/config"
+import { serverSideTranslations } from "next-i18next/serverSideTranslations"
+import { useRouter } from "next/router"
+import { FC, useEffect } from "react"
 
 const SignUpPage: FC<{}> = () => {
-  const router = useRouter();
+  const router = useRouter()
 
   useEffect(() => {
-    const token = !!localStorage.getItem("token");
-    if (token) router.push("/");
-  }, [router]);
+    const token = !!localStorage.getItem("token")
+    if (token) router.push("/")
+  }, [router])
 
   /* Render */
-  return <SignUpForm />;
-};
-
-export async function getStaticProps({ locale }: { locale: ELanguages }) {
-  return {
-    props: {
-      ...(await serverSideTranslations(locale, [
-        "common",
-        "footer",
-        "header",
-        "login",
-        "content",
-      ])),
-    },
-  };
+  return <SignUpForm />
 }
 
-export default SignUpPage;
+export const getServerSideProps = withGlobalData(withDetectDevice(withTrans))
+
+export default withNavigator(SignUpPage)

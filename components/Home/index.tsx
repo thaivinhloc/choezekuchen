@@ -1,9 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
 import { LeftOutlined, RightOutlined } from "@ant-design/icons"
 import { Button, Card, Carousel, Col, Row, Space } from "antd"
+import { TPage } from "definition"
+import { RichText } from "elements/RichText"
 
 import React, { FC, MutableRefObject, useEffect, useRef } from "react"
 import { useTranslation } from "react-i18next"
+import { THomePageResponse } from "services/page/home"
 import { DivHomeWrapper } from "./index.styles"
 
 const { Meta } = Card
@@ -118,161 +121,125 @@ const CENTRES = [
   }
 ]
 
-const Home: FC<{}> = () => {
+const Home: FC<{
+  data: TPage
+  content: THomePageResponse
+}> = ({ data, content }) => {
   const { t, i18n } = useTranslation(["content"])
-
-  const HomeCarousel = () => {
-    const slider: any = useRef(null)
-
-    return (
-      <>
-        <Carousel
-          ref={slider}
-          autoplay
-          effect='fade'
-          dots={false}
-          className='carousel'
-        >
-          {LEADERSSAY.map((item) => (
-            <div key={item.contact}>
-              <div className='carousel-item'>
-                <p className='quote'>{item.quote}</p>
-                <p className='sub-text'>
-                  {item.subText} -{" "}
-                  <span className='contact'>{item.contact}</span>
-                </p>
-              </div>
-            </div>
-          ))}
-        </Carousel>
-        <Space size='small'>
-          <Button
-            className='btn-primary bold btn-arrow'
-            onClick={() => slider.current.prev()}
-          >
-            <LeftOutlined />
-          </Button>
-          <Button
-            className='btn-primary bold btn-arrow'
-            onClick={() => slider.current.next()}
-          >
-            <RightOutlined />
-          </Button>
-        </Space>
-      </>
-    )
-  }
-
+  const { introduction, statistics, meetUsInPerson, contactUs } =
+    content?.attributes ?? {}
   return (
     <DivHomeWrapper>
       <div className='section-large section-card'>
-        <div className='container '>
-          <Row>
-            <Col span={24} className='section-title'>
-              <h2>{t("WHAT WE ARE ABOUT", { ns: "content" })}</h2>
-              <p>
-                {t(
-                  "Choeze Kuchen has been dedicating his life in disseminating Dharma across the world.",
-                  { ns: "content" }
-                )}
-              </p>
-            </Col>
-            <Col span={24}>
-              <Row className='section-group'>
-                {ABOUT.map((item) => (
-                  <Col
-                    key={item.title}
-                    className='section-item'
-                    xs={24}
-                    sm={24}
-                    md={12}
-                    lg={6}
-                    xl={6}
-                  >
-                    <Card
-                      // style={{ width:  }}
-                      bordered={false}
-                      cover={<img src={item.imgURL} alt='home' />}
-                    >
-                      <Meta
-                        title={t(item.title, { ns: "content" })}
-                        description={
-                          <p>{t(item.subText, { ns: "content" })}</p>
-                        }
-                      />
-                    </Card>
-                  </Col>
-                ))}
-              </Row>
-            </Col>
-          </Row>
-        </div>
-      </div>
-
-      <div className='section-count'>
-        <div className='container '>
-          <Row>
-            {COUNT.map((item) => (
-              <Col
-                key={item.title}
-                className='section-item'
-                xs={24}
-                sm={24}
-                md={12}
-                lg={6}
-                xl={6}
-              >
-                <span className='counter'>{item.number}</span>
-                <p>{t(item.title, { ns: "content" })}</p>
+        <div className='container'>
+          {introduction && (
+            <Row>
+              <Col span={24} className='section-title'>
+                <h2>{introduction.title}</h2>
+                <RichText content={introduction.description} />
               </Col>
-            ))}
-          </Row>
+              <Col span={24}>
+                <Row className='section-group'>
+                  {introduction.contentList.map((item) => (
+                    <Col
+                      key={item.title}
+                      className='section-item'
+                      xs={24}
+                      sm={24}
+                      md={12}
+                      lg={6}
+                      xl={6}
+                    >
+                      <Card
+                        // style={{ width:  }}
+                        bordered={false}
+                        cover={
+                          <img
+                            src={item.cover.data.attributes.url}
+                            alt='home'
+                          />
+                        }
+                      >
+                        <Meta
+                          title={item.title}
+                          description={<RichText content={item.description} />}
+                        />
+                      </Card>
+                    </Col>
+                  ))}
+                </Row>
+              </Col>
+            </Row>
+          )}
         </div>
       </div>
 
-      <div className='section-large section-card'>
-        <div className='container '>
-          <Row>
-            <Col span={24} className='section-title'>
-              <h2>{t("MEET US IN PERSON", { ns: "content" })}</h2>
-              <p>
-                {t(
-                  "Check out our scheduled tour to meet up with devotees. Contact your local centre representative for more information.",
-                  { ns: "content" }
-                )}
-              </p>
-            </Col>
-            <Col span={24}>
-              <Row className='section-group'>
-                {MEETUS.map((item) => (
-                  <Col
-                    key={item.title}
-                    className='section-item'
-                    xs={24}
-                    sm={24}
-                    md={12}
-                    lg={8}
-                    xl={8}
-                  >
-                    <Card
-                      // style={{ width:  }}
-                      bordered={false}
-                      cover={<img src={item.imgURL} alt='home' />}
-                    >
-                      <Meta
-                        title={t(item.title, { ns: "content" })}
-                        description={
-                          <p>{t(item.subText, { ns: "content" })}</p>
-                        }
-                      />
-                    </Card>
-                  </Col>
-                ))}
-              </Row>
-            </Col>
-          </Row>
+      {statistics && (
+        <div className='section-count'>
+          <div className='container '>
+            <Row>
+              {statistics.map((item) => (
+                <Col
+                  key={item.name}
+                  className='section-item'
+                  xs={24}
+                  sm={24}
+                  md={12}
+                  lg={6}
+                  xl={6}
+                >
+                  <span className='counter'>{item.value}</span>
+                  <p>{item.name}</p>
+                </Col>
+              ))}
+            </Row>
+          </div>
         </div>
-      </div>
+      )}
+
+      {meetUsInPerson && (
+        <div className='section-large section-card'>
+          <div className='container '>
+            <Row>
+              <Col span={24} className='section-title'>
+                <h2>{meetUsInPerson.title}</h2>
+                <RichText content={meetUsInPerson.description} />
+              </Col>
+              <Col span={24}>
+                <Row className='section-group'>
+                  {meetUsInPerson.contentList.map((item) => (
+                    <Col
+                      key={item.title}
+                      className='section-item'
+                      xs={24}
+                      sm={24}
+                      md={12}
+                      lg={8}
+                      xl={8}
+                    >
+                      <Card
+                        // style={{ width:  }}
+                        bordered={false}
+                        cover={
+                          <img
+                            src={item.cover.data.attributes.url}
+                            alt='home'
+                          />
+                        }
+                      >
+                        <Meta
+                          title={item.title}
+                          description={<RichText content={item.description} />}
+                        />
+                      </Card>
+                    </Col>
+                  ))}
+                </Row>
+              </Col>
+            </Row>
+          </div>
+        </div>
+      )}
 
       {/* <div className='section-slide'>
         <div className='container'>
@@ -281,38 +248,36 @@ const Home: FC<{}> = () => {
         </div>
       </div> */}
 
-      <div className='section-large section-bottom'>
-        <div className='container section-title'>
-          <h2 className='pl-3 mb-5'>{t("CONTACT US", { ns: "content" })}</h2>
-          <Row>
-            <Col xs={24} sm={24} md={24} lg={16}>
-              <Row>
-                {CENTRES.map((item) => (
-                  <Col xs={24} sm={24} md={12} lg={12} xl={12} key={item.name}>
-                    <Card bordered={false}>
-                      <Meta
-                        title={t(item.name, { ns: "content" })}
-                        description={
-                          <>
-                            <p>
-                              {item.contact} <br />
-                              {item.tel && (
-                                <span>
-                                  Tel: {t(item.tel, { ns: "content" })}
-                                </span>
-                              )}
-                            </p>
-                          </>
-                        }
-                      />
-                    </Card>
-                  </Col>
-                ))}
-              </Row>
-            </Col>
-          </Row>
+      {contactUs && (
+        <div className='section-large section-bottom'>
+          <div className='container section-title'>
+            <h2 className='pl-3 mb-5'>{contactUs.title}</h2>
+            <Row>
+              <Col xs={24} sm={24} md={24} lg={16}>
+                <Row>
+                  {contactUs.contentList.map((item) => (
+                    <Col
+                      xs={24}
+                      sm={24}
+                      md={12}
+                      lg={12}
+                      xl={12}
+                      key={item.title}
+                    >
+                      <Card bordered={false}>
+                        <Meta
+                          title={item.title}
+                          description={<RichText content={item.description} />}
+                        />
+                      </Card>
+                    </Col>
+                  ))}
+                </Row>
+              </Col>
+            </Row>
+          </div>
         </div>
-      </div>
+      )}
     </DivHomeWrapper>
   )
 }
