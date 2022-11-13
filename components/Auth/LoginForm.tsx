@@ -20,7 +20,7 @@ const LoginForm: React.FC<{}> = () => {
 
   const onFinish = (values: TLogin) => {
     onLogin(values, () => {
-      router.push(router.query.referer ? `/${router.query.referer}` : RETREAT)
+      router.push(router.query.redirect ? `/${router.query.redirect}` : RETREAT)
     })
   }
 
