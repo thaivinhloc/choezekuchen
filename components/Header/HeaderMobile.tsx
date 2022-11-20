@@ -47,14 +47,14 @@ const HeaderMobile = ({
   const menu = (
     <Menu>
       <Menu.Item key='0'>
-        <Link href='/profile'>Profile</Link>
+        <Link href='/profile'>{t("Profile", { ns: "header" })}</Link>
       </Menu.Item>
       <Menu.Item key='2'>
-        <Link href={RETREAT}>Retreat</Link>
+        <Link href={RETREAT}>{t("Retreat", { ns: "header" })}</Link>
       </Menu.Item>
       <Menu.Divider />
       <Menu.Item key='3' onClick={onLogout}>
-        Log out
+        {t("Log out", { ns: "header" })}
       </Menu.Item>
     </Menu>
   )
