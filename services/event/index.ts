@@ -61,16 +61,3 @@ export const getEventDetails = ({
   })
 }
 
-export const getEventPage = ({ locale }: { locale: string }) => {
-  return client.createRequest<{
-    data: TSingleTypeResponse<TPageConfigurationAttributes>
-  }>({
-    path: `/api/event-configuration`,
-    method: "get",
-    external: true,
-    params: {
-      "populate[0]": "banner",
-      locale: locale
-    }
-  })
-}

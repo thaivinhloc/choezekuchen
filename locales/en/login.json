@@ -1,8 +1,8 @@
 {
-  "login": "LOG IN",
+  "login": "Log in",
   "incorrectUserNameOrPassword": "The email or password your entered is incorrect",
   "error": "Error",
-  "RETREAT REGISTER": "RETREAT REGISTER",
+  "RETREAT REGISTER": "Retreat register",
   "City": "City",
   "Please input your City": "Please input your City",
   "Country": "Country",
@@ -12,5 +12,6 @@
   "Please input your Confirm Password": "Please input your Confirm Password",
   "Please input your": "Please input your",
   "firstName": "First Name",
-  "lastName": "Last Name"
+  "lastName": "Last Name",
+  "Phone": "Phone"
 }

@@ -12,15 +12,12 @@ export default function withRetreats(getServerSidePropsFunc) {
         throw Error("Data Not Found")
       }
 
-      const pageRes = await getRetreatPage({ locale: locale || "en" })
-
       if (typeof getServerSidePropsFunc === "function") {
         const ownProps = (await getServerSidePropsFunc(context)).props || {}
         console.log({ ownProps })
         return {
           props: {
             retreats,
-            ...(pageRes?.data?.attributes || {}),
             ...ownProps
           }
         }
@@ -28,8 +25,7 @@ export default function withRetreats(getServerSidePropsFunc) {
 
       return {
         props: {
-          retreats,
-          ...(pageRes?.data?.attributes || {})
+          retreats
         }
       }
     } catch (error) {

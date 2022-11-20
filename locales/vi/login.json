@@ -1,5 +1,5 @@
 {
-  "login": "ĐĂNG NHẬP",
+  "login": "Đăng nhập",
   "incorrectUserNameOrPassword": "Tài khoản hoặc mật khẩu không chính xác",
   "error": "Lỗi",
   "RETREAT REGISTER": "Đăng ký nhập thất",
@@ -12,5 +12,6 @@
   "Please input your Confirm Password": "Vui lòng xác nhận mật khẩu",
   "Please input your": "Vui lòng nhập",
   "firstName": "Họ",
-  "lastName": "Tên"
+  "lastName": "Tên",
+  "Phone": "Số điện thoại"
 }

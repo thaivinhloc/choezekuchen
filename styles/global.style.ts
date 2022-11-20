@@ -179,16 +179,15 @@ export const GlobalStyle = createGlobalStyle`${css`
   }
 
   .ant-form-item {
-    margin: 0 0 20px;
+    margin: 0 0 12px;
 
     .ant-input {
-      padding: 15px 12px;
-      border: 0;
       border-radius: 0;
-      font-size: 13px;
-      line-height: 17px;
-      color: #000;
-      font-weight: 400;
+      font-size: 16px;
+      height: 40px;
+    }
+    &-label {
+      padding-bottom: 0 !important;
     }
     .ant-picker {
       border-color: transparent;
@@ -220,16 +219,7 @@ export const GlobalStyle = createGlobalStyle`${css`
     margin: 0 0 20px;
 
     .form-button-submit {
-      text-align: right;
-      button {
-        line-height: 36px;
-        height: 39px;
-        width: auto;
-        padding: 0 23px;
-        border-radius: 4px;
-        background-color: #f9f9f9;
-        letter-spacing: 1px;
-      }
+      width: 100%;
     }
     .btn-primary: hover {
       background-color: #1abc9c;

@@ -1,179 +1,180 @@
-import { Button, Col, Form, Input, Row } from "antd";
-import { useForm } from "antd/lib/form/Form";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import React, { useEffect } from "react";
-import { useTranslation } from "react-i18next";
-import { useAuth } from "../../context/auth/AuthContext";
-import { TSignup } from "../../context/auth/AuthTypes";
-import { DivSignupWrapper } from "./index.styles";
+import { Button, Col, Form, Input, Row, Space } from "antd"
+import { useForm } from "antd/lib/form/Form"
+import Link from "next/link"
+import { useRouter } from "next/router"
+import React, { useEffect } from "react"
+import { useTranslation } from "react-i18next"
+import { useAuth } from "../../context/auth/AuthContext"
+import { TSignup } from "../../context/auth/AuthTypes"
+import { DivSignupWrapper } from "./index.styles"
 
 const validateMessages = {
   required: "${label} is required!",
   types: {
     email: "${label} is not a valid email!",
-    number: "${label} is not a valid number!",
+    number: "${label} is not a valid number!"
   },
   number: {
-    range: "${label} must be between ${min} and ${max}",
-  },
-};
+    range: "${label} must be between ${min} and ${max}"
+  }
+}
 
 type TFrom = {
-  firstName: string;
-  lastName: string;
-  email: string;
-  address: string;
-  password: string;
-  confirmPassword?: string;
-  country?: string;
-  city?: string;
-};
+  firstName: string
+  lastName: string
+  email: string
+  address: string
+  password: string
+  confirmPassword?: string
+  country?: string
+  city?: string
+}
 
 const SignUpForm = () => {
-  const { t, i18n } = useTranslation(["login"]);
+  const { t, i18n } = useTranslation(["login"])
 
-  const [form] = useForm<TFrom>();
-  const { onRegister, isLoading } = useAuth();
+  const [form] = useForm<TFrom>()
+  const { onRegister, isLoading } = useAuth()
 
   const onFinish = async (data: TFrom) => {
     const { country, city, firstName, lastName, confirmPassword, ...values } =
-      data;
-    const name = firstName.trim() + lastName.trim();
+      data
+    const name = firstName.trim() + lastName.trim()
     const body = {
       ...values,
       email: values.email.trim(),
       password: values.password.trim(),
       username: name.charAt(0).toUpperCase() + name.slice(1),
-      address: `${city}, ${country}`,
-    };
+      address: `${city}, ${country}`
+    }
 
-    onRegister(body);
-  };
+    onRegister(body)
+  }
 
   return (
     <DivSignupWrapper>
       {/* <div className="text-center">
         <h1>SIGN UP</h1>
       </div> */}
-      <div className="container">
-        <Row justify="center" align="middle">
+      <div className='container'>
+        <Row justify='center' align='middle'>
           {/* <Col span={10}> */}
           <Form
             form={form}
-            className="signup-form"
+            className='signup-form'
             onFinish={onFinish}
             validateMessages={validateMessages}
+            validateTrigger='submit'
             requiredMark={false}
+            labelCol={{
+              span: 24
+            }}
           >
             <Row gutter={16}>
               <Col span={12}>
                 <Form.Item
-                  name="firstName"
-                  label=""
+                  name='firstName'
+                  label={t("firstName")}
                   rules={[
                     {
                       whitespace: true,
                       required: true,
-                      message: t("Please input your") + ` ${t("firstName")}`,
-                    },
+                      message: t("Please input your") + ` ${t("firstName")}`
+                    }
                   ]}
                 >
-                  <Input
-                    size="large"
-                    placeholder={t("firstName", { ns: "login" })}
-                  />
+                  <Input />
                 </Form.Item>
               </Col>
               <Col span={12}>
                 <Form.Item
                   name={"lastName"}
-                  label=""
+                  label={t("lastName")}
                   rules={[
                     {
                       required: true,
-                      message: t("Please input your") + ` ${t("lastName")}`,
-                    },
+                      message: t("Please input your") + ` ${t("lastName")}`
+                    }
                   ]}
                 >
-                  <Input size="large" placeholder={t("lastName")} />
+                  <Input />
                 </Form.Item>
               </Col>
             </Row>
-            <Form.Item
-              name={"email"}
-              label=""
-              rules={[
-                {
-                  whitespace: true,
-                  type: "email",
-                  required: true,
-                  message: t("Please input your") + " email",
-                },
-              ]}
-            >
-              <Input size="large" placeholder="example@gmail.com" />
-            </Form.Item>
             <Row gutter={16}>
               <Col span={12}>
                 <Form.Item
-                  name="city"
-                  label=""
+                  name='city'
+                  label={t("City")}
                   rules={[
                     {
                       whitespace: true,
                       required: true,
-                      message: t("Please input your") + ` ${t("City")}`,
-                    },
+                      message: t("Please input your") + ` ${t("City")}`
+                    }
                   ]}
                 >
-                  <Input
-                    size="large"
-                    placeholder={t("City", { ns: "login" })}
-                  />
+                  <Input />
                 </Form.Item>
               </Col>
               <Col span={12}>
                 <Form.Item
                   name={"country"}
-                  label=""
+                  label={t("Country")}
                   rules={[
                     {
                       required: true,
-                      message: t("Please input your") + ` ${t("Country")}`,
-                    },
+                      message: t("Please input your") + ` ${t("Country")}`
+                    }
                   ]}
                 >
-                  <Input size="large" placeholder={t("Country")} />
+                  <Input />
                 </Form.Item>
               </Col>
             </Row>
+            <Form.Item name='phone' label={t("Phone")}>
+              <Input />
+            </Form.Item>
             <Form.Item
-              label=""
-              name="password"
+              name={"email"}
+              label='Email'
+              rules={[
+                {
+                  whitespace: true,
+                  type: "email",
+                  required: true,
+                  message: t("Please input your") + " email"
+                }
+              ]}
+            >
+              <Input placeholder='example@gmail.com' />
+            </Form.Item>
+            <Form.Item
+              label={t("Password")}
+              name='password'
               rules={[
                 {
                   whitespace: true,
                   required: true,
-                  message: t("Please input your Password") + "!",
-                },
+                  message: t("Please input your Password") + "!"
+                }
                 // {
                 //   min: 8,
                 //   message: "Password must be at least 8 characters",
                 // },
               ]}
             >
-              <Input size="large" type="password" placeholder={t("Password")} />
+              <Input type='password' />
             </Form.Item>
             <Form.Item
-              label=""
-              name="confirmPassword"
+              label={t("Confirm Password")}
+              name='confirmPassword'
               rules={[
                 {
                   whitespace: true,
                   required: true,
-                  message: t("Please input your Confirm Password") + "!",
-                },
+                  message: t("Please input your Confirm Password") + "!"
+                }
                 // ({ getFieldValue }) => ({
                 //   validator(_, value) {
                 //     if (!value || getFieldValue("password") === value) {
@@ -188,42 +189,38 @@ const SignUpForm = () => {
                 // }),
               ]}
             >
-              <Input
-                size="large"
-                type="password"
-                placeholder={t("Confirm Password")}
-              />
+              <Input type='password' />
             </Form.Item>
-            <div className="form-footer">
-              <Col span={14}>
-                <Row>
-                  <Col>
-                    {t("Already have member?", { ns: "content" })} &nbsp;
-                  </Col>
-                  <Col>
-                    <Link href="/login">
+            <Space
+              direction='vertical'
+              style={{ width: "100%", marginTop: 8 }}
+            >
+              <Button
+                block
+                type='primary'
+                htmlType='submit'
+                loading={isLoading}
+                size='large'
+              >
+                {t("Sign Up", { ns: "content" })}
+              </Button>
+              <Row>
+                <Col>{t("Already have member?", { ns: "content" })} &nbsp;</Col>
+                <Col>
+                  <Link href='/login'>
+                    <a>
                       <strong>{t("Log In", { ns: "content" })}</strong>
-                    </Link>
-                  </Col>
-                </Row>
-              </Col>
-              <Col span={10} className="form-button-submit">
-                <Button
-                  size="large"
-                  className="btn-primary bold form-button-submit"
-                  htmlType="submit"
-                  loading={isLoading}
-                >
-                  {t("Sign Up", { ns: "content" })}
-                </Button>
-              </Col>
-            </div>
+                    </a>
+                  </Link>
+                </Col>
+              </Row>
+            </Space>
           </Form>
           {/* </Col> */}
         </Row>
       </div>
     </DivSignupWrapper>
-  );
-};
+  )
+}
 
-export default SignUpForm;
+export default SignUpForm

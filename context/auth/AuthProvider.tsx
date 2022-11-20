@@ -1,102 +1,127 @@
-import { ReactNode, useState } from "react";
-import { AuthContext } from "./AuthContext";
-import { IResponseLogin, IUser, TLogin, TSignup } from "./AuthTypes";
-import { notification } from "antd";
-import { useRouter } from "next/router";
-import Client from "services/client";
-import i18n from "i18next";
-import { LOGIN, RETREAT } from "common/navigator";
-import { useTranslation } from "next-i18next";
+import { ReactNode, useState } from "react"
+import { AuthContext } from "./AuthContext"
+import { IResponseLogin, IUser, TLogin, TSignup } from "./AuthTypes"
+import { notification } from "antd"
+import { useRouter } from "next/router"
+import Client from "services/client"
+import i18n from "i18next"
+import { LOGIN, RETREAT } from "common/navigator"
+import { useTranslation } from "next-i18next"
 
 type Props = {
-  children: ReactNode;
-};
+  children: ReactNode
+}
 export function AuthProvider({ children }: Props) {
-  const router = useRouter();
-  const { t } = useTranslation("login");
-  const [user, setUser] = useState<IUser | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const router = useRouter()
+  const { t } = useTranslation("login")
+  const [user, setUser] = useState<IUser | null>(null)
+  const [isLoading, setIsLoading] = useState<boolean>(false)
 
   const onLogin = async (data: TLogin, callback?: () => void) => {
     try {
-      setIsLoading(true);
+      setIsLoading(true)
       const result: IResponseLogin = await Client.createRequest({
         path: "/api/auth/local",
         method: "post",
         body: data,
-        external: true,
-      });
-      localStorage.setItem("token", result.jwt);
-      setUser(result.user);
+        external: true
+      })
+      localStorage.setItem("token", result.jwt)
+      setUser(result.user)
       callback?.()
     } catch (error: any) {
       notification.error({
         message: t("error"),
-        description: t("incorrectUserNameOrPassword", { ns: "login" }) || "",
-      });
+        description: t("incorrectUserNameOrPassword", { ns: "login" }) || ""
+      })
     } finally {
-      setIsLoading(false);
+      setIsLoading(false)
     }
-  };
+  }
 
   const onLogout = () => {
-    localStorage.removeItem("token");
-    setUser(null);
-    router.push(LOGIN);
-  };
+    localStorage.removeItem("token")
+    setUser(null)
+    router.push(LOGIN)
+  }
 
   const onRegister = async (data: TSignup) => {
     try {
-      setIsLoading(true);
+      setIsLoading(true)
       const result: IResponseLogin = await Client.createRequest({
         path: "/api/auth/local/register",
         method: "post",
         body: data,
-        external: true,
-      });
+        external: true
+      })
 
-      localStorage.setItem("token", result.jwt);
-      setUser(result.user);
-      router.push(RETREAT);
+      localStorage.setItem("token", result.jwt)
+      setUser(result.user)
+      router.push(RETREAT)
     } catch (error: any) {
       notification.error({
         message: "Error",
-        description: error || "",
-      });
+        description: error || ""
+      })
     } finally {
-      setIsLoading(false);
+      setIsLoading(false)
     }
-  };
+  }
 
   const onGetMe = async () => {
     try {
       const result: IUser = await Client.createRequest({
         path: "/api/users/me",
-        method: "get",
-      });
-      const { address, ...values } = result;
-      const convertAddress = address?.split(",");
+        method: "get"
+      })
+      const { address, ...values } = result
+      const convertAddress = address?.split(",")
       const body = {
         ...values,
-        city: convertAddress?.[0],
-        country: convertAddress?.[convertAddress?.length - 1],
-      };
-      setUser(body);
+        city: convertAddress?.[0] ? convertAddress[0].trimStart() : "",
+        country: convertAddress?.[convertAddress?.length - 1]
+          ? convertAddress[convertAddress.length - 1].trimStart()
+          : ""
+      }
+      setUser(body)
     } catch (error: any) {
-      console.log("error", error);
+      console.log("error", error)
     }
-  };
+  }
+
+  const onUpdateProfile = async (body: Partial<IUser>) => {
+    try {
+      setIsLoading(true)
+      const result: IUser = await Client.createRequest({
+        path: "/api/users-permissions/me",
+        method: "put",
+        body
+      })
+      setUser(result)
+      notification.success({
+        message: "Success"
+      })
+      setIsLoading(false)
+    } catch (error) {
+      console.log("----error", error)
+      notification.error({
+        message: "Error",
+        description: error || ""
+      })
+      setIsLoading(false)
+    }
+  }
 
   const onResetPassword = async () => {
     try {
       const result = await Client.createRequest({
         path: "/api/auth/reset-password",
-        method: "post",
-      });
+        method: "post"
+      })
     } catch (error) {
-      console.log("----error", error);
+      console.log("----error", error)
     }
-  };
+  }
   return (
     <AuthContext.Provider
       value={{
@@ -106,10 +131,11 @@ export function AuthProvider({ children }: Props) {
         onLogout,
         isLoading,
         onGetMe,
-        onResetPassword,
+        onUpdateProfile,
+        onResetPassword
       }}
     >
       {children}
     </AuthContext.Provider>
-  );
+  )
 }

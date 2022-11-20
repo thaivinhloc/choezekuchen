@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "styled-components"
 
 export const DivLoginWrapper = styled.div`
   padding: 70px 0px;
@@ -14,7 +14,7 @@ export const DivLoginWrapper = styled.div`
   .ant-col-rtl .login-form-forgot {
     float: left;
   }
-`;
+`
 
 export const DivSignupWrapper = styled.div`
   padding: 70px 0px;
@@ -28,30 +28,41 @@ export const DivSignupWrapper = styled.div`
   .ant-col-rtl .login-form-forgot {
     float: left;
   }
-`;
+`
 
 export const DivProfileWrapper = styled.div`
-  background-color: #f9f9f9;
-
-  .container-inner {
-    padding: 120px 0;
-
-    .profile {
-      box-shadow: 0 3px 10px rgb(0 0 0 / 20%);
-      background-color: #fff;
-      color: #000;
-      border: 1px solid #999;
+  min-height: calc(100vh - 226px);
+  background-color: #fff;
+  color: #000;
+  margin: 0 auto;
+  padding: 24px 16px;
+  @media (min-width: 768px) {
+    padding: 48px 16px;
+  }
+  .ant-form {
+    @media (min-width: 768px) {
+      max-width: 570px;
       margin: 0 auto;
-
-      .ant-row {
-        padding: 10px;
-        font-size: 14px;
-        border-bottom: 1px solid #999;
-        .label {
-          padding-left: 5px;
-          font-weight: bold;
+    }
+  }
+  .profile-item {
+    font-size: 16px;
+    margin-bottom: 12px;
+    .label {
+      color: rgb(0, 0, 0, 0.8);
+    }
+    .value {
+      padding: 12px 0;
+      border-bottom: 1px solid ${(props) => props.theme.border};
+      .ant-form-item {
+        margin: 0 !important;
+        .ant-form-item-control-input {
+          min-height: auto;
+          .ant-input {
+            height: auto;
+          }
         }
       }
     }
   }
-`;
+`

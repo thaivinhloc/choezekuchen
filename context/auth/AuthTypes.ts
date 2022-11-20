@@ -24,6 +24,7 @@ export interface IUser {
   address?: string;
   city?: string;
   country?: string;
+  phone?: string;
 }
 
 export interface IResponseLogin {

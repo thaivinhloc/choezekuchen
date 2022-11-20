@@ -8,6 +8,7 @@ type authContextType = {
   onRegister: (data: TSignup) => any;
   onLogout: () => any;
   onGetMe: () => any;
+  onUpdateProfile: (user: IUser) => any;
   onResetPassword: () => any;
 };
 
@@ -18,6 +19,7 @@ const authContextDefaultValues: authContextType = {
   onRegister: async (data: TSignup) => {},
   onLogout: () => {},
   onGetMe: () => {},
+  onUpdateProfile: () => {},
   onResetPassword: () => {},
 };
 
