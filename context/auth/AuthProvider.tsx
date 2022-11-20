@@ -102,7 +102,7 @@ export function AuthProvider({ children }: Props) {
         message: "Success"
       })
       setIsLoading(false)
-    } catch (error) {
+    } catch (error: any) {
       console.log("----error", error)
       notification.error({
         message: "Error",
