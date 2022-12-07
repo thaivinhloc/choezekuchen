@@ -28,15 +28,36 @@ export type THomePageResponse = {
       contentList: {
         title: string
         description: string
+        redirectUrl: string
         cover: {
           data: TMedia
         }
       }[]
     }
-    statistics: {
-      name: string
-      value: string
-    }[]
+    statistic: {
+      title?: string
+      banner?: {
+        data: TMedia
+      }
+      contentList: {
+        name: string
+        value: string
+        description?: string
+      }[]
+    }
+    monastery: {
+      title?: string
+      description?: string
+      redirectTitle?: string
+      redirectLink?: string
+      contentList: {
+        title: string
+        cover: {
+          data: TMedia
+        }
+        redirectLink?: string
+      }[]
+    }
   }>
 }
 
@@ -47,15 +68,17 @@ export const getHomePage = ({ locale }: { locale: string }) => {
     external: true,
     params: {
       "populate[0]": "introduction",
-      "populate[1]": "statistics",
+      "populate[1]": "statistic",
       "populate[2]": "meetUsInPerson",
-      "populate[3]": "contactUs",
       "populate[4]": "introduction.contentList",
       "populate[5]": "meetUsInPerson.contentList",
-      "populate[6]": "contactUs.contentList",
-      "populate[7]": "contactUs.contentList",
-      "populate[8]": "meetUsInPerson.contentList.cover",
-      "populate[9]": "introduction.contentList.cover",
+      "populate[6]": "meetUsInPerson.contentList.cover",
+      "populate[7]": "introduction.contentList.cover",
+      "populate[8]": "statistic.contentList",
+      "populate[9]": "statistic.banner",
+      "populate[10]": "monastery",
+      "populate[11]": "monastery.contentList",
+      "populate[12]": "monastery.contentList.cover",
       locale: locale
     }
   })

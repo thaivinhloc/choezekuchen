@@ -28,6 +28,7 @@ export type TMedia = {
     width: number
     height: number
   }>
+  url?: string
 }
 
 export enum EMediaType {
@@ -235,9 +236,13 @@ export type TPage = {
   createdAt: string
   updatedAt: string
   pageContentEndpoint: string
-  cover?: {
-    data: TMedia
-  }
+  cover?: TAttributesResponse<{
+    name: string
+    url: string
+    ext: string
+    width: number
+    height: number
+  }>
   pageContentBanner?: TAttributesResponse<{
     id: number
     name: string

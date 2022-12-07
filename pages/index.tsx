@@ -1,10 +1,12 @@
 import Home from "components/Home"
+import { useApp } from "context/app/AppContext"
 import { TPage } from "definition"
 import withDetectDevice from "hoc/withDetectDevice"
 import withGlobalData from "hoc/withGlobalData"
 import withHome from "hoc/withHome"
 import { withNavigator } from "hoc/withNavigator"
 import withTrans from "hoc/withTrans"
+import { useEffect } from "react"
 import { THomePageResponse } from "services/page/home"
 
 function HomePage({

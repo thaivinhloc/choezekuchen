@@ -12,14 +12,10 @@ export const GlobalStyle = createGlobalStyle`${css`
     font-size: 16px;
     background: #f9f9f9;
   }
-  span,
   p {
     font-family: "${(props: TStyled) => props.theme.primaryFont}", sans-serif !important;
     background: transparent !important;
-  }
-  h1 {
-    font-size: 45px;
-    font-weight: bold;
+    color: ${(props) => props.theme.textSecondary};
   }
 
   h1,
@@ -30,16 +26,51 @@ export const GlobalStyle = createGlobalStyle`${css`
   h6 {
     font-family: ${(props: TStyled) => props.theme.titleFont} !important;
     font-weight: 700;
-    letter-spacing: 0.5px;
+  }
+
+  h1 {
+    font-size: 45px;
+    line-height: 67.5px;
+  }
+  h2 {
+    font-size: 45px;
+    line-height: 67.5px;
+    margin-bottom: 4px;
+    @media (max-width: 992px) {
+      font-size: 32px;
+      line-height: 32px;
+    }
+  }
+  h3 {
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 30px;
+    margin: 0.67em 0;
+    @media (max-width: 992px) {
+      font-size: 22px;
+      line-height: 26px;
+    }
+  }
+
+  a,
+  .ant-btn-link {
+    font-weight: 500;
+    color: ${(props) => props.theme.primary};
+    span {
+      color: ${(props) => props.theme.primary};
+    }
+  }
+
+  a.ant-btn {
+    span {
+      color: unset;
+    }
   }
 
   .text-center {
     text-align: center;
   }
 
-  p {
-    color: #000;
-  }
   .h-auto {
     height: auto !important;
   }
@@ -51,6 +82,28 @@ export const GlobalStyle = createGlobalStyle`${css`
   }
   .justify-content-between {
     justify-content: space-between;
+  }
+  .flex {
+    display: flex;
+  }
+  .items-center {
+    align-items: center;
+  }
+  .justify-between {
+    justify-content: space-between;
+  }
+  .justify-center {
+    justify-content: center;
+  }
+  .flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .flex-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
   .bold {
     font-weight: bold;
@@ -159,16 +212,6 @@ export const GlobalStyle = createGlobalStyle`${css`
     }
     .about .about_Item {
       padding: 10px 0;
-    }
-  }
-  @media (max-width: 1400px) {
-    .about {
-      h3 {
-        font-size: 15px;
-      }
-      p {
-        font-size: 13px;
-      }
     }
   }
   .link-underline {

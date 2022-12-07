@@ -1,12 +1,16 @@
 export const THEME = {
   primaryFont: "Inter",
-  titleFont: "Inter",
+  titleFont: "David Libre",
   primary: "#C00000",
-  dark: "#363636",
-  default: "#636363",
-  textSecondary: "#777777",
-  secondary: "#8d90a9",
-  hr: "#eaeaea",
-  border: "#DFE2E7",
-  link: "#C00000"
+  highlightBg: "#F4F4F4",
+  dark: "#14162E",
+  default: "#14162E",
+  textSecondary: "#535557",
+  secondary: "#535557",
+  hr: "#DCDCDC",
+  border: "#DCDCDC",
+  link: "#C00000",
+  gray: "#6D7073",
+  white: "#FFFFFF",
+  yellow: "#F4A530"
 }

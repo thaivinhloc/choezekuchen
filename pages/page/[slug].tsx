@@ -28,7 +28,10 @@ function Page({ data }: { data: TPage }) {
   }, [data.title])
   useEffect(() => {
     if (data.cover) {
-      setBanner(data.cover.data)
+      setBanner({
+        id: 0,
+        attributes: data.cover
+      })
     }
   }, [data.cover])
   console.log("Page", data)

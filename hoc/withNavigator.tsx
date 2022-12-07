@@ -36,8 +36,13 @@ export const withNavigator = (RootPageComponent: NextPage) => {
           setTitleBanner(replaceTitle(router.pathname.slice(1)))
         }
       }
+      console.log("=======", props.data)
+
       if (props.data?.cover) {
-        setBanner(props.data.cover.data)
+        setBanner({
+          id: 0,
+          attributes: props.data.cover
+        })
       } else {
         if (!["/event/[eid]"].includes(router.pathname)) {
           setBanner(undefined)
@@ -48,7 +53,7 @@ export const withNavigator = (RootPageComponent: NextPage) => {
     return (
       <PageWrapper>
         {props.navData && (
-          <Header data={props.navData} isMobile={props.isMobile} />
+          <Header data={props.navData} isMobile={props.isMobile} isHeaderFullscreen={props.isHeaderFullscreen} />
         )}
         <RootPageComponent {...props} isMobile={props.isMobile} />
         {props.globalData && (

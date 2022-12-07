@@ -8,7 +8,8 @@ export const globalDataReq = () => {
     params: {
       "populate[0]": "logo",
       "populate[1]": "Socials",
-      "populate[2]": "Socials.icon"
+      "populate[2]": "Socials.icon",
+      "populate[3]": "contacts",
     }
   })
 }
