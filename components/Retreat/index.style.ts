@@ -54,7 +54,7 @@ export const DivRetreatWrapper = styled.div`
         .box-title {
           /* background: #f6f6f6; */
           background: #fff;
-          color: #C00000;
+          color: #A51818;
           padding: 10px;
           font-weight: bold;
           border-bottom: 1px solid ${(props) => props.theme.border};
@@ -92,8 +92,8 @@ export const DivTableRetreat = styled.div`
     .ant-table {
       &-row {
         &:first-of-type {
-          background: #C0000010;
-          color: #C00000;
+          background: #A5181810;
+          color: #A51818;
         }
       }
     }
@@ -104,7 +104,7 @@ export const DivTableRetreat = styled.div`
       > tr,
       th {
         font-size: 14px;
-        background: #C00000;
+        background: #A51818;
         color: #fff;
         font-weight: 600;
         border-bottom: 1px solid ${(props) => props.theme.border};

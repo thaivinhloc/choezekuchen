@@ -1,14 +1,14 @@
-import "../styles/antd.less";
-import { ThemeProvider } from "styled-components";
-import { THEME } from "../common";
-import { GlobalStyle } from "../styles/global.style";
-import { AppProvider } from "../context/app/AppProvider";
-import { AuthProvider } from "../context/auth/AuthProvider";
-import Head from "next/head";
-import { appWithTranslation } from "next-i18next";
+import "../styles/antd.less"
+import '../lib/react-big-scheduler/lib/css/style.css'
+import { ThemeProvider } from "styled-components"
+import { THEME } from "../common"
+import { GlobalStyle } from "../styles/global.style"
+import { AppProvider } from "../context/app/AppProvider"
+import { AuthProvider } from "../context/auth/AuthProvider"
+import Head from "next/head"
+import { appWithTranslation } from "next-i18next"
 
 function MyApp({ Component, pageProps }) {
-
   return (
     <ThemeProvider theme={THEME}>
       <Head>
@@ -21,7 +21,7 @@ function MyApp({ Component, pageProps }) {
         </AuthProvider>
       </AppProvider>
     </ThemeProvider>
-  );
+  )
 }
 
-export default appWithTranslation(MyApp);
+export default appWithTranslation(MyApp)

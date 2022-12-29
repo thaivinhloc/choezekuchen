@@ -98,13 +98,20 @@ const HeaderMobile = ({
               width: "100%"
             }}
           >
-            <div>
+            <Space direction='vertical' style={{ width: "100%" }}>
+              {user?.username && (
+                <Link href='/profile'>
+                  <Button block>
+                    <span>{t("Profile")}</span>
+                  </Button>
+                </Link>
+              )}
               <Link href={!user?.username ? LOGIN : "/"}>
                 <Button type='primary' block>
                   <span style={{ color: THEME.white }}>On-going Retreat</span>
                 </Button>
               </Link>
-            </div>
+            </Space>
           </div>
           <a
             style={{ position: "absolute", right: 0, top: 0 }}

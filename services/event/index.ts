@@ -38,6 +38,57 @@ export const getEvents = ({
   })
 }
 
+export const getEventsByCategory = ({
+  locale,
+  categoryId
+}: {
+  locale: string
+  categoryId: number
+}) => {
+  return client.createRequest<{
+    data: TRecordResponse<TEvent>[]
+    meta: {
+      pagination: {
+        page: number
+        pageSize: number
+        pageCount: number
+        total: number
+      }
+    }
+  }>({
+    path: `/api/event-by-category`,
+    method: "get",
+    external: true,
+    params: {
+      "populate[0]": "image",
+      categoryId,
+      locale: locale
+    }
+  })
+}
+
+export const getEventsByTimeRange = ({
+  locale,
+  from,
+  to
+}: {
+  locale: string
+  from: string
+  to: string
+}) => {
+  return client.createRequest<TEvent[]>({
+    path: `/api/event-by-time-range`,
+    method: "get",
+    external: true,
+    params: {
+      "populate[0]": "image",
+      from,
+      to,
+      locale: locale
+    }
+  })
+}
+
 export const getEventDetails = ({
   eid,
   locale
@@ -60,4 +111,3 @@ export const getEventDetails = ({
     }
   })
 }
-

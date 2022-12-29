@@ -151,6 +151,8 @@ export type TEvent = {
   description?: string
   content?: string
   slug?: string
+  dateStart: string
+  dateEnd: string
   image: {
     data: TMedia
   }

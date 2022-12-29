@@ -1,7 +1,7 @@
 // @ts-nocheck
 import React from "react"
 import Link from "next/link"
-import { DivFooterWrapper } from "./index.style"
+import { DivFooterWrapper, TestBox } from "./index.style"
 import { Col, Row, Space } from "antd"
 import { useTranslation } from "next-i18next"
 

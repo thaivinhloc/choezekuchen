@@ -13,10 +13,10 @@ export const TopCategoryWrapper = styled.div`
     }
     &:hover {
       background: rgba(255, 255, 255);
-      color: #C00000;
+      color: #A51818;
     }
     &-checked {
-      background: #C00000;
+      background: #A51818;
     }
   }
 `

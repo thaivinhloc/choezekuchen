@@ -4,9 +4,8 @@ import {
   EListPageLayout,
   EMediaType,
   ListItem,
-  TMedia,
-  TPage,
-  TRetreat
+  TEvent,
+  TPage
 } from "definition"
 import { Button } from "elements/Button"
 import { GridMedia, Media } from "elements/Media"
@@ -26,6 +25,9 @@ import { useRouter } from "next/router"
 import { useAuth } from "context/auth/AuthContext"
 import { LOGIN } from "common/navigator"
 import useEvents from "hook/useEvents"
+import moment from "moment"
+import { getEventsByTimeRange } from "services/event"
+import EventScheduler from "components/Event/Scheduler"
 
 const ListPageContentWrapper = styled.div<Partial<TPage>>`
   padding-left: 15px;
@@ -36,7 +38,7 @@ const ListPageContentWrapper = styled.div<Partial<TPage>>`
   }
 `
 
-const ContentListTitleWrapper = styled.h3`
+const ContentListTitleWrapper: any = styled.h3`
   color: ${(props) => props.theme.primary};
 `
 
@@ -103,7 +105,7 @@ function HorizontalGrid({ topTitle, topDesciption, pageContentList }: TPage) {
                       <Button
                         style={{
                           padding: 0,
-                          color: "#C00000",
+                          color: "#A51818",
                           whiteSpace: "normal",
                           height: "fit-content",
                           fontSize: 15,
@@ -217,6 +219,15 @@ function BlogGrid({ ...props }: TPage) {
   return <ListPageContentWrapper></ListPageContentWrapper>
 }
 
+function EventCalendar({ topTitle, topDesciption }: TPage) {
+  return (
+    <ListPageContentWrapper>
+      <TopSection topTitle={topTitle} topDesciption={topDesciption} />
+      {typeof window !== undefined && <EventScheduler />}
+    </ListPageContentWrapper>
+  )
+}
+
 function EventGrid({ topTitle, topDesciption, locale }: TPage) {
   const pageSize = 3
   const router = useRouter()
@@ -323,10 +334,10 @@ export const TopCategoryWrapper = styled.div`
     }
     &:hover {
       background: rgba(255, 255, 255);
-      color: #c00000;
+      color: #a51818;
     }
     &-checked {
-      background: #c00000;
+      background: #a51818;
     }
   }
 `
@@ -537,7 +548,7 @@ function RetreatGrid({ topTitle, topDesciption, locale }: TPage) {
                         <Button
                           style={{
                             padding: 0,
-                            color: "#C00000",
+                            color: "#A51818",
                             whiteSpace: "normal",
                             height: "fit-content",
                             fontSize: 15,
@@ -581,7 +592,7 @@ export function ListPageLayout({ data }: { data: TPage }) {
     case EListPageLayout.BLOG:
       return <BlogGrid {...data} />
     case EListPageLayout.EVENT:
-      return <EventGrid {...data} />
+      return <EventCalendar {...data} />
     case EListPageLayout.LIBRARY:
       return <LibraryGrid {...data} />
     case EListPageLayout.RETREAT:

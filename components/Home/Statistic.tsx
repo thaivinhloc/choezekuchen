@@ -59,7 +59,7 @@ const SmallTitleWrapper = styled.div`
   }
 `
 
-const colors = ["#14162E", "#042E35", "#DDAA33", "#C74343"]
+const colors = ["#14162E", "#042E35", "#DDAA33", "#A51818"]
 
 export const HomeStatistic: FC<{
   title?: string
