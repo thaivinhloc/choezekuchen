@@ -3,7 +3,8 @@ import { createContext, useContext } from "react"
 
 type appContextType = {
   title: string
-  setTitleBanner: (title: string) => void
+  desc?: string
+  setTitleBanner: (title: string, meta_desc?: string ) => void
   banner?: TMedia
   setBanner: (banner?: TMedia) => void
 }

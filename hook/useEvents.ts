@@ -1,6 +1,6 @@
 import { TEvent, TPagination } from "definition"
 import { useState } from "react"
-import { getEvents, getEventsByTimeRange } from "services/event"
+import { getEvents, getEventsByTimeRange, getEventsFrom } from "services/event"
 
 type TPageProps = {
   locale?: string
@@ -20,7 +20,8 @@ function useEvents({ locale, page = 1, pageSize = 3 }: TPageProps) {
     }
   }>()
 
-  const [eventsCalendar, setEventsCalendar] = useState<{}>([])
+  const [eventsCalendar, setEventsCalendar] = useState<TEvent[]>([])
+  const [upcomingEvents, setUpcomingEvents] = useState<TEvent[]>([])
 
   async function getEventsCalendar({ from, to }: { from: string; to: string }) {
     try {
@@ -30,6 +31,19 @@ function useEvents({ locale, page = 1, pageSize = 3 }: TPageProps) {
         to
       })
       setEventsCalendar(res)
+      setIsLoading(false)
+    } catch (error) {
+      setIsLoading(false)
+    }
+  }
+
+  async function getUpcomingEvents({ from }: { from: string; }) {
+    try {
+      const res = await getEventsFrom({
+        locale: locale ?? "en",
+        from,
+      })
+      setUpcomingEvents(res)
       setIsLoading(false)
     } catch (error) {
       setIsLoading(false)
@@ -66,7 +80,9 @@ function useEvents({ locale, page = 1, pageSize = 3 }: TPageProps) {
     events,
     eventsCalendar,
     getEventList,
-    getEventsCalendar
+    getEventsCalendar,
+    upcomingEvents,
+    getUpcomingEvents
   }
 }
 

@@ -496,4 +496,7 @@ export const GlobalStyle = createGlobalStyle`${css`
       }
     }
   }
+  .rs__popper_actions ~ p {
+    color: #fff;
+  }
 `}`

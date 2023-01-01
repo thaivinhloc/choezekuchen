@@ -1,6 +1,12 @@
 import { ReactNode, useState } from "react"
 import { AuthContext } from "./AuthContext"
-import { IResponseLogin, IUser, TLogin, TSignup } from "./AuthTypes"
+import {
+  IResponseLogin,
+  IUser,
+  TForgotPassword,
+  TLogin,
+  TSignup
+} from "./AuthTypes"
 import { notification } from "antd"
 import { useRouter } from "next/router"
 import Client from "services/client"
@@ -58,6 +64,33 @@ export function AuthProvider({ children }: Props) {
       localStorage.setItem("token", result.jwt)
       setUser(result.user)
       router.push(RETREAT)
+    } catch (error: any) {
+      notification.error({
+        message: "Error",
+        description: error || ""
+      })
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  const onForgotPassword = async (data: TForgotPassword, callback?: () => void) => {
+    try {
+      setIsLoading(true)
+      await Client.createRequest({
+        path: "/api/auth/forgot-password",
+        method: "post",
+        body: data,
+        external: true
+      })
+      setIsLoading(false)
+      notification.error({
+        message: "Success",
+        description: t(
+          "Please check your email and follow the steps to recover your account!"
+        )
+      })
+      callback?.()
     } catch (error: any) {
       notification.error({
         message: "Error",
@@ -132,7 +165,8 @@ export function AuthProvider({ children }: Props) {
         isLoading,
         onGetMe,
         onUpdateProfile,
-        onResetPassword
+        onResetPassword,
+        onForgotPassword
       }}
     >
       {children}

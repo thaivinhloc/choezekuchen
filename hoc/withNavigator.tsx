@@ -53,7 +53,7 @@ export const withNavigator = (RootPageComponent: NextPage) => {
     return (
       <PageWrapper>
         {props.navData && (
-          <Header data={props.navData} isMobile={props.isMobile} isHeaderFullscreen={props.isHeaderFullscreen} />
+          <Header data={props.navData} retreats={props.retreats} isMobile={props.isMobile} isHeaderFullscreen={props.isHeaderFullscreen} />
         )}
         <RootPageComponent {...props} isMobile={props.isMobile} />
         {props.globalData && (

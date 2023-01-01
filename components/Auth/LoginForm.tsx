@@ -10,6 +10,7 @@ import { useTranslation } from "react-i18next"
 import { useAuth } from "../../context/auth/AuthContext"
 import { TLogin } from "../../context/auth/AuthTypes"
 import { DivLoginWrapper } from "./index.styles"
+import Link from "next/link"
 
 const LoginForm: React.FC<{}> = () => {
   const router = useRouter()
@@ -65,6 +66,15 @@ const LoginForm: React.FC<{}> = () => {
             >
               <Input size='large' type='password' />
             </Form.Item>
+            {/* <Row>
+              <Col span={24} style={{ textAlign: "right" }}>
+                <Link href='/forgot-password'>
+                  <a>
+                    <strong>{t("Forgot password?")}</strong>
+                  </a>
+                </Link>
+              </Col>
+            </Row> */}
             <Row gutter={24} align='bottom'>
               <Col span={14}>
                 <Row>

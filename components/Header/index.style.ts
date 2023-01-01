@@ -102,17 +102,25 @@ export const DivHeaderWrapperV1 = styled.div<HeaderProps>`
         }
       }
       &__title {
-        font-size: 36px;
-        line-height: 40px;
-        font-weight: 700px;
-        letter-spacing: 4px;
         text-align: center;
-        color: #ffffff;
         padding: 70px 16px 120px;
         margin: 0;
         z-index: 10;
         position: relative;
+        h1 {
+          letter-spacing: 4px;
+          color: #ffffff;
+          font-size: 36px;
+          line-height: 40px;
+          font-weight: 700px;
+        }
+        &__desc {
+          font-size: 16px;
+          color: #ffffff !important;
+          opacity: 0.8;
+        }
       }
+
       &-logo {
         img {
           display: block;
@@ -452,4 +460,7 @@ export const TopActionStyled = styled.div`
   padding-right: 8px;
   position: relative;
   z-index: 20;
+  @media (min-width: 1200px) {
+    padding: 8px 50px;
+  }
 `

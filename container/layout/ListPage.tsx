@@ -27,7 +27,7 @@ import { LOGIN } from "common/navigator"
 import useEvents from "hook/useEvents"
 import moment from "moment"
 import { getEventsByTimeRange } from "services/event"
-import EventScheduler from "components/Event/Scheduler"
+import { MonthEvent } from "components/Event/MonthEvent"
 
 const ListPageContentWrapper = styled.div<Partial<TPage>>`
   padding-left: 15px;
@@ -220,10 +220,11 @@ function BlogGrid({ ...props }: TPage) {
 }
 
 function EventCalendar({ topTitle, topDesciption }: TPage) {
+
   return (
     <ListPageContentWrapper>
       <TopSection topTitle={topTitle} topDesciption={topDesciption} />
-      {typeof window !== undefined && <EventScheduler />}
+      <MonthEvent />
     </ListPageContentWrapper>
   )
 }

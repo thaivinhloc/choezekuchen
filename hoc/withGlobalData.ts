@@ -2,6 +2,7 @@
 import { GetServerSidePropsContext } from "next"
 import { globalDataReq } from "services/global"
 import { navigationReq } from "services/global/navigator"
+import { getParentRetreats } from "services/retreat"
 
 export default function withGlobalData(getServerSidePropsFunc) {
   return async (context: GetServerSidePropsContext) => {
@@ -9,12 +10,10 @@ export default function withGlobalData(getServerSidePropsFunc) {
       const { locale } = context
       const globalData = await globalDataReq()
       const navData = await navigationReq({ locale })
-
-      console.log({ globalData, navData })
+      const retreats = await getParentRetreats({ locale })
 
       if (typeof getServerSidePropsFunc === "function") {
         const ownProps = (await getServerSidePropsFunc(context)).props || {}
-        console.log({ ownProps })
         return {
           props: {
             globalData: globalData?.data
@@ -23,6 +22,7 @@ export default function withGlobalData(getServerSidePropsFunc) {
                 }
               : {},
             navData,
+            retreats,
             ...ownProps
           }
         }
@@ -35,12 +35,12 @@ export default function withGlobalData(getServerSidePropsFunc) {
                 ...globalData.data
               }
             : {},
-          navData
+          navData,
+          retreats
         }
       }
     } catch (e) {
       console.log(e)
-
       return {
         props: {}
       }

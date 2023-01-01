@@ -156,6 +156,9 @@ export type TEvent = {
   image: {
     data: TMedia
   }
+  cover: {
+    data: TMedia
+  }
 }
 
 export type TEventCategory = {}

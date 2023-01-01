@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { RightOutlined } from "@ant-design/icons"
 import { Button, Space, Typography } from "antd"
-import { TNavigatorItem } from "definition"
+import { TNavigatorItem, TRetreat } from "definition"
 import { useTranslation } from "next-i18next"
 import Link from "next/link"
 import { useRouter } from "next/router"
@@ -18,6 +18,8 @@ import {
   TopActionStyled
 } from "./index.style"
 import { ChevronDown } from "@styled-icons/fa-solid"
+import { RETREAT } from "common/navigator"
+import { getRetreatPathFromSlug } from "helper"
 
 export const LANGS = [
   {
@@ -34,15 +36,17 @@ export const LANGS = [
 const Header = ({
   data,
   isMobile,
-  isHeaderFullscreen = false
+  isHeaderFullscreen = false,
+  retreats = []
 }: {
   data: TNavigatorItem[]
   isHeaderFullscreen?: boolean
   isMobile: boolean
+  retreats?: TRetreat[]
 }) => {
   const router = useRouter()
   const { onGetMe, user } = useAuth()
-  const { title, banner } = useApp()
+  const { title, banner, desc } = useApp()
   const { t } = useTranslation(["common", "header", "login"])
   const [isSticky, setSticky] = useState(false)
   const currentLocale = router.locale
@@ -92,7 +96,15 @@ const Header = ({
     router.replace(`/${currentLocale}${path}`)
   }
 
+  const getRetreatPath = (_retreats: TRetreat[]) => {
+    if (_retreats.length > 1) {
+      return RETREAT
+    }
+    return getRetreatPathFromSlug(_retreats[0].id, _retreats[0].slug)
+  }
+
   console.log({ title, banner, isHeaderFullscreen })
+  const activeRetreats = retreats.filter((r) => r.status)
 
   return (
     <DivHeaderWrapperV1
@@ -204,17 +216,30 @@ const Header = ({
               </li>
             ))}
           </NavbarNavStyled>
-          <Link
-            href={user?.id ? "/" : "/login"}
-            locale={currentLocale}
-            passHref
-          >
-            <Button type='primary' size='large'>
-              {t("On-going Retreat")}
-            </Button>
-          </Link>
+          {activeRetreats.length > 0 ? (
+            <Link
+              href={
+                user?.id
+                  ? getRetreatPath(activeRetreats)
+                  : `/login?redirect=${getRetreatPath(activeRetreats)}`
+              }
+              locale={currentLocale}
+              passHref
+            >
+              <Button
+                style={{ paddingLeft: 28, paddingRight: 28 }}
+                type='primary'
+                size='large'
+              >
+                {t("Retreat")}
+              </Button>
+            </Link>
+          ) : null}
         </NavListStyled>
-        <h1 className='navbar__title'>{title.toUpperCase()}</h1>
+        <div className='navbar__title'>
+          <h1>{title.toUpperCase()}</h1>
+          <span className='navbar__title__desc'>{desc}</span>
+        </div>
       </header>
     </DivHeaderWrapperV1>
   )

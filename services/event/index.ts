@@ -89,6 +89,24 @@ export const getEventsByTimeRange = ({
   })
 }
 
+export const getEventsFrom = ({
+  locale,
+  from,
+}: {
+  locale: string
+  from: string
+}) => {
+  return client.createRequest<TEvent[]>({
+    path: `/api/up-coming-events`,
+    method: "get",
+    external: true,
+    params: {
+      from,
+      locale: locale
+    }
+  })
+}
+
 export const getEventDetails = ({
   eid,
   locale
@@ -107,7 +125,8 @@ export const getEventDetails = ({
     external: true,
     params: {
       locale,
-      "populate[0]": "image"
+      "populate[0]": "image",
+      "populate[1]": "cover"
     }
   })
 }

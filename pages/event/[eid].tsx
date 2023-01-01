@@ -1,4 +1,4 @@
-import { Col, Row } from "antd"
+import { Breadcrumb, Col, Row } from "antd"
 import { SinglePageContentWrapper } from "container/layout/SinglePage"
 import { useApp } from "context/app/AppContext"
 import { TEvent } from "definition"
@@ -9,8 +9,15 @@ import withEvent from "hoc/withEvent"
 import withGlobalData from "hoc/withGlobalData"
 import { withNavigator } from "hoc/withNavigator"
 import withTrans from "hoc/withTrans"
+import useEvents from "hook/useEvents"
+import moment from "moment"
+import { useRouter } from "next/router"
 import { useEffect } from "react"
+import { useTranslation } from "next-i18next"
 import styled from "styled-components"
+import { getEventPathFromSlug } from "helper"
+import Link from "next/link"
+import { THEME } from "common"
 
 type TEventDetails = {
   eventDetails: {
@@ -30,21 +37,85 @@ const PageContentWrapper = styled.div`
 const EventDetails = ({ eventDetails, isMobile }: TEventDetails) => {
   console.log({ eventDetails, isMobile })
   const { setTitleBanner, setBanner } = useApp()
+  const { t } = useTranslation()
   const { attributes } = eventDetails.data || {}
+  const router = useRouter()
+  const { upcomingEvents, getUpcomingEvents } = useEvents({
+    locale: router.locale ?? "en"
+  })
+  moment.locale(router.locale)
 
   useEffect(() => {
-    if (eventDetails.data?.attributes?.image) {
-      setBanner(eventDetails.data.attributes.image.data)
+    if (eventDetails.data?.attributes?.cover) {
+      setBanner(eventDetails.data.attributes.cover.data)
     }
     if (eventDetails.data?.attributes?.title) {
-      setTitleBanner(eventDetails.data.attributes.title)
+      setTitleBanner(
+        eventDetails.data.attributes.title,
+        `${moment(attributes.dateStart).format("MMMM DD, YYYY")} - ${moment(
+          attributes.dateEnd
+        ).format("MMMM DD, YYYY")}`
+      )
     }
   }, [eventDetails])
+
+  useEffect(() => {
+    getUpcomingEvents({
+      from: moment(attributes.dateEnd).toISOString()
+    })
+  }, [])
 
   return (
     <PageContentWrapper>
       <SinglePageContentWrapper>
-        <RichText content={attributes?.content || attributes?.description} />
+        <Breadcrumb style={{ marginBottom: 25 }}>
+          <Breadcrumb.Item>
+            <Link href='/events.html'>
+              <a style={{ color: THEME.primary }}>{t("Events")}</a>
+            </Link>
+          </Breadcrumb.Item>
+          <Breadcrumb.Item>{attributes.title}</Breadcrumb.Item>
+        </Breadcrumb>
+        <Row gutter={40}>
+          <Col span={24} xl={{ span: 16 }}>
+            <RichText
+              content={attributes?.content || attributes?.description}
+            />
+          </Col>
+          <Col span={24} xl={{ span: 8 }}>
+            <h2 style={{ fontSize: 24, marginBottom: 25, lineHeight: "28px" }}>
+              {t("Upcoming Events")}
+            </h2>
+            <div>
+              {upcomingEvents.length ? (
+                upcomingEvents.map((event, index) => (
+                  <>
+                    <Link href={getEventPathFromSlug(event.id, event.slug)}>
+                      <span
+                        style={{
+                          cursor: "pointer",
+                          fontSize: 16,
+                          fontWeight: 500
+                        }}
+                      >
+                        {event.title}
+                      </span>
+                    </Link>
+                    {index !== upcomingEvents.length - 1 && (
+                      <hr style={{ color: THEME.hr }} />
+                    )}
+                  </>
+                ))
+              ) : (
+                <div>
+                  <span style={{ color: THEME.textSecondary }}>
+                    {t("No upcoming events")}
+                  </span>
+                </div>
+              )}
+            </div>
+          </Col>
+        </Row>
       </SinglePageContentWrapper>
     </PageContentWrapper>
   )

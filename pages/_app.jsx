@@ -1,5 +1,4 @@
 import "../styles/antd.less"
-import '../lib/react-big-scheduler/lib/css/style.css'
 import { ThemeProvider } from "styled-components"
 import { THEME } from "../common"
 import { GlobalStyle } from "../styles/global.style"
