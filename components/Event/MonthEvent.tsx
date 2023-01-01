@@ -13,6 +13,7 @@ import { GridMedia } from "elements/Media"
 import { RichText } from "elements/RichText"
 import { Button } from "elements/Button"
 import { useTranslation } from "next-i18next"
+import Link from "next/link"
 
 const EventWrapper = styled(Popover)`
   display: flex;
@@ -36,11 +37,6 @@ function eventItemRenderer(event: any) {
   const { id, image, content, description, dateEnd, dateStart, slug, title } =
     event
 
-  const router = useRouter()
-  const onEventClick = () => {
-    router.push(getEventPathFromSlug(id, slug))
-  }
-
   return (
     <EventWrapper
       placement='rightTop'
@@ -52,30 +48,27 @@ function eventItemRenderer(event: any) {
             {moment(dateStart).format("DD/MM/YYYY")} -{" "}
             {moment(dateEnd).format("DD/MM/YYYY")}
           </div>
-          <h3
-            style={{ cursor: "pointer" }}
-            onClick={() =>
-              router.push(getEventPathFromSlug(event.id, event.slug))
-            }
-          >
-            {title}
-          </h3>
+          <Link href={getEventPathFromSlug(id, slug)}>
+            <h3 style={{ cursor: "pointer" }}>{title}</h3>
+          </Link>
           <RichText content={description} />
         </EventPopContentWrapper>
       }
     >
-      <div onClick={onEventClick} style={{ height: "100%", cursor: "pointer" }}>
-        <div
-          style={{
-            fontSize: "10px",
-            marginBottom: 12
-          }}
-        >
-          {moment(dateStart).format("HH:mm A")} -{" "}
-          {moment(dateEnd).format("HH:mm A")}
+      <Link href={getEventPathFromSlug(id, slug)}>
+        <div style={{ height: "100%", cursor: "pointer" }}>
+          <div
+            style={{
+              fontSize: "10px",
+              marginBottom: 12
+            }}
+          >
+            {moment(dateStart).format("HH:mm A")} -{" "}
+            {moment(dateEnd).format("HH:mm A")}
+          </div>
+          <h4>{title}</h4>
         </div>
-        <h4>{title}</h4>
-      </div>
+      </Link>
     </EventWrapper>
   )
 }

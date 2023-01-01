@@ -18,7 +18,7 @@ const Footer = ({ data, isMobile }) => {
         <Space style={{ width: "100%" }} direction='vertical' size='large'>
           <Row gutter={[24, 12]}>
             {contacts?.map((item) => (
-              <Col span={24} lg={{ span: 6 }}>
+              <Col span={24} lg={{ span: 6 }} key={item.address}>
                 <h3>{item.name}</h3>
                 <p>{item.address}</p>
                 {item.phone && <p>Tel: {item.phone}</p>}
@@ -30,7 +30,7 @@ const Footer = ({ data, isMobile }) => {
               <h3>{t("Follow us")}</h3>
               <Space size={12}>
                 {Socials?.map(({ link, icon }) => (
-                  <Link href={link}>
+                  <Link href={link} key={link}>
                     <a className='icon' target='_blank'>
                       <img height={28} src={icon.data.attributes.url} />
                     </a>

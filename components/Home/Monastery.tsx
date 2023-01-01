@@ -129,7 +129,7 @@ export const Monastery: FC<{
             loop
           >
             {contentList?.map(({ title, cover, redirectLink }) => (
-              <SwiperSlide>
+              <SwiperSlide key={title}>
                 <Link href={redirectLink ?? "/"}>
                   <div style={{ position: "relative", cursor: "pointer" }}>
                     <GridMedia url={cover.data.attributes.url} />
