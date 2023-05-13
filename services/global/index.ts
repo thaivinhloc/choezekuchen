@@ -10,6 +10,9 @@ export const globalDataReq = () => {
       "populate[1]": "Socials",
       "populate[2]": "Socials.icon",
       "populate[3]": "contacts",
+      "populate[4]": "defaultHeadLine",
+      "populate[5]": "offering",
+      "populate[6]": "offering.background"
     }
   })
 }

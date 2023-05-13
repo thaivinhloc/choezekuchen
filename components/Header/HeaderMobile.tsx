@@ -26,10 +26,12 @@ const { SubMenu } = Menu
 
 const HeaderMobile = ({
   t,
-  data
+  data,
+  logo
 }: {
   t: TFunction
   data: TNavigatorItem[]
+  logo?: any
 }) => {
   const [isOpenMenu, setOpenMenu] = useState(false)
   const [isSticky, setSticky] = useState(false)
@@ -108,13 +110,18 @@ const HeaderMobile = ({
               )}
               <Link href={!user?.username ? LOGIN : "/"}>
                 <Button type='primary' block>
-                  <span style={{ color: THEME.white }}>On-going Retreat</span>
+                  <span style={{ color: THEME.white }}>Retreat</span>
                 </Button>
               </Link>
             </Space>
           </div>
           <a
-            style={{ position: "absolute", right: 0, top: 0 }}
+            style={{
+              position: "absolute",
+              right: 0,
+              top: 0,
+              WebkitAppearance: "none"
+            }}
             type='button'
             onClick={() => setOpenMenu(false)}
           >
@@ -126,7 +133,11 @@ const HeaderMobile = ({
               justifyContent: "center"
             }}
           >
-            <img src='/logo.png' alt='Logo' className='headermobile-logo' />
+            <img
+              src={logo?.data?.attributes?.url ?? "/logo.png"}
+              alt='Logo'
+              className='headermobile-logo'
+            />
           </div>
           <Menu
             style={{ width: "100%" }}

@@ -12,6 +12,7 @@ export const formatNumber = (num: number) => {
 const retreatRegex = /^([a-z0-9-\/]*)-r([0-9]*).html$/
 const eventRegex = /^([a-z0-9-\/]*)-e([0-9]*).html$/
 const blogRegex = /^([a-z0-9-\/]*)-b([0-9]*).html$/
+const monasteryRegex = /^([a-z0-9-\/]*)-m([0-9]*).html$/
 
 export const getPathType = (path: string) => {
   if (retreatRegex.test(path)) {
@@ -23,13 +24,19 @@ export const getPathType = (path: string) => {
   if (blogRegex.test(path)) {
     return "blog"
   }
+  if (monasteryRegex.test(path)) {
+    return "monastery"
+  }
 
   return ""
 }
 
 export const isValidPath = (path: string) => {
   return (
-    retreatRegex.test(path) || eventRegex.test(path) || blogRegex.test(path)
+    retreatRegex.test(path) ||
+    eventRegex.test(path) ||
+    blogRegex.test(path) ||
+    monasteryRegex.test(path)
   )
 }
 
@@ -38,7 +45,17 @@ export const getRetreatPathFromSlug = (id: number, slug = ""): string => {
 }
 
 export const getEventPathFromSlug = (id: number, slug = ""): string => {
+  if (slug.startsWith("/")) {
+    slug = slug.slice(1)
+  }
   return `/${slug || ""}-e${id}.html`
+}
+
+export const getMonasteryPathFromSlug = (id: number, slug = ""): string => {
+  if (slug.startsWith("/")) {
+    slug = slug.slice(1)
+  }
+  return `/${slug || ""}-m${id}.html`
 }
 
 export const getBlogPathFromSlug = (id: number, slug = ""): string => {

@@ -5,7 +5,7 @@ import { EMediaType, TMedia } from "definition"
 import { Button } from "components/Button"
 import { getMediaType } from "helper"
 import NextImage, { ImageProps } from "next/image"
-import { useTranslation } from "react-i18next"
+import { useTranslation } from "next-i18next"
 import styled from "styled-components"
 import {
   DownloadOutlined,
@@ -391,15 +391,18 @@ export const GridMedia = ({
   url,
   name,
   width = 600,
-  height = 300
+  height = 300,
+  style = {}
 }: {
   url?: string
   name?: string
   width?: number
   height?: number
+  style?: Record<string,any>
 }) => {
   return (
     <Image
+      style={style}
       objectFit='cover'
       src={url ?? ""}
       alt={name ?? "-"}

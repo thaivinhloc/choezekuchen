@@ -31,6 +31,10 @@ const RichTextWrapper = styled.div<RichTextProps>`
   b,
   strong,
   i {
+    font-family: ${(props) => props.theme.primaryFont} !important;
+    background: transparent !important;
+    line-height: 1.3;
+    color: #000;
     ${({ align }) => `text-align: ${align} !important;`}
     ${(props) => props.fontSize && `font-size: ${props.fontSize} !important;`}
     ${(props) =>

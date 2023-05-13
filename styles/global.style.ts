@@ -126,6 +126,12 @@ export const GlobalStyle = createGlobalStyle`${css`
       text-overflow: ellipsis;
       white-space: nowrap;
     }
+    &-2 {
+      -webkit-line-clamp: 2 !important;
+    }
+    &-3 {
+      -webkit-line-clamp: 3 !important;
+    }
   }
   .w-100 {
     width: 100%;

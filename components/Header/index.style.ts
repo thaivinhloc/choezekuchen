@@ -18,6 +18,7 @@ export const DivHeaderWrapperV1 = styled.div<HeaderProps>`
       props.isHeaderFullscreen ? "100vh" : "calc(100vw/2)"};
     @media (min-width: 992px) {
       height: ${(props) => (props.isHeaderFullscreen ? "100vh" : "auto")};
+      min-height: 50vh;
     }
     /* Main CSS */
     background-color: transparent !important;
@@ -57,7 +58,7 @@ export const DivHeaderWrapperV1 = styled.div<HeaderProps>`
       }
       display: flex;
       align-items: center;
-      padding: 15px 50px;
+      padding: 64px 50px 15px;
       position: relative;
       z-index: 20;
       transition: 0.3s linear;
@@ -68,10 +69,10 @@ export const DivHeaderWrapperV1 = styled.div<HeaderProps>`
         .nav {
           &-link {
             color: ${(props) => props.theme.white};
-            font-size: 16px;
+            font-size: 18px;
             font-style: normal;
             font-weight: 500;
-            padding: 10px 12px;
+            padding: 10px 16px;
             white-space: nowrap;
             display: flex;
             align-items: center;
@@ -103,15 +104,14 @@ export const DivHeaderWrapperV1 = styled.div<HeaderProps>`
       }
       &__title {
         text-align: center;
-        padding: 70px 16px 120px;
+        padding: 80px 16px 150px;
         margin: 0;
         z-index: 10;
         position: relative;
         h1 {
-          letter-spacing: 4px;
           color: #ffffff;
-          font-size: 36px;
-          line-height: 40px;
+          font-size: 48px;
+          line-height: 62px;
           font-weight: 700px;
         }
         &__desc {
@@ -424,6 +424,7 @@ export const NavListStyled = styled.nav<{ isSticky?: boolean }>`
       width:100%;
       height: 80px;
       background:${props.theme.white};
+      padding: 15px 50px !important;
       .navbar-nav {
         .nav-link {
           color: ${props.theme.dark} !important;
@@ -461,6 +462,10 @@ export const TopActionStyled = styled.div`
   position: relative;
   z-index: 20;
   @media (min-width: 1200px) {
-    padding: 8px 50px;
+    padding: 16px 50px;
+    position: absolute;
+    top: 16px;
+    right: 0;
+    z-index: 99999999;
   }
 `

@@ -201,11 +201,15 @@ export enum EListPageLayout {
 }
 
 export enum ESinglePageLayout {
-  VERTICAL = "VERTICAL",
-  HORIZONTAL = "HORIZONTAL",
   HOME = "HOME",
-  GURUS = "GURUS",
-  MONASTERY = "MONASTERY"
+  MONASTERY = "MONASTERY",
+  DRIKUNG = "DRIKUNG_KAGYU_LINEAGE",
+  ABOUT = "ABOUT",
+  TEACHING = "TEACHING",
+  LIBRARY = "LIBRARY",
+  RETREAT = "RETREAT",
+  EVENT = "EVENT",
+  OFFERING = "OFFERING"
 }
 
 type TContentListItem = {

@@ -8,13 +8,14 @@ import { FC, useEffect, useRef, useState } from "react"
 import styled from "styled-components"
 import { Swiper, SwiperRef, SwiperSlide } from "swiper/react"
 import { Autoplay } from "swiper"
-import "swiper/css"
-import "swiper/css/navigation"
+import useMonastery from "hook/useMonastery"
+import { useRouter } from "next/router"
+import { getMonasteryPathFromSlug } from "helper"
 
 const CustomSwiper = styled(Swiper)`
   .swiper-slide {
     @media (min-width: 1200px) {
-      width: 80%;
+      width: 60%;
     }
     .project {
       &__title {
@@ -42,6 +43,7 @@ const CustomSwiper = styled(Swiper)`
         width: 100%;
         height: 100%;
         z-index: 1;
+        border-radius: 0 0 8px 8px;
       }
     }
   }
@@ -50,8 +52,7 @@ const CustomContainer = styled.div`
   position: relative;
   margin-left: auto;
   margin-right: auto;
-  padding-right: 15px;
-  padding-left: 15px;
+  padding: 80px 15px;
   @media (min-width: 1200px) {
     width: calc(1140px + (100vw - 1140px) / 2);
     margin-right: unset !important;
@@ -75,12 +76,23 @@ export const Monastery: FC<{
   }[]
 }> = ({ title, description, contentList, redirectLink, redirectTitle }) => {
   const carouselRef = useRef<SwiperRef>(null)
+  const router = useRouter()
+  const { monasteries, getAllMonasteries } = useMonastery({
+    locale: router.locale ?? "en"
+  })
+
+  useEffect(() => {
+    getAllMonasteries()
+  }, [])
+
+  console.log({ monasteries })
+
   return (
     <CustomContainer>
       <Row gutter={[32, 24]}>
         <Col span={24} lg={{ span: 8 }}>
           <h2>{title}</h2>
-          <RichText fontSize='18px' content={description} />
+          <RichText fontSize='20px' content={description} />
           <Button
             style={{ padding: 0, fontWeight: 500 }}
             href={redirectLink}
@@ -117,29 +129,36 @@ export const Monastery: FC<{
           </Space>
         </Col>
         <Col span={24} lg={{ span: 16 }}>
-          <CustomSwiper
-            ref={carouselRef}
-            spaceBetween={32}
-            slidesPerView='auto'
-            autoplay={{
-              delay: 2000,
-              disableOnInteraction: false
-            }}
-            modules={[Autoplay]}
-            loop
-          >
-            {contentList?.map(({ title, cover, redirectLink }) => (
-              <SwiperSlide key={title}>
-                <Link href={redirectLink ?? "/"}>
-                  <div style={{ position: "relative", cursor: "pointer" }}>
-                    <GridMedia url={cover.data.attributes.url} />
-                    <div className='project__backdrop' />
-                    <div className='project__title'>{title}</div>
-                  </div>
-                </Link>
-              </SwiperSlide>
-            ))}
-          </CustomSwiper>
+          {monasteries?.length && (
+            <CustomSwiper
+              ref={carouselRef}
+              spaceBetween={32}
+              slidesPerView='auto'
+              autoplay={{
+                delay: 2000,
+                disableOnInteraction: false
+              }}
+              modules={[Autoplay]}
+              loop
+            >
+              {monasteries.map(({ id, attributes }) => (
+                <SwiperSlide key={attributes.title}>
+                  <Link
+                    href={getMonasteryPathFromSlug(id, attributes.slug ?? "/")}
+                  >
+                    <div style={{ position: "relative", cursor: "pointer" }}>
+                      <GridMedia
+                        style={{ borderRadius: 8 }}
+                        url={attributes.cover.data.attributes.url}
+                      />
+                      <div className='project__backdrop' />
+                      <div className='project__title'>{attributes.title}</div>
+                    </div>
+                  </Link>
+                </SwiperSlide>
+              ))}
+            </CustomSwiper>
+          )}
         </Col>
       </Row>
     </CustomContainer>

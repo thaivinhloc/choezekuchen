@@ -3,14 +3,6 @@ import client from "services/client"
 
 export type THomePageResponse = {
   attributes: TAttributesResponse<{
-    contactUs: {
-      title: string
-      description: string
-      contentList: {
-        title: string
-        description: string
-      }[]
-    }
     introduction: {
       title: string
       description: string
@@ -20,7 +12,11 @@ export type THomePageResponse = {
         cover: {
           data: TMedia
         }
+        redirectLink?: string
       }[]
+      background?: {
+        data: TMedia
+      }
     }
     meetUsInPerson: {
       title: string
@@ -28,11 +24,14 @@ export type THomePageResponse = {
       contentList: {
         title: string
         description: string
-        redirectUrl: string
+        redirectLink: string
         cover: {
           data: TMedia
         }
       }[]
+      background?: {
+        data: TMedia
+      }
     }
     statistic: {
       title?: string
@@ -44,6 +43,9 @@ export type THomePageResponse = {
         value: string
         description?: string
       }[]
+      background?: {
+        data: TMedia
+      }
     }
     monastery: {
       title?: string
@@ -79,6 +81,13 @@ export const getHomePage = ({ locale }: { locale: string }) => {
       "populate[10]": "monastery",
       "populate[11]": "monastery.contentList",
       "populate[12]": "monastery.contentList.cover",
+      "populate[13]": "introduction.background",
+      "populate[14]": "meetUsInPerson.background",
+      "populate[15]": "statistic.background",
+      "populate[16]": "upcomingEvents",
+      "populate[17]": "upcomingEvents.background",
+      "populate[18]": "offering",
+      "populate[19]": "offering.background",
       locale: locale
     }
   })

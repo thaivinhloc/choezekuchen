@@ -25,7 +25,7 @@ const LargeTitleWrapper = styled(Space)`
   @media (max-width: 991px) {
     .statistic {
       &__title {
-        font-size: 20px;
+        font-size: 28px;
         font-weight: 600;
       }
       &__value {
@@ -43,12 +43,13 @@ const LargeTitleWrapper = styled(Space)`
 const SmallTitleWrapper = styled.div`
   .statistic {
     &__title {
-      font-size: 20px;
+      font-size: 24px;
       color: ${(props) => props.theme.secondary};
       font-weight: 600;
     }
     &__value {
       font-size: 45px;
+      line-height: 45px;
     }
     &__description {
     }
@@ -59,7 +60,14 @@ const SmallTitleWrapper = styled.div`
   }
 `
 
-const colors = ["#14162E", "#042E35", "#DDAA33", "#A51818"]
+const BackgroundWrapper = styled.div<{ background?: any }>`
+  background: url(${(props) => props.background?.data?.attributes?.url});
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding: 80px 0;
+`
+
+const colors = ["#800000", "#FFB103", "#BA0808", "#2C7000"]
 
 export const HomeStatistic: FC<{
   title?: string
@@ -71,94 +79,105 @@ export const HomeStatistic: FC<{
     value: string
     description?: string
   }[]
-}> = ({ banner, contentList }) => {
+  background?: any
+}> = ({ banner, contentList, background }) => {
   const [isCountedUp, setCountedUp] = useState(false)
   return (
-    <div className='container'>
-      <Row gutter={{ xs: 16, sm: 16, md: 16, lg: 48 }}>
-        <Col span={24} lg={{ span: 12 }} style={{ marginBottom: 24 }}>
-          <GridMedia
-            width={300}
-            height={400}
-            url={banner?.data.attributes.url}
-          />
-        </Col>
-        <Col span={24} lg={{ span: 12 }}>
-          <Space direction='vertical' size='large'>
-            {contentList.map((item, idx) =>
-              !idx ? (
-                <LargeTitleWrapper
-                  direction='vertical'
-                  key={item.name}
-                  style={{ color: colors[idx] }}
-                >
-                  <strong className='statistic__value'>
-                    {/* <CountUp end={Number(item.value)}>
-                      {({ countUpRef, start }) => (
-                        <div>
-                          <span ref={countUpRef} />
-                          <ScrollTrigger onEnter={start} />
-                        </div>
+    <BackgroundWrapper
+      background={background}
+      style={{
+        backgroundColor: "#F1F2F2",
+        padding: "80px 0 0"
+      }}
+    >
+      <div className='container'>
+        <Row
+          align='bottom'
+          gutter={[
+            { xs: 16, sm: 16, md: 16, lg: 96 },
+            { xs: 16, sm: 16, md: 0, lg: 0 }
+          ]}
+        >
+          <Col span={24} lg={{ span: 12 }}>
+            <GridMedia
+              width={300}
+              height={400}
+              url={banner?.data.attributes.url}
+            />
+          </Col>
+          <Col span={24} lg={{ span: 12 }} style={{ paddingBottom: 48 }}>
+            <Space direction='vertical' size='large'>
+              {contentList.map((item, idx) =>
+                !idx ? (
+                  <LargeTitleWrapper
+                    direction='vertical'
+                    key={item.name}
+                    style={{ color: colors[idx] }}
+                  >
+                    <Space size='large'>
+                      <strong className='statistic__value'>
+                        {formatNumber(Number(item.value))}
+                      </strong>
+                      <strong
+                        className='statistic__title'
+                        style={{
+                          marginBottom: 0
+                        }}
+                      >
+                        {item.name}
+                      </strong>
+                    </Space>
+                    <RichText
+                      className='statistic__description'
+                      content={item.description}
+                      fontSize='24px'
+                    />
+                  </LargeTitleWrapper>
+                ) : (
+                  <SmallTitleWrapper
+                    key={item.name}
+                    style={{ color: colors[idx] }}
+                  >
+                    <strong className='statistic__value'>
+                      {isCountedUp ? (
+                        formatNumber(Number(item.value))
+                      ) : (
+                        <CountUp end={Number(item.value)}>
+                          {({ countUpRef, start }) => (
+                            <div>
+                              <span ref={countUpRef} />
+                              <ScrollTrigger
+                                onExit={() => {
+                                  setCountedUp(true)
+                                }}
+                                onEnter={start}
+                              />
+                            </div>
+                          )}
+                        </CountUp>
                       )}
-                    </CountUp> */}
-                    {formatNumber(Number(item.value))}
-                  </strong>
-                  <strong
-                    className='statistic__title'
-                    style={{
-                      marginBottom: 0
-                    }}
-                  >
-                    {item.name}
-                  </strong>
-                  <RichText
-                    className='statistic__description'
-                    content={item.description}
-                  />
-                </LargeTitleWrapper>
-              ) : (
-                <SmallTitleWrapper
-                  key={item.name}
-                  style={{ color: colors[idx] }}
-                >
-                  <strong className='statistic__value'>
-                    {isCountedUp ? (
-                      formatNumber(Number(item.value))
-                    ) : (
-                      <CountUp end={Number(item.value)}>
-                        {({ countUpRef, start }) => (
-                          <div>
-                            <span ref={countUpRef} />
-                            <ScrollTrigger
-                              onExit={() => {
-                                setCountedUp(true)
-                              }}
-                              onEnter={start}
-                            />
-                          </div>
-                        )}
-                      </CountUp>
-                    )}
-                  </strong>
-                  <strong
-                    className='statistic__title'
-                    style={{
-                      marginBottom: 0,
-                      display: "block"
-                    }}
-                  >
-                    {item.name}
-                  </strong>
-                  <RichText
-                    className='statistic__description'
-                    content={item.description}
-                  />
-                </SmallTitleWrapper>
-              )
-            )}
-          </Space>
-        </Col>
-      </Row>
-    </div>
+                    </strong>
+                    <strong
+                      className='statistic__title'
+                      style={{
+                        marginBottom: 0,
+                        display: "block"
+                      }}
+                    >
+                      {item.name}
+                    </strong>
+                    <RichText
+                      fontSize='20px'
+                      className='statistic__description'
+                      content={item.description}
+                    />
+                  </SmallTitleWrapper>
+                )
+              )}
+            </Space>
+          </Col>
+        </Row>
+      </div>
+    </BackgroundWrapper>
   )
 }

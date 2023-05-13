@@ -1,4 +1,6 @@
 import "../styles/antd.less"
+import "swiper/css"
+import "swiper/css/navigation"
 import { ThemeProvider } from "styled-components"
 import { THEME } from "../common"
 import { GlobalStyle } from "../styles/global.style"

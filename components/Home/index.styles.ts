@@ -8,7 +8,7 @@ type TStyled = {
 export const DivHomeWrapper = styled.div<{ background?: string }>`
   color: rgb(48, 48, 48);
   background: ${(props) => props.background ?? "#fff"};
-  padding: 80px 0;
+  padding: 0;
 `
 
 export const MeetUsSectionWrapper = styled.div<{ backgroundUrl: string }>`
@@ -24,6 +24,7 @@ export const MeetUsSectionWrapper = styled.div<{ backgroundUrl: string }>`
   background-image: url(${(props) => props.backgroundUrl});
   transition: background 0.3s, border 0.3s, border-radius 0.3s, box-shadow 0.3s;
   position: relative;
+  border-radius: 8px;
   &:hover {
     .meet-us-section {
       &__overlay {
@@ -44,6 +45,7 @@ export const MeetUsSectionOverlay = styled.div`
   left: 0;
   position: absolute;
   z-index: 2;
+  border-radius: 8px;
 `
 export const MeetUsSectionContent = styled.div`
   z-index: 3;

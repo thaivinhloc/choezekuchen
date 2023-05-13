@@ -37,12 +37,14 @@ const Header = ({
   data,
   isMobile,
   isHeaderFullscreen = false,
-  retreats = []
+  retreats = [],
+  logo
 }: {
   data: TNavigatorItem[]
   isHeaderFullscreen?: boolean
   isMobile: boolean
   retreats?: TRetreat[]
+  logo?: any
 }) => {
   const router = useRouter()
   const { onGetMe, user } = useAuth()
@@ -78,6 +80,7 @@ const Header = ({
   /* Method that will fix header after a specific scrollable */
   const onScroll = () => {
     const scrollTop = window.scrollY
+
     setSticky(scrollTop >= 100 ? true : false)
   }
 
@@ -90,7 +93,7 @@ const Header = ({
   }, [router.pathname])
 
   /* Render */
-  if (isMobile) return <HeaderMobile data={data} t={t} />
+  if (isMobile) return <HeaderMobile data={data} t={t} logo={logo} />
 
   const redirectToOtherPage = (path: string) => {
     router.replace(`/${currentLocale}${path}`)
@@ -118,23 +121,24 @@ const Header = ({
             {LANGS.filter((lang) => lang.locale !== currentLocale).map(
               (lang) => (
                 <Button
+                  shape='circle'
                   size='large'
                   type='primary'
                   onClick={() => handleChangeLocale(lang.locale)}
                   key={lang.code}
                   style={{ padding: 0, border: 0 }}
                 >
-                  <div style={{ color: "#fff" }}>
-                    <ReactCountryFlag
-                      style={{
-                        width: "54px",
-                        height: "40px"
-                      }}
-                      title={lang.name}
-                      countryCode={lang.code}
-                      svg
-                    />
-                  </div>
+                  <ReactCountryFlag
+                    style={{
+                      width: "40px",
+                      height: "40px",
+                      borderRadius: "50%"
+                    }}
+                    cdnUrl='https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/4.1.4/flags/1x1/'
+                    title={lang.name}
+                    countryCode={lang.code}
+                    svg
+                  />
                 </Button>
               )
             )}
@@ -147,7 +151,12 @@ const Header = ({
               style={{ fontSize: 28, color: "$dark" }}
               className='fa fa-whatsapp'
             />
-            <img src={"/logo.png"} width={105} height={105} alt='Logo' />
+            <img
+              src={logo?.data?.attributes?.url ?? "/logo.png"}
+              width={105}
+              height={105}
+              alt='Logo'
+            />
           </div>
           {/* <button className='navbar-toggler'>
             <i className='fa fa-bars' aria-hidden='true' />
@@ -228,14 +237,17 @@ const Header = ({
             >
               <Button
                 style={{ paddingLeft: 28, paddingRight: 28 }}
-                type='primary'
+                type={isSticky ? "primary" : "default"}
+                ghost
                 size='large'
+                shape='round'
               >
                 {t("Retreat")}
               </Button>
             </Link>
           ) : null}
         </NavListStyled>
+        {isSticky ? <div style={{ height: 184 }} /> : <div />}
         <div className='navbar__title'>
           <h1>{title.toUpperCase()}</h1>
           <span className='navbar__title__desc'>{desc}</span>

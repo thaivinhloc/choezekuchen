@@ -91,7 +91,7 @@ export const getEventsByTimeRange = ({
 
 export const getEventsFrom = ({
   locale,
-  from,
+  from
 }: {
   locale: string
   from: string
@@ -102,7 +102,8 @@ export const getEventsFrom = ({
     external: true,
     params: {
       from,
-      locale: locale
+      locale: locale,
+      "populate[0]": "image"
     }
   })
 }

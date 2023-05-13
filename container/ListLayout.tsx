@@ -6,7 +6,7 @@ import { RichText } from "elements/RichText"
 import { getMediaType } from "helper"
 import Link from "next/link"
 import { Container } from "react-bootstrap"
-import { useTranslation } from "react-i18next"
+import { useTranslation } from "next-i18next"
 import styled from "styled-components"
 import { ArrowRightOutlined } from "@ant-design/icons"
 
