@@ -162,6 +162,7 @@ export const About = ({
         <div className='container'>
           <div style={{ marginBottom: 50 }}>
             <Title
+              isMobile={isMobile}
               color={THEME.white}
               size={TITLE_SIZES.LARGE}
               title={t("GURUS")}
@@ -170,6 +171,7 @@ export const About = ({
           </div>
           <div style={{ position: "relative" }}>
             <Swiper
+              speed={1500}
               modules={[Navigation]}
               onBeforeInit={(swiper) => {
                 swiperRef.current = swiper
@@ -332,6 +334,7 @@ export const About = ({
             }}
           >
             <Swiper
+              speed={1500}
               onSlideChange={(swiper) => setHistoryIndex(swiper.realIndex)}
               modules={[Navigation]}
               onBeforeInit={(swiper) => {
@@ -668,6 +671,7 @@ export const About = ({
           <div style={{ textAlign: "center", marginBottom: 40 }}>
             <TitleWithHeadline headLine={defaultHeadLine} />
             <Title
+              isMobile={isMobile}
               size={TITLE_SIZES.MEDIUM}
               supTitle={t("Reincarnations of")}
               title={t("CHOEZE KUCHEN RINPOCHE")}

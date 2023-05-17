@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { DownOutlined } from "@ant-design/icons"
 import { Button, Dropdown, Menu } from "antd"
 import { PROFILE, RETREAT } from "common/navigator"
@@ -8,16 +9,18 @@ import React, { FC } from "react"
 import { useAuth } from "../../context/auth/AuthContext"
 import { IUser } from "../../context/auth/AuthTypes"
 import { CircleUser } from "@styled-icons/fa-solid"
+import { useTranslation } from "next-i18next"
 
-const HeaderProfileDropdown: FC = () => {
+const HeaderProfileDropdown: FC = ({ isSticky }) => {
   const auth = useAuth()
   const { onLogout } = useAuth()
   const user = auth.user as IUser
   const router = useRouter()
   const locale = router.locale
+  const { t } = useTranslation()
 
   const menu = (
-    <Menu>
+    <Menu style={{ width: 200 }}>
       <Menu.Item key='0'>
         <Link href={PROFILE}>Profile</Link>
       </Menu.Item>
@@ -33,14 +36,13 @@ const HeaderProfileDropdown: FC = () => {
       {user?.id && (
         <Dropdown overlay={menu} trigger={["click"]} placement='bottomRight'>
           <Button
-            style={{ padding: 0 }}
-            type='text'
+            style={{ paddingLeft: 28, paddingRight: 28 }}
+            type={isSticky ? "primary" : "default"}
+            ghost
             size='large'
-            className='ant-dropdown-link'
+            shape='round'
           >
-            <span className='bold' style={{ color: "#fff" }}>
-              <CircleUser size={40} />
-            </span>
+            {user.username.split(" ")[0]}
           </Button>
         </Dropdown>
       )}

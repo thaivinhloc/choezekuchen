@@ -12,7 +12,9 @@ export const globalDataReq = () => {
       "populate[3]": "contacts",
       "populate[4]": "defaultHeadLine",
       "populate[5]": "offering",
-      "populate[6]": "offering.background"
+      "populate[6]": "offering.background",
+      "populate[7]": "practice",
+      "populate[8]": "practice.background"
     }
   })
 }

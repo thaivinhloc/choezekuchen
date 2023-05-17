@@ -1,6 +1,13 @@
+// @ts-nocheck
 import { TEvent, TPagination } from "definition"
 import { useState } from "react"
-import { getEvents, getEventsByTimeRange, getEventsFrom } from "services/event"
+import {
+  getEvents,
+  getEventsByTimeRange,
+  getEventsFrom,
+  getNextEventsFromNow,
+  getOneHighlightedEvent
+} from "services/event"
 
 type TPageProps = {
   locale?: string
@@ -8,7 +15,7 @@ type TPageProps = {
   pageSize?: number
 }
 
-function useEvents({ locale, page = 1, pageSize = 3 }: TPageProps) {
+function useEvents({ locale }: TPageProps) {
   const [isLoading, setIsLoading] = useState<boolean>(false)
   const [events, setEvents] = useState<{
     data: {
@@ -22,6 +29,22 @@ function useEvents({ locale, page = 1, pageSize = 3 }: TPageProps) {
 
   const [eventsCalendar, setEventsCalendar] = useState<TEvent[]>([])
   const [upcomingEvents, setUpcomingEvents] = useState<TEvent[]>([])
+  const [highlightedEvent, setHighLightedEvent] = useState<TEvent>()
+  const [nextEvents, setNextEvents] = useState<TEvent[]>([])
+
+  async function getHighlightedEvent() {
+    try {
+      const res = await getOneHighlightedEvent({
+        locale: locale ?? "en"
+      })
+      console.log("getHighlightedEvent", { res })
+
+      setHighLightedEvent(res.data?.[0])
+      setIsLoading(false)
+    } catch (error) {
+      setIsLoading(false)
+    }
+  }
 
   async function getEventsCalendar({ from, to }: { from: string; to: string }) {
     try {
@@ -37,11 +60,11 @@ function useEvents({ locale, page = 1, pageSize = 3 }: TPageProps) {
     }
   }
 
-  async function getUpcomingEvents({ from }: { from: string; }) {
+  async function getUpcomingEvents({ from }: { from: string }) {
     try {
       const res = await getEventsFrom({
         locale: locale ?? "en",
-        from,
+        from
       })
       setUpcomingEvents(res)
       setIsLoading(false)
@@ -50,10 +73,31 @@ function useEvents({ locale, page = 1, pageSize = 3 }: TPageProps) {
     }
   }
 
-  async function getEventList() {
+  async function getUpcomingEventsFromNow() {
+    try {
+      const res = await getNextEventsFromNow({
+        locale: locale ?? "en"
+      })
+      setNextEvents(res)
+      setIsLoading(false)
+    } catch (error) {
+      setIsLoading(false)
+    }
+  }
+
+  async function getEventList({ page = 1, pageSize = 5, from, to, qs }) {
     try {
       setIsLoading(true)
-      const res = await getEvents({ locale: locale ?? "en", page, pageSize })
+      console.log({ page, pageSize, from, to, qs })
+
+      const res = await getEvents({
+        locale: locale ?? "en",
+        page,
+        pageSize,
+        from,
+        to,
+        qs
+      })
       // const res_1 = await getEventsByCategory({
       //   locale: locale ?? "en",
       //   categoryId: 1
@@ -82,7 +126,11 @@ function useEvents({ locale, page = 1, pageSize = 3 }: TPageProps) {
     getEventList,
     getEventsCalendar,
     upcomingEvents,
-    getUpcomingEvents
+    getUpcomingEvents,
+    nextEvents,
+    getUpcomingEventsFromNow,
+    highlightedEvent,
+    getHighlightedEvent
   }
 }
 

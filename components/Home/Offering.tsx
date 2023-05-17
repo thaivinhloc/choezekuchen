@@ -23,15 +23,6 @@ export const Offering: React.FC = ({
   isMobile
 }) => {
   const { t } = useTranslation()
-  const subTitleStyle = isMobile
-    ? {
-        fontSize: 28,
-        lineHeight: "36px"
-      }
-    : { fontSize: 48, lineHeight: "60px" }
-  const titleStyle = isMobile
-    ? { fontSize: 64, lineHeight: "64px" }
-    : { fontSize: 112, lineHeight: "112px" }
   const contentSize = isMobile ? "18px" : "32px"
   return (
     <BackgroundWrapper background={background}>
@@ -39,6 +30,7 @@ export const Offering: React.FC = ({
         <Row align='bottom' gutter={[{ xs: 16, md: 32 }, 24]}>
           <Col span={24} md={{ span: 12 }}>
             <Title
+              isMobile={isMobile}
               title={t("Offering")}
               supTitle={t("Support &")}
               size={TITLE_SIZES.LARGE}

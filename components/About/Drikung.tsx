@@ -8,6 +8,8 @@ import styled from "styled-components"
 import { THEME } from "common"
 import { RichText } from "elements/RichText"
 import { GridMedia } from "elements/Media"
+import { TITLE_SIZES, Title } from "components/Title"
+import { TitleWithHeadline } from "components/Title/TitleWithHeadline"
 
 const DrikungKagyuLinageWrapper = styled.div`
   padding-top: 50px;
@@ -32,8 +34,10 @@ const ContentImageWrapper = styled.div`
 export const DrikungKagyuLinage = ({
   locale,
   pageContentEndpoint,
-  isMobile
+  isMobile,
+  globalData
 }: TPage) => {
+  const { defaultHeadLine } = globalData.attributes
   const { content, getPageContent } = usePage({
     locale,
     endpoint: pageContentEndpoint,
@@ -77,25 +81,13 @@ export const DrikungKagyuLinage = ({
             ]}
           >
             <Col span={12} lg={{ span: 13 }}>
-              <strong
-                style={{
-                  display: "block",
-                  color: THEME.primary,
-                  ...subTitleStyle
-                }}
-              >
-                {t("Introduction to the")}
-              </strong>
-              <h2
-                style={{
-                  color: THEME.primary,
-                  marginBottom: 12,
-                  fontWeight: "bolder",
-                  ...titleStyle
-                }}
-              >
-                {introduction.title}
-              </h2>
+              <Title
+                isMobile={isMobile}
+                size={TITLE_SIZES.MEDIUM}
+                title={introduction.title}
+                supTitle={t("Introduction to the")}
+              />
+
               <RichText
                 style={{ marginTop: 32, textAlign: "justify" }}
                 content={introduction.description}
@@ -106,24 +98,14 @@ export const DrikungKagyuLinage = ({
             </Col>
           </Row>
         )}
-        {section_line_image && (
-          <div style={{ margin: "48px auto" }}>
-            <GridMedia {...section_line_image?.data?.attributes} />
-          </div>
-        )}
         {history && (
-          <div>
-            <h2
-              style={{
-                color: THEME.primary,
-                marginBottom: 12,
-                fontWeight: "bolder",
-                textAlign: "center",
-                ...titleStyle
-              }}
-            >
-              {history.title}
-            </h2>
+          <div style={{ padding: "80px 0" }}>
+            <div style={{ textAlign: "center" }}>
+              <TitleWithHeadline
+                title={history.title}
+                headLine={defaultHeadLine}
+              />
+            </div>
             <ContentImageWrapper>
               <RichText
                 style={{ marginTop: 32, textAlign: "justify" }}

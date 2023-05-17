@@ -3,6 +3,7 @@ export const LOGIN = "/login";
 export const SIGNUP = "/signup";
 export const PROFILE = "/profile";
 export const RETREAT = "/retreat.html";
+export const EVENT = "/events.html";
 export const RETREAT_HISTORY = "/retreat-history/:id";
 export const GURUS = "/gurus";
 export const JIGMECHOEWANGLODRO =

@@ -19,6 +19,8 @@ import { Monastery } from "./Monastery"
 import { HomeStatistic } from "./Statistic"
 import { UpcomingEvents } from "./UpcomingEvents"
 import { Offering } from "./Offering"
+import { EVENT } from "common/navigator"
+import { useTranslation } from "next-i18next"
 
 const BackgroundWrapper = styled.div<{ background?: any }>`
   background: url(${(props) => props.background?.data?.attributes?.url});
@@ -32,20 +34,14 @@ const Home: FC<{
   content: THomePageResponse
   isMobile: boolean
 }> = ({ data, content, isMobile }) => {
-  const {
-    introduction,
-    statistic,
-    meetUsInPerson,
-    monastery,
-    upcomingEvents,
-    offering
-  } = content?.attributes ?? {}
+  const { t } = useTranslation()
+  const { introduction, statistic, meetUsInPerson, monastery, offering } =
+    content?.attributes ?? {}
   console.log({
     introduction,
     statistic,
     meetUsInPerson,
     monastery,
-    upcomingEvents,
     offering
   })
 
@@ -160,7 +156,8 @@ const Home: FC<{
       <Monastery {...monastery} />
       {statistic && <HomeStatistic {...statistic} />}
       <UpcomingEvents
-        {...upcomingEvents}
+        redirectLink={EVENT}
+        title={t("Upcoming Events")}
         background={null}
         isMobile={isMobile}
       />

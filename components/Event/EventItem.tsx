@@ -9,7 +9,10 @@ import moment from "moment"
 import { RichText } from "elements/RichText"
 import { useTranslation } from "next-i18next"
 
-const EventItemWrapper = styled.div``
+const EventItemWrapper = styled.div`
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  border-radius: 8px;
+`
 
 export const EventItem: React.FC = ({
   id,
@@ -29,7 +32,7 @@ export const EventItem: React.FC = ({
             position: "relative",
             cursor: "pointer",
             background: "#fff",
-            borderRadius: 8
+            borderRadius: "8px"
           }}
         >
           <GridMedia style={{ borderRadius: "8px 8px 0 0" }} url={image.url} />

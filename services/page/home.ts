@@ -84,10 +84,8 @@ export const getHomePage = ({ locale }: { locale: string }) => {
       "populate[13]": "introduction.background",
       "populate[14]": "meetUsInPerson.background",
       "populate[15]": "statistic.background",
-      "populate[16]": "upcomingEvents",
-      "populate[17]": "upcomingEvents.background",
-      "populate[18]": "offering",
-      "populate[19]": "offering.background",
+      "populate[16]": "offering",
+      "populate[17]": "offering.background",
       locale: locale
     }
   })

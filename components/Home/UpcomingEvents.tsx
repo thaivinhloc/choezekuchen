@@ -14,14 +14,17 @@ import { useEffect, useRef } from "react"
 import { useTranslation } from "next-i18next"
 import styled from "styled-components"
 import { Swiper, SwiperRef, SwiperSlide } from "swiper/react"
+import { THEME } from "common"
 
 const HighlightWrapper = styled.div`
-  padding: 80px 0;
-  background: ${(props) =>
-    props?.background ? `url(${props.background})` : props.theme.primary};
+  padding: 80px 0 0;
   background-size: cover;
   background-repeat: no-repeat;
   color: #fff;
+  ${(props) =>
+    props.background && `background-image: url(${props.background});`}
+  ${(props) =>
+    props.backgroundColor && `background-color: ${props.backgroundColor};`}
 `
 
 const CustomSwiper = styled(Swiper)`
@@ -36,7 +39,9 @@ export const UpcomingEvents: React.FC = ({
   title,
   redirectLink,
   background,
-  isMobile
+  backgroundColor = THEME.primary,
+  isMobile,
+  headerColor = THEME.white
 }) => {
   const { t } = useTranslation()
   const carouselRef = useRef<SwiperRef>(null)
@@ -50,11 +55,11 @@ export const UpcomingEvents: React.FC = ({
   }, [])
 
   return upcomingEvents?.length ? (
-    <HighlightWrapper background={background}>
+    <HighlightWrapper background={background} backgroundColor={backgroundColor}>
       <div className='container' style={{ position: "relative" }}>
         <h2
           style={{
-            color: "#fff",
+            color: headerColor,
             display: isMobile ? "block" : "inline",
             marginRight: 24,
             marginBottom: isMobile ? 8 : 0
@@ -68,34 +73,37 @@ export const UpcomingEvents: React.FC = ({
             type='text'
             onClick={() => carouselRef.current?.swiper.slidePrev()}
           >
-            <LeftCircleOutlined style={{ fontSize: 28, color: "#ffffff80" }} />
+            <LeftCircleOutlined style={{ fontSize: 28, color: headerColor }} />
           </Button>
           <Button
             style={{ padding: 0 }}
             type='text'
             onClick={() => carouselRef.current?.swiper.slideNext()}
           >
-            <RightCircleOutlined style={{ fontSize: 28, color: "#ffffff80" }} />
+            <RightCircleOutlined style={{ fontSize: 28, color: headerColor }} />
           </Button>
         </Space>
-        {!isMobile && (
+        {!isMobile && !!redirectLink && (
           <div style={{ position: "absolute", right: 15, top: 0 }}>
             <Link href={redirectLink ?? "/"}>
               <Button
                 ghost
                 shape='round'
-                style={{ color: "#fff" }}
+                style={{ color: headerColor }}
                 size='large'
               >
                 {t("See all Events")}{" "}
-                <ArrowRightOutlined style={{ color: "#fff", fontSize: 16 }} />
+                <ArrowRightOutlined
+                  style={{ color: headerColor, fontSize: 16 }}
+                />
               </Button>
             </Link>
           </div>
         )}
-        <div style={{ height: 48 }} />
+        <div style={{ height: 12 }} />
         {upcomingEvents && (
           <CustomSwiper
+            speed={1500}
             ref={carouselRef}
             slidesPerView={isMobile ? "auto" : 3}
             spaceBetween={32}
@@ -103,7 +111,9 @@ export const UpcomingEvents: React.FC = ({
           >
             {upcomingEvents.map((eventItem) => (
               <SwiperSlide key={`event-${eventItem.id}`}>
-                <EventItem {...eventItem} />
+                <div style={{ padding: 10 }}>
+                  <EventItem {...eventItem} />
+                </div>
               </SwiperSlide>
             ))}
           </CustomSwiper>
@@ -114,11 +124,13 @@ export const UpcomingEvents: React.FC = ({
               <Button
                 ghost
                 shape='round'
-                style={{ color: "#fff" }}
+                style={{ color: headerColor }}
                 size='large'
               >
                 {t("See all Events")}{" "}
-                <ArrowRightOutlined style={{ color: "#fff", fontSize: 16 }} />
+                <ArrowRightOutlined
+                  style={{ color: headerColor, fontSize: 16 }}
+                />
               </Button>
             </Link>
           </div>

@@ -41,6 +41,7 @@ const Profile: FC<{}> = () => {
           >
             {fieldName ? (
               <Form.Item
+                style={{ width: "100%" }}
                 name={fieldName}
                 rules={[
                   {

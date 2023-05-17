@@ -1,6 +1,9 @@
 // @ts-nocheck
 import { THEME } from "common"
-import { TitleWithHeadline } from "components/Title/TitleWithHeadline"
+import {
+  TitleWithHeadline,
+  TitleWithHeadlineSmall
+} from "components/Title/TitleWithHeadline"
 import { RichText } from "elements/RichText"
 import styled from "styled-components"
 
@@ -26,6 +29,15 @@ export const SingleSection = ({ title, headLine, content }) => {
   return (
     <SingleSectionWrapper>
       <TitleWithHeadline title={title} headLine={headLine} />
+      <RichText align='center' content={content} fontSize='20px' />
+    </SingleSectionWrapper>
+  )
+}
+
+export const SingleSectionSmall = ({ title, headLine, content }) => {
+  return (
+    <SingleSectionWrapper>
+      <TitleWithHeadlineSmall title={title} headLine={headLine} />
       <RichText align='center' content={content} fontSize='20px' />
     </SingleSectionWrapper>
   )

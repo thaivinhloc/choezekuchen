@@ -18,6 +18,11 @@ import { useEffect } from "react"
 import styled from "styled-components"
 import eventsBackground from "assets/bg/events_background.png"
 import { About } from "components/About"
+import { Teaching } from "components/Teaching"
+import { Library } from "components/Library"
+import { RetreatList } from "components/Retreat/RetreatList"
+import { EventList } from "components/Event/EventList"
+import { OfferingPage } from "components/Offering"
 
 export const SinglePageContentWrapper = styled.div`
   padding-top: 50px;
@@ -188,9 +193,27 @@ export function SinglePageLayout({
     case ESinglePageLayout.MONASTERY:
       return <Monastery {...data} isMobile={isMobile} globalData={globalData} />
     case ESinglePageLayout.DRIKUNG_KAGYU_LINEAGE:
-      return <DrikungKagyuLinage {...data} isMobile={isMobile} />
+      return (
+        <DrikungKagyuLinage
+          {...data}
+          globalData={globalData}
+          isMobile={isMobile}
+        />
+      )
     case ESinglePageLayout.ABOUT:
       return <About {...data} globalData={globalData} isMobile={isMobile} />
+    case ESinglePageLayout.TEACHING:
+      return <Teaching {...data} globalData={globalData} isMobile={isMobile} />
+    case ESinglePageLayout.LIBRARY:
+      return <Library {...data} globalData={globalData} isMobile={isMobile} />
+    case ESinglePageLayout.RETREAT:
+      return (
+        <RetreatList {...data} globalData={globalData} isMobile={isMobile} />
+      )
+    case ESinglePageLayout.EVENT:
+      return <EventList {...data} globalData={globalData} isMobile={isMobile} />
+    case ESinglePageLayout.OFFERING:
+      return <OfferingPage {...data} globalData={globalData} isMobile={isMobile} />
     default:
       return <Horizontal {...data} />
   }

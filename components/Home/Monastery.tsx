@@ -131,6 +131,7 @@ export const Monastery: FC<{
         <Col span={24} lg={{ span: 16 }}>
           {monasteries?.length && (
             <CustomSwiper
+              speed={1500}
               ref={carouselRef}
               spaceBetween={32}
               slidesPerView='auto'

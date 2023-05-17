@@ -10,7 +10,6 @@ export const GlobalStyle = createGlobalStyle`${css`
   body {
     font-family: "${(props: TStyled) => props.theme.primaryFont}", sans-serif;
     font-size: 16px;
-    background: #f9f9f9;
   }
   p {
     font-family: "${(props: TStyled) => props.theme.primaryFont}", sans-serif !important;

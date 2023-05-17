@@ -1,4 +1,4 @@
-/* eslint-disable @next/next/no-img-element */
+// @ts-nocheck
 import { RightOutlined } from "@ant-design/icons"
 import { Button, Space, Typography } from "antd"
 import { TNavigatorItem, TRetreat } from "definition"
@@ -142,7 +142,6 @@ const Header = ({
                 </Button>
               )
             )}
-            <HeaderProfileDropdown />
           </Space>
         </TopActionStyled>
         <NavListStyled className='navbar' isSticky={isSticky}>
@@ -225,13 +224,9 @@ const Header = ({
               </li>
             ))}
           </NavbarNavStyled>
-          {activeRetreats.length > 0 ? (
+          {!user?.id ? (
             <Link
-              href={
-                user?.id
-                  ? getRetreatPath(activeRetreats)
-                  : `/login?redirect=${getRetreatPath(activeRetreats)}`
-              }
+              href={`/login?redirect=${getRetreatPath(activeRetreats)}`}
               locale={currentLocale}
               passHref
             >
@@ -242,10 +237,12 @@ const Header = ({
                 size='large'
                 shape='round'
               >
-                {t("Retreat")}
+                {t("Login")}
               </Button>
             </Link>
-          ) : null}
+          ) : (
+            <HeaderProfileDropdown isSticky={isSticky} />
+          )}
         </NavListStyled>
         {isSticky ? <div style={{ height: 184 }} /> : <div />}
         <div className='navbar__title'>

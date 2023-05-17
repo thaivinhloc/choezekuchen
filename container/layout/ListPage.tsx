@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { ArrowRightOutlined } from "@ant-design/icons"
 import { Col, Pagination, Radio, Row } from "antd"
 import {
@@ -29,16 +30,9 @@ import moment from "moment"
 import { getEventsByTimeRange } from "services/event"
 import { MonthEvent } from "components/Event/MonthEvent"
 
-const ListPageContentWrapper = styled.div<Partial<TPage>>`
-  padding-left: 15px;
-  padding-right: 15px;
-  @media (min-width: 1200px) {
-    max-width: 1170px;
-    margin: 0 auto;
-  }
-`
+export const ListPageContentWrapper = styled.div<Partial<TPage>>``
 
-const ContentListTitleWrapper: any = styled.h3`
+export const ContentListTitleWrapper: any = styled.h3`
   color: ${(props) => props.theme.primary};
 `
 
@@ -220,7 +214,6 @@ function BlogGrid({ ...props }: TPage) {
 }
 
 function EventCalendar({ topTitle, topDesciption }: TPage) {
-
   return (
     <ListPageContentWrapper>
       <TopSection topTitle={topTitle} topDesciption={topDesciption} />
@@ -323,23 +316,27 @@ function EventGrid({ topTitle, topDesciption, locale }: TPage) {
 }
 
 export const TopCategoryWrapper = styled.div`
-  margin-top: 60px;
-  margin-bottom: 32px;
   text-align: center;
   .ant-radio-button-wrapper {
-    border: 0;
-    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid ${(props) => props.theme.primary};
+    color: ${(props) => props.theme.primary};
+    width: 100%;
+    border-radius: 24px !important;
+    background: transparent;
     @media (min-width: 992px) {
       padding-left: 40px;
       padding-right: 40px;
     }
     &:hover {
-      background: rgba(255, 255, 255);
-      color: #a51818;
+      background: ${(props) => props.theme.primary};
+      color: ${(props) => props.theme.white};
     }
     &-checked {
-      background: #a51818;
+      background: ${(props) => props.theme.primary};
     }
+  }
+  .ant-radio-group {
+    width: 100%;
   }
 `
 

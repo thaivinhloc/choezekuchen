@@ -246,6 +246,7 @@ const Monastery = ({ monastery, otherMonasteries, isMobile, globalData }) => {
           >
             <div>
               <Title
+                isMobile={isMobile}
                 title={t("Monastery Gallery")}
                 supTitle={t("From our")}
                 size={TITLE_SIZES.MEDIUM}

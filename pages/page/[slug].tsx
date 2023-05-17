@@ -14,7 +14,7 @@ import styled from "styled-components"
 
 const PageContentWrapper = styled.div<Partial<TPage>>`
   padding-top: 0;
-  background: ${(props) => props.background ?? "#f9f9f9"};
+  background: ${(props) => props.background ?? "#ffffff"};
 `
 
 function Page({ data, globalData, isMobile }: { data: TPage }) {
