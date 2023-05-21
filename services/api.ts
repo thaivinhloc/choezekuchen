@@ -29,7 +29,10 @@ export const getRetreatDetail = async (retreatId: number, locale: string) => {
   return await Client.createRequest<IResponseRetreatDetail>({
     path: `/api/retreat-detail/${retreatId}?locale=${locale}`,
     method: "get",
-    external: !isPublic
+    external: !isPublic,
+    params: {
+      "populate[0]": "cover"
+    }
   })
 }
 

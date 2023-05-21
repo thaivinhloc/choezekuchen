@@ -39,6 +39,7 @@ const HeaderMobile = ({
   const user = auth.user as IUser
   const { onLogout } = useAuth()
   const { title, banner } = useApp()
+  const router = useRouter()
 
   useEffect(() => {
     window.addEventListener("scroll", onScroll)
@@ -52,7 +53,6 @@ const HeaderMobile = ({
     setSticky(scrollTop >= 100 ? true : false)
   }
 
-  const router = useRouter()
   const currentLocale = router.locale
 
   const handleChangeLocale = (newLocale: string) => {
@@ -101,18 +101,19 @@ const HeaderMobile = ({
             }}
           >
             <Space direction='vertical' style={{ width: "100%" }}>
-              {user?.username && (
+              {user?.username ? (
                 <Link href='/profile'>
-                  <Button block>
+                  <Button block type='primary' ghost>
                     <span>{t("Profile")}</span>
                   </Button>
                 </Link>
+              ) : (
+                <Link href={LOGIN}>
+                  <Button block type='primary' ghost>
+                    <span>{t("Login")}</span>
+                  </Button>
+                </Link>
               )}
-              <Link href={!user?.username ? LOGIN : "/"}>
-                <Button type='primary' block>
-                  <span style={{ color: THEME.white }}>Retreat</span>
-                </Button>
-              </Link>
             </Space>
           </div>
           <a
@@ -166,6 +167,8 @@ const HeaderMobile = ({
                       rel='noreferrer'
                       target={"_self"}
                       className='headermobile__menu'
+                      style={{ display: "block", height: "100%" }}
+                      onClick={() => setOpenMenu(false)}
                     >
                       {route.related.title}
                     </a>
@@ -181,7 +184,12 @@ const HeaderMobile = ({
                         icon={() => <div />}
                       >
                         <Link href={route.related.slug}>
-                          <a target={"_self"} rel='noreferrer'>
+                          <a
+                            target={"_self"}
+                            rel='noreferrer'
+                            style={{ display: "block", height: "100%" }}
+                            onClick={() => setOpenMenu(false)}
+                          >
                             {subRoute.related.title}
                           </a>
                         </Link>
@@ -194,7 +202,12 @@ const HeaderMobile = ({
                         }}
                         title={
                           <Link href={subRoute.related.slug}>
-                            <a rel='noreferrer' target={"_self"}>
+                            <a
+                              rel='noreferrer'
+                              target={"_self"}
+                              style={{ display: "block", height: "100%" }}
+                              onClick={() => setOpenMenu(false)}
+                            >
                               {subRoute.related.title}
                             </a>
                           </Link>
@@ -203,7 +216,12 @@ const HeaderMobile = ({
                         {subRoute.items.map((children) => (
                           <Menu.Item key={children.related.slug}>
                             <Link href={children.related.slug}>
-                              <a target={"_self"} rel='noreferrer'>
+                              <a
+                                target={"_self"}
+                                rel='noreferrer'
+                                style={{ display: "block", height: "100%" }}
+                                onClick={() => setOpenMenu(false)}
+                              >
                                 {children.related.title}
                               </a>
                             </Link>

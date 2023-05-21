@@ -5,8 +5,8 @@ export const DivRetreatWrapper = styled.div`
     color: ${(props) => props.theme.primary};
     font-size: 32px;
   }
-  padding: 20px 0px 50px;
   color: #000;
+  padding: 0 0 80px;
   .retreat-content {
     .ant-tabs-nav {
       margin: auto;
@@ -17,11 +17,31 @@ export const DivRetreatWrapper = styled.div`
       }
     }
   }
+  .hide-tabs {
+    > .ant-tabs-nav {
+      display: none;
+    }
+  }
   .center-tabs {
+    .ant-tabs-nav {
+      margin: 0 auto 24px;
+      .ant-tabs-tab {
+        font-size: 20px;
+        line-height: 48px;
+        margin: 0 !important;
+        padding-left: 24px;
+        padding-right: 24px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+        color: rgba(0, 0, 0, 0.5);
+      }
+      .ant-tabs-tab-active {
+        border-bottom: 3px solid #800000 !important;
+      }
+    }
     @media (min-width: 992px) {
       width: 100%;
       .ant-tabs-nav {
-        margin: auto;
+        margin: 0 auto 60px;
         .container {
           width: 100%;
         }
@@ -42,8 +62,6 @@ export const DivRetreatWrapper = styled.div`
       &__right {
         &-form {
           color: #000;
-          border: 1px solid ${(props) => props.theme.border};
-          border-radius: 8px;
           margin-bottom: 30px;
           .ant-input {
             &:focus {
@@ -54,7 +72,7 @@ export const DivRetreatWrapper = styled.div`
         .box-title {
           /* background: #f6f6f6; */
           background: #fff;
-          color: #A51818;
+          color: #a51818;
           padding: 10px;
           font-weight: bold;
           border-bottom: 1px solid ${(props) => props.theme.border};
@@ -74,7 +92,6 @@ export const DivRetreatWrapper = styled.div`
         font-size: 13px;
       }
       &-content {
-        padding: 10px;
         width: 100%;
       }
       &-submit {
@@ -92,8 +109,8 @@ export const DivTableRetreat = styled.div`
     .ant-table {
       &-row {
         &:first-of-type {
-          background: #A5181810;
-          color: #A51818;
+          background: #a5181810;
+          color: #a51818;
         }
       }
     }
@@ -104,7 +121,7 @@ export const DivTableRetreat = styled.div`
       > tr,
       th {
         font-size: 14px;
-        background: #A51818;
+        background: #a51818;
         color: #fff;
         font-weight: 600;
         border-bottom: 1px solid ${(props) => props.theme.border};

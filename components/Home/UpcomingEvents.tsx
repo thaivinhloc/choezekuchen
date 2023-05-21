@@ -118,8 +118,8 @@ export const UpcomingEvents: React.FC = ({
             ))}
           </CustomSwiper>
         )}
-        {isMobile && (
-          <div style={{ textAlign: "right", marginTop: 24 }}>
+        {isMobile && !!redirectLink && (
+          <div style={{ textAlign: "right", padding: "0 0 24px" }}>
             <Link href={redirectLink ?? "/"}>
               <Button
                 ghost

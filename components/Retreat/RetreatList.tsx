@@ -19,7 +19,7 @@ import { useEffect } from "react"
 import styled from "styled-components"
 
 const LatestRetreatWrapper = styled.div`
-  padding: 60px 0;
+  padding: 60px 16px;
   @media (min-width: 1200px) {
     max-width: 992px;
     margin: 0 auto;

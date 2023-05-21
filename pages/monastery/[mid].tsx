@@ -63,8 +63,9 @@ enum SWITCHER_VALUES {
 }
 
 const SwitcherWrapper = styled.div`
+  display: flex;
   > button {
-    font-size: 24px;
+    font-size: 16px;
     height: 50px;
     line-height: 50px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
@@ -74,6 +75,9 @@ const SwitcherWrapper = styled.div`
     }
     &.ant-btn-link {
       border-bottom: 3px solid;
+    }
+    @media (min-width: 992px) {
+      font-size: 24px;
     }
   }
 `

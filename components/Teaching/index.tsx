@@ -18,7 +18,9 @@ import { SingleSection } from "container/Section"
 import { TeachingItem } from "./TeachingItem"
 
 const TeachingMethodsWrapper = styled.div`
-  transform: translateY(-15%);
+  @media (min-width: 1200px) {
+    transform: translateY(-15%);
+  }
   position: relative;
   z-index: 10;
 `
@@ -65,19 +67,39 @@ const TeachingMethods = ({ data, isMobile }) => {
                           <div
                             style={{ padding: isMobile ? 0 : "24px 24px 12px" }}
                           >
+                            {isMobile && (
+                              <div
+                                style={{
+                                  height: 200,
+                                  width: "100%",
+                                  position: "relative",
+                                  marginBottom: 12
+                                }}
+                              >
+                                <Image
+                                  src={cover?.data?.attributes.url}
+                                  {...cover?.data?.attributes}
+                                  layout='fill'
+                                  objectFit='cover'
+                                  objectPosition='center center'
+                                />
+                              </div>
+                            )}
                             <h2 style={{ fontSize: 24, color: THEME.primary }}>
                               {title}
                             </h2>
                             <RichText content={description} />
                           </div>
                         </Col>
-                        <Col span={24} md={{ span: 9 }}>
-                          <Image
-                            src={cover?.data?.attributes.url}
-                            {...cover?.data?.attributes}
-                            layout='responsive'
-                          />
-                        </Col>
+                        {!isMobile && (
+                          <Col span={24} md={{ span: 9 }}>
+                            <Image
+                              src={cover?.data?.attributes.url}
+                              {...cover?.data?.attributes}
+                              layout='responsive'
+                            />
+                          </Col>
+                        )}
                       </Row>
                     </div>
                   </div>
@@ -89,7 +111,9 @@ const TeachingMethods = ({ data, isMobile }) => {
                 position: "absolute",
                 top: "50%",
                 left: 0,
-                transform: "translate(100%,-50%)",
+                transform: isMobile
+                  ? "translate(10%,-50%)"
+                  : "translate(100%,-50%)",
                 zIndex: 1001
               }}
               shape='circle'
@@ -103,7 +127,9 @@ const TeachingMethods = ({ data, isMobile }) => {
                 position: "absolute",
                 top: "50%",
                 right: 0,
-                transform: "translate(-100%,-50%)",
+                transform: isMobile
+                  ? "translate(-10%,-50%)"
+                  : "translate(-100%,-50%)",
                 zIndex: 1001
               }}
               shape='circle'

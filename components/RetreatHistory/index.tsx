@@ -103,7 +103,13 @@ const RetreatHistory: FC<{ retreatId: number }> = ({ retreatId }) => {
     <DivTableRetreat>
       <div className='container' style={{ marginBottom: 30 }}>
         <Button
-          style={{ padding: 0, marginTop: 10, marginBottom: 10 }}
+          style={{
+            padding: 0,
+            marginTop: 10,
+            marginBottom: 20,
+            fontWeight: "bold",
+            fontSize: 20
+          }}
           type='link'
           icon={<ArrowLeftOutlined />}
           onClick={() => router.back()}
@@ -111,7 +117,7 @@ const RetreatHistory: FC<{ retreatId: number }> = ({ retreatId }) => {
           {t("Back", { ns: "common" })}
         </Button>
         {retreatNameUniq.length > 1 ? (
-          <TopCategoryWrapper style={{ marginBottom: 32 }}>
+          <TopCategoryWrapper style={{ marginBottom: 32, marginTop: 0 }}>
             <Radio.Group
               value={activeRetreat}
               size='large'

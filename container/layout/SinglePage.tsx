@@ -60,23 +60,17 @@ function TopSection({
   ) : null
 }
 
-function Horizontal({
-  topTitle,
-  topDesciption,
-  pageContentBanner,
-  pageContent
-}: TPage) {
+function Horizontal({ globalData }) {
+  const { t } = useTranslation()
+  const { defaultHeadLine } = globalData.attributes
   return (
     <SinglePageContentWrapper>
-      <TopSection topTitle={topTitle} topDesciption={topDesciption} />
-      <Row gutter={[32, 32]} align='middle'>
-        <Col span={24} lg={{ span: 12 }}>
-          <GridMedia {...(pageContentBanner ?? {})} />
-        </Col>
-        <Col span={24} lg={{ span: 12 }}>
-          <RichText content={pageContent} />
-        </Col>
-      </Row>
+      <div style={{ textAlign: "center", padding: "60px 0 100px" }}>
+        <TitleWithHeadline
+          title={t("Coming soon")}
+          headLine={defaultHeadLine}
+        />
+      </div>
     </SinglePageContentWrapper>
   )
 }
@@ -213,8 +207,12 @@ export function SinglePageLayout({
     case ESinglePageLayout.EVENT:
       return <EventList {...data} globalData={globalData} isMobile={isMobile} />
     case ESinglePageLayout.OFFERING:
-      return <OfferingPage {...data} globalData={globalData} isMobile={isMobile} />
+      return (
+        <OfferingPage {...data} globalData={globalData} isMobile={isMobile} />
+      )
     default:
-      return <Horizontal {...data} />
+      return (
+        <Horizontal {...data} globalData={globalData} isMobile={isMobile} />
+      )
   }
 }

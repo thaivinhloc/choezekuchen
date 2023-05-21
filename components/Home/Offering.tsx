@@ -13,7 +13,10 @@ const BackgroundWrapper = styled.div<{ background?: any }>`
   background: url(${(props) => props.background?.data?.attributes?.url});
   background-size: cover;
   background-repeat: no-repeat;
-  padding: 200px 0;
+  padding: 80px 0;
+  @media (min-width: 1200px) {
+    padding: 200px 0;
+  }
 `
 
 export const Offering: React.FC = ({
@@ -23,7 +26,7 @@ export const Offering: React.FC = ({
   isMobile
 }) => {
   const { t } = useTranslation()
-  const contentSize = isMobile ? "18px" : "32px"
+  const contentSize = isMobile ? "24px" : "32px"
   return (
     <BackgroundWrapper background={background}>
       <div className='container'>

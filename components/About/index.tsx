@@ -51,9 +51,12 @@ export const About = ({
 }) => {
   const swiperRef = useRef()
   const historySwiperRef = useRef()
+  const historyTabRef = useRef()
   const eleventhHistorySwiperRef = useRef()
+  const eleventhHistoryTabRef = useRef()
   const [historyIndex, setHistoryIndex] = useState(0)
   const [eleventhHistoryIndex, setEleventhHistoryIndex] = useState(0)
+  const [isTabInit, setTabsInit] = useState(false)
   const { content, getPageContent } = usePage({
     locale,
     endpoint: pageContentEndpoint,
@@ -87,6 +90,14 @@ export const About = ({
       await getPageContent()
     }
   }, [pageContentEndpoint])
+
+  useEffect(() => {
+    if (content) {
+      setTimeout(() => {
+        setTabsInit(true)
+      }, 2000)
+    }
+  }, [content])
 
   const { introduction, gurus, history, eleventhHistory, reincarnation } =
     content?.data?.attributes ?? {}
@@ -142,6 +153,7 @@ export const About = ({
     history,
     historySwiperRef: historySwiperRef.current
   })
+
   return (
     <AboutWrapper>
       <BackgroundWrapper
@@ -206,7 +218,9 @@ export const About = ({
                 position: "absolute",
                 top: "50%",
                 left: 0,
-                transform: "translate(100%,-50%)",
+                transform: isMobile
+                  ? "translate(10%,-50%)"
+                  : "translate(100%,-50%)",
                 zIndex: 1001
               }}
               shape='circle'
@@ -220,7 +234,9 @@ export const About = ({
                 position: "absolute",
                 top: "50%",
                 right: 0,
-                transform: "translate(-100%,-50%)",
+                transform: isMobile
+                  ? "translate(-10%,-50%)"
+                  : "translate(-100%,-50%)",
                 zIndex: 1001
               }}
               shape='circle'
@@ -254,76 +270,86 @@ export const About = ({
               {t("Updating information")}
             </i>
           </div>
-          <TabsWrapper
-            activeKey={historyIndex}
-            size='large'
-            onChange={(ak) => {
-              historySwiperRef.current?.slideTo(ak)
-              setHistoryIndex(ak)
-            }}
-          >
-            {history?.contentList?.map((item, idx) => {
-              return (
-                <Tabs.TabPane
-                  disabled={!item.description}
-                  tab={
-                    <Tooltip
-                      placement={
-                        idx < history?.contentList?.length / 2
-                          ? "topRight"
-                          : "topLeft"
-                      }
-                      visible={idx == historyIndex && !!item.actionTitle}
-                      title={item.actionTitle}
-                      color={THEME.primary}
-                      overlayInnerStyle={{
-                        borderRadius: 4,
-                        fontWeight: 600,
-                        width: "max-content",
-                        padding: "12px 15px"
-                      }}
-                    >
+          <div ref={historyTabRef} />
+          {history && (
+            <TabsWrapper
+              activeKey={historyIndex}
+              size='large'
+              onChange={(ak) => {
+                historySwiperRef.current?.slideTo(ak)
+                setHistoryIndex(ak)
+              }}
+            >
+              {history.contentList?.map((item, idx) => {
+                return (
+                  <Tabs.TabPane
+                    disabled={!item.description}
+                    tab={
                       <div>
-                        <div
-                          style={{
-                            color: THEME.white,
-                            backgroundColor: !item.description
-                              ? "#a7a9ac"
-                              : THEME.primary,
-                            width: 44,
-                            height: 44,
-                            borderRadius: "50%",
+                        <Tooltip
+                          trigger={["click", "focus"]}
+                          placement={
+                            idx < history?.contentList?.length / 2
+                              ? "topRight"
+                              : "topLeft"
+                          }
+                          visible={
+                            idx == historyIndex &&
+                            !!item.actionTitle &&
+                            isTabInit
+                          }
+                          title={item.actionTitle}
+                          color={THEME.primary}
+                          overlayInnerStyle={{
+                            borderRadius: 4,
                             fontWeight: 600,
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "center",
-                            fontSize: 20
+                            width: "max-content",
+                            padding: "12px 15px"
                           }}
                         >
-                          {idx + 1}
-                          <sup>
-                            {idx % 10 === 0
-                              ? "st"
-                              : idx % 10 === 1
-                              ? "nd"
-                              : idx % 10 === 2
-                              ? "rd"
-                              : "th"}
-                          </sup>
-                        </div>
-                        {!item.description && (
-                          <div style={{ textAlign: "center" }}>
-                            <Image src={StarIcon} width={14} height={14} />
+                          <div>
+                            <div
+                              style={{
+                                color: THEME.white,
+                                backgroundColor: !item.description
+                                  ? "#a7a9ac"
+                                  : THEME.primary,
+                                width: 44,
+                                height: 44,
+                                borderRadius: "50%",
+                                fontWeight: 600,
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                fontSize: 20
+                              }}
+                            >
+                              {idx + 1}
+                              <sup>
+                                {idx % 10 === 0
+                                  ? "st"
+                                  : idx % 10 === 1
+                                  ? "nd"
+                                  : idx % 10 === 2
+                                  ? "rd"
+                                  : "th"}
+                              </sup>
+                            </div>
+                            {!item.description && (
+                              <div style={{ textAlign: "center" }}>
+                                <Image src={StarIcon} width={14} height={14} />
+                              </div>
+                            )}
                           </div>
-                        )}
+                        </Tooltip>
                       </div>
-                    </Tooltip>
-                  }
-                  key={idx}
-                />
-              )
-            })}
-          </TabsWrapper>
+                    }
+                    key={idx}
+                  />
+                )
+              })}
+            </TabsWrapper>
+          )}
           <div
             style={{
               position: "relative",
@@ -334,8 +360,12 @@ export const About = ({
             }}
           >
             <Swiper
+              autoHeight
               speed={1500}
-              onSlideChange={(swiper) => setHistoryIndex(swiper.realIndex)}
+              onSlideChange={(swiper) => {
+                setHistoryIndex(swiper.realIndex)
+                historyTabRef.current?.scrollIntoView({ behavior: "smooth" })
+              }}
               modules={[Navigation]}
               onBeforeInit={(swiper) => {
                 historySwiperRef.current = swiper
@@ -376,7 +406,7 @@ export const About = ({
                 <div
                   style={{
                     display: "flex",
-                    justifyContent: "space-between",
+                    justifyContent: isMobile ? "flex-start" : "space-between",
                     alignItems: "center"
                   }}
                 >
@@ -459,6 +489,7 @@ export const About = ({
               headLine={defaultHeadLine}
             />
           </div>
+          <div ref={eleventhHistoryTabRef} />
           <TabsWrapper
             activeKey={eleventhHistoryIndex}
             size='large'
@@ -479,7 +510,9 @@ export const About = ({
                           : "topLeft"
                       }
                       visible={
-                        idx == eleventhHistoryIndex && !!item.actionTitle
+                        idx == eleventhHistoryIndex &&
+                        !!item.actionTitle &&
+                        isTabInit
                       }
                       title={item.actionTitle}
                       color={THEME.primary}
@@ -489,6 +522,7 @@ export const About = ({
                         width: "max-content",
                         padding: "12px 15px"
                       }}
+                      trigger={["click", "focus"]}
                     >
                       <div>
                         <div
@@ -541,9 +575,13 @@ export const About = ({
             }}
           >
             <Swiper
-              onSlideChange={(swiper) =>
+              autoHeight
+              onSlideChange={(swiper) => {
                 setEleventhHistoryIndex(swiper.realIndex)
-              }
+                eleventhHistoryTabRef.current?.scrollIntoView({
+                  behavior: "smooth"
+                })
+              }}
               modules={[Navigation]}
               onBeforeInit={(swiper) => {
                 eleventhHistorySwiperRef.current = swiper
@@ -586,7 +624,7 @@ export const About = ({
                 <div
                   style={{
                     display: "flex",
-                    justifyContent: "space-between",
+                    justifyContent: isMobile ? "flex-start" : "space-between",
                     alignItems: "center"
                   }}
                 >

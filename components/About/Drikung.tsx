@@ -17,6 +17,9 @@ const DrikungKagyuLinageWrapper = styled.div`
 const ContentImageWrapper = styled.div`
   table {
     td {
+      @media (max-width: 991px) {
+        width: auto !important;
+      }
       &:first-of-type {
         img {
           padding: 10px 40px 10px;
@@ -80,7 +83,7 @@ export const DrikungKagyuLinage = ({
               { xs: 16, sm: 16 }
             ]}
           >
-            <Col span={12} lg={{ span: 13 }}>
+            <Col span={24} lg={{ span: 13 }}>
               <Title
                 isMobile={isMobile}
                 size={TITLE_SIZES.MEDIUM}
@@ -93,7 +96,7 @@ export const DrikungKagyuLinage = ({
                 content={introduction.description}
               />
             </Col>
-            <Col span={12} lg={{ span: 11 }}>
+            <Col span={24} lg={{ span: 11 }}>
               <GridMedia {...introduction.background?.data?.attributes} />
             </Col>
           </Row>

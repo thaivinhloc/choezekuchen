@@ -60,7 +60,7 @@ export const DivHeaderWrapperV1 = styled.div<HeaderProps>`
       align-items: center;
       padding: 64px 50px 15px;
       position: relative;
-      z-index: 20;
+      z-index: 1002;
       transition: 0.3s linear;
       &-nav {
         display: flex;

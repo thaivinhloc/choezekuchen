@@ -108,7 +108,7 @@ const Header = ({
 
   console.log({ title, banner, isHeaderFullscreen })
   const activeRetreats = retreats.filter((r) => r.status)
-
+  const { SUPPORT_LANG } = process.env
   return (
     <DivHeaderWrapperV1
       banner={banner}
@@ -118,30 +118,33 @@ const Header = ({
       <header className='site-header'>
         <TopActionStyled>
           <Space className='navbar__right' size='middle'>
-            {LANGS.filter((lang) => lang.locale !== currentLocale).map(
-              (lang) => (
-                <Button
-                  shape='circle'
-                  size='large'
-                  type='primary'
-                  onClick={() => handleChangeLocale(lang.locale)}
-                  key={lang.code}
-                  style={{ padding: 0, border: 0 }}
-                >
-                  <ReactCountryFlag
-                    style={{
-                      width: "40px",
-                      height: "40px",
-                      borderRadius: "50%"
-                    }}
-                    cdnUrl='https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/4.1.4/flags/1x1/'
-                    title={lang.name}
-                    countryCode={lang.code}
-                    svg
-                  />
-                </Button>
-              )
-            )}
+            {SUPPORT_LANG?.split(",")
+              .filter((lang) => lang !== currentLocale)
+              .map((lc) => {
+                const lang = LANGS.find((l) => l.locale == lc)
+                return (
+                  <Button
+                    shape='circle'
+                    size='large'
+                    type='primary'
+                    onClick={() => handleChangeLocale(lang.locale)}
+                    key={lang.code}
+                    style={{ padding: 0, border: 0 }}
+                  >
+                    <ReactCountryFlag
+                      style={{
+                        width: "40px",
+                        height: "40px",
+                        borderRadius: "50%"
+                      }}
+                      cdnUrl='https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/4.1.4/flags/1x1/'
+                      title={lang.name}
+                      countryCode={lang.code}
+                      svg
+                    />
+                  </Button>
+                )
+              })}
           </Space>
         </TopActionStyled>
         <NavListStyled className='navbar' isSticky={isSticky}>

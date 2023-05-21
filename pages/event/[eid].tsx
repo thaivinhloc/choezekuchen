@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Breadcrumb, Col, Row } from "antd"
 import { SinglePageContentWrapper } from "container/layout/SinglePage"
 import { useApp } from "context/app/AppContext"
@@ -18,6 +19,7 @@ import styled from "styled-components"
 import { getEventPathFromSlug } from "helper"
 import Link from "next/link"
 import { THEME } from "common"
+import { EventItem } from "components/Event/EventItem"
 
 type TEventDetails = {
   eventDetails: {
@@ -88,24 +90,7 @@ const EventDetails = ({ eventDetails, isMobile }: TEventDetails) => {
             </h2>
             <div>
               {upcomingEvents.length ? (
-                upcomingEvents.map((event, index) => (
-                  <>
-                    <Link href={getEventPathFromSlug(event.id, event.slug)}>
-                      <span
-                        style={{
-                          cursor: "pointer",
-                          fontSize: 16,
-                          fontWeight: 500
-                        }}
-                      >
-                        {event.title}
-                      </span>
-                    </Link>
-                    {index !== upcomingEvents.length - 1 && (
-                      <hr style={{ color: THEME.hr }} />
-                    )}
-                  </>
-                ))
+                upcomingEvents.map((event, index) => <EventItem {...event} />)
               ) : (
                 <div>
                   <span style={{ color: THEME.textSecondary }}>
