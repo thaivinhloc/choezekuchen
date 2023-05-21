@@ -2,6 +2,9 @@ export type TLogin = {
   identifier: string;
   password: string;
 };
+export type TForgotPassword = {
+  email: string;
+};
 export type TSignup = {
   username: string;
   email: string;

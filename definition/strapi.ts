@@ -28,6 +28,7 @@ export type TMedia = {
     width: number
     height: number
   }>
+  url?: string
 }
 
 export enum EMediaType {
@@ -150,7 +151,12 @@ export type TEvent = {
   description?: string
   content?: string
   slug?: string
+  dateStart: string
+  dateEnd: string
   image: {
+    data: TMedia
+  }
+  cover: {
     data: TMedia
   }
 }
@@ -195,11 +201,15 @@ export enum EListPageLayout {
 }
 
 export enum ESinglePageLayout {
-  VERTICAL = "VERTICAL",
-  HORIZONTAL = "HORIZONTAL",
   HOME = "HOME",
-  GURUS = "GURUS",
-  MONASTERY = "MONASTERY"
+  MONASTERY = "MONASTERY",
+  DRIKUNG_KAGYU_LINEAGE = "DRIKUNG_KAGYU_LINEAGE",
+  ABOUT = "ABOUT",
+  TEACHING = "TEACHING",
+  LIBRARY = "LIBRARY",
+  RETREAT = "RETREAT",
+  EVENT = "EVENT",
+  OFFERING = "OFFERING"
 }
 
 type TContentListItem = {
@@ -235,9 +245,13 @@ export type TPage = {
   createdAt: string
   updatedAt: string
   pageContentEndpoint: string
-  cover?: {
-    data: TMedia
-  }
+  cover?: TAttributesResponse<{
+    name: string
+    url: string
+    ext: string
+    width: number
+    height: number
+  }>
   pageContentBanner?: TAttributesResponse<{
     id: number
     name: string

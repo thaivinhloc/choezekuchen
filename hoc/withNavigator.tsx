@@ -30,16 +30,22 @@ export const withNavigator = (RootPageComponent: NextPage) => {
           ![
             "/retreat/[[...id]]",
             "/retreat-history/[[...id]]",
-            "/event/[eid]"
+            "/event/[eid]",
+            "/monastery/[mid]"
           ].includes(router.pathname)
         ) {
           setTitleBanner(replaceTitle(router.pathname.slice(1)))
         }
       }
+      console.log("=======", props.data)
+
       if (props.data?.cover) {
-        setBanner(props.data.cover.data)
+        setBanner({
+          id: 0,
+          attributes: props.data.cover[0]
+        })
       } else {
-        if (!["/event/[eid]"].includes(router.pathname)) {
+        if (!["/event/[eid]", "/monastery/[mid]"].includes(router.pathname)) {
           setBanner(undefined)
         }
       }
@@ -48,7 +54,13 @@ export const withNavigator = (RootPageComponent: NextPage) => {
     return (
       <PageWrapper>
         {props.navData && (
-          <Header data={props.navData} isMobile={props.isMobile} />
+          <Header
+            data={props.navData}
+            retreats={props.retreats}
+            isMobile={props.isMobile}
+            isHeaderFullscreen={props.isHeaderFullscreen}
+            logo={props.globalData?.attributes?.logo}
+          />
         )}
         <RootPageComponent {...props} isMobile={props.isMobile} />
         {props.globalData && (

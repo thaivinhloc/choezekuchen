@@ -3,7 +3,8 @@ import { createContext, useContext } from "react"
 
 type appContextType = {
   title: string
-  setTitleBanner: (title: string) => void
+  desc?: string
+  setTitleBanner: (title: string, meta_desc?: string ) => void
   banner?: TMedia
   setBanner: (banner?: TMedia) => void
 }
@@ -11,7 +12,7 @@ type appContextType = {
 const appContextDefaultValues: appContextType = {
   title: "CHOEZE KUCHEN",
   setTitleBanner: (title: string) => {},
-  setBanner: (banner?: TMedia) => {}
+  setBanner: (banner?: TMedia) => {},
 }
 
 export const AppContext = createContext<appContextType>(appContextDefaultValues)

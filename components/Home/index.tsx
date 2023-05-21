@@ -1,283 +1,167 @@
+// @ts-nocheck
 /* eslint-disable @next/next/no-img-element */
-import { LeftOutlined, RightOutlined } from "@ant-design/icons"
-import { Button, Card, Carousel, Col, Row, Space } from "antd"
+import { Col, Row, Space } from "antd"
 import { TPage } from "definition"
 import { RichText } from "elements/RichText"
+import Image from "next/image"
+import Link from "next/link"
 
-import React, { FC, MutableRefObject, useEffect, useRef } from "react"
-import { useTranslation } from "react-i18next"
+import React, { FC, useEffect } from "react"
 import { THomePageResponse } from "services/page/home"
-import { DivHomeWrapper } from "./index.styles"
+import styled from "styled-components"
+import {
+  DivHomeWrapper,
+  MeetUsSectionContent,
+  MeetUsSectionOverlay,
+  MeetUsSectionWrapper
+} from "./index.styles"
+import { Monastery } from "./Monastery"
+import { HomeStatistic } from "./Statistic"
+import { UpcomingEvents } from "./UpcomingEvents"
+import { Offering } from "./Offering"
+import { EVENT } from "common/navigator"
+import { useTranslation } from "next-i18next"
 
-const { Meta } = Card
-const ABOUT = [
-  {
-    imgURL: "/images/homepage/wwaa-1.jpg",
-    title: "WHAT WE DO",
-    subText:
-      "Being a non-profit organization, we offer Tibetan buddhist teachings and practices for monks and devotees."
-  },
-  {
-    imgURL: "/images/homepage/wwaa-2.jpg",
-    title: "OUR TEACHING",
-    subText:
-      "Our teachings are based off the practices of Drikung Kagyu- The Five-fold Profound Path of Mahamudrā and The Six Dharmas of Nāropa."
-  },
-  {
-    imgURL: "/images/homepage/wwaa-3.jpg",
-    title: "OUR PRESENCE",
-    subText:
-      "We are actively setting up new buddhist centres across Asia region with the aim of delivering quality Buddhism teachings."
-  },
-  {
-    imgURL: "/images/homepage/wwaa-4.jpg",
-    title: "OUR INITIATIVES",
-    subText:
-      "We are finding new ways to deliver more Buddhist teachings through next-generation technologies."
-  }
-]
-
-const COUNT = [
-  {
-    number: "4",
-    title: "BUDDHIST CENTRES"
-  },
-  {
-    number: "250",
-    title: "NUMBER OF LAMAS"
-  },
-  {
-    number: "801",
-    title: "YEARS OF TEACHING"
-  },
-  {
-    number: "16020",
-    title: "NUMBER OF GRADUATED SCHOLARS"
-  }
-]
-
-const MEETUS = [
-  {
-    imgURL: "/images/homepage/muip-1.jpg",
-    title: "WHAT WE DO",
-    subText:
-      "Our local tour would encompass some of the key highlights of the Tibetan Dharma practice, delivered face-to-face in your nearest Tibetan buddhist centres."
-  },
-  {
-    imgURL: "/images/homepage/muip-2.jpg",
-    title: "OUR PRACTICE",
-    subText:
-      "We conduct prayers, puja, meditation and advisory in both public and private setting."
-  },
-  {
-    imgURL: "/images/homepage/muip-3.jpg",
-    title: "OUR MISSION",
-    subText:
-      "We strive to share more Tibetan Buddhist practices through sharing of insights and experience."
-  }
-]
-
-const LEADERSSAY = [
-  {
-    quote:
-      "Our local tour would encompass some of the key highlights of the Tibetan Dharma practice, delivered face-to-face in your nearest Tibetan buddhist centres.",
-    subText: "Peter Smith",
-    contact: "www.yourwebsite.zt"
-  },
-  {
-    quote:
-      "We conduct prayers, puja, meditation and advisory in both public and private setting.",
-    subText: "Alan Snow",
-    contact: "www.yourwebsite.zt"
-  },
-  {
-    quote:
-      "We strive to share more Tibetan Buddhist practices through sharing of insights and experience.",
-    subText: "Rick Hammer",
-    contact: "www.yourwebsite.zt"
-  }
-]
-
-const CENTRES = [
-  {
-    name: "Choeze Thupten Dargyeling Monastery",
-    contact: "Kham, the Yushu, Qinghai Province, China",
-    tel: "+8618097353988"
-  },
-  {
-    name: "Namkha Thing-Sang Retreat Centre",
-    contact: "Pharping Moutain, Kathmandu, Nepal",
-    tel: "+977 981-3085111"
-  },
-  {
-    name: "Motithang Thimphu Center",
-    contact: "Thimphu-Bhutan",
-    tel: ""
-  },
-  {
-    name: "Dharma Treasure Center",
-    contact: "529 Balestier Road #02-01 Singapore 329856",
-    tel: "+6598358289 (Ms. Mildred)"
-  }
-]
+const BackgroundWrapper = styled.div<{ background?: any }>`
+  background: url(${(props) => props.background?.data?.attributes?.url});
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding: 80px 0;
+`
 
 const Home: FC<{
   data: TPage
   content: THomePageResponse
-}> = ({ data, content }) => {
-  const { t, i18n } = useTranslation(["content"])
-  const { introduction, statistics, meetUsInPerson, contactUs } =
+  isMobile: boolean
+}> = ({ data, content, isMobile }) => {
+  const { t } = useTranslation()
+  const { introduction, statistic, meetUsInPerson, monastery, offering } =
     content?.attributes ?? {}
-  return (
-    <DivHomeWrapper>
-      <div className='section-large section-card'>
-        <div className='container'>
-          {introduction && (
-            <Row>
-              <Col span={24} className='section-title'>
-                <h2>{introduction.title}</h2>
-                <RichText content={introduction.description} />
-              </Col>
-              <Col span={24}>
-                <Row className='section-group'>
-                  {introduction.contentList.map((item) => (
-                    <Col
-                      key={item.title}
-                      className='section-item'
-                      xs={24}
-                      sm={24}
-                      md={12}
-                      lg={6}
-                      xl={6}
-                    >
-                      <Card
-                        // style={{ width:  }}
-                        bordered={false}
-                        cover={
-                          <img
-                            src={item.cover.data.attributes.url}
-                            alt='home'
-                          />
-                        }
-                      >
-                        <Meta
-                          title={item.title}
-                          description={<RichText content={item.description} />}
-                        />
-                      </Card>
-                    </Col>
-                  ))}
-                </Row>
-              </Col>
-            </Row>
-          )}
-        </div>
-      </div>
+  console.log({
+    introduction,
+    statistic,
+    meetUsInPerson,
+    monastery,
+    offering
+  })
 
-      {statistics && (
-        <div className='section-count'>
-          <div className='container '>
-            <Row>
-              {statistics.map((item) => (
+  return (
+    <DivHomeWrapper background={data?.background}>
+      {introduction && (
+        <BackgroundWrapper background={introduction.background}>
+          <div className='container'>
+            <h2>{introduction.title}</h2>
+            <RichText
+              fontSize='20px'
+              align='left'
+              content={introduction.description}
+            />
+            <Row
+              gutter={[{ xs: 15, sm: 15, md: 48 }, 15]}
+              style={{ marginTop: "3em" }}
+            >
+              {introduction.contentList.map((item) => (
                 <Col
-                  key={item.name}
+                  key={item.title}
                   className='section-item'
                   xs={24}
                   sm={24}
                   md={12}
-                  lg={6}
-                  xl={6}
+                  lg={8}
+                  xl={8}
                 >
-                  <span className='counter'>{item.value}</span>
-                  <p>{item.name}</p>
+                  <MeetUsSectionWrapper
+                    backgroundUrl={item.cover.data.attributes.url}
+                  >
+                    <Link href={item.redirectLink ?? "/"}>
+                      <a>
+                        <MeetUsSectionOverlay className='meet-us-section__overlay' />
+                        <MeetUsSectionContent>
+                          <span
+                            style={{
+                              textDecoration: "none",
+                              fontSize: 28,
+                              fontWeight: "600",
+                              color: "#fff"
+                            }}
+                          >
+                            {item.title}
+                          </span>
+                        </MeetUsSectionContent>
+                      </a>
+                    </Link>
+                  </MeetUsSectionWrapper>
                 </Col>
               ))}
             </Row>
           </div>
-        </div>
+        </BackgroundWrapper>
       )}
-
       {meetUsInPerson && (
-        <div className='section-large section-card'>
-          <div className='container '>
-            <Row>
-              <Col span={24} className='section-title'>
-                <h2>{meetUsInPerson.title}</h2>
-                <RichText content={meetUsInPerson.description} />
-              </Col>
-              <Col span={24}>
-                <Row className='section-group'>
-                  {meetUsInPerson.contentList.map((item) => (
-                    <Col
-                      key={item.title}
-                      className='section-item'
-                      xs={24}
-                      sm={24}
-                      md={12}
-                      lg={8}
-                      xl={8}
-                    >
-                      <Card
-                        // style={{ width:  }}
-                        bordered={false}
-                        cover={
-                          <img
-                            src={item.cover.data.attributes.url}
-                            alt='home'
-                          />
-                        }
+        <BackgroundWrapper background={meetUsInPerson.background}>
+          <div className='container'>
+            <h2>{meetUsInPerson.title}</h2>
+            <RichText
+              fontSize='20px'
+              align='left'
+              content={meetUsInPerson.description}
+            />
+            <Row gutter={[24, 16]} style={{ marginTop: "3em" }}>
+              {meetUsInPerson.contentList.map((item) => (
+                <Col
+                  key={item.title}
+                  className='section-item'
+                  xs={24}
+                  sm={24}
+                  md={12}
+                  lg={8}
+                  xl={8}
+                >
+                  <Link href={item.redirectLink ?? "/"}>
+                    <a>
+                      <div
+                        style={{
+                          borderRadius: 8,
+                          background: "#800000",
+                          height: "100%",
+                          color: "#fff"
+                        }}
                       >
-                        <Meta
-                          title={item.title}
-                          description={<RichText content={item.description} />}
+                        <Image
+                          style={{ borderRadius: "8px 8px 0 0" }}
+                          layout='responsive'
+                          width={item.cover.data.attributes.width}
+                          height={item.cover.data.attributes.height}
+                          src={item.cover.data.attributes.url}
+                          alt='home'
                         />
-                      </Card>
-                    </Col>
-                  ))}
-                </Row>
-              </Col>
+                        <div style={{ paddingLeft: 15, paddingRight: 15 }}>
+                          <h3 style={{ color: "#fff" }}>{item.title}</h3>
+                          <RichText
+                            color='#fff'
+                            align='left'
+                            content={item.description}
+                            fontWeight='300'
+                          />
+                        </div>
+                      </div>
+                    </a>
+                  </Link>
+                </Col>
+              ))}
             </Row>
           </div>
-        </div>
+        </BackgroundWrapper>
       )}
-
-      {/* <div className='section-slide'>
-        <div className='container'>
-          <h2>{t("WHAT OUR LEADERS SAY", { ns: "content" })}</h2>
-          <HomeCarousel />
-        </div>
-      </div> */}
-
-      {contactUs && (
-        <div className='section-large section-bottom'>
-          <div className='container section-title'>
-            <h2 className='pl-3 mb-5'>{contactUs.title}</h2>
-            <Row>
-              <Col xs={24} sm={24} md={24} lg={16}>
-                <Row>
-                  {contactUs.contentList.map((item) => (
-                    <Col
-                      xs={24}
-                      sm={24}
-                      md={12}
-                      lg={12}
-                      xl={12}
-                      key={item.title}
-                    >
-                      <Card bordered={false}>
-                        <Meta
-                          title={item.title}
-                          description={<RichText content={item.description} />}
-                        />
-                      </Card>
-                    </Col>
-                  ))}
-                </Row>
-              </Col>
-            </Row>
-          </div>
-        </div>
-      )}
+      <Monastery {...monastery} />
+      {statistic && <HomeStatistic {...statistic} />}
+      <UpcomingEvents
+        redirectLink={EVENT}
+        title={t("Upcoming Events")}
+        background={null}
+        isMobile={isMobile}
+      />
+      <Offering {...offering} isMobile={isMobile} />
     </DivHomeWrapper>
   )
 }

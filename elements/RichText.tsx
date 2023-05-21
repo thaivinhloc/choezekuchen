@@ -4,6 +4,12 @@ import styled from "styled-components"
 interface RichTextProps extends React.HTMLProps<HTMLDivElement> {
   content?: string
   className?: string
+  align?: string
+  fontSize?: string
+  color?: string
+  lineHeight?: string
+  fontWeight?: string
+  letterSpacing?: string
 }
 
 const RichTextWrapper = styled.div<RichTextProps>`
@@ -25,21 +31,43 @@ const RichTextWrapper = styled.div<RichTextProps>`
   b,
   strong,
   i {
-    color: ${(props) => props.style?.color ?? "inherit"} !important;
-    font-size: ${(props) => props.style?.fontSize ?? "inherit"} !important;
-    line-height: ${(props) => props.style?.lineHeight ?? "inherit"} !important;
-    font-weight: ${(props) => props.style?.fontWeight ?? "inherit"} !important;
-    letter-spacing: ${(props) =>
-      props.style?.letterSpacing ?? "inherit"} !important;
-  }
+    font-family: ${(props) => props.theme.primaryFont} !important;
+    background: transparent !important;
+    line-height: 1.3;
+    color: #000;
+    ${({ align }) => `text-align: ${align} !important;`}
+    ${(props) => props.fontSize && `font-size: ${props.fontSize} !important;`}
+    ${(props) =>
+      props.lineHeight && `line-height: ${props.lineHeight} !important;`}
+    ${(props) =>
+      props.fontWeight && `font-weight: ${props.fontWeight} !important;`}
+    ${(props) => props.color && `color: ${props.color} !important;`}
+    ${(props) =>
+      props.letterSpacing &&
+      `letter-spacing: ${props.letterSpacing} !important;`}
 `
 
 export const RichText: React.FC<RichTextProps> = ({
   content,
   className,
-  style
+  style,
+  align,
+  fontSize,
+  lineHeight,
+  fontWeight,
+  letterSpacing,
+  color
 }) => (
-  <RichTextWrapper className={className} style={style}>
+  <RichTextWrapper
+    className={className}
+    style={style}
+    align={align}
+    fontSize={fontSize}
+    lineHeight={lineHeight}
+    fontWeight={fontWeight}
+    letterSpacing={letterSpacing}
+    color={color}
+  >
     {content ? HtmlParser(content) : null}
   </RichTextWrapper>
 )

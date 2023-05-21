@@ -1,12 +1,12 @@
+// @ts-nocheck
 import { ArrowRightOutlined } from "@ant-design/icons"
 import { Col, Pagination, Radio, Row } from "antd"
 import {
   EListPageLayout,
   EMediaType,
   ListItem,
-  TMedia,
-  TPage,
-  TRetreat
+  TEvent,
+  TPage
 } from "definition"
 import { Button } from "elements/Button"
 import { GridMedia, Media } from "elements/Media"
@@ -26,17 +26,13 @@ import { useRouter } from "next/router"
 import { useAuth } from "context/auth/AuthContext"
 import { LOGIN } from "common/navigator"
 import useEvents from "hook/useEvents"
+import moment from "moment"
+import { getEventsByTimeRange } from "services/event"
+import { MonthEvent } from "components/Event/MonthEvent"
 
-const ListPageContentWrapper = styled.div<Partial<TPage>>`
-  padding-left: 15px;
-  padding-right: 15px;
-  @media (min-width: 1200px) {
-    max-width: 1170px;
-    margin: 0 auto;
-  }
-`
+export const ListPageContentWrapper = styled.div<Partial<TPage>>``
 
-const ContentListTitleWrapper = styled.h3`
+export const ContentListTitleWrapper: any = styled.h3`
   color: ${(props) => props.theme.primary};
 `
 
@@ -103,7 +99,7 @@ function HorizontalGrid({ topTitle, topDesciption, pageContentList }: TPage) {
                       <Button
                         style={{
                           padding: 0,
-                          color: "#C00000",
+                          color: "#A51818",
                           whiteSpace: "normal",
                           height: "fit-content",
                           fontSize: 15,
@@ -217,6 +213,15 @@ function BlogGrid({ ...props }: TPage) {
   return <ListPageContentWrapper></ListPageContentWrapper>
 }
 
+function EventCalendar({ topTitle, topDesciption }: TPage) {
+  return (
+    <ListPageContentWrapper>
+      <TopSection topTitle={topTitle} topDesciption={topDesciption} />
+      <MonthEvent />
+    </ListPageContentWrapper>
+  )
+}
+
 function EventGrid({ topTitle, topDesciption, locale }: TPage) {
   const pageSize = 3
   const router = useRouter()
@@ -311,23 +316,27 @@ function EventGrid({ topTitle, topDesciption, locale }: TPage) {
 }
 
 export const TopCategoryWrapper = styled.div`
-  margin-top: 60px;
-  margin-bottom: 32px;
   text-align: center;
   .ant-radio-button-wrapper {
-    border: 0;
-    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid ${(props) => props.theme.primary};
+    color: ${(props) => props.theme.primary};
+    width: 100%;
+    border-radius: 24px !important;
+    background: transparent;
     @media (min-width: 992px) {
       padding-left: 40px;
       padding-right: 40px;
     }
     &:hover {
-      background: rgba(255, 255, 255);
-      color: #c00000;
+      background: ${(props) => props.theme.primary};
+      color: ${(props) => props.theme.white};
     }
     &-checked {
-      background: #c00000;
+      background: ${(props) => props.theme.primary};
     }
+  }
+  .ant-radio-group {
+    width: 100%;
   }
 `
 
@@ -537,7 +546,7 @@ function RetreatGrid({ topTitle, topDesciption, locale }: TPage) {
                         <Button
                           style={{
                             padding: 0,
-                            color: "#C00000",
+                            color: "#A51818",
                             whiteSpace: "normal",
                             height: "fit-content",
                             fontSize: 15,
@@ -581,7 +590,7 @@ export function ListPageLayout({ data }: { data: TPage }) {
     case EListPageLayout.BLOG:
       return <BlogGrid {...data} />
     case EListPageLayout.EVENT:
-      return <EventGrid {...data} />
+      return <EventCalendar {...data} />
     case EListPageLayout.LIBRARY:
       return <LibraryGrid {...data} />
     case EListPageLayout.RETREAT:

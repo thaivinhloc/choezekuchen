@@ -7,7 +7,9 @@ const WithLess = withLess({
     styledComponents: true
   },
   env: {
-    REACT_APP_API_URL: process.env.REACT_APP_API_URL
+    REACT_APP_API_URL: process.env.REACT_APP_API_URL,
+    MAINTENANCE_MODE: process.env.MAINTENANCE_MODE,
+    SUPPORT_LANG: process.env.SUPPORT_LANG,
   }
 })
 const nextConfig = {

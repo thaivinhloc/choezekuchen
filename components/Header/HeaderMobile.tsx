@@ -1,18 +1,20 @@
 /* eslint-disable @next/next/no-img-element */
 import {
+  CloseOutlined,
   DownOutlined,
   MenuOutlined,
   RightOutlined,
   UserOutlined
 } from "@ant-design/icons"
-import { Button, Collapse, Dropdown, Menu, Space } from "antd"
+import { Button, Collapse, Drawer, Dropdown, Menu, Space } from "antd"
+import { THEME } from "common"
 import { LOGIN, RETREAT } from "common/navigator"
 import { useApp } from "context/app/AppContext"
 import { TNavigatorItem } from "definition"
 import { TFunction } from "i18next"
 import Link from "next/link"
 import { useRouter } from "next/router"
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import ReactCountryFlag from "react-country-flag"
 import { LANGS } from "."
 import { ROUTES } from "../../common/routes"
@@ -24,247 +26,278 @@ const { SubMenu } = Menu
 
 const HeaderMobile = ({
   t,
-  data
+  data,
+  logo
 }: {
   t: TFunction
   data: TNavigatorItem[]
+  logo?: any
 }) => {
+  const [isOpenMenu, setOpenMenu] = useState(false)
+  const [isSticky, setSticky] = useState(false)
   const auth = useAuth()
   const user = auth.user as IUser
   const { onLogout } = useAuth()
-  const { title } = useApp()
-
+  const { title, banner } = useApp()
   const router = useRouter()
-  const currentLocale = router.locale
 
-  const { Panel } = Collapse
+  useEffect(() => {
+    window.addEventListener("scroll", onScroll)
+    return () => {
+      window.removeEventListener("scroll", onScroll)
+    }
+  }, [])
+
+  const onScroll = () => {
+    const scrollTop = window.scrollY
+    setSticky(scrollTop >= 100 ? true : false)
+  }
+
+  const currentLocale = router.locale
 
   const handleChangeLocale = (newLocale: string) => {
     const { pathname, asPath, query } = router
     router.push({ pathname, query }, asPath, { locale: newLocale })
   }
 
-  const menu = (
-    <Menu>
-      <Menu.Item key='0'>
-        <Link href='/profile'>{t("Profile", { ns: "header" })}</Link>
-      </Menu.Item>
-      <Menu.Item key='2'>
-        <Link href={RETREAT}>{t("Retreat", { ns: "header" })}</Link>
-      </Menu.Item>
-      <Menu.Divider />
-      <Menu.Item key='3' onClick={onLogout}>
-        {t("Log out", { ns: "header" })}
-      </Menu.Item>
-    </Menu>
-  )
-
-  const name = user?.username?.charAt(0).toUpperCase()
-  const [activeKey, setActiveKey] = useState<string>("")
-
-  console.log("title", title)
+  const headerStyle = isSticky
+    ? {
+        position: "fixed",
+        top: 0,
+        left: 0,
+        right: 0,
+        width: "100%",
+        paddingTop: 12,
+        paddingBottom: 12,
+        zIndex: 10,
+        background: THEME.white,
+        boxShadow: "0 9px 35px rgb(0 0 0 / 5%)"
+      }
+    : {
+        paddingTop: 12,
+        paddingBottom: 12
+      }
 
   /* Render */
   return (
-    <div>
-      <DivHeaderMobile className='headermobile' style={{ width: "100%" }}>
-        <div className='container'>
-          <Collapse
-            collapsible='header'
-            ghost
-            activeKey={activeKey}
-            expandIcon={({ isActive }) => {
+    <DivHeaderMobile className='headermobile' style={{ width: "100%" }}>
+      <Drawer
+        width='85%'
+        visible={isOpenMenu}
+        placement='right'
+        onClose={() => setOpenMenu(false)}
+        getContainer={false}
+        closeIcon={null}
+        headerStyle={{ display: "none" }}
+      >
+        <div style={{ position: "relative", minHeight: "100%" }}>
+          <div
+            style={{
+              position: "absolute",
+              right: 0,
+              bottom: 0,
+              left: 0,
+              width: "100%"
+            }}
+          >
+            <Space direction='vertical' style={{ width: "100%" }}>
+              {user?.username ? (
+                <Link href='/profile'>
+                  <Button block type='primary' ghost>
+                    <span>{t("Profile")}</span>
+                  </Button>
+                </Link>
+              ) : (
+                <Link href={LOGIN}>
+                  <Button block type='primary' ghost>
+                    <span>{t("Login")}</span>
+                  </Button>
+                </Link>
+              )}
+            </Space>
+          </div>
+          <a
+            style={{
+              position: "absolute",
+              right: 0,
+              top: 0,
+              WebkitAppearance: "none"
+            }}
+            type='button'
+            onClick={() => setOpenMenu(false)}
+          >
+            <CloseOutlined style={{ fontSize: 24 }} />
+          </a>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center"
+            }}
+          >
+            <img
+              src={logo?.data?.attributes?.url ?? "/logo.png"}
+              alt='Logo'
+              className='headermobile-logo'
+            />
+          </div>
+          <Menu
+            style={{ width: "100%" }}
+            defaultSelectedKeys={["1"]}
+            mode='inline'
+            className='headermobile__menu'
+            inlineIndent={0}
+            expandIcon={(...props: any) => {
+              console.log("props", props[0].isHasChildren)
+              const isHasChildren = !!props[0]?.isHasChildren
+              const isOpen = props[0].isOpen
+              if (!isHasChildren) return <div />
               return (
-                <MenuOutlined
-                  onClick={() => setActiveKey(() => (activeKey ? "" : "1"))}
-                  style={{ margin: "0px", fontSize: "17px" }}
-                />
+                <div className='headermobile__menu-icon'>
+                  {!isOpen ? <RightOutlined /> : <DownOutlined />}
+                </div>
               )
             }}
-            expandIconPosition='left'
           >
-            <Panel
-              header={
-                <div onClick={(e) => e.stopPropagation()}>
-                  <img
-                    src='/logo.png'
-                    alt='Logo'
-                    className='headermobile-logo'
-                    width={65}
-                    height={65}
-                  />
-                </div>
-              }
-              className='headermobile'
-              key='1'
-              extra={
-                <Space size={2}>
-                  {LANGS.filter((lang) => lang.locale !== currentLocale).map(
-                    (lang) => (
-                      <Button
-                        className='h-auto'
-                        size='small'
-                        type='link'
-                        onClick={() => handleChangeLocale(lang.locale)}
-                        key={lang.code}
-                        style={{ marginRight: "6px" }}
-                      >
-                        <ReactCountryFlag
-                          style={{
-                            fontSize: "2em",
-                            lineHeight: "2em",
-                            marginRight: 8
-                          }}
-                          title={lang.name}
-                          countryCode={lang.code}
-                          svg
-                        />
-                        {/* {lang.name} */}
-                      </Button>
-                    )
-                  )}
-                  {!user?.username ? (
-                    <div onClick={(e) => e.stopPropagation()}>
-                      <Link passHref href={LOGIN}>
-                        <UserOutlined
-                          style={{ fontSize: "20px" }}
-                          className='headermobile-user'
-                        />
-                      </Link>
-                    </div>
-                  ) : (
-                    <Dropdown
-                      overlay={menu}
-                      trigger={["click"]}
-                      overlayStyle={{ width: "140px" }}
-                      placement='bottomRight'
+            {data.map((route) => (
+              <SubMenu
+                key={route.related.slug}
+                title={
+                  <Link href={route.related.slug}>
+                    <a
+                      rel='noreferrer'
+                      target={"_self"}
+                      className='headermobile__menu'
+                      style={{ display: "block", height: "100%" }}
+                      onClick={() => setOpenMenu(false)}
                     >
-                      <div
-                        className='headermobile-avatar'
-                        onClick={(event) => event.stopPropagation()}
-                      >
-                        {name}
-                      </div>
-                    </Dropdown>
-                  )}
-                </Space>
-              }
-            >
-              <Menu
-                style={{ width: 256 }}
-                defaultSelectedKeys={["1"]}
-                defaultOpenKeys={["sub1"]}
-                mode='inline'
-                className='headermobile__menu'
-                inlineIndent={0}
-                expandIcon={(...props: any) => {
-                  console.log("props", props[0].isHasChildren)
-                  const isHasChildren = !!props[0]?.isHasChildren
-                  const isOpen = props[0].isOpen
-                  if (!isHasChildren) return <div />
-                  return (
-                    <div className='headermobile__menu-icon'>
-                      {!isOpen ? <RightOutlined /> : <DownOutlined />}
-                    </div>
-                  )
-                }}
+                      {route.related.title}
+                    </a>
+                  </Link>
+                }
+                {...{ isHasChildren: !!route.items.length }}
               >
-                {data.map((route) => (
-                  <SubMenu
-                    key={route.related.slug}
-                    title={
-                      <Link href={route.related.slug}>
-                        <a
-                          rel='noreferrer'
-                          target={"_self"}
-                          className='headermobile__menu'
-                          onClick={() => setActiveKey("")}
-                        >
-                          {route.related.title}
-                        </a>
-                      </Link>
-                    }
-                    {...{ isHasChildren: !!route.items.length }}
-                  >
-                    {route.items.map((subRoute) => (
-                      <React.Fragment key={subRoute.related.slug}>
-                        {subRoute.items.length < 0 ? (
-                          <Menu.Item
-                            key={subRoute.related.slug}
-                            icon={() => <div />}
+                {route.items.map((subRoute) => (
+                  <React.Fragment key={subRoute.related.slug}>
+                    {subRoute.items.length < 0 ? (
+                      <Menu.Item
+                        key={subRoute.related.slug}
+                        icon={() => <div />}
+                      >
+                        <Link href={route.related.slug}>
+                          <a
+                            target={"_self"}
+                            rel='noreferrer'
+                            style={{ display: "block", height: "100%" }}
+                            onClick={() => setOpenMenu(false)}
                           >
-                            <Link href={route.related.slug}>
+                            {subRoute.related.title}
+                          </a>
+                        </Link>
+                      </Menu.Item>
+                    ) : (
+                      <SubMenu
+                        key={subRoute.related.slug}
+                        {...{
+                          isHasChildren: !!subRoute.items.length
+                        }}
+                        title={
+                          <Link href={subRoute.related.slug}>
+                            <a
+                              rel='noreferrer'
+                              target={"_self"}
+                              style={{ display: "block", height: "100%" }}
+                              onClick={() => setOpenMenu(false)}
+                            >
+                              {subRoute.related.title}
+                            </a>
+                          </Link>
+                        }
+                      >
+                        {subRoute.items.map((children) => (
+                          <Menu.Item key={children.related.slug}>
+                            <Link href={children.related.slug}>
                               <a
                                 target={"_self"}
                                 rel='noreferrer'
-                                onClick={() => setActiveKey("")}
+                                style={{ display: "block", height: "100%" }}
+                                onClick={() => setOpenMenu(false)}
                               >
-                                {subRoute.related.title}
+                                {children.related.title}
                               </a>
                             </Link>
                           </Menu.Item>
-                        ) : (
-                          <SubMenu
-                            key={subRoute.related.slug}
-                            {...{
-                              isHasChildren: !!subRoute.items.length
-                            }}
-                            title={
-                              <Link href={subRoute.related.slug}>
-                                <a
-                                  onClick={() => setActiveKey("")}
-                                  rel='noreferrer'
-                                  target={"_self"}
-                                >
-                                  {subRoute.related.title}
-                                </a>
-                              </Link>
-                            }
-                          >
-                            {subRoute.items.map((children) => (
-                              <Menu.Item key={children.related.slug}>
-                                <Link href={children.related.slug}>
-                                  <a
-                                    onClick={() => setActiveKey("")}
-                                    target={"_self"}
-                                    rel='noreferrer'
-                                  >
-                                    {children.related.title}
-                                  </a>
-                                </Link>
-                              </Menu.Item>
-                            ))}
-                          </SubMenu>
-                        )}
-                      </React.Fragment>
-                    ))}
-                  </SubMenu>
+                        ))}
+                      </SubMenu>
+                    )}
+                  </React.Fragment>
                 ))}
-              </Menu>
-            </Panel>
-          </Collapse>
+              </SubMenu>
+            ))}
+          </Menu>
         </div>
-        <div className='w-100 banner'>
-          {router.pathname === "/" ? (
-            <img
-              className='w-100'
-              src='/images/title-image-homepage.jpg'
-              alt='banner'
+      </Drawer>
+      {/* @ts-ignore */}
+      <div className='container' style={{ ...headerStyle }}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center"
+          }}
+        >
+          <img src='/logo.png' alt='Logo' width={50} />
+          <div style={{ display: "flex", alignItems: "center" }}>
+            {LANGS.filter((lang) => lang.locale !== currentLocale).map(
+              (lang) => (
+                <Button
+                  className='h-auto'
+                  size='small'
+                  type='link'
+                  onClick={() => handleChangeLocale(lang.locale)}
+                  key={lang.code}
+                  style={{ marginRight: "6px" }}
+                >
+                  <ReactCountryFlag
+                    style={{
+                      fontSize: "2em",
+                      lineHeight: "2em",
+                      marginRight: 8
+                    }}
+                    title={lang.name}
+                    countryCode={lang.code}
+                    svg
+                  />
+                  {/* {lang.name} */}
+                </Button>
+              )
+            )}
+            <MenuOutlined
+              onClick={() => setOpenMenu(true)}
+              style={{ margin: "0px", fontSize: "17px" }}
             />
-          ) : (
-            <img
-              className='w-100 '
-              src='/images/title-image-3.jpeg'
-              alt='banner'
-              style={{ height: "160px", objectFit: "cover" }}
-            />
-          )}
-          <div className='banner__content' style={{ top: 0 }}>
-            {title}
           </div>
         </div>
-      </DivHeaderMobile>
-    </div>
+      </div>
+      <div className='w-100 banner'>
+        {router.pathname === "/" ? (
+          <img
+            className='w-100'
+            src={banner?.attributes?.url ?? "/images/title-image-homepage.jpg"}
+            alt='banner'
+          />
+        ) : (
+          <img
+            className='w-100 '
+            src={banner?.attributes?.url ?? "/images/title-image-3.jpeg"}
+            alt='banner'
+            style={{ height: "160px", objectFit: "cover" }}
+          />
+        )}
+        <div className='banner__content' style={{ top: 0 }}>
+          {title}
+        </div>
+      </div>
+    </DivHeaderMobile>
   )
 }
 

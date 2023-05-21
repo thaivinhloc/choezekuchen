@@ -15,7 +15,7 @@ export default function withHome(getServerSidePropsFunc) {
       console.log("------", { result })
 
       const content = await getHomePage({ locale: locale || "en" })
-      console.log("------", { content })
+      console.log("------", { content: JSON.stringify(content) })
       if (!result) {
         throw Error("Data not found")
       }
@@ -25,6 +25,7 @@ export default function withHome(getServerSidePropsFunc) {
         console.log({ ownProps })
         return {
           props: {
+            isHeaderFullscreen: true,
             data: result,
             content: content?.data ?? {},
             ...ownProps
@@ -34,6 +35,7 @@ export default function withHome(getServerSidePropsFunc) {
 
       return {
         props: {
+          isHeaderFullscreen: true,
           data: result,
           content: content?.data ?? {}
         }

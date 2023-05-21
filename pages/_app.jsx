@@ -1,11 +1,14 @@
-import "../styles/antd.less";
-import { ThemeProvider } from "styled-components";
-import { THEME } from "../common";
-import { GlobalStyle } from "../styles/global.style";
-import { AppProvider } from "../context/app/AppProvider";
-import { AuthProvider } from "../context/auth/AuthProvider";
-import Head from "next/head";
-import { appWithTranslation } from "next-i18next";
+// @ts-nocheck
+import "../styles/antd.less"
+import "swiper/css"
+import "swiper/css/navigation"
+import { ThemeProvider } from "styled-components"
+import { THEME } from "../common"
+import { GlobalStyle } from "../styles/global.style"
+import { AppProvider } from "../context/app/AppProvider"
+import { AuthProvider } from "../context/auth/AuthProvider"
+import Head from "next/head"
+import { appWithTranslation } from "next-i18next"
 
 function MaintenancePage() {
   return (
@@ -48,4 +51,4 @@ function MyApp({ Component, pageProps }) {
   )
 }
 
-export default appWithTranslation(MyApp);
+export default appWithTranslation(MyApp)
