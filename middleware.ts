@@ -22,6 +22,12 @@ export function middleware(request: NextRequest) {
     )
   }
 
+  if (id && type === "monastery") {
+    return NextResponse.rewrite(
+      new URL(`${locale ? "/" + locale : ""}/monastery/${id}`, request.url)
+    )
+  }
+
   if (id && type === "blog") {
     return NextResponse.rewrite(
       new URL(`${locale ? "/" + locale : ""}/blog/${id}`, request.url)

@@ -34,7 +34,7 @@ const RetreatListing: React.FC<{
                 style={{
                   textDecoration: "underline",
                   fontWeight: 600,
-                  color: "#C00000"
+                  color: "#A51818"
                 }}
               >
                 {name}

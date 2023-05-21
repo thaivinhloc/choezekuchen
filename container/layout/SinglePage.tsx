@@ -1,12 +1,31 @@
-import { Carousel, Col, Image, Row } from "antd"
-import { ESinglePageLayout, TMedia, TPage } from "definition"
+// @ts-nocheck
+import { ArrowRightOutlined } from "@ant-design/icons"
+import { Col, Row } from "antd"
+import { THEME } from "common"
+import { DrikungKagyuLinage } from "components/About/Drikung"
+import { UpcomingEvents } from "components/Home/UpcomingEvents"
+import { TitleWithHeadline } from "components/Title/TitleWithHeadline"
+import { ESinglePageLayout, TPage } from "definition"
+import { Button } from "elements/Button"
 import { GridMedia } from "elements/Media"
 import { RichText } from "elements/RichText"
-import usePage from "hook/usePage"
+import { getMonasteryPathFromSlug } from "helper"
+import useMonastery from "hook/useMonastery"
+import { useTranslation } from "next-i18next"
+import Image from "next/image"
+import Link from "next/link"
 import { useEffect } from "react"
 import styled from "styled-components"
+import eventsBackground from "assets/bg/events_background.png"
+import { About } from "components/About"
+import { Teaching } from "components/Teaching"
+import { Library } from "components/Library"
+import { RetreatList } from "components/Retreat/RetreatList"
+import { EventList } from "components/Event/EventList"
+import { OfferingPage } from "components/Offering"
 
 export const SinglePageContentWrapper = styled.div`
+  padding-top: 50px;
   padding-left: 15px;
   padding-right: 15px;
   @media (min-width: 992px) {
@@ -16,6 +35,10 @@ export const SinglePageContentWrapper = styled.div`
   @media (min-width: 1200px) {
     max-width: 1170px;
     margin: 0 auto;
+  }
+  @media (min-width: 1400px) {
+    width: 1340px;
+    max-width: 100%;
   }
 `
 
@@ -36,178 +59,160 @@ function TopSection({
     </div>
   ) : null
 }
-function Vertical({ ...props }: TPage) {
-  return <SinglePageContentWrapper></SinglePageContentWrapper>
-}
 
-function Horizontal({
-  topTitle,
-  topDesciption,
-  pageContentBanner,
-  pageContent
-}: TPage) {
+function Horizontal({ globalData }) {
+  const { t } = useTranslation()
+  const { defaultHeadLine } = globalData.attributes
   return (
     <SinglePageContentWrapper>
-      <TopSection topTitle={topTitle} topDesciption={topDesciption} />
-      <Row gutter={[32, 32]} align='middle'>
-        <Col span={24} lg={{ span: 12 }}>
-          <GridMedia {...(pageContentBanner ?? {})} />
-        </Col>
-        <Col span={24} lg={{ span: 12 }}>
-          <RichText content={pageContent} />
-        </Col>
-      </Row>
+      <div style={{ textAlign: "center", padding: "60px 0 100px" }}>
+        <TitleWithHeadline
+          title={t("Coming soon")}
+          headLine={defaultHeadLine}
+        />
+      </div>
     </SinglePageContentWrapper>
   )
 }
-
-function Gurus({
-  topTitle,
-  topDesciption,
-  pageContentEndpoint,
-  locale
-}: TPage) {
-  const { content, getPageContent, isLoading } = usePage<{
-    guruList: {
-      title: string
-      description: string
-      cover?: {
-        data: TMedia
-      }
-    }[]
-  }>({
-    locale,
-    endpoint: pageContentEndpoint,
-    params: {
-      "populate[0]": "guruList",
-      "populate[1]": "guruList.cover"
-    }
-  })
-
-  useEffect(() => {
-    if (pageContentEndpoint) {
-      getData()
-    }
-    async function getData() {
-      await getPageContent()
-    }
-  }, [pageContentEndpoint])
-  const { guruList } = content?.data.attributes ?? {}
-  return (
-    <SinglePageContentWrapper>
-      <TopSection topTitle={topTitle} topDesciption={topDesciption} />
-      {!isLoading && guruList ? (
-        <Row gutter={[32, 32]}>
-          {guruList.map(({ title, description, cover }, idx) => (
-            <Col span={24} lg={{ span: idx !== 0 ? 12 : 24 }}>
-              <div
-                style={{
-                  textAlign: "center",
-                  maxWidth: idx !== 0 ? 400 : 500,
-                  margin: "0 auto"
-                }}
-              >
-                <GridMedia
-                  {...(cover?.data.attributes ?? {})}
-                  width={500}
-                  height={500}
-                />
-                <h3>{title}</h3>
-                <RichText content={description} />
-              </div>
-            </Col>
-          ))}
-        </Row>
-      ) : (
-        <div></div>
-      )}
-    </SinglePageContentWrapper>
-  )
-}
-
-const MonasteryImageWrapper = styled.div`
-  background: #fff;
-  .ant-image {
-    width: 100%;
-  }
-  img {
-    width: 100%;
-    object-fit: contain;
-    object-position: center center;
-    height: calc(100vw - 30px);
-    @media (min-width: 992px) {
-      height: calc(888px / 4);
-    }
-    @media (min-width: 1200px) {
-      height: calc(998px / 4);
-    }
-  }
-`
 
 function Monastery({
   locale,
-  pageContentEndpoint,
   topTitle,
   topDesciption,
-  pageContent
+  globalData,
+  isMobile
 }: TPage) {
-  const { content, getPageContent, isLoading } = usePage<{
-    images: {
-      data: TMedia[]
-    }
-  }>({
-    locale,
-    endpoint: pageContentEndpoint,
-    params: {
-      "populate[0]": "images"
-    }
+  const { t } = useTranslation()
+  const { monasteries, getAllMonasteries } = useMonastery({
+    locale: locale ?? "en"
   })
 
   useEffect(() => {
-    if (pageContentEndpoint) {
-      getData()
-    }
-    async function getData() {
-      await getPageContent()
-    }
-  }, [pageContentEndpoint])
-  console.log({ content })
-  const { images } = content?.data.attributes ?? {}
+    getAllMonasteries()
+  }, [])
+  const { defaultHeadLine } = globalData.attributes
+  console.log({ eventsBackground })
+
   return (
-    <SinglePageContentWrapper>
-      <TopSection topTitle={topTitle} topDesciption={topDesciption} />
-      <div>
-        <RichText content={pageContent} />
-      </div>
-      <Row gutter={[24, 24]}>
-        {!isLoading && images ? (
-          images.data.map((image) => (
-            <Col span={24} lg={{ span: 6 }}>
-              <MonasteryImageWrapper>
-                <Image src={image.attributes.url} alt={image.attributes.name} />
-              </MonasteryImageWrapper>
-            </Col>
-          ))
-        ) : (
-          <Col></Col>
+    <>
+      <SinglePageContentWrapper>
+        {topTitle && (
+          <div style={{ textAlign: "center", marginBottom: 50 }}>
+            <TitleWithHeadline headLine={defaultHeadLine} title={topTitle} />
+            <RichText content={topDesciption} />
+          </div>
         )}
-      </Row>
-    </SinglePageContentWrapper>
+        <Row
+          gutter={[{ xs: 15, sm: 15, md: 32 }, 40]}
+          style={{ padding: "40px 0 80px" }}
+        >
+          {monasteries?.map(({ id, attributes }) => {
+            return (
+              <Col span={24} xl={{ span: 12 }}>
+                <div
+                  style={{
+                    height: 320,
+                    position: "relative",
+                    borderRadius: 12
+                  }}
+                >
+                  <Image
+                    style={{ borderRadius: 12 }}
+                    src={attributes.cover?.data?.attributes?.url}
+                    width={attributes.cover?.data?.attributes?.width}
+                    height={attributes.cover?.data?.attributes?.height}
+                    layout='fill'
+                    objectFit='cover'
+                  />
+                </div>
+                <h3 style={{ color: THEME.primary }}>{attributes.title}</h3>
+                <p className='ellipsis ellipsis-3' style={{ minHeight: 80 }}>
+                  {attributes.description}
+                </p>
+                <Link href={getMonasteryPathFromSlug(id, attributes.slug)}>
+                  <a>
+                    <div
+                      style={{
+                        border: `1px solid ${THEME.primary}`,
+                        borderRadius: 24,
+                        height: 40,
+                        position: "relative",
+                        lineHeight: "38px",
+                        paddingLeft: 20,
+                        fontSize: 18,
+                        color: THEME.primary,
+                        width: 200
+                      }}
+                    >
+                      {t("Discover now")}
+                      <Button
+                        shape='circle'
+                        style={{
+                          position: "absolute",
+                          right: 3,
+                          top: 3,
+                          height: 32,
+                          width: 32
+                        }}
+                        type='primary'
+                        icon={<ArrowRightOutlined style={{ fontSize: 16 }} />}
+                      />
+                    </div>
+                  </a>
+                </Link>
+              </Col>
+            )
+          })}
+        </Row>
+      </SinglePageContentWrapper>
+      <UpcomingEvents
+        background={eventsBackground.src}
+        title={t("Upcoming Events")}
+        redirectLink='/events.html'
+        isMobile={isMobile}
+      />
+    </>
   )
 }
 
-export function SinglePageLayout({ data }: { data: TPage }) {
+export function SinglePageLayout({
+  data,
+  globalData,
+  isMobile
+}: {
+  data: TPage
+}) {
   console.log("SinglePageLayout", { data })
   switch (data.pageContentLayout) {
-    case ESinglePageLayout.HORIZONTAL:
-      return <Horizontal {...data} />
-    case ESinglePageLayout.VERTICAL:
-      return <Vertical {...data} />
-    case ESinglePageLayout.GURUS:
-      return <Gurus {...data} />
     case ESinglePageLayout.MONASTERY:
-      return <Monastery {...data} />
+      return <Monastery {...data} isMobile={isMobile} globalData={globalData} />
+    case ESinglePageLayout.DRIKUNG_KAGYU_LINEAGE:
+      return (
+        <DrikungKagyuLinage
+          {...data}
+          globalData={globalData}
+          isMobile={isMobile}
+        />
+      )
+    case ESinglePageLayout.ABOUT:
+      return <About {...data} globalData={globalData} isMobile={isMobile} />
+    case ESinglePageLayout.TEACHING:
+      return <Teaching {...data} globalData={globalData} isMobile={isMobile} />
+    case ESinglePageLayout.LIBRARY:
+      return <Library {...data} globalData={globalData} isMobile={isMobile} />
+    case ESinglePageLayout.RETREAT:
+      return (
+        <RetreatList {...data} globalData={globalData} isMobile={isMobile} />
+      )
+    case ESinglePageLayout.EVENT:
+      return <EventList {...data} globalData={globalData} isMobile={isMobile} />
+    case ESinglePageLayout.OFFERING:
+      return (
+        <OfferingPage {...data} globalData={globalData} isMobile={isMobile} />
+      )
     default:
-      return <Horizontal {...data} />
+      return (
+        <Horizontal {...data} globalData={globalData} isMobile={isMobile} />
+      )
   }
 }

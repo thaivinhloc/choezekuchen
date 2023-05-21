@@ -1,8 +1,8 @@
-import { ListPageLayout } from "container/layout/ListPage"
+// @ts-nocheck
+import { Offering } from "components/Home/Offering"
 import { SinglePageLayout } from "container/layout/SinglePage"
 import { useApp } from "context/app/AppContext"
-import { EPageType, TPage } from "definition"
-import { RichText } from "elements/RichText"
+import { TPage } from "definition"
 import withDetectDevice from "hoc/withDetectDevice"
 import withGlobalData from "hoc/withGlobalData"
 import { withNavigator } from "hoc/withNavigator"
@@ -13,12 +13,11 @@ import { useEffect } from "react"
 import styled from "styled-components"
 
 const PageContentWrapper = styled.div<Partial<TPage>>`
-  padding-top: 50px;
-  padding-bottom: 80px;
-  background: ${(props) => props.background ?? "#f9f9f9"};
+  padding-top: 0;
+  background: ${(props) => props.background ?? "#ffffff"};
 `
 
-function Page({ data }: { data: TPage }) {
+function Page({ data, globalData, isMobile }: { data: TPage }) {
   const { setTitleBanner, setBanner } = useApp()
 
   useEffect(() => {
@@ -28,18 +27,26 @@ function Page({ data }: { data: TPage }) {
   }, [data.title])
   useEffect(() => {
     if (data.cover) {
-      setBanner(data.cover.data)
+      setBanner({
+        id: 0,
+        attributes: data.cover
+      })
     }
   }, [data.cover])
   console.log("Page", data)
+  console.log({ globalData })
+
   return (
     <>
       <Head>{data.title && <title>{data.title}</title>}</Head>
       <PageContentWrapper background={data.background}>
-        {data.pageType === EPageType.LIST ? (
-          <ListPageLayout data={data} />
-        ) : (
-          <SinglePageLayout data={data} />
+        <SinglePageLayout
+          data={data}
+          isMobile={isMobile}
+          globalData={globalData}
+        />
+        {data.isEnabledOffering && (
+          <Offering {...globalData.attributes.offering} isMobile={isMobile} />
         )}
       </PageContentWrapper>
     </>

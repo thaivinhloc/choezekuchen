@@ -1,3 +1,4 @@
+// @ts-nocheck
 import Retreat from "components/Retreat"
 import useRetreat from "components/Retreat/hooks/useRetreat"
 import { useApp } from "context/app/AppContext"
@@ -13,7 +14,8 @@ import React, { FC, useEffect } from "react"
 
 const RetreatPage: FC<{ retreats: TRetreat[]; parent: TRetreat }> = ({
   retreats,
-  parent
+  parent,
+  isMobile
 }) => {
   const { setTitleBanner, setBanner } = useApp()
   const router = useRouter()
@@ -39,12 +41,15 @@ const RetreatPage: FC<{ retreats: TRetreat[]; parent: TRetreat }> = ({
           locale: router.locale || "en"
         })
       }
+      isMobile={isMobile}
     />
   ) : (
     <div />
   )
 }
 
-export const getServerSideProps = withDetectDevice(withGlobalData(withRetreat(withTrans)))
+export const getServerSideProps = withDetectDevice(
+  withGlobalData(withRetreat(withTrans))
+)
 
 export default withNavigator(RetreatPage)

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Document, Page, pdfjs } from "react-pdf"
 import { Modal } from "./Modal"
 import { ElementRef, useRef, useState } from "react"
@@ -5,7 +6,7 @@ import { EMediaType, TMedia } from "definition"
 import { Button } from "components/Button"
 import { getMediaType } from "helper"
 import NextImage, { ImageProps } from "next/image"
-import { useTranslation } from "react-i18next"
+import { useTranslation } from "next-i18next"
 import styled from "styled-components"
 import {
   DownloadOutlined,
@@ -13,7 +14,9 @@ import {
   RightOutlined,
   ZoomInOutlined
 } from "@ant-design/icons"
-import { Space } from "antd"
+import { Col, Row, Space } from "antd"
+import { THEME } from "common"
+import { RichText } from "./RichText"
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.js`
 
@@ -39,6 +42,7 @@ const AudioWrapper = styled.div<Partial<MediaProps>>`
   position: relative;
   width: 100%;
   min-height: ${(props) => props.ratioHeight ?? 240}px;
+  height: 100%;
 `
 
 const MediaWrapper = styled.div<Partial<MediaProps>>`
@@ -60,7 +64,7 @@ const MediaWrapper = styled.div<Partial<MediaProps>>`
     }
   }
   position: relative;
-  border-radius: 2px 2px 0 0;
+  border-radius: 4px;
 `
 
 const Wrapper = styled.div`
@@ -72,6 +76,7 @@ const Wrapper = styled.div`
     border-radius: 2px;
   }
   position: relative;
+  height: 100%;
 `
 
 const PreviewMediaWrapper = styled.div`
@@ -95,25 +100,33 @@ export const Image: React.FC<ExtendedImageProps> = ({ src, alt, ...props }) => {
   )
 }
 
-const DownloadButtonWrapper = styled(Button)`
-  border-radius: 0;
-  background-color: #fff;
-  border: 0;
-  font-weight: 500;
-  font-size: 12px !important;
-  padding-left: 19px;
-  padding-right: 19px;
-  line-height: 24px !important;
-  box-shadow: none;
-  svg {
-    margin-top: -7px;
-  }
-  color: ${(props) => props.theme.primary};
-`
+const TitleWithDescription = ({ title, description }) => {
+  return (
+    <div
+      style={{
+        position: "relative",
+        paddingBottom: 40
+      }}
+    >
+      <h3
+        className='ellipsis'
+        style={{
+          fontSize: 20,
+          margin: "16px 0 12px",
+          color: THEME.primary
+        }}
+      >
+        {title}
+      </h3>
+      <RichText fontSize='15px' content={description} />
+    </div>
+  )
+}
 
 export const Media: React.FC<MediaProps> = ({
   mediaData,
   name,
+  description,
   cover,
   width = 600,
   height = 400,
@@ -164,7 +177,7 @@ export const Media: React.FC<MediaProps> = ({
     <Wrapper>
       {type === EMediaType.FILE ? (
         <>
-          <div style={{ position: "relative" }}>
+          <div style={{ position: "relative", height: "100%" }}>
             <MediaWrapper style={style} ratioHeight={ratioHeight}>
               {cover ? (
                 <Image
@@ -173,6 +186,7 @@ export const Media: React.FC<MediaProps> = ({
                   alt={name}
                   width={width}
                   height={height}
+                  style={{ borderRadius: 8 }}
                 />
               ) : (
                 <Document file={url} onLoadSuccess={onLoadSuccess}>
@@ -180,30 +194,45 @@ export const Media: React.FC<MediaProps> = ({
                 </Document>
               )}
             </MediaWrapper>
-
-            <Space style={{ width: "100%", justifyContent: "flex-end" }}>
-              {previewable && (
-                <DownloadButtonWrapper
-                  size='small'
-                  onClick={onOpenPDFViewer}
-                  icon={<ZoomInOutlined />}
-                  style={{ background: "transparent" }}
-                >
-                  {t("Preview")}
-                </DownloadButtonWrapper>
-              )}
-
-              {downloadable && (
-                <DownloadButtonWrapper
-                  size='small'
-                  onClick={onDownload}
-                  icon={<DownloadOutlined />}
-                  style={{ background: "transparent" }}
-                >
-                  {t("Download")}
-                </DownloadButtonWrapper>
-              )}
-            </Space>
+            <TitleWithDescription title={name} description={description} />
+            <div
+              style={{
+                position: "absolute",
+                bottom: 0,
+                left: 0,
+                width: "100%"
+              }}
+            >
+              <Row gutter={16}>
+                <Col span={12}>
+                  {previewable && (
+                    <Button
+                      style={{ width: "100%" }}
+                      shape='round'
+                      type='primary'
+                      ghost
+                      icon={<ZoomInOutlined />}
+                      onClick={onOpenPDFViewer}
+                    >
+                      {t("Preview")}
+                    </Button>
+                  )}
+                </Col>
+                <Col span={12}>
+                  {downloadable && (
+                    <Button
+                      style={{ width: "100%" }}
+                      shape='round'
+                      type='primary'
+                      icon={<DownloadOutlined />}
+                      onClick={onDownload}
+                    >
+                      {t("Download")}
+                    </Button>
+                  )}
+                </Col>
+              </Row>
+            </div>
           </div>
           <Modal ref={viewModalRef} width='768px'>
             <PreviewMediaWrapper>
@@ -238,86 +267,98 @@ export const Media: React.FC<MediaProps> = ({
         </>
       ) : type === EMediaType.VIDEO ? (
         <>
-          <div style={{ position: "relative" }}>
-            {cover ? (
-              <>
-                <Image
-                  layout='responsive'
-                  src={cover.attributes.url}
-                  alt={name}
-                  width={width}
-                  height={height}
-                />
-                <div
-                  onClick={onOpenPDFViewer}
-                  style={{
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    width: "100%",
-                    height: "100%",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    cursor: "pointer",
-                    backgroundColor: "rgba(0,0,0,0.2)"
-                  }}
-                >
-                  <svg
-                    width='130'
-                    height='130'
-                    viewBox='0 0 130 130'
-                    fill='none'
-                    xmlns='http://www.w3.org/2000/svg'
+          <div style={{ position: "relative", height: "100%" }}>
+            <div style={{ position: "relative" }}>
+              {cover ? (
+                <>
+                  <Image
+                    layout='responsive'
+                    src={cover.attributes.url}
+                    alt={name}
+                    width={width}
+                    height={height}
+                    style={{ borderRadius: 8 }}
+                  />
+                  <div
+                    onClick={onOpenPDFViewer}
+                    style={{
+                      position: "absolute",
+                      top: 0,
+                      left: 0,
+                      width: "100%",
+                      height: "100%",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      cursor: "pointer",
+                      backgroundColor: "rgba(0,0,0,0.2)",
+                      borderRadius: 8
+                    }}
                   >
-                    <path
-                      fill-rule='evenodd'
-                      clip-rule='evenodd'
-                      d='M65 119.166C94.9155 119.166 119.167 94.9151 119.167 64.9997C119.167 35.0842 94.9155 10.833 65 10.833C35.0846 10.833 10.8334 35.0842 10.8334 64.9997C10.8334 94.9151 35.0846 119.166 65 119.166Z'
-                      fill='#000000'
-                      fill-opacity='0.5'
-                    />
-                    <path
-                      d='M52.1433 44.1484C50.1399 45.2219 48.75 47.2321 48.75 50.0731V79.8648C48.75 85.5469 54.4181 88.2714 59.0981 85.6173L81.1569 73.094C88.6384 68.4627 88.3669 61.3127 81.1569 56.844L59.0981 44.3179C56.7581 42.9914 54.1466 43.0753 52.1433 44.1484Z'
-                      fill='#F8F8F8'
-                    />
-                  </svg>
-                </div>
-                <Modal
-                  ref={viewModalRef}
-                  width='768px'
-                  bodyStyle={{ padding: 0 }}
-                >
-                  <video width='100%' controls>
-                    <source src={url} type='video/mp4' />
-                    Your browser does not support HTML video.
-                  </video>
-                </Modal>
-              </>
-            ) : (
-              <video width='100%' controls>
-                <source src={url} type='video/mp4' />
-                Your browser does not support HTML video.
-              </video>
-            )}
-            <Space
+                    <svg
+                      width='130'
+                      height='130'
+                      viewBox='0 0 130 130'
+                      fill='none'
+                      xmlns='http://www.w3.org/2000/svg'
+                    >
+                      <path
+                        fill-rule='evenodd'
+                        clip-rule='evenodd'
+                        d='M65 119.166C94.9155 119.166 119.167 94.9151 119.167 64.9997C119.167 35.0842 94.9155 10.833 65 10.833C35.0846 10.833 10.8334 35.0842 10.8334 64.9997C10.8334 94.9151 35.0846 119.166 65 119.166Z'
+                        fill='#000000'
+                        fill-opacity='0.5'
+                      />
+                      <path
+                        d='M52.1433 44.1484C50.1399 45.2219 48.75 47.2321 48.75 50.0731V79.8648C48.75 85.5469 54.4181 88.2714 59.0981 85.6173L81.1569 73.094C88.6384 68.4627 88.3669 61.3127 81.1569 56.844L59.0981 44.3179C56.7581 42.9914 54.1466 43.0753 52.1433 44.1484Z'
+                        fill='#F8F8F8'
+                      />
+                    </svg>
+                  </div>
+                  <Modal
+                    ref={viewModalRef}
+                    width='768px'
+                    bodyStyle={{ padding: 0 }}
+                  >
+                    <video width='100%' controls>
+                      <source src={url} type='video/mp4' />
+                      Your browser does not support HTML video.
+                    </video>
+                  </Modal>
+                </>
+              ) : (
+                <video width='100%' controls>
+                  <source src={url} type='video/mp4' />
+                  Your browser does not support HTML video.
+                </video>
+              )}
+            </div>
+            <TitleWithDescription title={name} description={description} />
+            <div
               style={{
                 position: "absolute",
-                top: 16,
-                right: 16,
-                zIndex: 10
+                bottom: 0,
+                left: 0,
+                width: "100%"
               }}
             >
-              {downloadable && (
-                <DownloadButtonWrapper
-                  size='small'
-                  onClick={onDownload}
-                  icon={<DownloadOutlined />}
-                >
-                  {t("Download")}
-                </DownloadButtonWrapper>
-              )}
-            </Space>
+              <Row gutter={16}>
+                <Col span={12}></Col>
+                <Col span={12}>
+                  {downloadable && (
+                    <Button
+                      style={{ width: "100%" }}
+                      shape='round'
+                      type='primary'
+                      icon={<DownloadOutlined />}
+                      onClick={onDownload}
+                    >
+                      {t("Download")}
+                    </Button>
+                  )}
+                </Col>
+              </Row>
+            </div>
           </div>
         </>
       ) : type === EMediaType.AUDIO ? (
@@ -330,6 +371,7 @@ export const Media: React.FC<MediaProps> = ({
                 alt={name}
                 width={width}
                 height={height}
+                style={{ borderRadius: 8 }}
               />
             ) : null}
             <div
@@ -351,23 +393,31 @@ export const Media: React.FC<MediaProps> = ({
                 Your browser does not support the audio element.
               </audio>
             </div>
+            <TitleWithDescription title={name} description={description} />
             <div
               style={{
                 position: "absolute",
-                top: 16,
-                right: 16,
-                zIndex: 10
+                bottom: 0,
+                left: 0,
+                width: "100%"
               }}
             >
-              {downloadable && (
-                <DownloadButtonWrapper
-                  size='small'
-                  onClick={onDownload}
-                  icon={<DownloadOutlined />}
-                >
-                  {t("Download")}
-                </DownloadButtonWrapper>
-              )}
+              <Row gutter={16}>
+                <Col span={12}></Col>
+                <Col span={12}>
+                  {downloadable && (
+                    <Button
+                      style={{ width: "100%" }}
+                      shape='round'
+                      type='primary'
+                      icon={<DownloadOutlined />}
+                      onClick={onDownload}
+                    >
+                      {t("Download")}
+                    </Button>
+                  )}
+                </Col>
+              </Row>
             </div>
           </AudioWrapper>
         </>
@@ -391,15 +441,18 @@ export const GridMedia = ({
   url,
   name,
   width = 600,
-  height = 300
+  height = 300,
+  style = {}
 }: {
   url?: string
   name?: string
   width?: number
   height?: number
+  style?: Record<string, any>
 }) => {
   return (
     <Image
+      style={style}
       objectFit='cover'
       src={url ?? ""}
       alt={name ?? "-"}

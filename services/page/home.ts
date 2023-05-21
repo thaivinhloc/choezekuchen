@@ -3,14 +3,6 @@ import client from "services/client"
 
 export type THomePageResponse = {
   attributes: TAttributesResponse<{
-    contactUs: {
-      title: string
-      description: string
-      contentList: {
-        title: string
-        description: string
-      }[]
-    }
     introduction: {
       title: string
       description: string
@@ -20,7 +12,11 @@ export type THomePageResponse = {
         cover: {
           data: TMedia
         }
+        redirectLink?: string
       }[]
+      background?: {
+        data: TMedia
+      }
     }
     meetUsInPerson: {
       title: string
@@ -28,15 +24,42 @@ export type THomePageResponse = {
       contentList: {
         title: string
         description: string
+        redirectLink: string
         cover: {
           data: TMedia
         }
       }[]
+      background?: {
+        data: TMedia
+      }
     }
-    statistics: {
-      name: string
-      value: string
-    }[]
+    statistic: {
+      title?: string
+      banner?: {
+        data: TMedia
+      }
+      contentList: {
+        name: string
+        value: string
+        description?: string
+      }[]
+      background?: {
+        data: TMedia
+      }
+    }
+    monastery: {
+      title?: string
+      description?: string
+      redirectTitle?: string
+      redirectLink?: string
+      contentList: {
+        title: string
+        cover: {
+          data: TMedia
+        }
+        redirectLink?: string
+      }[]
+    }
   }>
 }
 
@@ -47,15 +70,22 @@ export const getHomePage = ({ locale }: { locale: string }) => {
     external: true,
     params: {
       "populate[0]": "introduction",
-      "populate[1]": "statistics",
+      "populate[1]": "statistic",
       "populate[2]": "meetUsInPerson",
-      "populate[3]": "contactUs",
       "populate[4]": "introduction.contentList",
       "populate[5]": "meetUsInPerson.contentList",
-      "populate[6]": "contactUs.contentList",
-      "populate[7]": "contactUs.contentList",
-      "populate[8]": "meetUsInPerson.contentList.cover",
-      "populate[9]": "introduction.contentList.cover",
+      "populate[6]": "meetUsInPerson.contentList.cover",
+      "populate[7]": "introduction.contentList.cover",
+      "populate[8]": "statistic.contentList",
+      "populate[9]": "statistic.banner",
+      "populate[10]": "monastery",
+      "populate[11]": "monastery.contentList",
+      "populate[12]": "monastery.contentList.cover",
+      "populate[13]": "introduction.background",
+      "populate[14]": "meetUsInPerson.background",
+      "populate[15]": "statistic.background",
+      "populate[16]": "offering",
+      "populate[17]": "offering.background",
       locale: locale
     }
   })

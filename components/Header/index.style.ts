@@ -8,14 +8,24 @@ type TStyled = {
 
 type HeaderProps = {
   banner?: TMedia
+  isMobile?: boolean
+  isHeaderFullscreen?: boolean
 }
 
 export const DivHeaderWrapperV1 = styled.div<HeaderProps>`
-  .header-desktop {
+  .site-header {
+    height: ${(props) =>
+      props.isHeaderFullscreen ? "100vh" : "calc(100vw/2)"};
+    @media (min-width: 992px) {
+      height: ${(props) => (props.isHeaderFullscreen ? "100vh" : "auto")};
+      min-height: 50vh;
+    }
     /* Main CSS */
     background-color: transparent !important;
     background-image: url(${(props) =>
-      props.banner?.attributes.url ?? "/images/title-image-3.jpeg"});
+      props.banner?.attributes.url ??
+      props.banner?.url ??
+      "/images/title-image-3.jpeg"});
     background-size: cover;
     background-position: center center;
     position: relative;
@@ -31,7 +41,7 @@ export const DivHeaderWrapperV1 = styled.div<HeaderProps>`
       position: absolute;
       top: 0;
       left: 0;
-      background: rgba(0, 0, 0, 0.2);
+      background: rgba(0, 0, 0, 0.3);
       @media (min-width: 1200px) {
         display: block;
       }
@@ -47,10 +57,10 @@ export const DivHeaderWrapperV1 = styled.div<HeaderProps>`
         }
       }
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      padding: 15px 50px;
+      padding: 64px 50px 15px;
       position: relative;
+      z-index: 1002;
       transition: 0.3s linear;
       &-nav {
         display: flex;
@@ -58,21 +68,16 @@ export const DivHeaderWrapperV1 = styled.div<HeaderProps>`
         flex-wrap: wrap;
         .nav {
           &-link {
-            color: #ffffff;
-            font-size: 12px;
+            color: ${(props) => props.theme.white};
+            font-size: 18px;
             font-style: normal;
-            font-weight: 700;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            padding: 0 10px;
-            border: 2px solid transparent;
-            padding: 11px 24px;
-            border-radius: 2px;
+            font-weight: 500;
+            padding: 10px 16px;
             white-space: nowrap;
-            margin-right: 16px;
+            display: flex;
+            align-items: center;
             &:hover,
             &.active {
-              border: 2px solid #fff;
               cursor: pointer;
             }
           }
@@ -98,22 +103,27 @@ export const DivHeaderWrapperV1 = styled.div<HeaderProps>`
         }
       }
       &__title {
-        font-size: 36px;
-        line-height: 40px;
-        font-weight: 700px;
-        letter-spacing: 4px;
         text-align: center;
-        height: 100px;
-        color: #ffffff;
-        height: 150px;
-        margin-bottom: 0;
-        margin-top: 24px;
+        padding: 80px 16px 150px;
+        margin: 0;
+        z-index: 10;
+        position: relative;
+        h1 {
+          color: #ffffff;
+          font-size: 48px;
+          line-height: 62px;
+          font-weight: 700px;
+        }
+        &__desc {
+          font-size: 16px;
+          color: #ffffff !important;
+          opacity: 0.8;
+        }
       }
+
       &-logo {
         img {
           display: block;
-          width: auto !important;
-          max-width: none;
           width: 105px;
           height: 105px;
           -webkit-transition: opacity 0.6s ease-in-out;
@@ -128,10 +138,9 @@ export const DivHeaderWrapperV1 = styled.div<HeaderProps>`
         .arrow-right {
           display: block;
           margin: 3px auto;
-          font-size: 12px;
-          font-weight: 900;
-          color: #9d9d9d;
+          font-size: 14px;
           margin-right: 0;
+          font-weight: 500;
           padding-right: 5px;
         }
         &:hover {
@@ -139,34 +148,23 @@ export const DivHeaderWrapperV1 = styled.div<HeaderProps>`
         }
       }
       &-nav-link {
-        color: #9d9d9d;
-        font-weight: 600;
-        font-size: 11px;
+        font-weight: 500;
+        font-size: 14px;
         height: auto;
         /* line-height: 10px; */
         margin: 0;
         padding: 0 0;
         &:hover {
-          color: #ffffff;
+          color: ${(props) => props.theme.primary};
           cursor: pointer;
         }
-      }
-    }
-    /* Navbar options (bg options) */
-    .site-header {
-      .navbar-toggler,
-      .nav-link,
-      .utils-search {
-        color: #fff;
-      }
-      .nav-item:after {
-        background: #fff;
       }
     }
     /* Dropdown CSS */
     .nav-item {
       .dropdown {
-        width: 200px;
+        width: fit-content;
+        min-width: 240px;
         display: block;
         position: absolute;
         top: 35px;
@@ -175,12 +173,17 @@ export const DivHeaderWrapperV1 = styled.div<HeaderProps>`
         opacity: 0;
         visibility: hidden;
         transform: translateY(5px);
-        background: black;
-        color: wheat;
+        background: ${(props) => props.theme.white};
         z-index: 999;
         box-shadow: 0 5px 5px 0px rgba(0, 0, 0, 0.15);
         .nav-link {
-          color: ${(props: TStyled) => props.theme.default};
+          color: ${(props: TStyled) => props.theme.dark};
+          &:hover {
+            color: ${(props) => props.theme.primary} !important;
+            svg {
+              color: ${(props) => props.theme.primary} !important;
+            }
+          }
         }
         .dropdown {
           top: -10px;
@@ -212,9 +215,6 @@ export const DivHeaderWrapperV1 = styled.div<HeaderProps>`
       }
       &:hover > a::before {
         transform: rotate(90deg);
-      }
-      .dropdown-nav-link {
-        text-transform: uppercase;
       }
     }
     .nav-close {
@@ -261,14 +261,6 @@ export const DivHeaderWrapperV1 = styled.div<HeaderProps>`
         transform: rotate(90deg);
       }
     }
-
-    &.homepage {
-      .site-header {
-        background-image: url("/images/title-image-homepage.jpg");
-        background-size: cover;
-        height: 100vh;
-      }
-    }
   }
 
   .ant-collapse {
@@ -298,13 +290,7 @@ export const DivHeaderMobile = styled.div`
       text-align: center;
     }
   }
-  button {
-    background: none;
-    border: none;
-    box-shadow: none;
-    height: 90px;
-    width: 100%;
-  }
+
   .ant-typography {
     display: block;
     height: 80px;
@@ -335,6 +321,34 @@ export const DivHeaderMobile = styled.div`
       text-align: right;
     }
   }
+  &.headermobile {
+    .ant-menu {
+      &-sub {
+        background-color: #fff !important;
+        padding-left: 10px;
+      }
+      &-inline {
+        background-color: transparent;
+        border-right: none;
+      }
+      &-item::after {
+        border-right: none;
+      }
+
+      &-submenu {
+        padding-bottom: 0px !important;
+        &-title:active {
+          background: none;
+        }
+        &-title {
+          border-bottom: 1px solid #eaeaea;
+          padding-right: 0;
+          margin-top: 2px;
+          margin-bottom: 2px;
+        }
+      }
+    }
+  }
 
   .headermobile {
     &-avatar {
@@ -352,41 +366,15 @@ export const DivHeaderMobile = styled.div`
     */ .ant-menu-root.ant-menu-inline {
       border: none;
     }
-    .ant-menu {
-      padding: revert;
-      &-sub {
-        background-color: #fff;
-      }
-      &-inline {
-        background-color: transparent;
-        border-right: none;
-      }
-      &-item::after {
-        border-right: none;
-      }
 
-      &-submenu {
-        padding-bottom: 0px !important;
-
-        &-title:active {
-          background: none;
-        }
-        &-title {
-          border-bottom: 1px solid #eaeaea;
-          padding-right: 0;
-          margin-top: 2px;
-          margin-bottom: 2px;
-        }
-      }
-    }
     //icon outline:
     &__icon {
       display: flex;
       width: 100%;
     }
     &-logo {
-      height: 50px;
-      width: 50px;
+      height: 100px;
+      width: 100px;
     }
     &-user {
     }
@@ -395,8 +383,8 @@ export const DivHeaderMobile = styled.div`
       height: 20px;
     }
     &__menu {
+      border-right: 0 !important;
       min-width: 100%;
-      min-height: 374px;
       padding-left: 0px !important;
       a {
         color: #303030;
@@ -421,5 +409,63 @@ export const DivHeaderMobile = styled.div`
       border-color: none;
       background: none;
     }
+  }
+`
+
+export const NavListStyled = styled.nav<{ isSticky?: boolean }>`
+  justify-content: space-between;
+  ${(props) =>
+    props.isSticky &&
+    `
+      box-shadow: 0 9px 35px rgb(0 0 0 / 5%);
+      position: fixed !important;
+      top:0;
+      left:0;
+      width:100%;
+      height: 80px;
+      background:${props.theme.white};
+      padding: 15px 50px !important;
+      .navbar-nav {
+        .nav-link {
+          color: ${props.theme.dark} !important;
+          svg {
+            color: ${props.theme.dark} !important;
+          }
+          &-active {
+            color: ${props.theme.primary} !important;
+            svg {
+              color: ${props.theme.primary} !important;
+            }
+          }  
+        }
+      }
+      .navbar-logo {
+        img {
+          width: 80px !important;
+          height: 80px !important;
+        }
+      }
+    `}
+`
+
+export const NavbarNavStyled = styled.ul`
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0;
+`
+
+export const TopActionStyled = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 8px;
+  padding-right: 8px;
+  position: relative;
+  z-index: 20;
+  @media (min-width: 1200px) {
+    padding: 16px 50px;
+    position: absolute;
+    top: 16px;
+    right: 0;
+    z-index: 99999999;
   }
 `
