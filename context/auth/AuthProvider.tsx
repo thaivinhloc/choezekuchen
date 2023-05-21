@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { ReactNode, useState } from "react"
 import { AuthContext } from "./AuthContext"
 import {

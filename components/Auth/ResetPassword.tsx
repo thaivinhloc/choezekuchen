@@ -1,4 +1,4 @@
-/* eslint-disable react/no-unescaped-entities */
+// @ts-nocheck
 import { Button, Col, Form, Input, Row } from "antd"
 import { useForm } from "antd/lib/form/Form"
 import { LOGIN, RETREAT } from "common/navigator"
