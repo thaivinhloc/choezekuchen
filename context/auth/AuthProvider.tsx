@@ -74,7 +74,10 @@ export function AuthProvider({ children }: Props) {
     }
   }
 
-  const onForgotPassword = async (data: TForgotPassword, callback?: () => void) => {
+  const onForgotPassword = async (
+    data: TForgotPassword,
+    callback?: () => void
+  ) => {
     try {
       setIsLoading(true)
       await Client.createRequest({
@@ -84,7 +87,7 @@ export function AuthProvider({ children }: Props) {
         external: true
       })
       setIsLoading(false)
-      notification.error({
+      notification.success({
         message: "Success",
         description: t(
           "Please check your email and follow the steps to recover your account!"
@@ -145,14 +148,24 @@ export function AuthProvider({ children }: Props) {
     }
   }
 
-  const onResetPassword = async () => {
+  const onResetPassword = async (data, callback?: () => void) => {
     try {
-      const result = await Client.createRequest({
+      setIsLoading(true)
+      await Client.createRequest({
         path: "/api/auth/reset-password",
-        method: "post"
+        method: "post",
+        body: data,
+        external: true
       })
-    } catch (error) {
-      console.log("----error", error)
+      setIsLoading(false)
+      callback?.()
+    } catch (error: any) {
+      notification.error({
+        message: "Error",
+        description: error || ""
+      })
+    } finally {
+      setIsLoading(false)
     }
   }
   return (

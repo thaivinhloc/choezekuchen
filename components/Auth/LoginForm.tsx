@@ -66,15 +66,6 @@ const LoginForm: React.FC<{}> = () => {
             >
               <Input size='large' type='password' />
             </Form.Item>
-            {/* <Row>
-              <Col span={24} style={{ textAlign: "right" }}>
-                <Link href='/forgot-password'>
-                  <a>
-                    <strong>{t("Forgot password?")}</strong>
-                  </a>
-                </Link>
-              </Col>
-            </Row> */}
             <Row gutter={24} align='bottom'>
               <Col span={14}>
                 <Row>
@@ -102,6 +93,16 @@ const LoginForm: React.FC<{}> = () => {
                 </Button>
               </Col>
             </Row>
+            <div style={{ height: 8 }} />
+            {/* <Row>
+              <Col span={24} style={{ textAlign: "right" }}>
+                <Link href='/forgot-password'>
+                  <a>
+                    <strong>{t("Forgot password?")}</strong>
+                  </a>
+                </Link>
+              </Col>
+            </Row> */}
           </Form>
         </Row>
       </div>
