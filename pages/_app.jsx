@@ -7,8 +7,28 @@ import { AuthProvider } from "../context/auth/AuthProvider";
 import Head from "next/head";
 import { appWithTranslation } from "next-i18next";
 
-function MyApp({ Component, pageProps }) {
+function MaintenancePage() {
+  return (
+    <div
+      style={{
+        minHeight: "100vh",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center"
+      }}
+    >
+      <h1>{`We'll be back`}</h1>
+      <p style={{ fontSize: 20 }}>
+        {`Our website is under Maintenance. We'll be here soon with our new
+        awesome site.`}
+      </p>
+    </div>
+  )
+}
 
+function MyApp({ Component, pageProps }) {
+  const { MAINTENANCE_MODE } = process.env
   return (
     <ThemeProvider theme={THEME}>
       <Head>
@@ -17,11 +37,15 @@ function MyApp({ Component, pageProps }) {
       <GlobalStyle />
       <AppProvider>
         <AuthProvider>
-          <Component {...pageProps} />
+          {MAINTENANCE_MODE == "true" ? (
+            <MaintenancePage />
+          ) : (
+            <Component {...pageProps} />
+          )}
         </AuthProvider>
       </AppProvider>
     </ThemeProvider>
-  );
+  )
 }
 
 export default appWithTranslation(MyApp);
