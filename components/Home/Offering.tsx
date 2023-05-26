@@ -77,3 +77,5 @@ export const Offering: React.FC = ({
     </BackgroundWrapper>
   )
 }
+
+export default Offering

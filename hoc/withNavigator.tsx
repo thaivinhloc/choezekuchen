@@ -1,6 +1,7 @@
-import Footer from "components/Footer"
-import Header from "components/Header"
+const Footer = dynamic(() => import("components/Footer"), { ssr: false })
+const Header = dynamic(() => import("components/Header"), { ssr: false })
 import { useApp } from "context/app/AppContext"
+import dynamic from "next/dynamic"
 import { useRouter } from "next/router"
 import { useEffect } from "react"
 import styled from "styled-components"

@@ -1,5 +1,4 @@
 import { HOME, RETREAT } from "common/navigator"
-import LoginForm from "components/Auth/LoginForm"
 import withDetectDevice from "hoc/withDetectDevice"
 import withGlobalData from "hoc/withGlobalData"
 import { withNavigator } from "hoc/withNavigator"
@@ -8,6 +7,8 @@ import { ELanguages } from "i18n/config"
 import { serverSideTranslations } from "next-i18next/serverSideTranslations"
 import { useRouter } from "next/router"
 import { FC, useEffect } from "react"
+import dynamic from "next/dynamic"
+const LoginForm = dynamic(() => import("components/Auth/LoginForm"), { ssr: false })
 
 const Login: FC<{}> = ({ language }: any) => {
   const router = useRouter()

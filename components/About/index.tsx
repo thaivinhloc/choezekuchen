@@ -736,3 +736,5 @@ export const About = ({
     </AboutWrapper>
   )
 }
+
+export default About

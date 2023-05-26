@@ -628,3 +628,5 @@ export const OfferingPage = ({
     </OfferingPageWrapper>
   )
 }
+
+export default OfferingPage

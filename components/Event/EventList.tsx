@@ -369,3 +369,5 @@ export const EventList = ({ locale, isMobile }) => {
     </EventListWrapper>
   )
 }
+
+export default EventList

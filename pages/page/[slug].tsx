@@ -1,6 +1,7 @@
 // @ts-nocheck
-import { Offering } from "components/Home/Offering"
-import { SinglePageLayout } from "container/layout/SinglePage"
+import dynamic from "next/dynamic"
+const Offering = dynamic(() => import("components/Home/Offering"), { ssr: false })
+const SinglePageLayout = dynamic(() => import("container/layout/SinglePage"), { ssr: false })
 import { useApp } from "context/app/AppContext"
 import { TPage } from "definition"
 import withDetectDevice from "hoc/withDetectDevice"

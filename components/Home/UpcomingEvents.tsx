@@ -139,3 +139,5 @@ export const UpcomingEvents: React.FC = ({
     </HighlightWrapper>
   ) : null
 }
+
+export default UpcomingEvents

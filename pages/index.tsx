@@ -1,4 +1,4 @@
-import Home from "components/Home"
+const Home = dynamic(() => import("components/Home"), { ssr: false })
 import { useApp } from "context/app/AppContext"
 import { TPage } from "definition"
 import withDetectDevice from "hoc/withDetectDevice"
@@ -6,6 +6,7 @@ import withGlobalData from "hoc/withGlobalData"
 import withHome from "hoc/withHome"
 import { withNavigator } from "hoc/withNavigator"
 import withTrans from "hoc/withTrans"
+import dynamic from "next/dynamic"
 import { useEffect } from "react"
 import { THomePageResponse } from "services/page/home"
 

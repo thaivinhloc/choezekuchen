@@ -1,5 +1,4 @@
 // @ts-nocheck
-import { SinglePageContentWrapper } from "container/layout/SinglePage"
 import { useApp } from "context/app/AppContext"
 import withDetectDevice from "hoc/withDetectDevice"
 import withGlobalData from "hoc/withGlobalData"
@@ -11,14 +10,12 @@ import { ElementRef, useEffect, useRef, useState } from "react"
 import { useTranslation } from "next-i18next"
 import styled from "styled-components"
 import withMonastery from "hoc/withMonastery"
-import { SingleSection } from "container/Section"
 import { TITLE_SIZES, Title } from "components/Title"
 import { Button } from "elements/Button"
 import { Gallery, ThumbnailImageProps } from "react-grid-gallery"
 import { Modal } from "elements/Modal"
 import { PlayArrow, PlayCircle } from "@mui/icons-material"
 import { Col, Row } from "antd"
-import { TitleWithHeadline } from "components/Title/TitleWithHeadline"
 import Image from "next/image"
 import { THEME } from "common"
 import Link from "next/link"
@@ -28,7 +25,10 @@ import {
   MeetUsSectionWrapper
 } from "components/Home/index.styles"
 import { getMonasteryPathFromSlug } from "helper"
-import { Offering } from "components/Home/Offering"
+import dynamic from "next/dynamic"
+const Offering = dynamic(() => import("components/Home/Offering"), { ssr: false })
+const SingleSection = dynamic(() => import("container/Section"), { ssr: false })
+const TitleWithHeadline = dynamic(() => import("components/Title/TitleWithHeadline"), { ssr: false })
 
 const PageContentWrapper = styled.div``
 

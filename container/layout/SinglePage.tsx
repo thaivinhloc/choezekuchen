@@ -2,9 +2,6 @@
 import { ArrowRightOutlined } from "@ant-design/icons"
 import { Col, Row } from "antd"
 import { THEME } from "common"
-import { DrikungKagyuLinage } from "components/About/Drikung"
-import { UpcomingEvents } from "components/Home/UpcomingEvents"
-import { TitleWithHeadline } from "components/Title/TitleWithHeadline"
 import { ESinglePageLayout, TPage } from "definition"
 import { Button } from "elements/Button"
 import { GridMedia } from "elements/Media"
@@ -17,12 +14,29 @@ import Link from "next/link"
 import { useEffect } from "react"
 import styled from "styled-components"
 import eventsBackground from "assets/bg/events_background.png"
-import { About } from "components/About"
-import { Teaching } from "components/Teaching"
-import { Library } from "components/Library"
-import { RetreatList } from "components/Retreat/RetreatList"
-import { EventList } from "components/Event/EventList"
-import { OfferingPage } from "components/Offering"
+import dynamic from "next/dynamic"
+const About = dynamic(() => import("components/About"), { ssr: false })
+const Teaching = dynamic(() => import("components/Teaching"), { ssr: false })
+const Library = dynamic(() => import("components/Library"), { ssr: false })
+const RetreatList = dynamic(() => import("components/Retreat/RetreatList"), {
+  ssr: false
+})
+const EventList = dynamic(() => import("components/Event/EventList"), {
+  ssr: false
+})
+const OfferingPage = dynamic(() => import("components/Offering"), {
+  ssr: false
+})
+const TitleWithHeadline = dynamic(
+  () => import("components/Title/TitleWithHeadline"),
+  { ssr: false }
+)
+const UpcomingEvents = dynamic(() => import("components/Home/UpcomingEvents"), {
+  ssr: false
+})
+const DrikungKagyuLinage = dynamic(() => import("components/About/Drikung"), {
+  ssr: false
+})
 
 export const SinglePageContentWrapper = styled.div`
   padding-top: 50px;
@@ -123,6 +137,7 @@ function Monastery({
                     height={attributes.cover?.data?.attributes?.height}
                     layout='fill'
                     objectFit='cover'
+                    objectPosition='top center'
                   />
                 </div>
                 <h3 style={{ color: THEME.primary }}>{attributes.title}</h3>
@@ -216,3 +231,5 @@ export function SinglePageLayout({
       )
   }
 }
+
+export default SinglePageLayout

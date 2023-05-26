@@ -121,3 +121,5 @@ export const DrikungKagyuLinage = ({
     </DrikungKagyuLinageWrapper>
   )
 }
+
+export default DrikungKagyuLinage

@@ -67,3 +67,5 @@ export const TitleWithHeadlineSmall = ({
     </>
   )
 }
+
+export default TitleWithHeadline

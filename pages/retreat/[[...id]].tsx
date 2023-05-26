@@ -1,5 +1,6 @@
 // @ts-nocheck
-import Retreat from "components/Retreat"
+import dynamic from "next/dynamic"
+const Retreat = dynamic(() => import("components/Retreat"), { ssr: false })
 import useRetreat from "components/Retreat/hooks/useRetreat"
 import { useApp } from "context/app/AppContext"
 import { TRetreat } from "definition"

@@ -1,4 +1,5 @@
-import RetreatHistory from "components/RetreatHistory"
+import dynamic from "next/dynamic"
+const RetreatHistory = dynamic(() => import("components/RetreatHistory"), { ssr: false })
 import withDetectDevice from "hoc/withDetectDevice"
 import withGlobalData from "hoc/withGlobalData"
 import { withNavigator } from "hoc/withNavigator"

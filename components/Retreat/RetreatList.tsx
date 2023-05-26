@@ -293,3 +293,5 @@ export const RetreatList = ({ locale, globalData }: TPage) => {
     </ListPageContentWrapper>
   )
 }
+
+export default RetreatList

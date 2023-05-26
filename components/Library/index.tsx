@@ -257,3 +257,5 @@ export const Library = ({ locale, globalData, isMobile }) => {
     </ListPageContentWrapper>
   )
 }
+
+export default Library
