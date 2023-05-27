@@ -33,7 +33,8 @@ const Home: FC<{
   data: TPage
   content: THomePageResponse
   isMobile: boolean
-}> = ({ data, content, isMobile }) => {
+  globalData: any
+}> = ({ data, content, isMobile, globalData }) => {
   const { t } = useTranslation()
   const { introduction, statistic, meetUsInPerson, monastery, offering } =
     content?.attributes ?? {}
@@ -161,7 +162,9 @@ const Home: FC<{
         background={null}
         isMobile={isMobile}
       />
-      <Offering {...offering} isMobile={isMobile} />
+      {data.isEnabledOffering && (
+        <Offering {...globalData.attributes.offering} isMobile={isMobile} />
+      )}
     </DivHomeWrapper>
   )
 }

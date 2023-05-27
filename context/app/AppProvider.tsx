@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { TMedia } from "definition"
 import { useRouter } from "next/router"
 import { ReactNode, useEffect, useState } from "react"
@@ -10,6 +11,7 @@ export function AppProvider({ children }: Props) {
   const [title, setTitle] = useState<string>("")
   const [desc, setDesc] = useState<string>()
   const [banner, setBanner] = useState<TMedia>()
+  const [banners, setBanners] = useState<TMedia[]>([])
 
   const setTitleBanner = (title: string, meta_desc?: string) => {
     setTitle(title)
@@ -23,7 +25,9 @@ export function AppProvider({ children }: Props) {
         desc,
         setTitleBanner,
         banner,
-        setBanner
+        setBanner,
+        banners,
+        setBanners
       }}
     >
       {children}

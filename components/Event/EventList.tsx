@@ -277,9 +277,9 @@ export const EventList = ({ locale, isMobile }) => {
                         <GridMedia
                           url={item.attributes.image?.data?.attributes.url}
                           name={item.attributes.image?.data?.attributes.name}
-                          width={600}
-                          height={300}
                           style={{ borderRadius: 12 }}
+                          {...item.attributes.image?.data?.attributes}
+                          layout='fill'
                         />
                       </Col>
                       <Col

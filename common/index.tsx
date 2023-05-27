@@ -1,6 +1,6 @@
 export const THEME = {
-  primaryFont: "Kumbh Sans",
-  titleFont: "Kumbh Sans",
+  primaryFont: "Product Sans",
+  titleFont: "Product Sans",
   primary: "#800000",
   highlightBg: "#800000",
   dark: "#14162E",

@@ -25,8 +25,8 @@ const supSizes = (isMobile = false) => {
 const titleSizes = (isMobile = false) => {
   return {
     [TITLE_SIZES.LARGE]: isMobile
-      ? { fontSize: 64, lineHeight: "64px" }
-      : { fontSize: 112, lineHeight: "112px" },
+      ? { fontSize: 48, lineHeight: "48px" }
+      : { fontSize: 80, lineHeight: "80px" },
     [TITLE_SIZES.MEDIUM]: isMobile
       ? { fontSize: 28, lineHeight: "32px" }
       : { fontSize: 48, lineHeight: "54px" }

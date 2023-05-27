@@ -26,7 +26,7 @@ export const Offering: React.FC = ({
   isMobile
 }) => {
   const { t } = useTranslation()
-  const contentSize = isMobile ? "24px" : "32px"
+  const contentSize = isMobile ? "18px" : "24px"
   return (
     <BackgroundWrapper background={background}>
       <div className='container'>
@@ -40,17 +40,17 @@ export const Offering: React.FC = ({
             />
             <RichText fontSize={contentSize} content={description} />
           </Col>
-          <Col span={24} md={{ span: 12 }} style={{ paddingBottom: 60 }}>
+          <Col span={24} md={{ span: 12 }} style={{ paddingBottom: 28 }}>
             <Link href={redirectLink ?? "/"}>
               <a>
                 <div
                   style={{
                     border: `3px solid ${THEME.primary}`,
                     borderRadius: 40,
-                    height: 78,
+                    height: 68,
                     position: "relative",
                     textAlign: "center",
-                    lineHeight: "70px",
+                    lineHeight: "60px",
                     fontSize: contentSize,
                     color: THEME.primary
                   }}
@@ -62,8 +62,8 @@ export const Offering: React.FC = ({
                       position: "absolute",
                       right: 4,
                       top: 3,
-                      height: 64,
-                      width: 64
+                      height: 54,
+                      width: 54
                     }}
                     type='primary'
                     icon={<ArrowRightOutlined style={{ fontSize: 28 }} />}

@@ -5,7 +5,7 @@ import { TNavigatorItem, TRetreat } from "definition"
 import { useTranslation } from "next-i18next"
 import Link from "next/link"
 import { useRouter } from "next/router"
-import React, { useEffect, useState, useMemo } from "react"
+import React, { useEffect, useState, useMemo, useRef } from "react"
 import ReactCountryFlag from "react-country-flag"
 import { useApp } from "../../context/app/AppContext"
 import { useAuth } from "../../context/auth/AuthContext"
@@ -48,10 +48,31 @@ const Header = ({
 }) => {
   const router = useRouter()
   const { onGetMe, user } = useAuth()
-  const { title, banner, desc } = useApp()
+  const { title, banner, banners, setBanner, desc } = useApp()
   const { t } = useTranslation(["common", "header", "login"])
   const [isSticky, setSticky] = useState(false)
   const currentLocale = router.locale
+  const bgInterval = useRef(null)
+
+  useEffect(() => {
+    if (banners?.length > 1) {
+      bgInterval.current = setInterval(() => {
+        let bannerIndex = Number(localStorage.getItem("b_i"))
+        console.log("---- ", bannerIndex)
+        if (isNaN(bannerIndex) || bannerIndex >= banners.length - 1) {
+          bannerIndex = 0
+        } else {
+          bannerIndex += 1
+        }
+        setBanner(banners[bannerIndex])
+        localStorage.setItem("b_i", bannerIndex)
+      }, 4000)
+    }
+    return () => {
+      clearInterval(bgInterval.current)
+      bgInterval.current = null
+    }
+  }, [banners])
 
   useEffect(() => {
     const token = localStorage.getItem("token")
@@ -106,11 +127,12 @@ const Header = ({
     return getRetreatPathFromSlug(_retreats[0].id, _retreats[0].slug)
   }
 
-  console.log({ title, banner, isHeaderFullscreen })
+  console.log({ title, banner, banners, isHeaderFullscreen })
   const activeRetreats = retreats.filter((r) => r.status)
   const { SUPPORT_LANG } = process.env
   return (
     <DivHeaderWrapperV1
+      banners={banners}
       banner={banner}
       isMobile={isMobile}
       isHeaderFullscreen={isHeaderFullscreen}
@@ -179,6 +201,21 @@ const Header = ({
                 </span>
                 {route.items.length > 0 && (
                   <ul className='dropdown'>
+                    <li
+                      className='dropdown-nav-item nav-item'
+                      key={`nav-children-${route.related.slug ?? route.path}`}
+                    >
+                      <div
+                        style={{ display: "flex" }}
+                        onClick={() =>
+                          redirectToOtherPage(route.related.slug ?? route.path)
+                        }
+                      >
+                        <span className='dropdown-nav-link'>
+                          {route.related.title}
+                        </span>
+                      </div>
+                    </li>
                     {route.items.map((item) => (
                       <li
                         className='dropdown-nav-item nav-item'

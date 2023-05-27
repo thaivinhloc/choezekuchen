@@ -442,7 +442,8 @@ export const GridMedia = ({
   name,
   width = 600,
   height = 300,
-  style = {}
+  style = {},
+  ...props
 }: {
   url?: string
   name?: string
@@ -459,6 +460,7 @@ export const GridMedia = ({
       layout='responsive'
       width={width}
       height={height}
+      {...props}
     />
   )
 }

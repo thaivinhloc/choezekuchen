@@ -167,7 +167,8 @@ export const DivHeaderWrapperV1 = styled.div<HeaderProps>`
         min-width: 240px;
         display: block;
         position: absolute;
-        top: 35px;
+        top: 50px;
+        left: 16px;
         transition: 300ms;
         padding: 10px;
         opacity: 0;

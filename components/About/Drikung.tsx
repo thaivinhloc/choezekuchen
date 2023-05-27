@@ -16,6 +16,7 @@ const DrikungKagyuLinageWrapper = styled.div`
 `
 const ContentImageWrapper = styled.div`
   table {
+    width: 100%;
     td {
       @media (max-width: 991px) {
         width: auto !important;

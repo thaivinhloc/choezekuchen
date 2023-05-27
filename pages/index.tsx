@@ -13,14 +13,16 @@ import { THomePageResponse } from "services/page/home"
 function HomePage({
   data,
   content,
-  isMobile
+  isMobile,
+  globalData,
 }: {
   data: TPage
   content: THomePageResponse
   isMobile: boolean
+  globalData: any
 }) {
-  console.log("HomePage", { data, content })
-  return <Home data={data} content={content} isMobile={isMobile} />
+  console.log("HomePage", { data, content, isMobile })
+  return <Home data={data} content={content} isMobile={isMobile} globalData={globalData} />
 }
 
 export const getServerSideProps = withDetectDevice(
