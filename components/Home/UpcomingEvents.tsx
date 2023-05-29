@@ -55,7 +55,11 @@ export const UpcomingEvents: React.FC = ({
   }, [])
 
   return upcomingEvents?.length ? (
-    <HighlightWrapper background={background} backgroundColor={backgroundColor}>
+    <HighlightWrapper
+      style={{ paddingBottom: isMobile ? 0 : 100 }}
+      background={background}
+      backgroundColor={backgroundColor}
+    >
       <div className='container' style={{ position: "relative" }}>
         <h2
           style={{

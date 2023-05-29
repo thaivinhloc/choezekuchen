@@ -21,6 +21,7 @@ import { UpcomingEvents } from "./UpcomingEvents"
 import { Offering } from "./Offering"
 import { EVENT } from "common/navigator"
 import { useTranslation } from "next-i18next"
+import { THEME } from "common"
 
 const BackgroundWrapper = styled.div<{ background?: any }>`
   background: url(${(props) => props.background?.data?.attributes?.url});
@@ -137,13 +138,17 @@ const Home: FC<{
                           alt='home'
                         />
                         <div style={{ paddingLeft: 15, paddingRight: 15 }}>
-                          <h3 style={{ color: "#fff" }}>{item.title}</h3>
-                          <RichText
-                            color='#fff'
-                            align='left'
-                            content={item.description}
-                            fontWeight='300'
-                          />
+                          <h3 style={{ color: THEME.white, fontSize: 24 }}>
+                            {item.title}
+                          </h3>
+                          <div style={{ paddingBottom: 15 }}>
+                            <RichText
+                              color={THEME.white}
+                              align='left'
+                              content={item.description}
+                              fontWeight='300'
+                            />
+                          </div>
                         </div>
                       </div>
                     </a>

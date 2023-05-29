@@ -69,7 +69,7 @@ const PrayersWrapper = styled.div`
     button,
     p,
     span {
-      color: ${(props) => props.theme.white};
+      color: ${(props) => props.theme.white} !important;
     }
   }
 `
@@ -220,7 +220,10 @@ export const OfferingPage = ({
                 title={t("Make an Offering by Credit Card or PayPal")}
               />
             </div>
-            <Row justify='space-between' gutter={[{ xs: 16, sm: 16, xl: 0 }, 24]}>
+            <Row
+              justify='space-between'
+              gutter={[{ xs: 16, sm: 16, xl: 0 }, 24]}
+            >
               {introduction.contentList?.map((item) => {
                 const { title, actionIcon } = item
                 return (
@@ -251,117 +254,119 @@ export const OfferingPage = ({
           </div>
         </IntroductionWrapper>
       )}
-      {otherOffering && (
-        <div style={{ padding: "50px 0" }}>
-          <div className='container'>
-            <SingleSection
-              title={otherOffering.title}
-              content={otherOffering.content}
-            />
-            <div style={{ height: 50 }} />
-            <Row gutter={[40, 24]} align='top'>
-              {otherOffering.contentList?.map((item) => (
-                <Col
-                  span={24}
-                  lg={{ span: 12 }}
-                  style={{ alignSelf: "stretch" }}
-                >
-                  <PrayersWrapper>
-                    <GridMedia
-                      url={item.cover?.data?.attributes.url}
-                      name={item.cover?.data?.attributes.name}
-                      width={600}
-                      height={400}
-                      style={{ borderRadius: 4 }}
-                    />
-                    <div>
-                      <div style={{ paddingBottom: 50 }}>
-                        <h3 style={{ fontSize: 28 }}>{item.title}</h3>
-                        <RichText content={item.description} />
-                      </div>
-                      <div
-                        style={{ position: "absolute", bottom: 16, left: 16 }}
-                      >
-                        <Button
-                          type='text'
-                          style={{
-                            display: "flex",
-                            alignItems: "center",
-                            padding: "12px 0"
-                          }}
-                        >
-                          <span style={{ display: "block", marginRight: 10 }}>
-                            {t("See more")}
-                          </span>{" "}
-                          <ArrowRightAlt />
-                        </Button>
-                      </div>
-                    </div>
-                  </PrayersWrapper>
-                </Col>
-              ))}
-            </Row>
-          </div>
-        </div>
-      )}
-      {banner && (
-        <div style={{ padding: "24px 0 50px" }}>
-          <div className='container'>
-            <GridMedia
-              url={banner?.data?.attributes.url}
-              name={banner?.data?.attributes.name}
-              width={banner?.data?.attributes?.width}
-              height={banner?.data?.attributes?.height}
-              style={{ borderRadius: 16 }}
-            />
-          </div>
-        </div>
-      )}
-      {makeOffering && (
-        <div style={{ padding: "24px 0 80px" }}>
-          <div className='container'>
-            <Title
-              size={TITLE_SIZES.MEDIUM}
-              title={t("Make an Offering")}
-              supTitle={t("Other ways to")}
-            />
-            <div style={{ height: 42 }} />
-            <MakeOfferingWrapper>
-              <Row gutter={[24, 24]}>
-                {makeOffering.contentList?.map(
-                  ({ id, order, title, description, actionIcon }) => (
-                    <Col span={24} xl={{ span: order === 1 ? 24 : 12 }}>
-                      <div style={{ display: "flex" }}>
-                        <div
-                          style={{ width: 40, minWidth: 40, marginRight: 10 }}
-                        >
-                          <Image
-                            src={actionIcon?.data?.attributes.url}
-                            {...actionIcon?.data?.attributes}
-                            layout='responsive'
-                          />
+      <div style={{ maxWidth: 992, margin: "0 auto" }}>
+        {otherOffering && (
+          <div style={{ padding: "50px 0" }}>
+            <div className='container'>
+              <SingleSection
+                title={otherOffering.title}
+                content={otherOffering.content}
+              />
+              <div style={{ height: 50 }} />
+              <Row gutter={[40, 24]} align='top'>
+                {otherOffering.contentList?.map((item) => (
+                  <Col
+                    span={24}
+                    lg={{ span: 12 }}
+                    style={{ alignSelf: "stretch" }}
+                  >
+                    <PrayersWrapper>
+                      <GridMedia
+                        url={item.cover?.data?.attributes.url}
+                        name={item.cover?.data?.attributes.name}
+                        width={600}
+                        height={400}
+                        style={{ borderRadius: 4 }}
+                      />
+                      <div>
+                        <div style={{ paddingBottom: 50 }}>
+                          <h3 style={{ fontSize: 28 }}>{item.title}</h3>
+                          <RichText content={item.description} />
                         </div>
-                        <div>
-                          <h3
+                        <div
+                          style={{ position: "absolute", bottom: 16, left: 16 }}
+                        >
+                          <Button
+                            type='text'
                             style={{
-                              color: THEME.primary,
-                              margin: "6px 0 12px",
-                              fontWeight: "bold"
+                              display: "flex",
+                              alignItems: "center",
+                              padding: "12px 0"
                             }}
                           >
-                            {title}
-                          </h3>
-                          <RichText content={description} />
+                            <span style={{ display: "block", marginRight: 10 }}>
+                              {t("See more")}
+                            </span>{" "}
+                            <ArrowRightAlt />
+                          </Button>
                         </div>
                       </div>
-                    </Col>
-                  )
-                )}
+                    </PrayersWrapper>
+                  </Col>
+                ))}
               </Row>
-            </MakeOfferingWrapper>
+            </div>
           </div>
-        </div>
-      )}
+        )}
+        {banner && (
+          <div style={{ padding: "24px 0 50px" }}>
+            <div className='container'>
+              <GridMedia
+                url={banner?.data?.attributes.url}
+                name={banner?.data?.attributes.name}
+                width={banner?.data?.attributes?.width}
+                height={banner?.data?.attributes?.height}
+                style={{ borderRadius: 16 }}
+              />
+            </div>
+          </div>
+        )}
+        {makeOffering && (
+          <div style={{ padding: "24px 0 80px" }}>
+            <div className='container'>
+              <Title
+                size={TITLE_SIZES.MEDIUM}
+                title={t("Make an Offering")}
+                supTitle={t("Other ways to")}
+              />
+              <div style={{ height: 42 }} />
+              <MakeOfferingWrapper>
+                <Row gutter={[24, 24]}>
+                  {makeOffering.contentList?.map(
+                    ({ id, order, title, description, actionIcon }) => (
+                      <Col span={24} xl={{ span: order === 1 ? 24 : 12 }}>
+                        <div style={{ display: "flex" }}>
+                          <div
+                            style={{ width: 40, minWidth: 40, marginRight: 10 }}
+                          >
+                            <Image
+                              src={actionIcon?.data?.attributes.url}
+                              {...actionIcon?.data?.attributes}
+                              layout='responsive'
+                            />
+                          </div>
+                          <div>
+                            <h3
+                              style={{
+                                color: THEME.primary,
+                                margin: "6px 0 12px",
+                                fontWeight: "bold"
+                              }}
+                            >
+                              {title}
+                            </h3>
+                            <RichText content={description} />
+                          </div>
+                        </div>
+                      </Col>
+                    )
+                  )}
+                </Row>
+              </MakeOfferingWrapper>
+            </div>
+          </div>
+        )}
+      </div>
 
       <Modal
         ref={makeOfferingModalRef}

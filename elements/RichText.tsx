@@ -52,7 +52,7 @@ export const RichText: React.FC<RichTextProps> = ({
   className,
   style,
   align,
-  fontSize,
+  fontSize = '16px',
   lineHeight,
   fontWeight,
   letterSpacing,
