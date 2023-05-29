@@ -20,7 +20,7 @@ const HighlightWrapper = styled.div`
   padding: 80px 0 0;
   background-size: cover;
   background-repeat: no-repeat;
-  color: #fff;
+  color: ${props => props.theme.white};
   ${(props) =>
     props.background && `background-image: url(${props.background});`}
   ${(props) =>

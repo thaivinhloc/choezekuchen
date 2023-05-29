@@ -84,7 +84,7 @@ const Home: FC<{
                               textDecoration: "none",
                               fontSize: 28,
                               fontWeight: "600",
-                              color: "#fff"
+                              color: THEME.white
                             }}
                           >
                             {item.title}
@@ -126,7 +126,7 @@ const Home: FC<{
                           borderRadius: 8,
                           background: "#800000",
                           height: "100%",
-                          color: "#fff"
+                          color: THEME.white
                         }}
                       >
                         <Image

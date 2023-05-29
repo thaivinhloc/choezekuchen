@@ -6,6 +6,7 @@ import { Col, Row, Space } from "antd"
 import { useTranslation } from "next-i18next"
 import { Button } from "elements/Button"
 import Image from "next/image"
+import { THEME } from "common"
 
 const Footer = ({ data, isMobile }) => {
   const { t } = useTranslation()
@@ -44,7 +45,7 @@ const Footer = ({ data, isMobile }) => {
             style={{
               marginLeft: 12,
               fontSize: isMobile ? 16 : 24,
-              color: "#fff"
+              color: THEME.white
             }}
           >
             {site_name}
@@ -53,7 +54,7 @@ const Footer = ({ data, isMobile }) => {
         <div
           style={{
             textTransform: "uppercase",
-            color: "#fff",
+            color: THEME.white,
             display: "flex",
             alignItems: "flex-end",
             margin: "16px 0 32px"

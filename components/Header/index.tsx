@@ -66,7 +66,7 @@ const Header = ({
         }
         setBanner(banners[bannerIndex])
         localStorage.setItem("b_i", bannerIndex)
-      }, 4000)
+      }, 5000)
     }
     return () => {
       clearInterval(bgInterval.current)

@@ -51,7 +51,7 @@ export const MeetUsSectionContent = styled.div`
   z-index: 3;
   position: relative;
   a {
-    color: #fff !important;
+    color: ${props => props.theme.white} !important;
     font-weight: 600;
     text-decoration: underline;
     font-size: 20px;

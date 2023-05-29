@@ -109,14 +109,14 @@ export const DivHeaderWrapperV1 = styled.div<HeaderProps>`
         z-index: 10;
         position: relative;
         h1 {
-          color: #ffffff;
+          color: ${props => props.theme.white};
           font-size: 48px;
           line-height: 62px;
           font-weight: 700px;
         }
         &__desc {
           font-size: 16px;
-          color: #ffffff !important;
+          color: ${props => props.theme.white} !important;
           opacity: 0.8;
         }
       }
@@ -242,7 +242,7 @@ export const DivHeaderWrapperV1 = styled.div<HeaderProps>`
         &:hover,
         &:focus {
           background: ${(props: TStyled) => props.theme.dark};
-          color: #fff;
+          color: ${props => props.theme.white};
         }
       }
     }
@@ -282,7 +282,7 @@ export const DivHeaderMobile = styled.div`
       height: 100%;
       width: 100%;
       inset: 0;
-      color: #fff;
+      color: ${props => props.theme.white};
       font-size: 20px;
       font-weight: bold;
       display: flex;
@@ -357,7 +357,7 @@ export const DivHeaderMobile = styled.div`
       height: 30px;
       border-radius: 50%;
       background-color: #303030;
-      color: #fff;
+      color: ${props => props.theme.white};
       font-weight: bold;
       display: flex;
       align-items: center;
