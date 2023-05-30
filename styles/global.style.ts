@@ -147,7 +147,7 @@ export const GlobalStyle = createGlobalStyle`${css`
   }
   .btn-secondary {
     border: 2px solid #303030;
-    color: #000;
+    color: ${props => props.theme.dark};
   }
   .container {
     position: relative;
@@ -489,7 +489,7 @@ export const GlobalStyle = createGlobalStyle`${css`
         &:hover {
           .ant-dropdown-menu-title-content {
             span {
-              color: #000;
+              color: ${props => props.theme.dark};
             }
           }
         }

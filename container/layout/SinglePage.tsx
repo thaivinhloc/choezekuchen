@@ -133,8 +133,8 @@ function Monastery({
                   <Image
                     style={{ borderRadius: 12 }}
                     src={attributes.cover?.data?.attributes?.url}
-                    width={attributes.cover?.data?.attributes?.width}
-                    height={attributes.cover?.data?.attributes?.height}
+                    width={640}
+                    height={360}
                     layout='fill'
                     objectFit='cover'
                     objectPosition='top center'

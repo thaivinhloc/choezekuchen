@@ -130,7 +130,7 @@ export const RetreatList = ({ locale, globalData }: TPage) => {
               <h2 style={{ ...titleStyle }}>{latestActiveRetreat.name}</h2>
               <i
                 style={{
-                  color: "#000",
+                  color: THEME.dark,
                   fontWeight: 300,
                   fontSize: 14,
                   display: "block",
@@ -248,7 +248,7 @@ export const RetreatList = ({ locale, globalData }: TPage) => {
                           </h2>
                           <i
                             style={{
-                              color: "#000",
+                              color: THEME.dark,
                               fontWeight: 300,
                               fontSize: 14,
                               display: "block",

@@ -58,7 +58,7 @@ export const DivHeaderWrapperV1 = styled.div<HeaderProps>`
       }
       display: flex;
       align-items: center;
-      padding: 64px 50px 15px;
+      padding: 40px 50px 15px;
       position: relative;
       z-index: 1002;
       transition: 0.3s linear;
@@ -174,7 +174,7 @@ export const DivHeaderWrapperV1 = styled.div<HeaderProps>`
         opacity: 0;
         visibility: hidden;
         transform: translateY(5px);
-        background: ${(props) => props.theme.white};
+        background: #fff;
         z-index: 999;
         box-shadow: 0 5px 5px 0px rgba(0, 0, 0, 0.15);
         .nav-link {
@@ -424,7 +424,7 @@ export const NavListStyled = styled.nav<{ isSticky?: boolean }>`
       left:0;
       width:100%;
       height: 80px;
-      background:${props.theme.white};
+      background: #fff;
       padding: 15px 50px !important;
       .navbar-nav {
         .nav-link {
@@ -465,7 +465,7 @@ export const TopActionStyled = styled.div`
   @media (min-width: 1200px) {
     padding: 16px 50px;
     position: absolute;
-    top: 16px;
+    top: 0;
     right: 0;
     z-index: 99999999;
   }

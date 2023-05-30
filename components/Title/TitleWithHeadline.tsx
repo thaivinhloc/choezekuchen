@@ -13,7 +13,7 @@ export const TitleWithHeadline = ({
     <>
       {headLine && (
         <img
-          style={{ width: "100%", maxWidth: 600, margin: "0 auto 24px" }}
+          style={{ width: "100%", maxWidth: 600, margin: "0 auto 12px" }}
           src={headLine.data?.attributes?.url}
         />
       )}
@@ -47,7 +47,7 @@ export const TitleWithHeadlineSmall = ({
     <>
       {headLine && (
         <img
-          style={{ width: "100%", maxWidth: 320, margin: "0 auto 24px" }}
+          style={{ width: "100%", maxWidth: 320, margin: "0 auto 12px" }}
           src={headLine.data?.attributes?.url}
         />
       )}

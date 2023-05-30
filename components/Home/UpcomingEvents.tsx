@@ -20,7 +20,7 @@ const HighlightWrapper = styled.div`
   padding: 80px 0 0;
   background-size: cover;
   background-repeat: no-repeat;
-  color: ${props => props.theme.white};
+  color: ${(props) => props.theme.white};
   ${(props) =>
     props.background && `background-image: url(${props.background});`}
   ${(props) =>
@@ -104,20 +104,18 @@ export const UpcomingEvents: React.FC = ({
             </Link>
           </div>
         )}
-        <div style={{ height: 12 }} />
+        <div style={{ height: isMobile ? 12 : 24 }} />
         {upcomingEvents && (
           <CustomSwiper
             speed={1500}
             ref={carouselRef}
-            slidesPerView={isMobile ? "auto" : 3}
-            spaceBetween={32}
+            slidesPerView='auto'
+            spaceBetween={48}
             loop={false}
           >
             {upcomingEvents.map((eventItem) => (
               <SwiperSlide key={`event-${eventItem.id}`}>
-                <div style={{ padding: 10 }}>
-                  <EventItem {...eventItem} />
-                </div>
+                <EventItem {...eventItem} />
               </SwiperSlide>
             ))}
           </CustomSwiper>

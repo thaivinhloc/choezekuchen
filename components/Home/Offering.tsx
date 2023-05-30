@@ -23,7 +23,11 @@ export const Offering: React.FC = ({
   description,
   redirectLink,
   background,
-  isMobile
+  isMobile,
+  offeringTitle,
+  offeringSubTitle,
+  offeringRedirectTitle,
+  offeringRedirectLink
 }) => {
   const { t } = useTranslation()
   const contentSize = isMobile ? "18px" : "24px"
@@ -34,14 +38,16 @@ export const Offering: React.FC = ({
           <Col span={24} md={{ span: 12 }}>
             <Title
               isMobile={isMobile}
-              title={t("Offering")}
-              supTitle={t("Support &")}
+              title={offeringTitle ?? t("Offering")}
+              supTitle={
+                offeringSubTitle ? offeringSubTitle + " &" : t("Support &")
+              }
               size={TITLE_SIZES.LARGE}
             />
             <RichText fontSize={contentSize} content={description} />
           </Col>
           <Col span={24} md={{ span: 12 }} style={{ paddingBottom: 28 }}>
-            <Link href={redirectLink ?? "/"}>
+            <Link href={offeringRedirectLink ?? redirectLink ?? "/"}>
               <a>
                 <div
                   style={{
@@ -55,7 +61,7 @@ export const Offering: React.FC = ({
                     color: THEME.primary
                   }}
                 >
-                  {t("Make an Offering")}
+                  {offeringRedirectTitle ?? t("Make an Offering")}
                   <Button
                     shape='circle'
                     style={{

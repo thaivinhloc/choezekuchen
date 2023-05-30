@@ -56,6 +56,7 @@ const Home: FC<{
             <RichText
               fontSize='20px'
               align='left'
+              color={THEME.dark}
               content={introduction.description}
             />
             <Row
@@ -108,7 +109,7 @@ const Home: FC<{
               align='left'
               content={meetUsInPerson.description}
             />
-            <Row gutter={[24, 16]} style={{ marginTop: "3em" }}>
+            <Row gutter={[32, 16]} style={{ marginTop: "3em" }}>
               {meetUsInPerson.contentList.map((item) => (
                 <Col
                   key={item.title}
@@ -167,8 +168,15 @@ const Home: FC<{
         background={null}
         isMobile={isMobile}
       />
-      {data.isEnabledOffering && (
-        <Offering {...globalData.attributes.offering} isMobile={isMobile} />
+      {data?.isEnabledOffering && (
+        <Offering
+          {...globalData.attributes.offering}
+          offeringTitle={data.offeringTitle}
+          offeringSubTitle={data.offeringSubTitle}
+          offeringRedirectLink={data.offeringRedirectLink}
+          offeringRedirectTitle={data.offeringRedirectTitle}
+          isMobile={isMobile}
+        />
       )}
     </DivHomeWrapper>
   )

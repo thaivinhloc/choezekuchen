@@ -17,6 +17,7 @@ import ArrowRightIcon from "assets/svgs/circle_arrow_right_icon.svg"
 import StarIcon from "assets/svgs/star_icon.svg"
 import { ChevronLeft, ChevronRight } from "@mui/icons-material"
 import { TitleWithHeadline } from "components/Title/TitleWithHeadline"
+import { Autoplay } from "swiper"
 
 const AboutWrapper = styled.div``
 
@@ -147,13 +148,6 @@ export const About = ({
     )
   }
 
-  console.log({
-    introduction,
-    gurusItemsByGroup,
-    history,
-    historySwiperRef: historySwiperRef.current
-  })
-
   return (
     <AboutWrapper>
       <BackgroundWrapper
@@ -184,7 +178,10 @@ export const About = ({
           <div style={{ position: "relative" }}>
             <Swiper
               speed={1500}
-              modules={[Navigation]}
+              modules={[Navigation, Autoplay]}
+              autoplay={{
+                delay: 5000
+              }}
               onBeforeInit={(swiper) => {
                 swiperRef.current = swiper
               }}
@@ -299,12 +296,13 @@ export const About = ({
                             isTabInit
                           }
                           title={item.actionTitle}
-                          color={THEME.primary}
+                          color={"#fff"}
                           overlayInnerStyle={{
                             borderRadius: 4,
                             fontWeight: 600,
                             width: "max-content",
-                            padding: "12px 15px"
+                            padding: "12px 15px",
+                            color: THEME.primary
                           }}
                         >
                           <div>
@@ -314,14 +312,14 @@ export const About = ({
                                 backgroundColor: !item.description
                                   ? "#a7a9ac"
                                   : THEME.primary,
-                                width: 44,
-                                height: 44,
+                                width: 32,
+                                height: 32,
                                 borderRadius: "50%",
                                 fontWeight: 600,
                                 display: "flex",
                                 alignItems: "center",
                                 justifyContent: "center",
-                                fontSize: 20
+                                fontSize: 16
                               }}
                             >
                               {idx + 1}
@@ -515,12 +513,13 @@ export const About = ({
                         isTabInit
                       }
                       title={item.actionTitle}
-                      color={THEME.primary}
+                      color={"#fff"}
                       overlayInnerStyle={{
                         borderRadius: 4,
                         fontWeight: 600,
                         width: "max-content",
-                        padding: "12px 15px"
+                        padding: "12px 15px",
+                        color: THEME.primary
                       }}
                       trigger={["click", "focus"]}
                     >

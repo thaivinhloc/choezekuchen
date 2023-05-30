@@ -86,6 +86,8 @@ export const Monastery: FC<{
   }, [])
 
   console.log({ monasteries })
+  const inMaintenanceMonastery =
+    monasteries?.filter(({ attributes }) => attributes.inMaintenance) ?? []
 
   return (
     <CustomContainer>
@@ -129,7 +131,7 @@ export const Monastery: FC<{
           </Space>
         </Col>
         <Col span={24} lg={{ span: 16 }}>
-          {monasteries?.length && (
+          {inMaintenanceMonastery.length ? (
             <CustomSwiper
               speed={1500}
               ref={carouselRef}
@@ -142,7 +144,7 @@ export const Monastery: FC<{
               modules={[Autoplay]}
               loop
             >
-              {monasteries.map(({ id, attributes }) => (
+              {inMaintenanceMonastery.map(({ id, attributes }) => (
                 <SwiperSlide key={attributes.title}>
                   <Link
                     href={getMonasteryPathFromSlug(id, attributes.slug ?? "/")}
@@ -151,6 +153,8 @@ export const Monastery: FC<{
                       <GridMedia
                         style={{ borderRadius: 8 }}
                         url={attributes.cover.data.attributes.url}
+                        width={640}
+                        height={360}
                       />
                       <div className='project__backdrop' />
                       <div className='project__title'>{attributes.title}</div>
@@ -159,7 +163,7 @@ export const Monastery: FC<{
                 </SwiperSlide>
               ))}
             </CustomSwiper>
-          )}
+          ) : null}
         </Col>
       </Row>
     </CustomContainer>

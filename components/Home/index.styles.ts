@@ -6,7 +6,6 @@ type TStyled = {
 }
 
 export const DivHomeWrapper = styled.div<{ background?: string }>`
-  color: rgb(48, 48, 48);
   background: ${(props) => props.background ?? "#fff"};
   padding: 0;
 `

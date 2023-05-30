@@ -1,7 +1,11 @@
 // @ts-nocheck
 import dynamic from "next/dynamic"
-const Offering = dynamic(() => import("components/Home/Offering"), { ssr: false })
-const SinglePageLayout = dynamic(() => import("container/layout/SinglePage"), { ssr: false })
+const Offering = dynamic(() => import("components/Home/Offering"), {
+  ssr: false
+})
+const SinglePageLayout = dynamic(() => import("container/layout/SinglePage"), {
+  ssr: false
+})
 import { useApp } from "context/app/AppContext"
 import { TPage } from "definition"
 import withDetectDevice from "hoc/withDetectDevice"
@@ -47,7 +51,14 @@ function Page({ data, globalData, isMobile }: { data: TPage }) {
           globalData={globalData}
         />
         {data.isEnabledOffering && (
-          <Offering {...globalData.attributes.offering} isMobile={isMobile} />
+          <Offering
+            {...globalData.attributes.offering}
+            offeringTitle={data.offeringTitle}
+            offeringSubTitle={data.offeringSubTitle}
+            offeringRedirectLink={data.offeringRedirectLink}
+            offeringRedirectTitle={data.offeringRedirectTitle}
+            isMobile={isMobile}
+          />
         )}
       </PageContentWrapper>
     </>

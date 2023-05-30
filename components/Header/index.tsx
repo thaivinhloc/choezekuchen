@@ -141,22 +141,22 @@ const Header = ({
         <TopActionStyled>
           <Space className='navbar__right' size='middle'>
             {SUPPORT_LANG?.split(",")
-              .filter((lang) => lang !== currentLocale)
               .map((lc) => {
                 const lang = LANGS.find((l) => l.locale == lc)
                 return (
                   <Button
                     shape='circle'
-                    size='large'
+                    size='medium'
                     type='primary'
                     onClick={() => handleChangeLocale(lang.locale)}
                     key={lang.code}
                     style={{ padding: 0, border: 0 }}
+                    disabled={lc === currentLocale}
                   >
                     <ReactCountryFlag
                       style={{
-                        width: "40px",
-                        height: "40px",
+                        width: "32px",
+                        height: "32px",
                         borderRadius: "50%"
                       }}
                       cdnUrl='https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/4.1.4/flags/1x1/'

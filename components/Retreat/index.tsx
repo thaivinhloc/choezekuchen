@@ -598,7 +598,7 @@ const Retreat: React.FC<{
                     <Col span={24} xl={{ span: 8 }}>
                       <div
                         style={{
-                          background: THEME.white,
+                          background: "#fff",
                           borderRadius: 16,
                           height: "100%",
                           paddingBottom: isMobile ? 24 : 0
