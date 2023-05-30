@@ -1,6 +1,6 @@
 // @ts-nocheck
 import { RightOutlined } from "@ant-design/icons"
-import { Button, Space, Typography } from "antd"
+import { Button, Carousel, Space, Typography } from "antd"
 import { TNavigatorItem, TRetreat } from "definition"
 import { useTranslation } from "next-i18next"
 import Link from "next/link"
@@ -20,6 +20,8 @@ import {
 import { ChevronDown } from "@styled-icons/fa-solid"
 import { RETREAT } from "common/navigator"
 import { getRetreatPathFromSlug } from "helper"
+import { RichText } from "elements/RichText"
+import { THEME } from "common"
 
 export const LANGS = [
   {
@@ -38,13 +40,15 @@ const Header = ({
   isMobile,
   isHeaderFullscreen = false,
   retreats = [],
-  logo
+  logo,
+  homeTopSlider
 }: {
   data: TNavigatorItem[]
   isHeaderFullscreen?: boolean
   isMobile: boolean
   retreats?: TRetreat[]
   logo?: any
+  homeTopSlider?: any
 }) => {
   const router = useRouter()
   const { onGetMe, user } = useAuth()
@@ -52,27 +56,28 @@ const Header = ({
   const { t } = useTranslation(["common", "header", "login"])
   const [isSticky, setSticky] = useState(false)
   const currentLocale = router.locale
-  const bgInterval = useRef(null)
+  const [currentSlide, setCurrentSlide] = useState(0)
+  // const bgInterval = useRef(null)
 
-  useEffect(() => {
-    if (banners?.length > 1) {
-      bgInterval.current = setInterval(() => {
-        let bannerIndex = Number(localStorage.getItem("b_i"))
-        console.log("---- ", bannerIndex)
-        if (isNaN(bannerIndex) || bannerIndex >= banners.length - 1) {
-          bannerIndex = 0
-        } else {
-          bannerIndex += 1
-        }
-        setBanner(banners[bannerIndex])
-        localStorage.setItem("b_i", bannerIndex)
-      }, 5000)
-    }
-    return () => {
-      clearInterval(bgInterval.current)
-      bgInterval.current = null
-    }
-  }, [banners])
+  // useEffect(() => {
+  //   if (banners?.length > 1) {
+  //     bgInterval.current = setInterval(() => {
+  //       let bannerIndex = Number(localStorage.getItem("b_i"))
+  //       console.log("---- ", bannerIndex)
+  //       if (isNaN(bannerIndex) || bannerIndex >= banners.length - 1) {
+  //         bannerIndex = 0
+  //       } else {
+  //         bannerIndex += 1
+  //       }
+  //       setBanner(banners[bannerIndex])
+  //       localStorage.setItem("b_i", bannerIndex)
+  //     }, 5000)
+  //   }
+  //   return () => {
+  //     clearInterval(bgInterval.current)
+  //     bgInterval.current = null
+  //   }
+  // }, [banners])
 
   useEffect(() => {
     const token = localStorage.getItem("token")
@@ -127,7 +132,6 @@ const Header = ({
     return getRetreatPathFromSlug(_retreats[0].id, _retreats[0].slug)
   }
 
-  console.log({ title, banner, banners, isHeaderFullscreen })
   const activeRetreats = retreats.filter((r) => r.status)
   const { SUPPORT_LANG } = process.env
   return (
@@ -140,33 +144,32 @@ const Header = ({
       <header className='site-header'>
         <TopActionStyled>
           <Space className='navbar__right' size='middle'>
-            {SUPPORT_LANG?.split(",")
-              .map((lc) => {
-                const lang = LANGS.find((l) => l.locale == lc)
-                return (
-                  <Button
-                    shape='circle'
-                    size='medium'
-                    type='primary'
-                    onClick={() => handleChangeLocale(lang.locale)}
-                    key={lang.code}
-                    style={{ padding: 0, border: 0 }}
-                    disabled={lc === currentLocale}
-                  >
-                    <ReactCountryFlag
-                      style={{
-                        width: "32px",
-                        height: "32px",
-                        borderRadius: "50%"
-                      }}
-                      cdnUrl='https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/4.1.4/flags/1x1/'
-                      title={lang.name}
-                      countryCode={lang.code}
-                      svg
-                    />
-                  </Button>
-                )
-              })}
+            {SUPPORT_LANG?.split(",").map((lc) => {
+              const lang = LANGS.find((l) => l.locale == lc)
+              return (
+                <Button
+                  shape='circle'
+                  size='medium'
+                  type='primary'
+                  onClick={() => handleChangeLocale(lang.locale)}
+                  key={lang.code}
+                  style={{ padding: 0, border: 0 }}
+                  disabled={lc === currentLocale}
+                >
+                  <ReactCountryFlag
+                    style={{
+                      width: "32px",
+                      height: "32px",
+                      borderRadius: "50%"
+                    }}
+                    cdnUrl='https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/4.1.4/flags/1x1/'
+                    title={lang.name}
+                    countryCode={lang.code}
+                    svg
+                  />
+                </Button>
+              )
+            })}
           </Space>
         </TopActionStyled>
         <NavListStyled className='navbar' isSticky={isSticky}>
@@ -289,6 +292,39 @@ const Header = ({
           <h1>{title.toUpperCase()}</h1>
           <span className='navbar__title__desc'>{desc}</span>
         </div>
+        {banners?.length && isHeaderFullscreen && !isMobile ? (
+          <div className='banner-slider'>
+            <Carousel
+              afterChange={(currentS) => setCurrentSlide(currentS)}
+              autoplay
+              autoplaySpeed={5000}
+              speed={1000}
+            >
+              {banners.map((b) => (
+                <div>
+                  <div style={{ height: "100vh" }}>
+                    <img
+                      src={b?.attributes.url}
+                      width='100%'
+                      height='100%'
+                      style={{ objectFit: "cover" }}
+                    />
+                  </div>
+                </div>
+              ))}
+            </Carousel>
+            {homeTopSlider?.[currentSlide] ? (
+              <div className='banner-slider__content'>
+                <h2>{homeTopSlider[currentSlide].title}</h2>
+                <RichText
+                  color={THEME.white}
+                  content={homeTopSlider[currentSlide].description}
+                  fontSize='20px'
+                />
+              </div>
+            ) : null}
+          </div>
+        ) : null}
       </header>
     </DivHeaderWrapperV1>
   )

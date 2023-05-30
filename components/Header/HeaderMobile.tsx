@@ -70,7 +70,7 @@ const HeaderMobile = ({
         paddingTop: 12,
         paddingBottom: 12,
         zIndex: 10,
-        background: THEME.white,
+        background: "#fff",
         boxShadow: "0 9px 35px rgb(0 0 0 / 5%)"
       }
     : {

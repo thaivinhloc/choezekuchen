@@ -24,8 +24,7 @@ export const DivHeaderWrapperV1 = styled.div<HeaderProps>`
     background-color: transparent !important;
     background-image: url(${(props) =>
       props.banner?.attributes.url ??
-      props.banner?.url ??
-      "/images/title-image-3.jpeg"});
+      props.banner?.url});
     background-size: cover;
     background-position: center center;
     position: relative;
@@ -33,19 +32,47 @@ export const DivHeaderWrapperV1 = styled.div<HeaderProps>`
       position: relative;
       z-index: 2;
     }
-    &:after {
-      content: "";
-      display: none;
+    .banner-slider {
       width: 100%;
-      height: 100%;
+      height: 100vh;
       position: absolute;
       top: 0;
       left: 0;
-      background: rgba(0, 0, 0, 0.3);
-      @media (min-width: 1200px) {
-        display: block;
-      }
       z-index: 1;
+      &:after {
+        content: "";
+        display: none;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background: rgba(0, 0, 0, 0.4);
+        @media (min-width: 1200px) {
+          display: block;
+        }
+        z-index: 2;
+      }
+      &__content {
+        width: 100%;
+        height: 50vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        max-width: 420px;
+        position: absolute;
+        left: 18px;
+        bottom: 18px;
+        z-index: 3;
+        padding: 32px;
+        opacity: 0.7;
+        h2 {
+          color: ${props => props.theme.white} !important;
+          font-size: 32px;
+          line-height: 40px;
+          margin-bottom: 16px;
+        }
+      }
     }
 
     .navbar {

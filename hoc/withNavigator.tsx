@@ -65,6 +65,7 @@ export const withNavigator = (RootPageComponent: NextPage) => {
             isMobile={props.isMobile}
             isHeaderFullscreen={props.isHeaderFullscreen}
             logo={props.globalData?.attributes?.logo}
+            homeTopSlider={props.globalData?.attributes?.homeTopSlider}
           />
         )}
         <RootPageComponent {...props} isMobile={props.isMobile} />

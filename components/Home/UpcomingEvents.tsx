@@ -109,7 +109,7 @@ export const UpcomingEvents: React.FC = ({
           <CustomSwiper
             speed={1500}
             ref={carouselRef}
-            slidesPerView='auto'
+            slidesPerView={isMobile ? "auto" : 3}
             spaceBetween={48}
             loop={false}
           >
