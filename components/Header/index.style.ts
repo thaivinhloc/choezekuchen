@@ -24,7 +24,8 @@ export const DivHeaderWrapperV1 = styled.div<HeaderProps>`
     background-color: transparent !important;
     background-image: url(${(props) =>
       props.banner?.attributes.url ??
-      props.banner?.url});
+      props.banner?.url ??
+      "/images/title-image-3.jpeg"});
     background-size: cover;
     background-position: center center;
     position: relative;
@@ -67,7 +68,7 @@ export const DivHeaderWrapperV1 = styled.div<HeaderProps>`
         padding: 32px;
         opacity: 0.7;
         h2 {
-          color: ${props => props.theme.white} !important;
+          color: ${(props) => props.theme.white} !important;
           font-size: 32px;
           line-height: 40px;
           margin-bottom: 16px;
@@ -136,14 +137,14 @@ export const DivHeaderWrapperV1 = styled.div<HeaderProps>`
         z-index: 10;
         position: relative;
         h1 {
-          color: ${props => props.theme.white};
+          color: ${(props) => props.theme.white};
           font-size: 48px;
           line-height: 62px;
           font-weight: 700px;
         }
         &__desc {
           font-size: 16px;
-          color: ${props => props.theme.white} !important;
+          color: ${(props) => props.theme.white} !important;
           opacity: 0.8;
         }
       }
@@ -269,7 +270,7 @@ export const DivHeaderWrapperV1 = styled.div<HeaderProps>`
         &:hover,
         &:focus {
           background: ${(props: TStyled) => props.theme.dark};
-          color: ${props => props.theme.white};
+          color: ${(props) => props.theme.white};
         }
       }
     }
@@ -309,7 +310,7 @@ export const DivHeaderMobile = styled.div`
       height: 100%;
       width: 100%;
       inset: 0;
-      color: ${props => props.theme.white};
+      color: ${(props) => props.theme.white};
       font-size: 20px;
       font-weight: bold;
       display: flex;
@@ -384,7 +385,7 @@ export const DivHeaderMobile = styled.div`
       height: 30px;
       border-radius: 50%;
       background-color: #303030;
-      color: ${props => props.theme.white};
+      color: ${(props) => props.theme.white};
       font-weight: bold;
       display: flex;
       align-items: center;
