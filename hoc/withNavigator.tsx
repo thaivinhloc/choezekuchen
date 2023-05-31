@@ -50,7 +50,7 @@ export const withNavigator = (RootPageComponent: NextPage) => {
           props.data?.cover.map((c, idx) => ({ id: idx, attributes: c }))
         )
       } else {
-        if (!["/event/[eid]", "/monastery/[mid]"].includes(router.pathname)) {
+        if (!["/event/[eid]", "/monastery/[mid]", "/retreat/[[...id]]"].includes(router.pathname)) {
           setBanner(undefined)
         }
       }
