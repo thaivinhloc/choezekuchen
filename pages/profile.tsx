@@ -5,7 +5,7 @@ import { withNavigator } from "hoc/withNavigator"
 import withTrans from "hoc/withTrans"
 import dynamic from "next/dynamic"
 
-function ProfilePage({ allLangsData }: any) {
+function ProfilePage({}: any) {
   return <Profile />
 }
 

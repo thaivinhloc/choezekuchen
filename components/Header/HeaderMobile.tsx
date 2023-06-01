@@ -8,7 +8,7 @@ import {
 } from "@ant-design/icons"
 import { Button, Collapse, Drawer, Dropdown, Menu, Space } from "antd"
 import { THEME } from "common"
-import { LOGIN, RETREAT } from "common/navigator"
+import { LOGIN, PROFILE, RETREAT } from "common/navigator"
 import { useApp } from "context/app/AppContext"
 import { TNavigatorItem } from "definition"
 import { TFunction } from "i18next"
@@ -102,11 +102,16 @@ const HeaderMobile = ({
           >
             <Space direction='vertical' style={{ width: "100%" }}>
               {user?.username ? (
-                <Link href='/profile'>
-                  <Button block type='primary' ghost>
-                    <span>{t("Profile")}</span>
+                <>
+                  <Link href={PROFILE}>
+                    <Button block type='primary'>
+                      <span>{t("Profile")}</span>
+                    </Button>
+                  </Link>
+                  <Button onClick={onLogout} block type='primary' ghost>
+                    <span>{t("Log out")}</span>
                   </Button>
-                </Link>
+                </>
               ) : (
                 <Link href={LOGIN}>
                   <Button block type='primary' ghost>

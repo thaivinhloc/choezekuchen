@@ -76,3 +76,5 @@ export const withNavigator = (RootPageComponent: NextPage) => {
     )
   }
 }
+
+export default withNavigator

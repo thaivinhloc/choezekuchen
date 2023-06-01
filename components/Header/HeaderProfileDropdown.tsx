@@ -12,9 +12,7 @@ import { CircleUser } from "@styled-icons/fa-solid"
 import { useTranslation } from "next-i18next"
 
 const HeaderProfileDropdown: FC = ({ isSticky }) => {
-  const auth = useAuth()
-  const { onLogout } = useAuth()
-  const user = auth.user as IUser
+  const { onLogout, user } = useAuth()
   const router = useRouter()
   const locale = router.locale
   const { t } = useTranslation()
@@ -22,11 +20,11 @@ const HeaderProfileDropdown: FC = ({ isSticky }) => {
   const menu = (
     <Menu style={{ width: 200 }}>
       <Menu.Item key='0'>
-        <Link href={PROFILE}>Profile</Link>
+        <Link href={PROFILE}>{t("Profile")}</Link>
       </Menu.Item>
       <Menu.Divider />
       <Menu.Item key='3' onClick={onLogout}>
-        Log out
+        {t("Log out")}
       </Menu.Item>
     </Menu>
   )

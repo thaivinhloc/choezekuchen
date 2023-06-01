@@ -9,8 +9,8 @@ import React, { useEffect, useState, useMemo, useRef } from "react"
 import ReactCountryFlag from "react-country-flag"
 import { useApp } from "../../context/app/AppContext"
 import { useAuth } from "../../context/auth/AuthContext"
-import HeaderMobile from "./HeaderMobile"
-import HeaderProfileDropdown from "./HeaderProfileDropdown"
+const HeaderMobile = dynamic(() => import("./HeaderMobile"), { ssr: false })
+const HeaderProfileDropdown = dynamic(() => import("./HeaderProfileDropdown"), { ssr: false })
 import {
   DivHeaderWrapperV1,
   NavbarNavStyled,
@@ -22,6 +22,7 @@ import { RETREAT } from "common/navigator"
 import { getRetreatPathFromSlug } from "helper"
 import { RichText } from "elements/RichText"
 import { THEME } from "common"
+import dynamic from "next/dynamic"
 
 export const LANGS = [
   {
