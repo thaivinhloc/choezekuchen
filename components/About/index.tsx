@@ -267,14 +267,18 @@ export const About = ({
               {t("Updating information")}
             </i>
           </div>
-          <div ref={historyTabRef} />
+          <div style={{ transform: "translateY(-150px)", height: 1 }} ref={historyTabRef} />
           {history && (
             <TabsWrapper
               activeKey={historyIndex}
               size='large'
               onChange={(ak) => {
+                setTabsInit(false)
                 historySwiperRef.current?.slideTo(ak)
                 setHistoryIndex(ak)
+                setTimeout(() => {
+                  setTabsInit(true)
+                }, 1500)
               }}
             >
               {history.contentList?.map((item, idx) => {
@@ -361,8 +365,12 @@ export const About = ({
               autoHeight
               speed={1500}
               onSlideChange={(swiper) => {
+                setTabsInit(false)
                 setHistoryIndex(swiper.realIndex)
                 historyTabRef.current?.scrollIntoView({ behavior: "smooth" })
+                setTimeout(() => {
+                  setTabsInit(true)
+                }, 1500)
               }}
               modules={[Navigation]}
               onBeforeInit={(swiper) => {
@@ -487,7 +495,7 @@ export const About = ({
               headLine={defaultHeadLine}
             />
           </div>
-          <div ref={eleventhHistoryTabRef} />
+          <div style={{ transform: "translateY(-150px)", height: 1 }} ref={eleventhHistoryTabRef} />
           <TabsWrapper
             activeKey={eleventhHistoryIndex}
             size='large'

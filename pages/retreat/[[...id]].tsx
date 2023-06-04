@@ -27,8 +27,8 @@ const RetreatPage: FC<{ retreats: TRetreat[]; parent: TRetreat }> = ({
     if (parent?.name) {
       setTitleBanner(parent.name)
     }
-    if (parent?.image) {
-      setBanner({ id: parent.image.id, attributes: parent.image })
+    if (parent?.cover) {
+      setBanner({ id: parent.cover.id, attributes: parent.cover })
     }
   }, [parent])
 
