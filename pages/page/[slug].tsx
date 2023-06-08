@@ -29,7 +29,7 @@ function Page({ data, globalData, isMobile }: { data: TPage }) {
     if (data.title) {
       setTitleBanner(data.title)
     }
-  }, [data.title])
+  }, [data?.title])
   useEffect(() => {
     if (data.cover) {
       setBanner({
@@ -37,13 +37,13 @@ function Page({ data, globalData, isMobile }: { data: TPage }) {
         attributes: data.cover
       })
     }
-  }, [data.cover])
+  }, [data?.cover])
   console.log("Page", data)
   console.log({ globalData })
 
   return (
     <>
-      <Head>{data.title && <title>{data.title}</title>}</Head>
+      <Head>{data?.title && <title>{data?.title}</title>}</Head>
       <PageContentWrapper background={data.background}>
         <SinglePageLayout
           data={data}

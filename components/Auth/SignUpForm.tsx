@@ -7,6 +7,7 @@ import { useTranslation } from "next-i18next"
 import { useAuth } from "../../context/auth/AuthContext"
 import { TSignup } from "../../context/auth/AuthTypes"
 import { DivSignupWrapper } from "./index.styles"
+import { useApp } from "context/app/AppContext"
 
 const validateMessages = {
   required: "${label} is required!",
@@ -32,9 +33,18 @@ type TFrom = {
 
 const SignUpForm = () => {
   const { t, i18n } = useTranslation(["login"])
+  const { setTitleBanner } = useApp()
 
   const [form] = useForm<TFrom>()
   const { onRegister, isLoading } = useAuth()
+
+  useEffect(()=>{
+    if (i18n.language === 'en'){
+      setTitleBanner('Sign up for retreat')
+    } else {
+      setTitleBanner('Đăng kí cho nhập thất')
+    }
+  },[i18n.language, setTitleBanner])
 
   const onFinish = async (data: TFrom) => {
     const { country, city, firstName, lastName, confirmPassword, ...values } =

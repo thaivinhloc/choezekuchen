@@ -4,7 +4,7 @@ import {
   DownOutlined,
   LeftOutlined,
   RightOutlined
-} from "@ant-design/icons"
+} from "@ant-design/icons";
 import {
   Button,
   Col,
@@ -20,50 +20,50 @@ import {
   Space,
   Tabs,
   Tooltip
-} from "antd"
-import { useForm } from "antd/lib/form/Form"
-import { THEME } from "common"
-import { LOGIN, RETREAT_HISTORY } from "common/navigator"
-import { TRetreat } from "definition"
-import { RichText } from "elements/RichText"
-import i18next from "i18next"
-import moment from "moment"
-import { useTranslation } from "next-i18next"
-import Link from "next/link"
-import { useRouter } from "next/router"
-import React, { createElement, useEffect, useRef, useState } from "react"
-import { Container } from "react-bootstrap"
-import { useApp } from "../../context/app/AppContext"
-import { useAuth } from "../../context/auth/AuthContext"
-import { formatNumber } from "../../helper"
+} from "antd";
+import { useForm } from "antd/lib/form/Form";
+import { THEME } from "common";
+import { LOGIN, RETREAT_HISTORY } from "common/navigator";
+import { TRetreat } from "definition";
+import { RichText } from "elements/RichText";
+import i18next from "i18next";
+import moment from "moment";
+import { useTranslation } from "next-i18next";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import React, { createElement, useEffect, useRef, useState } from "react";
+import { Container } from "react-bootstrap";
+import { useApp } from "../../context/app/AppContext";
+import { useAuth } from "../../context/auth/AuthContext";
+import { formatNumber } from "../../helper";
 import {
   getParticipants,
   getRetreatDetail,
   postRetreatRecitation
-} from "../../services/api"
+} from "../../services/api";
 import {
   IResponseActiveRetreat,
   IResponseListRetreat,
   IResponseRetreatDetail,
   User
-} from "../../services/retreatTypes"
-import RetreatListing from "./components/RetreatListing"
-import useRetreat, { TLanguage } from "./hooks/useRetreat"
-import { DivRetreatWrapper } from "./index.style"
-import { GridMedia } from "elements/Media"
-import styled from "styled-components"
-import Image from "next/image"
-import { ArrowRight, ChevronRight } from "@mui/icons-material"
-import useEvents from "hook/useEvents"
-import { EventItem } from "components/Event/EventItem"
-import { TopCategoryWrapper } from "elements/styled/TopCategory"
+} from "../../services/retreatTypes";
+import RetreatListing from "./components/RetreatListing";
+import useRetreat, { TLanguage } from "./hooks/useRetreat";
+import { DivRetreatWrapper } from "./index.style";
+import { GridMedia } from "elements/Media";
+import styled from "styled-components";
+import Image from "next/image";
+import { ArrowRight, ChevronRight } from "@mui/icons-material";
+import useEvents from "hook/useEvents";
+import { EventItem } from "components/Event/EventItem";
+import { TopCategoryWrapper } from "elements/styled/TopCategory";
 
 const SubmitFormWrapper = styled.div`
   border-radius: 16px;
   background: #f1f2f2;
   padding: 16px 24px;
   margin-bottom: 50px;
-`
+`;
 
 const DatePopupWrapper = styled.div`
   width: 100%;
@@ -140,53 +140,53 @@ const DatePopupWrapper = styled.div`
       }
     }
   }
-`
+`;
 
-const { TabPane } = Tabs
+const { TabPane } = Tabs;
 
-const PATH = process.env.REACT_APP_API_URL
+const PATH = process.env.REACT_APP_API_URL;
 enum ETabPane {
   DETAIL = "detail",
   LISTING = "listing"
 }
 type TRenderItem = {
-  title: string
-  content: string | number
-}
+  title: string;
+  content: string | number;
+};
 type TRetreatForm = {
-  recitationNumber: number
-  completedAt: string | moment.Moment
-}
+  recitationNumber: number;
+  completedAt: string | moment.Moment;
+};
 
 const Retreat: React.FC<{
-  retreats: TRetreat[]
-  onGetRetreats: () => Promise<TRetreat[]>
-  parent: TRetreat
+  retreats: TRetreat[];
+  onGetRetreats: () => Promise<TRetreat[]>;
+  parent: TRetreat;
 }> = ({ retreats, onGetRetreats, parent, isMobile }) => {
-  const datePickerRef = useRef()
-  const router = useRouter()
-  const { user } = useAuth()
+  const datePickerRef = useRef();
+  const router = useRouter();
+  const { user } = useAuth();
   const { upcomingEvents, getUpcomingEvents } = useEvents({
     locale: router.locale
-  })
-  const [form] = useForm<TRetreatForm>()
-  const { t } = useTranslation("retreat")
+  });
+  const [form] = useForm<TRetreatForm>();
+  const { t } = useTranslation("retreat");
 
-  const currentLng = router.locale as any
+  const currentLng = router.locale as any;
 
   /* All State */
-  const [tab, setTab] = useState<ETabPane>(ETabPane.DETAIL)
-  const [activeRetreat, setActiveRetreat] = useState<number | null>(null)
-  const [isLoading, setIsLoading] = useState<boolean>(false)
-  const [isLoadingSubmit, setIsLoadingSubmit] = useState<boolean>(false)
+  const [tab, setTab] = useState<ETabPane>(ETabPane.DETAIL);
+  const [activeRetreat, setActiveRetreat] = useState<number | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoadingSubmit, setIsLoadingSubmit] = useState<boolean>(false);
   const [isLoadingRetreatDetail, setIsLoadingRetreatDetail] =
-    useState<boolean>(false)
+    useState<boolean>(false);
 
   const [listParticipant, setListParticipant] = useState<
     IResponseListRetreat[]
-  >([])
+  >([]);
 
-  const [retreatDetail, setRetreatDetail] = useState<IResponseRetreatDetail>()
+  const [retreatDetail, setRetreatDetail] = useState<IResponseRetreatDetail>();
 
   useEffect(() => {
     switch (tab) {
@@ -194,42 +194,42 @@ const Retreat: React.FC<{
         onGetRetreats()
           .then((res: TRetreat[]) => {
             if (res) {
-              const response = res.sort((a, b) => a.id - b.id)
-              setActiveRetreat(response[0].id)
+              const response = res.sort((a, b) => a.id - b.id);
+              setActiveRetreat(response[0].id);
             }
           })
-          .catch((error) => console.log("---error", error))
-        break
+          .catch((error) => console.log("---error", error));
+        break;
       case ETabPane.LISTING:
-        onGetRetreats()
-        getListParticipant()
-        break
+        onGetRetreats();
+        getListParticipant();
+        break;
       default:
-        break
+        break;
     }
-  }, [tab, currentLng])
+  }, [tab, currentLng]);
 
   useEffect(() => {
-    if (!activeRetreat) return
-    handleGetRetreatDetail(activeRetreat, currentLng)
-  }, [activeRetreat, currentLng])
+    if (!activeRetreat) return;
+    handleGetRetreatDetail(activeRetreat, currentLng);
+  }, [activeRetreat, currentLng]);
 
   useEffect(() => {
     form.setFieldsValue({
       completedAt: moment()
-    })
-    getUpcomingEvents({ from: moment().toISOString() })
-  }, [])
+    });
+    getUpcomingEvents({ from: moment().toISOString() });
+  }, []);
 
   const getListParticipant = async () => {
     try {
-      setIsLoading(true)
+      setIsLoading(true);
       const result = await getParticipants({
         parentId: parent?.id,
         locale: router.locale || "en"
-      })
+      });
       const data = result.map((item) => {
-        const address = item.address?.split(",")
+        const address = item.address?.split(",");
 
         const retreats = item.completed.reduce((prev: any, curr) => {
           prev[curr.retreatName] = {
@@ -237,77 +237,87 @@ const Retreat: React.FC<{
             completed_fm: formatNumber(curr.completed),
             commited_fm: formatNumber(curr.commited),
             ...curr
-          }
-          return prev
-        }, {})
+          };
+          return prev;
+        }, {});
 
         return {
           city: address?.[0],
           country: address?.[address?.length - 1],
           ...retreats,
           ...item
-        }
-      })
-      console.log("getListParticipant", { data })
+        };
+      });
+      console.log("getListParticipant", { data });
 
-      setListParticipant(data)
-      return data
+      setListParticipant(data);
+      return data;
     } catch (error) {
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   const handleGetRetreatDetail = async (
     retreatId: number,
     currentLng: string
   ) => {
     try {
-      setIsLoading(true)
-      const response = await getRetreatDetail(retreatId, currentLng)
-      setRetreatDetail(response)
+      setIsLoading(true);
+      const response = await getRetreatDetail(retreatId, currentLng);
+      setRetreatDetail(response);
     } catch (error) {
-      console.log("----failed", error)
+      console.log("----failed", error);
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
+
+  const [submitSuccess, setSubmitSuccess] = useState("");
+
+  useEffect(() => {
+    if (submitSuccess) {
+      setTimeout(() => {
+        setSubmitSuccess("");
+      }, 3000);
+    }
+  }, [submitSuccess]);
 
   const handleSubmit = async (value: TRetreatForm) => {
-    if (!activeRetreat) return
+    if (!activeRetreat) return;
 
     try {
-      const values = await form.validateFields()
-      const recitationNumber = Number(values.recitationNumber)
-      const completedAt = moment(values.completedAt).format("YYYY-MM-DD")
+      const values = await form.validateFields();
+      const recitationNumber = Number(values.recitationNumber);
+      const completedAt = moment(values.completedAt).format("YYYY-MM-DD");
       if (!user) {
-        router.push(LOGIN, undefined, { locale: currentLng })
+        router.push(LOGIN, undefined, { locale: currentLng });
       } else {
-        setIsLoadingSubmit(true)
+        setIsLoadingSubmit(true);
         await postRetreatRecitation({
           recitationNumber,
           completedAt,
           retreatId: activeRetreat
         }).then(() => {
-          handleGetRetreatDetail(activeRetreat, currentLng)
+          handleGetRetreatDetail(activeRetreat, currentLng);
           form.setFieldsValue({
             recitationNumber: undefined
-          })
+          });
           notification.success({
             message: "Success",
             description: `Submit successfully`
-          })
-        })
+          });
+        });
       }
     } catch (error) {
     } finally {
-      setIsLoadingSubmit(false)
+      setIsLoadingSubmit(false);
     }
-  }
+  };
 
   function handleChangeTab(key: string) {
-    setTab(key as ETabPane)
-    form.resetFields()
+    setTab(key as ETabPane);
+    form.resetFields();
   }
 
   const RenderItemWrapper = styled.div`
@@ -315,7 +325,7 @@ const Retreat: React.FC<{
     @media (min-width: 992px) {
       padding: 48px 16px;
     }
-  `
+  `;
 
   /* Render */
   const RenderItem = ({ title, content }: TRenderItem) => {
@@ -345,15 +355,15 @@ const Retreat: React.FC<{
           </strong>
         </div>
       </RenderItemWrapper>
-    )
-  }
+    );
+  };
 
-  const userRetreat: User | undefined = retreatDetail?.user
+  const userRetreat: User | undefined = retreatDetail?.user;
   const totalDue =
     Number(retreatDetail?.totalCommitment || 0) -
-    Number(retreatDetail?.totalGroupCompleted || 0)
+    Number(retreatDetail?.totalGroupCompleted || 0);
 
-  console.log({ listParticipant, parent })
+  console.log({ listParticipant, parent });
 
   return (
     <DivRetreatWrapper>
@@ -374,8 +384,8 @@ const Retreat: React.FC<{
                   size='large'
                   buttonStyle='solid'
                   onChange={(e) => {
-                    setActiveRetreat(e.target.value)
-                    form.resetFields()
+                    setActiveRetreat(e.target.value);
+                    form.resetFields();
                   }}
                 >
                   <div
@@ -397,7 +407,7 @@ const Retreat: React.FC<{
                           >
                             {retreat.name}
                           </Radio.Button>
-                        )
+                        );
                       })}
                   </div>
                 </Radio.Group>
@@ -592,6 +602,14 @@ const Retreat: React.FC<{
                               </Button>
                             </Form.Item>
                           </Col>
+                          {submitSuccess && (
+                            <>
+                              <Col span={16} md={{ span: 19 }} />
+                              <Col span={8} md={{ span: 5 }}>
+                                <p>{t(submitSuccess)}</p>
+                              </Col>
+                            </>
+                          )}
                         </Row>
                       </div>
                     </Col>
@@ -619,7 +637,7 @@ const Retreat: React.FC<{
                               showToday={false}
                               open={true}
                               getPopupContainer={() => {
-                                return datePickerRef.current ?? null
+                                return datePickerRef.current ?? null;
                               }}
                               className='h-100'
                               size='large'
@@ -629,7 +647,7 @@ const Retreat: React.FC<{
                                 return (
                                   moment(retreatDetail?.dateStart) >= current ||
                                   moment(retreatDetail?.dateEnd) <= current
-                                )
+                                );
                               }}
                             />
                           </Form.Item>
@@ -735,7 +753,7 @@ const Retreat: React.FC<{
           </div> */}
       </Container>
     </DivRetreatWrapper>
-  )
-}
+  );
+};
 
-export default Retreat
+export default Retreat;

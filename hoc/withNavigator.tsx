@@ -61,7 +61,6 @@ export const withNavigator = (RootPageComponent: NextPage) => {
         {props.navData && (
           <Header
             data={props.navData}
-            retreats={props.retreats}
             isMobile={props.isMobile}
             isHeaderFullscreen={props.isHeaderFullscreen}
             logo={props.globalData?.attributes?.logo}

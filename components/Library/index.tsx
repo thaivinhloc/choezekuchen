@@ -1,29 +1,29 @@
 // @ts-nocheck
 
-import { ArrowRightAlt } from "@mui/icons-material"
-import { Col, Radio, Row, Space } from "antd"
-import { THEME } from "common"
-import { UpcomingEventItem } from "components/Event/UpcomingEvent"
-import { TITLE_SIZES, Title } from "components/Title"
-import { TitleWithHeadline } from "components/Title/TitleWithHeadline"
+import { ArrowRightAlt } from "@mui/icons-material";
+import { Col, Radio, Row, Space } from "antd";
+import { THEME } from "common";
+import { UpcomingEventItem } from "components/Event/UpcomingEvent";
+import { TITLE_SIZES, Title } from "components/Title";
+import { TitleWithHeadline } from "components/Title/TitleWithHeadline";
 import {
   ContentListTitleWrapper,
   ListPageContentWrapper,
   TopCategoryWrapper
-} from "container/layout/ListPage"
-import { EMediaType, ListItem, TPage } from "definition"
-import { Button } from "elements/Button"
-import { Media } from "elements/Media"
-import { RichText } from "elements/RichText"
-import { getMediaType } from "helper"
-import useEvents from "hook/useEvents"
-import useLibrary from "hook/useLibrary"
-import usePage from "hook/usePage"
-import moment from "moment"
-import { useTranslation } from "next-i18next"
-import Link from "next/link"
-import { useEffect, useState } from "react"
-import styled from "styled-components"
+} from "container/layout/ListPage";
+import { EMediaType, ListItem, TPage } from "definition";
+import { Button } from "elements/Button";
+import { Media } from "elements/Media";
+import { RichText } from "elements/RichText";
+import { getMediaType } from "helper";
+import useEvents from "hook/useEvents";
+import useLibrary from "hook/useLibrary";
+import usePage from "hook/usePage";
+import moment from "moment";
+import { useTranslation } from "next-i18next";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import styled from "styled-components";
 
 const mediaTypes = [
   {
@@ -37,8 +37,12 @@ const mediaTypes = [
   {
     type: "VIDEO",
     name: "Video"
+  },
+  {
+    type: "IMAGES",
+    name: "Images"
   }
-]
+];
 
 const LibraryItemWrapper = styled.div`
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
@@ -46,7 +50,7 @@ const LibraryItemWrapper = styled.div`
   border: 1px solid ${(props) => props.theme.primary};
   padding: 16px;
   height: 100%;
-`
+`;
 
 const PracticeWrapper = styled.div`
   ${(props) =>
@@ -56,45 +60,45 @@ const PracticeWrapper = styled.div`
   background-size: cover;
   background-repeat: no-repeat;
   padding: 120px 0;
-`
+`;
 
 export const Library = ({ locale, globalData, isMobile }) => {
-  const { t } = useTranslation()
-  const { nextEvents, getUpcomingEventsFromNow } = useEvents({ locale })
+  const { t } = useTranslation();
+  const { nextEvents, getUpcomingEventsFromNow } = useEvents({ locale });
   const { medias, getMedias } = useLibrary({
     locale
-  })
+  });
 
-  const [mediaType, setMediaType] = useState(mediaTypes[0].type)
+  const [mediaType, setMediaType] = useState(mediaTypes[0].type);
 
   useEffect(() => {
-    getMedias()
-    getUpcomingEventsFromNow()
-  }, [])
+    getMedias();
+    getUpcomingEventsFromNow();
+  }, []);
 
   const getLengthByType = (type) => {
     return medias
       ? medias.filter((media) => media.attributes.category === type).length
-      : 0
-  }
+      : 0;
+  };
 
   const newReleaseMedias =
     medias
       ?.sort((a, b) => moment(b.createdAt).unix() - moment(a.createdAt).unix())
-      .slice(0, 2) ?? []
+      .slice(0, 2) ?? [];
 
   const mediaList =
-    medias?.filter((m) => m.attributes.category === mediaType) ?? []
-  console.log({ nextEvents, mediaList, newReleaseMedias })
+    medias?.filter((m) => m.attributes.category === mediaType) ?? [];
+  console.log({ nextEvents, mediaList, newReleaseMedias });
 
   const latestEvent = nextEvents?.sort(
     (a, b) => moment(b.createdAt).unix() - moment(a.createdAt).unix()
-  )?.[0]
-  console.log({ latestEvent })
+  )?.[0];
+  console.log({ latestEvent });
 
-  const { practice } = globalData.attributes
-  console.log({ practice })
-  const contentSize = isMobile ? "18px" : "24px"
+  const { practice } = globalData.attributes;
+  console.log({ practice });
+  const contentSize = isMobile ? "18px" : "24px";
 
   return (
     <ListPageContentWrapper>
@@ -106,9 +110,9 @@ export const Library = ({ locale, globalData, isMobile }) => {
                 <UpcomingEventItem
                   {...latestEvent}
                   style={{
-                    height: "100%",
-                    display: "flex",
-                    alignItems: "flex-end"
+                    height: "100%"
+                    // display: "flex",
+                    // alignItems: "flex-end"
                   }}
                 />
               )}
@@ -118,7 +122,7 @@ export const Library = ({ locale, globalData, isMobile }) => {
               <Row gutter={[24, 24]}>
                 {newReleaseMedias &&
                   newReleaseMedias.map(({ id, attributes }, idx) => {
-                    const { name, description, media, cover } = attributes
+                    const { name, description, media, cover } = attributes;
                     return (
                       <Col
                         key={`page-list-col-${idx}`}
@@ -138,7 +142,7 @@ export const Library = ({ locale, globalData, isMobile }) => {
                           )}
                         </LibraryItemWrapper>
                       </Col>
-                    )
+                    );
                   })}
               </Row>
             </Col>
@@ -161,12 +165,12 @@ export const Library = ({ locale, globalData, isMobile }) => {
                     style={{ width: "100%" }}
                   >
                     {mediaTypes.map(({ name, type }) => {
-                      const items = getLengthByType(type)
+                      const items = getLengthByType(type);
                       return (
                         <Radio.Button key={`${type}-${name}`} value={type}>
                           {t(name)} ({items})
                         </Radio.Button>
-                      )
+                      );
                     })}
                   </Space>
                 </Radio.Group>
@@ -176,7 +180,7 @@ export const Library = ({ locale, globalData, isMobile }) => {
               <Row gutter={[24, 24]}>
                 {mediaList &&
                   mediaList.map(({ id, attributes }, idx) => {
-                    const { name, description, media, cover } = attributes
+                    const { name, description, media, cover } = attributes;
                     return (
                       <Col
                         key={`page-list-col-${idx}`}
@@ -196,7 +200,7 @@ export const Library = ({ locale, globalData, isMobile }) => {
                           )}
                         </LibraryItemWrapper>
                       </Col>
-                    )
+                    );
                   })}
               </Row>
             </Col>
@@ -255,7 +259,7 @@ export const Library = ({ locale, globalData, isMobile }) => {
         </div>
       </PracticeWrapper>
     </ListPageContentWrapper>
-  )
-}
+  );
+};
 
-export default Library
+export default Library;

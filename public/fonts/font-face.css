@@ -24,3 +24,10 @@
   font-weight: normal;
   font-style: italic;
 }
+
+@font-face {
+  font-family: "SVN Alluring";
+  src: url("./svn-alluring/SVN-Alluring.otf");
+  font-weight: normal;
+  font-style: normal;
+}

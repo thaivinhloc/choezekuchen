@@ -10,7 +10,6 @@ export default function withGlobalData(getServerSidePropsFunc) {
       const { locale } = context
       const globalData = await globalDataReq()
       const navData = await navigationReq({ locale })
-      const retreats = await getParentRetreats({ locale })
 
       if (typeof getServerSidePropsFunc === "function") {
         const ownProps = (await getServerSidePropsFunc(context)).props || {}
@@ -22,7 +21,6 @@ export default function withGlobalData(getServerSidePropsFunc) {
                 }
               : {},
             navData,
-            retreats,
             ...ownProps
           }
         }
@@ -36,7 +34,6 @@ export default function withGlobalData(getServerSidePropsFunc) {
               }
             : {},
           navData,
-          retreats
         }
       }
     } catch (e) {

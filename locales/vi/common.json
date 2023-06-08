@@ -1,6 +1,6 @@
 {
-  "login": "ĐĂNG NHẬP",
-  "signUp": "ĐĂNG KÝ",
+  "login": "ĐĂNG NHẬP cho nhập thất",
+  "signUp": "ĐĂNG KÝ cho nhập thất",
   "linkLogin": "Đăng nhập",
   "linkSignUp": "Đăng ký",
   "Retreat Register": "Đăng ký nhập thất",
@@ -66,5 +66,7 @@
   "Total Offering": "Tổng chi phí cúng dường",
   "Payment Donation": "Xác nhận quyên góp",
   "Payment Fee": "Phí thanh toán",
-  "Make Offering": "Thực hiện cúng dường"
+  "Make Offering": "Thực hiện cúng dường",
+  "More images": "Xem thêm",
+  "Welcome to join the": "Xin mời Quý đạo hữu đăng ký Thực hành "
 }

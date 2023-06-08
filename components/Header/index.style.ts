@@ -1,16 +1,16 @@
-import { TMedia } from "definition"
-import styled from "styled-components"
-import { THEME } from "../../common"
+import { TMedia } from "definition";
+import styled from "styled-components";
+import { THEME } from "../../common";
 
 type TStyled = {
-  theme: typeof THEME
-}
+  theme: typeof THEME;
+};
 
 type HeaderProps = {
-  banner?: TMedia
-  isMobile?: boolean
-  isHeaderFullscreen?: boolean
-}
+  banner?: TMedia;
+  isMobile?: boolean;
+  isHeaderFullscreen?: boolean;
+};
 
 export const DivHeaderWrapperV1 = styled.div<HeaderProps>`
   .site-header {
@@ -300,7 +300,7 @@ export const DivHeaderWrapperV1 = styled.div<HeaderProps>`
       }
     }
   }
-`
+`;
 
 export const DivHeaderMobile = styled.div`
   .banner {
@@ -439,7 +439,35 @@ export const DivHeaderMobile = styled.div`
       background: none;
     }
   }
-`
+
+  .banner-slider {
+    width: 100%;
+    height: 100vh;
+    z-index: 1;
+    position: relative;
+
+    &__content {
+      width: 100%;
+      height: 50vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      max-width: 420px;
+      position: absolute;
+      left: 18px;
+      bottom: 18px;
+      z-index: 3;
+      padding: 32px;
+      opacity: 0.7;
+      h2 {
+        color: ${(props) => props.theme.white} !important;
+        font-size: 32px;
+        line-height: 40px;
+        margin-bottom: 16px;
+      }
+    }
+  }
+`;
 
 export const NavListStyled = styled.nav<{ isSticky?: boolean }>`
   justify-content: space-between;
@@ -475,13 +503,13 @@ export const NavListStyled = styled.nav<{ isSticky?: boolean }>`
         }
       }
     `}
-`
+`;
 
 export const NavbarNavStyled = styled.ul`
   justify-content: center;
   align-items: center;
   margin-bottom: 0;
-`
+`;
 
 export const TopActionStyled = styled.div`
   display: flex;
@@ -497,4 +525,4 @@ export const TopActionStyled = styled.div`
     right: 0;
     z-index: 99999999;
   }
-`
+`;

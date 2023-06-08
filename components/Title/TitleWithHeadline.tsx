@@ -1,13 +1,13 @@
-import { THEME } from "common"
+import { THEME } from "common";
 
 export const TitleWithHeadline = ({
   title,
   headLine,
   color = THEME.primary
 }: {
-  title?: string
-  headLine?: any
-  color?: string
+  title?: string;
+  headLine?: any;
+  color?: string;
 }) => {
   return (
     <>
@@ -31,17 +31,17 @@ export const TitleWithHeadline = ({
         </h2>
       )}
     </>
-  )
-}
+  );
+};
 
 export const TitleWithHeadlineSmall = ({
   title,
   headLine,
   color = THEME.primary
 }: {
-  title?: string
-  headLine?: any
-  color?: string
+  title?: string;
+  headLine?: any;
+  color?: string;
 }) => {
   return (
     <>
@@ -58,14 +58,15 @@ export const TitleWithHeadlineSmall = ({
             fontSize: 32,
             lineHeight: "36px",
             maxWidth: 500,
-            margin: "0 auto 32px"
+            margin: "0 auto 32px",
+            letterSpacing: "1px"
           }}
         >
           {title}
         </h2>
       )}
     </>
-  )
-}
+  );
+};
 
-export default TitleWithHeadline
+export default TitleWithHeadline;

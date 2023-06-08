@@ -1,19 +1,17 @@
-import moment from "moment"
-import { useEffect } from "react"
-import useEvents from "hook/useEvents"
-import { useRouter } from "next/router"
-import { TEvent } from "definition"
-import { getEventPathFromSlug } from "helper"
-import { Scheduler } from "@aldabil/react-scheduler"
-import { ProcessedEvent, ViewEvent } from "@aldabil/react-scheduler/types"
-import { getEventsByTimeRange } from "services/event"
-import styled from "styled-components"
-import { Popover } from "antd"
-import { GridMedia } from "elements/Media"
-import { RichText } from "elements/RichText"
-import { Button } from "elements/Button"
-import { useTranslation } from "next-i18next"
-import Link from "next/link"
+import { Scheduler } from "@aldabil/react-scheduler";
+import { ProcessedEvent, ViewEvent } from "@aldabil/react-scheduler/types";
+import { Popover } from "antd";
+import { TEvent } from "definition";
+import { Button } from "elements/Button";
+import { GridMedia } from "elements/Media";
+import { RichText } from "elements/RichText";
+import { getEventPathFromSlug } from "helper";
+import moment from "moment";
+import { useTranslation } from "next-i18next";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { getEventsByTimeRange } from "services/event";
+import styled from "styled-components";
 
 const EventWrapper = styled(Popover)`
   display: flex;
@@ -26,16 +24,16 @@ const EventWrapper = styled(Popover)`
   h4 {
     color: #fff;
   }
-`
+`;
 
 const EventPopContentWrapper = styled.div`
   width: 320px;
-`
+`;
 
 function eventItemRenderer(event: any) {
-  console.log({ event })
+  console.log({ event });
   const { id, image, content, description, dateEnd, dateStart, slug, title } =
-    event
+    event;
 
   return (
     <EventWrapper
@@ -70,7 +68,7 @@ function eventItemRenderer(event: any) {
         </div>
       </Link>
     </EventWrapper>
-  )
+  );
 }
 
 const MonthEventWrapper = styled.div`
@@ -89,11 +87,11 @@ const MonthEventWrapper = styled.div`
       }
     }
   }
-`
+`;
 
 export function MonthEvent() {
-  const router = useRouter()
-  const { t } = useTranslation()
+  const router = useRouter();
+  const { t } = useTranslation();
   function toCalendarEvents(evts: TEvent[]): ProcessedEvent[] {
     return evts.map((evt) => ({
       ...evt,
@@ -104,25 +102,25 @@ export function MonthEvent() {
       editable: false,
       draggable: false,
       deletable: false
-    }))
+    }));
   }
 
   const getRemoteEvents = async (query: ViewEvent) => {
     try {
-      console.log(query)
-      const { start, end } = query
-      const dateStart = moment(start).toISOString()
-      const dateEnd = moment(end).toISOString()
+      console.log(query);
+      const { start, end } = query;
+      const dateStart = moment(start).toISOString();
+      const dateEnd = moment(end).toISOString();
       const events = await getEventsByTimeRange({
         from: dateStart,
         to: dateEnd,
         locale: router.locale ?? "en"
-      })
-      return toCalendarEvents(events)
+      });
+      return toCalendarEvents(events);
     } catch (error) {
-      return []
+      return [];
     }
-  }
+  };
 
   return (
     <MonthEventWrapper>
@@ -152,5 +150,5 @@ export function MonthEvent() {
         )}
       />
     </MonthEventWrapper>
-  )
+  );
 }

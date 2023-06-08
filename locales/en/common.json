@@ -1,6 +1,6 @@
 {
-  "login": "LOG IN",
-  "signUp": "SIGN UP",
+  "login": "LOG IN FOR RETREAT",
+  "signUp": "SIGN UP FOR RETREAT",
   "linkLogin": "Login",
   "linkSignUp": "Register",
   "Retreat Register": "Retreat Register",
@@ -16,8 +16,6 @@
   "Contact": "Contact",
   "Follow us": "Follow us",
   "Retreat": "Retreat",
-  "Contact": "Contact",
-  "Follow us": "Follow us",
   "On-going Retreat": "On-going Retreat",
   "Day": "Day",
   "Week": "Week",
@@ -68,5 +66,5 @@
   "Total Offering": "Total Offering",
   "Payment Donation": "Payment Donation",
   "Payment Fee": "Payment Fee",
-  "Make Offering": "Make Offering"
+  "Make Offering": "Make Offering",
 }

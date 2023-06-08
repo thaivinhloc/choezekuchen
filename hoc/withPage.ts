@@ -5,6 +5,8 @@ import { getPageBySlug } from "services/page"
 export default function withPage(getServerSidePropsFunc) {
   return async (context: GetServerSidePropsContext) => {
     try {
+      console.log('withPage=====');
+      
       const { params, locale } = context
       const { slug } = params || {}
       const result = await getPageBySlug({

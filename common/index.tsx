@@ -1,5 +1,6 @@
 export const THEME = {
   primaryFont: "Product Sans",
+  secondaryFont: "SVN Alluring",
   titleFont: "Product Sans",
   primary: "#800000",
   highlightBg: "#800000",
@@ -13,4 +14,4 @@ export const THEME = {
   gray: "#6D7073",
   white: "#e6e7e8",
   yellow: "#F4A530"
-}
+};

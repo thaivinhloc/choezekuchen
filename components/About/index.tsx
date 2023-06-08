@@ -1,29 +1,32 @@
 // @ts-nocheck
-import { Col, Row, Tabs, Tooltip } from "antd"
-import { THEME } from "common"
-import { TITLE_SIZES, Title } from "components/Title"
-import { SingleSection } from "container/Section"
-import { Button } from "elements/Button"
-import { RichText } from "elements/RichText"
-import usePage from "hook/usePage"
-import { useTranslation } from "next-i18next"
-import Image from "next/image"
-import { useEffect, useRef, useState } from "react"
-import styled from "styled-components"
-import { Navigation } from "swiper"
-import { Swiper, SwiperRef, SwiperSlide } from "swiper/react"
-import ArrowLeftIcon from "assets/svgs/circle_arrow_left_icon.svg"
-import ArrowRightIcon from "assets/svgs/circle_arrow_right_icon.svg"
-import StarIcon from "assets/svgs/star_icon.svg"
-import { ChevronLeft, ChevronRight } from "@mui/icons-material"
-import { TitleWithHeadline } from "components/Title/TitleWithHeadline"
-import { Autoplay } from "swiper"
+import { Col, Row, Space, Tabs, Tooltip } from "antd";
+import { THEME } from "common";
+import { TITLE_SIZES, Title } from "components/Title";
+import { SingleSection } from "container/Section";
+import { Button } from "elements/Button";
+import { RichText } from "elements/RichText";
+import usePage from "hook/usePage";
+import { useTranslation } from "next-i18next";
+import Image from "next/image";
+import { useEffect, useMemo, useRef, useState } from "react";
+import styled from "styled-components";
+import { Navigation } from "swiper";
+import { Swiper, SwiperRef, SwiperSlide } from "swiper/react";
+import ArrowLeftIcon from "assets/svgs/circle_arrow_left_icon.svg";
+import ArrowRightIcon from "assets/svgs/circle_arrow_right_icon.svg";
+import StarIcon from "assets/svgs/star_icon.svg";
+import { ChevronLeft, ChevronRight } from "@mui/icons-material";
+import { TitleWithHeadline } from "components/Title/TitleWithHeadline";
+import { Autoplay } from "swiper";
+import ReadMoreReact from "container/readMore/components/ReadMore";
+import Lightbox from "react-image-lightbox";
+import "react-image-lightbox/style.css";
 
-const AboutWrapper = styled.div``
+const AboutWrapper = styled.div``;
 
 const BackgroundWrapper = styled.div<{
-  background?: any
-  backgroundColor?: string
+  background?: any;
+  backgroundColor?: string;
 }>`
   background: ${(props) =>
     props.background?.data
@@ -32,7 +35,7 @@ const BackgroundWrapper = styled.div<{
   background-size: cover;
   background-repeat: no-repeat;
   padding: 80px 0;
-`
+`;
 
 const TabsWrapper = styled(Tabs)`
   .ant-tabs-nav-list {
@@ -42,7 +45,7 @@ const TabsWrapper = styled(Tabs)`
       min-width: 100%;
     }
   }
-`
+`;
 
 export const About = ({
   locale,
@@ -50,103 +53,131 @@ export const About = ({
   globalData,
   isMobile
 }) => {
-  const swiperRef = useRef()
-  const historySwiperRef = useRef()
-  const historyTabRef = useRef()
-  const eleventhHistorySwiperRef = useRef()
-  const eleventhHistoryTabRef = useRef()
-  const [historyIndex, setHistoryIndex] = useState(0)
-  const [eleventhHistoryIndex, setEleventhHistoryIndex] = useState(0)
-  const [isTabInit, setTabsInit] = useState(false)
+  const swiperRef = useRef();
+  const historySwiperRef = useRef();
+  const historyTabRef = useRef();
+  const eleventhHistorySwiperRef = useRef();
+  const eleventhHistoryTabRef = useRef();
+  const [historyIndex, setHistoryIndex] = useState(0);
+  const [eleventhHistoryIndex, setEleventhHistoryIndex] = useState(0);
+  const [isTabInit, setTabsInit] = useState(false);
   const { content, getPageContent } = usePage({
     locale,
     endpoint: pageContentEndpoint,
     params: {
       "populate[0]": "introduction",
-      "populate[5]": "introduction.background",
       "populate[1]": "gurus",
+      "populate[2]": "history",
+      "populate[3]": "eleventhHistory",
+      "populate[4]": "reincarnation",
+      "populate[5]": "introduction.background",
       "populate[6]": "gurus.background",
       "populate[7]": "gurus.contentList",
-      "populate[14]": "gurus.contentList.cover",
-      "populate[2]": "history",
       "populate[9]": "history.background",
       "populate[8]": "history.contentList",
-      "populate[15]": "history.contentList.cover",
-      "populate[3]": "eleventhHistory",
       "populate[10]": "eleventhHistory.background",
       "populate[11]": "eleventhHistory.contentList",
-      "populate[16]": "eleventhHistory.contentList.cover",
-      "populate[4]": "reincarnation",
       "populate[12]": "reincarnation.background",
-      "populate[13]": "reincarnation.contentList"
+      "populate[13]": "reincarnation.contentList",
+      "populate[14]": "gurus.contentList.cover",
+      "populate[15]": "history.contentList.cover",
+      "populate[16]": "eleventhHistory.contentList.cover",
+      "populate[17]": "eleventhHistory.contentList.images"
     }
-  })
-  const { t } = useTranslation()
+  });
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (pageContentEndpoint) {
-      getData()
+      getData();
     }
     async function getData() {
-      await getPageContent()
+      await getPageContent();
     }
-  }, [pageContentEndpoint])
+  }, [pageContentEndpoint]);
 
   useEffect(() => {
     if (content) {
       setTimeout(() => {
-        setTabsInit(true)
-      }, 2000)
+        setTabsInit(true);
+      }, 2000);
     }
-  }, [content])
+  }, [content]);
 
   const { introduction, gurus, history, eleventhHistory, reincarnation } =
-    content?.data?.attributes ?? {}
-  const { defaultHeadLine } = globalData.attributes
+    content?.data?.attributes ?? {};
+  const { defaultHeadLine } = globalData.attributes;
   const {
     title: introductionTitle,
     description: introductionDescription,
     background: introductionBackground,
     backgroundColor: introductionBackgroundColor
-  } = introduction ?? {}
+  } = introduction ?? {};
 
   const {
     contentList: gurusContentList,
     background: gurusBackground,
     backgroundColor: gurusBackgroundColor
-  } = gurus ?? {}
+  } = gurus ?? {};
 
   const gurusItemsByGroup = Object.values(
     gurusContentList?.reduce((res, cur) => {
-      res[cur.order] = res[cur.order] ?? []
-      res[cur.order].push(cur)
-      return res
+      res[cur.order] = res[cur.order] ?? [];
+      res[cur.order].push(cur);
+      return res;
     }, {}) ?? {}
-  )
+  );
+
+  /* Zoom Images */
+  const [indexImages, setIndexImages] = useState(-1);
+
+  const listImages = useMemo(() => {
+    if (!eleventhHistory?.contentList) return [];
+    return eleventhHistory.contentList.map((item) => item.images.data);
+  }, [eleventhHistory]);
+  console.log("listImages", { listImages, eleventhHistory });
+
+  const currentImage = listImages[indexImages]?.[0]?.attributes;
+
+  const nextIndex = (indexImages + 1) % listImages.length;
+  const nextImage = listImages[nextIndex]?.[0]?.attributes || currentImage;
+  const prevIndex = (indexImages + listImages.length - 1) % listImages.length;
+  const prevImage = listImages[prevIndex]?.[0]?.attributes || currentImage;
+
+  const handleClick = (index: number, item: CustomImage) =>
+    setIndexImages(index);
+  const handleClose = () => setIndexImages(-1);
+  const handleMovePrev = () => setIndexImages(prevIndex);
+  const handleMoveNext = () => setIndexImages(nextIndex);
 
   const findNextHasHistory = (_historyContentList, idx) => {
     return _historyContentList?.find(
       (h, index) => index > idx && !!h.description
-    )
-  }
+    );
+  };
 
   const findPrevHasHistory = (_historyContentList, idx) => {
     return _historyContentList?.find(
       (h, index) => index < idx && !!h.description
-    )
-  }
+    );
+  };
 
   const findNextHasHistoryIndex = (_historyContentList, idx) => {
     return _historyContentList?.findIndex(
       (h, index) => index > idx && !!h.description
-    )
-  }
+    );
+  };
 
   const findPrevHasHistoryIndex = (_historyContentList, idx) => {
     return _historyContentList?.findIndex(
       (h, index) => index < idx && !!h.description
-    )
-  }
+    );
+  };
+  console.log("gurusItemsByGroup", {
+    gurusItemsByGroup,
+    gurusContentList
+  });
 
   return (
     <AboutWrapper>
@@ -161,7 +192,11 @@ export const About = ({
         />
       </BackgroundWrapper>
       <BackgroundWrapper
-        style={{ textAlign: "center" }}
+        style={{
+          textAlign: "center",
+          padding: "40px 0px 20px",
+          backgroundPosition: "center"
+        }}
         background={gurusBackground}
         backgroundColor={gurusBackgroundColor}
       >
@@ -183,19 +218,32 @@ export const About = ({
                 delay: 5000
               }}
               onBeforeInit={(swiper) => {
-                swiperRef.current = swiper
+                swiperRef.current = swiper;
+              }}
+              slidesPerView='auto'
+              breakpoints={{
+                768: {
+                  slidesPerView: 1
+                },
+                1000: {
+                  slidesPerView: 2,
+                  slidesPerGroup: 2
+                }
               }}
             >
-              {gurusItemsByGroup?.map((item) => (
-                <SwiperSlide style={{ textAlign: "center" }}>
-                  <Row gutter={24} justify='center'>
-                    {item.map(({ title, cover, description }) => (
-                      <Col span={Math.floor(20 / item.length)}>
-                        <div style={{ maxWidth: 240, margin: "0 auto" }}>
+              {gurusContentList
+                ?.sort()
+                ?.map(({ cover, title, description }) => (
+                  <SwiperSlide style={{ textAlign: "center" }}>
+                    <Row gutter={24} justify='center'>
+                      {/* {item.map(({ title, cover, description }) => ( */}
+                      <Col span={18}>
+                        <div style={{ margin: "0 auto" }}>
                           <Image
                             src={cover?.data?.attributes.url}
                             {...cover?.data?.attributes}
                             layout='responsive'
+                            alt=''
                           />
                         </div>
                         <h3 style={{ color: THEME.white }}>{title}</h3>
@@ -205,10 +253,9 @@ export const About = ({
                           content={description}
                         />
                       </Col>
-                    ))}
-                  </Row>
-                </SwiperSlide>
-              ))}
+                    </Row>
+                  </SwiperSlide>
+                ))}
             </Swiper>
             <Button
               style={{
@@ -224,7 +271,7 @@ export const About = ({
               type='text'
               onClick={() => swiperRef.current?.slidePrev()}
             >
-              <Image src={ArrowLeftIcon} width={40} height={40} />
+              <Image src={ArrowLeftIcon} width={40} height={40} alt='' />
             </Button>
             <Button
               style={{
@@ -240,7 +287,7 @@ export const About = ({
               type='text'
               onClick={() => swiperRef.current?.slideNext()}
             >
-              <Image src={ArrowRightIcon} width={40} height={40} />
+              <Image src={ArrowRightIcon} width={40} height={40} alt='' />
             </Button>
           </div>
         </div>
@@ -262,23 +309,26 @@ export const About = ({
               marginBottom: 80
             }}
           >
-            <Image src={StarIcon} width={18} height={18} />
+            <Image src={StarIcon} width={18} height={18} alt='' />
             <i style={{ display: "block", marginLeft: 8, fontSize: 20 }}>
               {t("Updating information")}
             </i>
           </div>
-          <div style={{ transform: "translateY(-150px)", height: 1 }} ref={historyTabRef} />
+          <div
+            style={{ transform: "translateY(-150px)", height: 1 }}
+            ref={historyTabRef}
+          />
           {history && (
             <TabsWrapper
               activeKey={historyIndex}
               size='large'
               onChange={(ak) => {
-                setTabsInit(false)
-                historySwiperRef.current?.slideTo(ak)
-                setHistoryIndex(ak)
+                setTabsInit(false);
+                historySwiperRef.current?.slideTo(ak);
+                setHistoryIndex(ak);
                 setTimeout(() => {
-                  setTabsInit(true)
-                }, 1500)
+                  setTabsInit(true);
+                }, 1500);
               }}
             >
               {history.contentList?.map((item, idx) => {
@@ -348,7 +398,7 @@ export const About = ({
                     }
                     key={idx}
                   />
-                )
+                );
               })}
             </TabsWrapper>
           )}
@@ -365,16 +415,16 @@ export const About = ({
               autoHeight
               speed={1500}
               onSlideChange={(swiper) => {
-                setTabsInit(false)
-                setHistoryIndex(swiper.realIndex)
-                historyTabRef.current?.scrollIntoView({ behavior: "smooth" })
+                setTabsInit(false);
+                setHistoryIndex(swiper.realIndex);
+                historyTabRef.current?.scrollIntoView({ behavior: "smooth" });
                 setTimeout(() => {
-                  setTabsInit(true)
-                }, 1500)
+                  setTabsInit(true);
+                }, 1500);
               }}
               modules={[Navigation]}
               onBeforeInit={(swiper) => {
-                historySwiperRef.current = swiper
+                historySwiperRef.current = swiper;
               }}
             >
               {history?.contentList?.map(({ cover, title, description }) => (
@@ -397,7 +447,11 @@ export const About = ({
                       <h3 style={{ color: THEME.primary, marginTop: 0 }}>
                         {title}
                       </h3>
-                      <RichText color={THEME.dark} content={description} />
+                      <ReadMoreReact
+                        scrollHeight={isMobile ? 200 : 300}
+                        charLimit={500}
+                        text={description}
+                      />
                     </Col>
                   </Row>
                 </SwiperSlide>
@@ -407,16 +461,22 @@ export const About = ({
               gutter={[{ xs: 15, sm: 15, md: 32 }, 15]}
               style={{ marginTop: 40 }}
             >
-              <Col span={24} md={{ span: 7 }}></Col>
-              <Col span={24} md={{ span: 17 }} style={{ textAlign: "left" }}>
-                <div
+              {/* <Col span={24} md={{ span: 7 }}></Col> */}
+              <Col span={24} md={{ span: 24 }} style={{ textAlign: "left" }}>
+                <Space
                   style={{
                     display: "flex",
                     justifyContent: isMobile ? "flex-start" : "space-between",
                     alignItems: "center"
                   }}
                 >
-                  <div>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: isMobile ? "flex-start" : "space-between",
+                      alignItems: "center"
+                    }}
+                  >
                     {findPrevHasHistory(history?.contentList, historyIndex) && (
                       <Button
                         style={{
@@ -437,14 +497,16 @@ export const About = ({
                         type='link'
                       >
                         <ChevronLeft />
-                        {
-                          history?.contentList?.[
-                            findPrevHasHistoryIndex(
-                              history?.contentList,
-                              historyIndex
-                            )
-                          ]?.title
-                        }
+                        <span className='ellipsis'>
+                          {
+                            history?.contentList?.[
+                              findPrevHasHistoryIndex(
+                                history?.contentList,
+                                historyIndex
+                              )
+                            ]?.title
+                          }
+                        </span>
                       </Button>
                     )}
                   </div>
@@ -468,19 +530,22 @@ export const About = ({
                         }
                         type='link'
                       >
-                        {
-                          history?.contentList?.[
-                            findNextHasHistoryIndex(
-                              history?.contentList,
-                              historyIndex
-                            )
-                          ]?.title
-                        }
+                        <span className='ellipsis'>
+                          {
+                            history?.contentList?.[
+                              findNextHasHistoryIndex(
+                                history?.contentList,
+                                historyIndex
+                              )
+                            ]?.title
+                          }
+                        </span>
+
                         <ChevronRight />
                       </Button>
                     )}
                   </div>
-                </div>
+                </Space>
               </Col>
             </Row>
           </div>
@@ -495,13 +560,16 @@ export const About = ({
               headLine={defaultHeadLine}
             />
           </div>
-          <div style={{ transform: "translateY(-150px)", height: 1 }} ref={eleventhHistoryTabRef} />
+          <div
+            style={{ transform: "translateY(-150px)", height: 1 }}
+            ref={eleventhHistoryTabRef}
+          />
           <TabsWrapper
             activeKey={eleventhHistoryIndex}
             size='large'
             onChange={(ak) => {
-              eleventhHistorySwiperRef.current?.slideTo(ak)
-              setEleventhHistoryIndex(ak)
+              eleventhHistorySwiperRef.current?.slideTo(ak);
+              setEleventhHistoryIndex(ak);
             }}
           >
             {eleventhHistory?.contentList?.map((item, idx) => {
@@ -561,7 +629,12 @@ export const About = ({
                         </div>
                         {!item.description && (
                           <div style={{ textAlign: "center" }}>
-                            <Image src={StarIcon} width={14} height={14} />
+                            <Image
+                              src={StarIcon}
+                              width={14}
+                              height={14}
+                              alt=''
+                            />
                           </div>
                         )}
                       </div>
@@ -569,7 +642,7 @@ export const About = ({
                   }
                   key={idx}
                 />
-              )
+              );
             })}
           </TabsWrapper>
           <div
@@ -584,18 +657,18 @@ export const About = ({
             <Swiper
               autoHeight
               onSlideChange={(swiper) => {
-                setEleventhHistoryIndex(swiper.realIndex)
+                setEleventhHistoryIndex(swiper.realIndex);
                 eleventhHistoryTabRef.current?.scrollIntoView({
                   behavior: "smooth"
-                })
+                });
               }}
               modules={[Navigation]}
               onBeforeInit={(swiper) => {
-                eleventhHistorySwiperRef.current = swiper
+                eleventhHistorySwiperRef.current = swiper;
               }}
             >
               {eleventhHistory?.contentList?.map(
-                ({ cover, title, description }) => (
+                ({ cover, title, description, images }, index) => (
                   <SwiperSlide style={{ textAlign: "center" }}>
                     <Row gutter={[{ xs: 15, sm: 15, md: 32 }, 15]}>
                       <Col span={24} md={{ span: 7 }}>
@@ -604,8 +677,30 @@ export const About = ({
                             src={cover?.data?.attributes.url}
                             {...cover?.data?.attributes}
                             layout='responsive'
+                            alt=''
                           />
+                          {images?.data && (
+                            <span onClick={() => handleClick(index)}>
+                              {t("More images")}
+                            </span>
+                          )}
                         </div>
+                        {!!currentImage && (
+                          /* @ts-ignore */
+                          <Lightbox
+                            mainSrc={currentImage.url}
+                            imageTitle={currentImage.name}
+                            mainSrcThumbnail={currentImage.formats.small.url}
+                            nextSrc={nextImage.url}
+                            nextSrcThumbnail={nextImage.formats.small.url}
+                            prevSrc={prevImage.url}
+                            prevSrcThumbnail={prevImage.formats.small.url}
+                            onCloseRequest={handleClose}
+                            onMovePrevRequest={handleMovePrev}
+                            onMoveNextRequest={handleMoveNext}
+                            reactModalStyle={{ zIndex: 99999999 }}
+                          />
+                        )}
                       </Col>
                       <Col
                         span={24}
@@ -615,7 +710,11 @@ export const About = ({
                         <h3 style={{ color: THEME.primary, marginTop: 0 }}>
                           {title}
                         </h3>
-                        <RichText color={THEME.dark} content={description} />
+                        <ReadMoreReact
+                          scrollHeight={300}
+                          text={description}
+                          charLimit={800}
+                        />
                       </Col>
                     </Row>
                   </SwiperSlide>
@@ -716,6 +815,7 @@ export const About = ({
           <div style={{ textAlign: "center", marginBottom: 40 }}>
             <TitleWithHeadline headLine={defaultHeadLine} />
             <Title
+              isSecondaryFont
               isMobile={isMobile}
               size={TITLE_SIZES.MEDIUM}
               supTitle={t("Reincarnations of")}
@@ -725,13 +825,17 @@ export const About = ({
           <div
             style={{
               border: "5px solid #d2aa66",
-              padding: isMobile ? 16 : "32px 48px"
+              padding: isMobile ? 16 : "32px 48px",
+              borderRadius: "8px"
             }}
           >
             <Row gutter={[{ xs: 15, sm: 15, md: 40 }, 12]}>
               {reincarnation?.contentList?.map((item) => (
                 <Col span={24} md={12} lg={8}>
-                  <strong style={{ lineHeight: "32px", fontSize: 20 }}>
+                  <strong
+                    style={{ lineHeight: "32px", fontSize: 28 }}
+                    className='tx-secondary'
+                  >
                     {item.title}
                   </strong>
                 </Col>
@@ -741,7 +845,7 @@ export const About = ({
         </div>
       </div>
     </AboutWrapper>
-  )
-}
+  );
+};
 
-export default About
+export default About;

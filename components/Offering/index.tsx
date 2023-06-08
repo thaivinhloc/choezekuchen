@@ -404,6 +404,7 @@ export const OfferingPage = ({
                 src={openedOffering?.actionIcon?.data?.attributes?.url}
                 {...(openedOffering?.actionIcon?.data?.attributes ?? {})}
                 layout='responsive'
+                alt=''
               />
             </div>
             <CloseIcon style={{ width: 42 }} />

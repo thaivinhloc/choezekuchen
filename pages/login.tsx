@@ -6,6 +6,7 @@ import withTrans from "hoc/withTrans"
 import { useRouter } from "next/router"
 import { FC, useEffect } from "react"
 import dynamic from "next/dynamic"
+import { useApp } from "context/app/AppContext"
 const LoginForm = dynamic(() => import("components/Auth/LoginForm"), { ssr: false })
 
 const Login: FC<{}> = ({ language }: any) => {

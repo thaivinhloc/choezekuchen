@@ -1,23 +1,23 @@
 // @ts-nocheck
-import React from "react"
-import Link from "next/link"
-import { DivFooterWrapper } from "./index.style"
-import { Col, Row, Space } from "antd"
-import { useTranslation } from "next-i18next"
-import { Button } from "elements/Button"
-import Image from "next/image"
-import { THEME } from "common"
+import React from "react";
+import Link from "next/link";
+import { DivFooterWrapper } from "./index.style";
+import { Col, Row, Space } from "antd";
+import { useTranslation } from "next-i18next";
+import { Button } from "elements/Button";
+import Image from "next/image";
+import { THEME } from "common";
 
 const Footer = ({ data, isMobile }) => {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
   const {
     Socials = [],
     contacts = [],
     footer_background,
     logo,
     site_name
-  } = data?.attributes || {}
-  console.log("Footer", { contacts, Socials, logo })
+  } = data?.attributes || {};
+  console.log("Footer", { contacts, Socials, logo });
   return (
     <DivFooterWrapper style={{ background: footer_background }}>
       <h2
@@ -104,8 +104,8 @@ const Footer = ({ data, isMobile }) => {
           >
             <Row gutter={[24, 24]}>
               {contacts?.map((item) => (
-                <Col span={24} lg={{ span: 12 }} key={item.address}>
-                  <h3>{item.name}</h3>
+                <Col span={24} lg={{ span: 8 }} key={item.address}>
+                  <h3 style={{ fontSize: 15 }}>{item.name}</h3>
                   <div style={{ display: "flex", marginBottom: 14 }}>
                     <div
                       style={{
@@ -126,7 +126,7 @@ const Footer = ({ data, isMobile }) => {
                         src={require("assets/svgs/pin-icon.svg")}
                       />
                     </div>
-                    <p>{item.address}</p>
+                    <p style={{ fontSize: 13 }}>{item.address}</p>
                   </div>
                   {item.phone && (
                     <div style={{ display: "flex" }}>
@@ -149,7 +149,7 @@ const Footer = ({ data, isMobile }) => {
                           src={require("assets/svgs/phone-icon.svg")}
                         />
                       </div>
-                      <p>{item.phone}</p>
+                      <p style={{ fontSize: 13 }}>{item.phone}</p>
                     </div>
                   )}
                 </Col>
@@ -159,7 +159,7 @@ const Footer = ({ data, isMobile }) => {
         </Row>
       </div>
     </DivFooterWrapper>
-  )
-}
+  );
+};
 
-export default Footer
+export default Footer;

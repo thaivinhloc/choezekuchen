@@ -1,57 +1,57 @@
 // @ts-nocheck
-import { ArrowRightOutlined } from "@ant-design/icons"
-import { Col, Pagination, Radio, Row } from "antd"
+import { ArrowRightOutlined } from "@ant-design/icons";
+import { Col, Pagination, Radio, Row } from "antd";
 import {
   EListPageLayout,
   EMediaType,
   ListItem,
   TEvent,
   TPage
-} from "definition"
-import { Button } from "elements/Button"
-import { GridMedia, Media } from "elements/Media"
-import { RichText } from "elements/RichText"
+} from "definition";
+import { Button } from "elements/Button";
+import { GridMedia, Media } from "elements/Media";
+import { RichText } from "elements/RichText";
 import {
   getEventPathFromSlug,
   getMediaType,
   getRetreatPathFromSlug
-} from "helper"
-import usePage from "hook/usePage"
-import Link from "next/link"
-import { useEffect, useState } from "react"
-import styled from "styled-components"
-import { useTranslation } from "next-i18next"
-import useRetreat from "hook/useRetreat"
-import { useRouter } from "next/router"
-import { useAuth } from "context/auth/AuthContext"
-import { LOGIN } from "common/navigator"
-import useEvents from "hook/useEvents"
-import moment from "moment"
-import { getEventsByTimeRange } from "services/event"
-import { MonthEvent } from "components/Event/MonthEvent"
+} from "helper";
+import usePage from "hook/usePage";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import styled from "styled-components";
+import { useTranslation } from "next-i18next";
+import useRetreat from "hook/useRetreat";
+import { useRouter } from "next/router";
+import { useAuth } from "context/auth/AuthContext";
+import { LOGIN } from "common/navigator";
+import useEvents from "hook/useEvents";
+import moment from "moment";
+import { getEventsByTimeRange } from "services/event";
+import { MonthEvent } from "components/Event/MonthEvent";
 
-export const ListPageContentWrapper = styled.div<Partial<TPage>>``
+export const ListPageContentWrapper = styled.div<Partial<TPage>>``;
 
 export const ContentListTitleWrapper: any = styled.h3`
   color: ${(props) => props.theme.primary};
-`
+`;
 
 function TopSection({
   topTitle,
   topDesciption
 }: {
-  topTitle?: string
-  topDesciption?: string
+  topTitle?: string;
+  topDesciption?: string;
 }) {
   return topTitle ? (
     <div
-      className='text-center'
+      className="text-center"
       style={{ maxWidth: 800, margin: "0 auto 50px" }}
     >
       <h2>{topTitle}</h2>
       <RichText content={topDesciption ?? ""} />
     </div>
-  ) : null
+  ) : null;
 }
 
 function VerticalGrid({ topTitle, topDesciption, pageContentList }: TPage) {
@@ -59,11 +59,11 @@ function VerticalGrid({ topTitle, topDesciption, pageContentList }: TPage) {
     <ListPageContentWrapper>
       <TopSection topTitle={topTitle} topDesciption={topDesciption} />
     </ListPageContentWrapper>
-  )
+  );
 }
 
 function HorizontalGrid({ topTitle, topDesciption, pageContentList }: TPage) {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
   return (
     <ListPageContentWrapper>
       <TopSection topTitle={topTitle} topDesciption={topDesciption} />
@@ -105,8 +105,8 @@ function HorizontalGrid({ topTitle, topDesciption, pageContentList }: TPage) {
                           fontSize: 15,
                           fontWeight: 400
                         }}
-                        size='large'
-                        type='link'
+                        size="large"
+                        type="link"
                         href={redirectPage?.slug || redirectLink}
                       >
                         {redirectTitle ? redirectTitle : t("View more")}{" "}
@@ -116,12 +116,12 @@ function HorizontalGrid({ topTitle, topDesciption, pageContentList }: TPage) {
                   </Col>
                 </Row>
               </Col>
-            )
+            );
           }
         )}
       </Row>
     </ListPageContentWrapper>
-  )
+  );
 }
 
 function ReverseGrid({ topTitle, topDesciption, pageContentList }: TPage) {
@@ -130,12 +130,12 @@ function ReverseGrid({ topTitle, topDesciption, pageContentList }: TPage) {
       <TopSection topTitle={topTitle} topDesciption={topDesciption} />
       {pageContentList?.map(
         ({ title, description, cover, redirectPage, redirectLink }, idx) => {
-          let mediaOrder = idx % 2 === 0 ? 0 : 1
+          let mediaOrder = idx % 2 === 0 ? 0 : 1;
           return (
             <Row
               key={`page-list-row-${idx}`}
               gutter={{ lg: 32 }}
-              align='middle'
+              align="middle"
               style={{ marginBottom: 50 }}
             >
               <Col
@@ -148,7 +148,7 @@ function ReverseGrid({ topTitle, topDesciption, pageContentList }: TPage) {
               <Col span={24} lg={{ span: 12 }}>
                 {redirectLink || redirectPage ? (
                   <Link href={redirectPage?.slug ?? redirectLink ?? "/"}>
-                    <ContentListTitleWrapper as='a'>
+                    <ContentListTitleWrapper as="a">
                       {title}
                     </ContentListTitleWrapper>
                   </Link>
@@ -158,11 +158,11 @@ function ReverseGrid({ topTitle, topDesciption, pageContentList }: TPage) {
                 {description && <RichText content={description} />}
               </Col>
             </Row>
-          )
+          );
         }
       )}
     </ListPageContentWrapper>
-  )
+  );
 }
 
 function ReverseWithTitleGrid({
@@ -174,7 +174,7 @@ function ReverseWithTitleGrid({
     <ListPageContentWrapper>
       <TopSection topTitle={topTitle} topDesciption={topDesciption} />
       {pageContentList?.map(({ description, gridTitle }, idx) => {
-        let mediaOrder = idx % 2 === 0 ? 0 : 1
+        let mediaOrder = idx % 2 === 0 ? 0 : 1;
         return (
           <Row
             key={`page-list-row-${idx}`}
@@ -203,14 +203,14 @@ function ReverseWithTitleGrid({
               {description && <RichText content={description} />}
             </Col>
           </Row>
-        )
+        );
       })}
     </ListPageContentWrapper>
-  )
+  );
 }
 
 function BlogGrid({ ...props }: TPage) {
-  return <ListPageContentWrapper></ListPageContentWrapper>
+  return <ListPageContentWrapper></ListPageContentWrapper>;
 }
 
 function EventCalendar({ topTitle, topDesciption }: TPage) {
@@ -219,30 +219,30 @@ function EventCalendar({ topTitle, topDesciption }: TPage) {
       <TopSection topTitle={topTitle} topDesciption={topDesciption} />
       <MonthEvent />
     </ListPageContentWrapper>
-  )
+  );
 }
 
 function EventGrid({ topTitle, topDesciption, locale }: TPage) {
-  const pageSize = 3
-  const router = useRouter()
-  const { t } = useTranslation()
-  const [page, setPage] = useState(1)
-  const { events, getEventList } = useEvents({ locale, page, pageSize })
+  const pageSize = 3;
+  const router = useRouter();
+  const { t } = useTranslation();
+  const [page, setPage] = useState(1);
+  const { events, getEventList } = useEvents({ locale, page, pageSize });
 
   useEffect(() => {
-    getData()
+    getData();
     async function getData() {
-      await getEventList()
+      await getEventList();
     }
-  }, [page])
+  }, [page]);
 
-  console.log("EventGrid", { events })
+  console.log("EventGrid", { events });
 
   const onEventClick = ({ id, slug }: { id: number; slug: string }) => {
-    router.push(getEventPathFromSlug(id, slug))
-  }
+    router.push(getEventPathFromSlug(id, slug));
+  };
 
-  const { data, meta } = events || {}
+  const { data, meta } = events || {};
 
   return (
     <ListPageContentWrapper>
@@ -290,8 +290,8 @@ function EventGrid({ topTitle, topDesciption, locale }: TPage) {
                     <RichText content={attributes.description} />
                   )}
                   <Button
-                    size='large'
-                    type='link'
+                    size="large"
+                    type="link"
                     onClick={() =>
                       onEventClick({ id, slug: attributes.slug ?? "" })
                     }
@@ -312,7 +312,7 @@ function EventGrid({ topTitle, topDesciption, locale }: TPage) {
         />
       </div>
     </ListPageContentWrapper>
-  )
+  );
 }
 
 export const TopCategoryWrapper = styled.div`
@@ -338,7 +338,7 @@ export const TopCategoryWrapper = styled.div`
   .ant-radio-group {
     width: 100%;
   }
-`
+`;
 
 const mediaTypes = [
   {
@@ -353,7 +353,7 @@ const mediaTypes = [
     type: EMediaType.VIDEO,
     name: "Video"
   }
-]
+];
 
 function LibraryGrid({
   topTitle,
@@ -361,11 +361,11 @@ function LibraryGrid({
   locale,
   pageContentEndpoint
 }: TPage) {
-  const { t } = useTranslation()
-  const [mediaType, setMediaType] = useState(EMediaType.FILE)
-  const [mediaList, setMediaList] = useState<ListItem[]>([])
+  const { t } = useTranslation();
+  const [mediaType, setMediaType] = useState(EMediaType.FILE);
+  const [mediaList, setMediaList] = useState<ListItem[]>([]);
   const { content, getPageContent, isLoading } = usePage<{
-    dataList: ListItem[]
+    dataList: ListItem[];
   }>({
     locale,
     endpoint: pageContentEndpoint,
@@ -374,34 +374,34 @@ function LibraryGrid({
       "populate[1]": "dataList.cover",
       "populate[2]": "dataList.media"
     }
-  })
-  const { dataList } = content?.data?.attributes ?? {}
+  });
+  const { dataList } = content?.data?.attributes ?? {};
 
   useEffect(() => {
     if (dataList) {
       const _mediaList = dataList.filter(({ media }) => {
-        const { type } = getMediaType(media?.data)
-        return type === mediaType
-      })
-      setMediaList([..._mediaList])
+        const { type } = getMediaType(media?.data);
+        return type === mediaType;
+      });
+      setMediaList([..._mediaList]);
     }
-  }, [mediaType, dataList])
+  }, [mediaType, dataList]);
 
   useEffect(() => {
     if (pageContentEndpoint) {
-      getData()
+      getData();
     }
     async function getData() {
-      await getPageContent()
+      await getPageContent();
     }
-  }, [pageContentEndpoint])
+  }, [pageContentEndpoint]);
 
   const getLengthByType = (type: EMediaType) => {
     return dataList
       ? dataList.filter(({ media }) => getMediaType(media.data).type === type)
           .length
-      : 0
-  }
+      : 0;
+  };
 
   return (
     <ListPageContentWrapper>
@@ -409,19 +409,19 @@ function LibraryGrid({
       <TopCategoryWrapper>
         <Radio.Group
           defaultValue={EMediaType.FILE}
-          size='large'
-          buttonStyle='solid'
+          size="large"
+          buttonStyle="solid"
           onChange={(e) => setMediaType(e.target.value)}
         >
           {mediaTypes.map(({ name, type }) => {
-            const items = getLengthByType(type)
-            console.log({ name })
+            const items = getLengthByType(type);
+            console.log({ name });
 
             return (
               <Radio.Button key={`${type}-${name}`} value={type}>
                 {t(name)} ({items})
               </Radio.Button>
-            )
+            );
           })}
         </Radio.Group>
       </TopCategoryWrapper>
@@ -456,47 +456,47 @@ function LibraryGrid({
                   )}
                 </div>
               </Col>
-            )
+            );
           })}
       </Row>
     </ListPageContentWrapper>
-  )
+  );
 }
 
 function RetreatGrid({ topTitle, topDesciption, locale }: TPage) {
-  const { t } = useTranslation()
-  const router = useRouter()
-  const { user } = useAuth()
+  const { t } = useTranslation();
+  const router = useRouter();
+  const { user } = useAuth();
   const { parentRetreats, getPRetreats, isLoading } = useRetreat({
     locale
-  })
+  });
 
   useEffect(() => {
-    getData()
+    getData();
     async function getData() {
-      await getPRetreats()
+      await getPRetreats();
     }
-  }, [])
+  }, []);
 
   const onRetreatClick = ({
     id,
     slug,
     status
   }: {
-    id: number
-    slug: string
-    status: boolean
+    id: number;
+    slug: string;
+    status: boolean;
   }) => {
     if (status) {
       router.push(
         user
           ? getRetreatPathFromSlug(id, slug)
           : `${LOGIN}?redirect=${getRetreatPathFromSlug(id, slug)}`
-      )
+      );
     }
-  }
+  };
 
-  console.log("RetreatGrid", { parentRetreats })
+  console.log("RetreatGrid", { parentRetreats });
 
   return (
     <ListPageContentWrapper>
@@ -535,7 +535,7 @@ function RetreatGrid({ topTitle, topDesciption, locale }: TPage) {
                       <ContentListTitleWrapper
                         style={{}}
                         onClick={() => {
-                          onRetreatClick({ id, slug: slug ?? "", status })
+                          onRetreatClick({ id, slug: slug ?? "", status });
                         }}
                       >
                         {name}
@@ -552,8 +552,8 @@ function RetreatGrid({ topTitle, topDesciption, locale }: TPage) {
                             fontSize: 15,
                             fontWeight: 400
                           }}
-                          size='large'
-                          type='link'
+                          size="large"
+                          type="link"
                           onClick={() =>
                             onRetreatClick({ id, slug: slug ?? "", status })
                           }
@@ -568,36 +568,36 @@ function RetreatGrid({ topTitle, topDesciption, locale }: TPage) {
                     </Col>
                   </Row>
                 </Col>
-              )
+              );
             }
           )}
       </Row>
     </ListPageContentWrapper>
-  )
+  );
 }
 
 export function ListPageLayout({ data }: { data: TPage }) {
   console.log("ListPageLayout", {
     data,
     type: data.pageContentListLayout === EListPageLayout.HORIZONTAL_GRID
-  })
+  });
 
   switch (data.pageContentListLayout) {
     case EListPageLayout.VERTICAL_GRID:
-      return <VerticalGrid {...data} />
+      return <VerticalGrid {...data} />;
     case EListPageLayout.HORIZONTAL_GRID:
-      return <HorizontalGrid {...data} />
+      return <HorizontalGrid {...data} />;
     case EListPageLayout.BLOG:
-      return <BlogGrid {...data} />
+      return <BlogGrid {...data} />;
     case EListPageLayout.EVENT:
-      return <EventCalendar {...data} />
+      return <EventCalendar {...data} />;
     case EListPageLayout.LIBRARY:
-      return <LibraryGrid {...data} />
+      return <LibraryGrid {...data} />;
     case EListPageLayout.RETREAT:
-      return <RetreatGrid {...data} />
+      return <RetreatGrid {...data} />;
     case EListPageLayout.REVERSE_WITH_TITLE:
-      return <ReverseWithTitleGrid {...data} />
+      return <ReverseWithTitleGrid {...data} />;
     default:
-      return <ReverseGrid {...data} />
+      return <ReverseGrid {...data} />;
   }
 }

@@ -5,12 +5,13 @@ import { RETREAT } from "common/navigator"
 import LinkComponent from "components/Link"
 import i18next from "i18next"
 import { useRouter } from "next/router"
-import React from "react"
+import React, { useEffect } from "react"
 import { useTranslation } from "next-i18next"
 import { useAuth } from "../../context/auth/AuthContext"
 import { TLogin } from "../../context/auth/AuthTypes"
 import { DivLoginWrapper } from "./index.styles"
 import Link from "next/link"
+import { useApp } from "context/app/AppContext"
 
 const LoginForm: React.FC<{}> = () => {
   const router = useRouter()
@@ -18,6 +19,17 @@ const LoginForm: React.FC<{}> = () => {
   const { t, i18n } = useTranslation(["content", "login"])
 
   const { onLogin, isLoading } = useAuth()
+  const {setTitleBanner}  = useApp()
+  
+  
+  useEffect(()=>{
+    if (i18n.language === 'en'){
+      setTitleBanner('LOGIN FOR RETREAT')
+    } else {
+      setTitleBanner('ĐĂNG NHẬP CHO NHẬP THẤT')
+    }
+    
+  },[i18n.language, setTitleBanner])
 
   const onFinish = (values: TLogin) => {
     onLogin(values, () => {

@@ -34,7 +34,7 @@ const RichTextWrapper = styled.div<RichTextProps>`
   i {
     font-family: ${(props) => props.theme.primaryFont} !important;
     background: transparent !important;
-    line-height: ${props => props.lineHeight ?? parseInt(props.fontSize ?? "") + 8 + "px"} !imporant;
+    line-height: ${props => props.lineHeight ?? parseInt(props.fontSize ?? "") + 8 + "px"} +  '!important';
     ${({ align }) => `text-align: ${align} !important;`}
     ${(props) => props.fontSize && `font-size: ${props.fontSize} !important;`}
     ${(props) =>
@@ -43,6 +43,7 @@ const RichTextWrapper = styled.div<RichTextProps>`
     ${(props) =>
       props.letterSpacing &&
       `letter-spacing: ${props.letterSpacing} !important;`}
+  }
 `
 
 export const RichText: React.FC<RichTextProps> = ({

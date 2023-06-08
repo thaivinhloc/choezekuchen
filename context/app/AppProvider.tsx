@@ -14,6 +14,8 @@ export function AppProvider({ children }: Props) {
   const [banners, setBanners] = useState<TMedia[]>([])
 
   const setTitleBanner = (title: string, meta_desc?: string) => {
+    console.log('title',title);
+    
     setTitle(title)
     setDesc(meta_desc)
   }

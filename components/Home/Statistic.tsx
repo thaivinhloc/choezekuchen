@@ -16,7 +16,7 @@ const LargeTitleWrapper = styled(Space)`
     }
     &__value {
       font-size: 100px;
-      line-height: 100px;
+      line-height: 80px;
       margin-left: -10px;
     }
     &__description {
