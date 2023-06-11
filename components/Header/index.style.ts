@@ -442,28 +442,25 @@ export const DivHeaderMobile = styled.div`
 
   .banner-slider {
     width: 100%;
-    height: 100vh;
     z-index: 1;
     position: relative;
 
     &__content {
       width: 100%;
-      height: 50vh;
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
-      max-width: 420px;
+      max-width: 200px;
       position: absolute;
-      left: 18px;
-      bottom: 18px;
+      left: 10px;
+      top: 87px;
       z-index: 3;
-      padding: 32px;
+      padding: 24px 0;
       opacity: 0.7;
       h2 {
         color: ${(props) => props.theme.white} !important;
-        font-size: 32px;
-        line-height: 40px;
-        margin-bottom: 16px;
+        font-size: 12px !important;
+        line-height: 20px;
       }
     }
   }

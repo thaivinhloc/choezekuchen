@@ -134,7 +134,8 @@ export const About = ({
 
   const listImages = useMemo(() => {
     if (!eleventhHistory?.contentList) return [];
-    return eleventhHistory.contentList.map((item) => item.images.data);
+    if (!eleventhHistory?.contentList?.data) return [];
+    return eleventhHistory.contentList.map((item) => item.images?.data);
   }, [eleventhHistory]);
   console.log("listImages", { listImages, eleventhHistory });
 
