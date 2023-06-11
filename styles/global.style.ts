@@ -87,8 +87,17 @@ export const GlobalStyle = createGlobalStyle`${css`
   .justify-content-between {
     justify-content: space-between;
   }
+  .justify-content-center {
+    justify-content: center;
+  }
+  .justify-content-end {
+    justify-content: flex-end;
+  }
   .flex {
     display: flex;
+  }
+  .flex-wrap {
+    flex-wrap: wrap;
   }
   .items-center {
     align-items: center;
@@ -139,6 +148,9 @@ export const GlobalStyle = createGlobalStyle`${css`
   }
   .w-100 {
     width: 100%;
+  }
+  .h-100 {
+    height: 100%;
   }
   .btn-primary {
     border: 2px solid #303030;

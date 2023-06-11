@@ -165,7 +165,6 @@ const HeaderMobile = ({
             className='headermobile__menu'
             inlineIndent={0}
             expandIcon={(...props: any) => {
-              console.log("props", props[0].isHasChildren);
               const isHasChildren = !!props[0]?.isHasChildren;
               const isOpen = props[0].isOpen;
               if (!isHasChildren) return <div />;

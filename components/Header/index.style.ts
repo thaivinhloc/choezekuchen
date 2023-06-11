@@ -88,7 +88,7 @@ export const DivHeaderWrapperV1 = styled.div<HeaderProps>`
       align-items: center;
       padding: 40px 50px 15px;
       position: relative;
-      z-index: 1002;
+      z-index: 999;
       transition: 0.3s linear;
       &-nav {
         display: flex;
@@ -523,6 +523,6 @@ export const TopActionStyled = styled.div`
     position: absolute;
     top: 0;
     right: 0;
-    z-index: 99999999;
+    z-index: 999;
   }
 `;

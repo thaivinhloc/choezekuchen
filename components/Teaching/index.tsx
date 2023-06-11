@@ -5,7 +5,7 @@ import { Button } from "elements/Button";
 import usePage from "hook/usePage";
 import { useTranslation } from "next-i18next";
 import Image from "next/image";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { Swiper, SwiperSlide } from "swiper/react";
 import ArrowLeftIcon from "assets/svgs/circle_arrow_left_icon.svg";
@@ -16,6 +16,7 @@ import { RichText } from "elements/RichText";
 import { Autoplay } from "swiper";
 import { SingleSection } from "container/Section";
 import { TeachingItem } from "./TeachingItem";
+import { getListTeaching } from "services/teaching";
 
 const TeachingMethodsWrapper = styled.div`
   @media (min-width: 1200px) {
@@ -82,6 +83,7 @@ const TeachingMethods = ({ data, isMobile }) => {
                                   layout='fill'
                                   objectFit='cover'
                                   objectPosition='center center'
+                                  alt=''
                                 />
                               </div>
                             )}
@@ -97,6 +99,7 @@ const TeachingMethods = ({ data, isMobile }) => {
                               src={cover?.data?.attributes.url}
                               {...cover?.data?.attributes}
                               layout='responsive'
+                              alt=''
                             />
                           </Col>
                         )}
@@ -168,6 +171,7 @@ export const Teaching = ({
   globalData
 }) => {
   const { t } = useTranslation();
+  const [listTeaching, setListTeaching] = useState([]);
   const { content, getPageContent } = usePage({
     locale,
     endpoint: pageContentEndpoint,
@@ -183,6 +187,21 @@ export const Teaching = ({
       "populate[8]": "event_banner"
     }
   });
+
+  useEffect(() => {
+    fetchListTeaching();
+  }, []);
+
+  const fetchListTeaching = async () => {
+    try {
+      const response = await getListTeaching({ locale: locale });
+      console.log(response.data);
+
+      setListTeaching(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     if (pageContentEndpoint) {
@@ -216,9 +235,9 @@ export const Teaching = ({
               { xs: 16, sm: 16, md: 24, xl: 40 }
             ]}
           >
-            {ourPractices?.contentList?.map((item) => (
+            {listTeaching.map(({ attributes, id }) => (
               <Col span={24} md={{ span: 12 }} xl={{ span: 8 }}>
-                <TeachingItem {...item} />
+                <TeachingItem id={id} {...attributes} />
               </Col>
             ))}
           </Row>

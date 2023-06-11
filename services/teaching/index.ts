@@ -6,7 +6,40 @@ import {
 } from "definition";
 import client from "services/client";
 
-export const getMonasteries = ({
+export const getTeachingContent = ({
+  locale,
+  page = 1,
+  pageSize = 100
+}: {
+  locale: string;
+  page?: number;
+  pageSize?: number;
+}) => {
+  return client.createRequest<{
+    data: TRecordResponse<TEvent>[];
+    meta: {
+      pagination: {
+        page: number;
+        pageSize: number;
+        pageCount: number;
+        total: number;
+      };
+    };
+  }>({
+    path: `/api/teaching-content`,
+    method: "get",
+    external: true,
+    params: {
+      "populate[0]": "socialMedia",
+      "populate[1]": "socialMedia.image",
+      "pagination[pageSize]": pageSize,
+      "pagination[page]": page,
+      locale: locale
+    }
+  });
+};
+
+export const getListTeaching = ({
   locale,
   page = 1,
   pageSize = 100,
@@ -28,21 +61,20 @@ export const getMonasteries = ({
       };
     };
   }>({
-    path: `/api/monasteries`,
+    path: `/api/teachings`,
     method: "get",
     external: true,
     params: {
       "populate[0]": "cover",
+      "populate[1]": "thumbnail",
       "pagination[pageSize]": pageSize,
       "pagination[page]": page,
-      locale: locale,
-      sort: "order:asc",
-      ...filter
+      locale: locale
     }
   });
 };
 
-export const getMonasteryDetails = ({
+export const getTeachingDetails = ({
   id,
   locale
 }: {
@@ -55,7 +87,7 @@ export const getMonasteryDetails = ({
       attributes: Record<string, any>[];
     };
   }>({
-    path: `/api/monasteries/${id}`,
+    path: `/api/teachings/${id}`,
     method: "get",
     external: true,
     params: {
@@ -64,7 +96,7 @@ export const getMonasteryDetails = ({
       "populate[1]": "images",
       "populate[2]": "videos",
       "populate[3]": "background",
-      "populate[4]": "address_pin"
+      "populate[4]": "images2"
     }
   });
 };
