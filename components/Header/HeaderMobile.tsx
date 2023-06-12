@@ -31,6 +31,7 @@ import { useAuth } from "../../context/auth/AuthContext";
 import { IUser } from "../../context/auth/AuthTypes";
 import { DivHeaderMobile } from "./index.style";
 import { RichText } from "elements/RichText";
+import Image from "next/image";
 
 const { SubMenu } = Menu;
 
@@ -311,15 +312,18 @@ const HeaderMobile = ({
               <div>
                 <div
                   style={{
-                    height: "calc(100vh - 100px)",
+                    // height: "calc(100vh - 100px)",
                     background: "rgba(0, 0, 0, 0.4)"
                   }}
                 >
-                  <img
+                  <Image
                     src={b?.attributes.url}
-                    width='100%'
-                    height='100%'
-                    style={{ objectFit: "cover" }}
+                    {...b?.attributes}
+                    layout='responsive'
+                    // width='100%'
+                    // height='100%'
+                    // style={{ objectFit: "contain" }}
+                    alt=''
                   />
                 </div>
                 <div
@@ -336,12 +340,16 @@ const HeaderMobile = ({
             ))}
           </Carousel>
           {homeTopSlider?.[currentSlide] ? (
-            <div className='banner-slider__content'>
+            <div
+              className='banner-slider__content'
+              style={{ maxWidth: "200px" }}
+            >
               <h2>{homeTopSlider[currentSlide].title}</h2>
               <RichText
                 color={THEME.white}
                 content={homeTopSlider[currentSlide].description}
-                fontSize='20px'
+                fontSize='10px'
+                lineHeight='20px'
               />
             </div>
           ) : null}
