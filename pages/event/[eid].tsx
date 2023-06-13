@@ -1,11 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
 // @ts-nocheck
-import { RightCircleFilled } from "@ant-design/icons";
+import { ArrowRightOutlined, RightCircleFilled } from "@ant-design/icons";
 import { Col, Form, Row } from "antd";
 import { THEME } from "common";
 import { EventItem } from "components/Event/EventItem";
 import Input, { TextArea } from "components/Input";
 import { TeachingItem } from "components/Teaching/TeachingItem";
+import { TITLE_SIZES, Title } from "components/Title";
 import { SinglePageContentWrapper } from "container/layout/SinglePage";
 import { useApp } from "context/app/AppContext";
 import { TEvent } from "definition";
@@ -21,6 +22,7 @@ import useTeaching from "hook/useTeaching";
 import moment from "moment";
 import { useTranslation } from "next-i18next";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useMemo, useState } from "react";
 import { Gallery } from "react-grid-gallery";
@@ -37,6 +39,15 @@ type TEventDetails = {
   };
   isMobile: boolean;
 };
+const BackgroundWrapper = styled.div<{ background?: any }>`
+  background: url("images/bg/HomeSite_Lotus_Background.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding: 80px 0;
+  @media (min-width: 1200px) {
+    padding: 200px 0;
+  }
+`;
 
 const PageContentWrapper = styled.div`
   padding-top: 50px;
@@ -101,7 +112,7 @@ const EventDetails = ({ eventDetails, isMobile }: TEventDetails) => {
     buttonRetreatLink,
     buttonRetreatText
   } = attributes;
-  const listMedia = media.data;
+  const listMedia = media.data || [];
 
   const listIntro = useMemo(() => {
     const startTime = moment(dateStart).format("h:mm A");
@@ -416,62 +427,59 @@ const EventDetails = ({ eventDetails, isMobile }: TEventDetails) => {
           />
         )}
       </PageContentWrapper>
-      <div
-        style={{
-          backgroundImage: 'url("images/bg/HomeSite_Lotus_Background.png")',
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "contain"
-        }}
-      >
-        <div
-          className='container'
-          style={{
-            padding: "80px 0"
-          }}
-        >
-          <Row className='lotus-wrapper' gutter={16}>
-            <Col span={24} xl={12}>
-              <h2
-                style={{
-                  color: THEME.primary,
-                  marginBottom: 0
-                }}
-              >
-                Teaching &
-              </h2>
-              <h1 style={{ color: THEME.primary, ...titleStyle }}>Retreat</h1>
-              <Col span={24} lg={14}>
-                <h3 style={{ fontWeight: 500 }}>{retreatContent}</h3>
-              </Col>
+
+      <BackgroundWrapper background=''>
+        <div className='container'>
+          <Row align='bottom' gutter={[{ xs: 16, md: 32 }, 24]}>
+            <Col span={24} md={{ span: 12 }}>
+              <Title
+                isMobile={isMobile}
+                title={"Teaching &"}
+                supTitle={"Retreat"}
+                size={TITLE_SIZES.LARGE}
+              />
             </Col>
-            <Col span={24} xl={12}>
-              <div className='d-flex align-items-center h-100'>
-                <Button
-                  type='default'
-                  shape='round'
-                  size='large'
-                  className='d-flex align-items-center'
-                  style={{ borderColor: THEME.primary, height: "50px" }}
-                  onClick={() =>
-                    router.push(buttonRetreatLink ? buttonRetreatLink : "/")
-                  }
-                >
-                  <span style={{ color: THEME.primary }}>
-                    {buttonRetreatText}
-                  </span>
-                  <div className='d-flex' style={{ marginLeft: 12 }}>
-                    <RightCircleFilled
-                      size={27}
-                      color={THEME.primary}
-                      style={{ color: THEME.primary, fontSize: 20 }}
+          </Row>
+          <Row>
+            <Col span={24} md={{ span: 12 }} style={{ paddingBottom: 28 }}>
+              <h3 style={{ fontWeight: 500 }}>{retreatContent}</h3>
+            </Col>
+            <Col span={24} md={{ span: 12 }} style={{ paddingBottom: 28 }}>
+              <Link href={buttonRetreatLink ?? buttonRetreatLink ?? "/"}>
+                <a>
+                  <div
+                    style={{
+                      border: `3px solid ${THEME.primary}`,
+                      borderRadius: 40,
+                      height: 68,
+                      position: "relative",
+                      textAlign: "center",
+                      lineHeight: "60px",
+                      color: THEME.primary,
+                      fontSize: 20,
+                      fontWeight: 700
+                    }}
+                  >
+                    {buttonRetreatText ?? t("Learn more")}
+                    <Button
+                      shape='circle'
+                      style={{
+                        position: "absolute",
+                        right: 4,
+                        top: 3,
+                        height: 54,
+                        width: 54
+                      }}
+                      type='primary'
+                      icon={<ArrowRightOutlined style={{ fontSize: 28 }} />}
                     />
                   </div>
-                </Button>
-              </div>
+                </a>
+              </Link>
             </Col>
           </Row>
         </div>
-      </div>
+      </BackgroundWrapper>
     </div>
   );
 };

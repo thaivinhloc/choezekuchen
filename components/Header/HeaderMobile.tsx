@@ -342,7 +342,7 @@ const HeaderMobile = ({
           {homeTopSlider?.[currentSlide] ? (
             <div
               className='banner-slider__content'
-              style={{ maxWidth: "200px" }}
+              style={{ maxWidth: "146px" }}
             >
               <h2>{homeTopSlider[currentSlide].title}</h2>
               <RichText

@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 // @ts-nocheck
 import { Col, Row, Space, Tabs, Tooltip } from "antd";
 import { THEME } from "common";
@@ -21,6 +22,7 @@ import { Autoplay } from "swiper";
 import ReadMoreReact from "container/readMore/components/ReadMore";
 import Lightbox from "react-image-lightbox";
 import "react-image-lightbox/style.css";
+import Link from "next/link";
 
 const AboutWrapper = styled.div``;
 
@@ -38,6 +40,11 @@ const BackgroundWrapper = styled.div<{
 `;
 
 const TabsWrapper = styled(Tabs)`
+  .ant-tabs-nav {
+    &::before {
+      border-bottom: unset;
+    }
+  }
   .ant-tabs-nav-list {
     align-items: flex-start;
     @media (min-width: 1200px) {
@@ -82,7 +89,8 @@ export const About = ({
       "populate[14]": "gurus.contentList.cover",
       "populate[15]": "history.contentList.cover",
       "populate[16]": "eleventhHistory.contentList.cover",
-      "populate[17]": "eleventhHistory.contentList.images"
+      "populate[17]": "eleventhHistory.contentList.images",
+      "populate[18]": "reincarnation.borderButtonImage"
     }
   });
 
@@ -316,7 +324,7 @@ export const About = ({
             </i>
           </div>
           <div
-            style={{ transform: "translateY(-150px)", height: 1 }}
+            style={{ transform: "translateY(-100px)", height: 1 }}
             ref={historyTabRef}
           />
           {history && (
@@ -437,6 +445,7 @@ export const About = ({
                           src={cover?.data?.attributes.url}
                           {...cover?.data?.attributes}
                           layout='responsive'
+                          alt={cover?.data?.attributes?.name}
                         />
                       </div>
                     </Col>
@@ -449,8 +458,8 @@ export const About = ({
                         {title}
                       </h3>
                       <ReadMoreReact
-                        scrollHeight={isMobile ? 200 : 300}
-                        charLimit={500}
+                        scrollHeight={isMobile ? 200 : 400}
+                        charLimit={1000}
                         text={description}
                       />
                     </Col>
@@ -562,7 +571,7 @@ export const About = ({
             />
           </div>
           <div
-            style={{ transform: "translateY(-150px)", height: 1 }}
+            style={{ transform: "translateY(-100px)", height: 1 }}
             ref={eleventhHistoryTabRef}
           />
           <TabsWrapper
@@ -712,9 +721,9 @@ export const About = ({
                           {title}
                         </h3>
                         <ReadMoreReact
-                          scrollHeight={300}
+                          scrollHeight={400}
                           text={description}
-                          charLimit={800}
+                          charLimit={1100}
                         />
                       </Col>
                     </Row>
@@ -825,23 +834,96 @@ export const About = ({
           </div>
           <div
             style={{
-              border: "5px solid #d2aa66",
-              padding: isMobile ? 16 : "32px 48px",
-              borderRadius: "8px"
+              position: "relative"
             }}
           >
-            <Row gutter={[{ xs: 15, sm: 15, md: 40 }, 12]}>
-              {reincarnation?.contentList?.map((item) => (
-                <Col span={24} md={12} lg={8}>
-                  <strong
-                    style={{ lineHeight: "32px", fontSize: 28 }}
-                    className='tx-secondary'
+            <div
+              style={{
+                border: isMobile ? "5px solid #d2aa66" : "unset",
+                padding: isMobile ? 32 : "32px 48px",
+                borderRadius: "8px"
+              }}
+            >
+              <Row gutter={[{ xs: 15, sm: 15, md: 40 }, 12]}>
+                {reincarnation?.contentList?.map((item) => (
+                  <Col span={24} md={12} lg={8}>
+                    <strong
+                      style={{ lineHeight: "32px", fontSize: 28 }}
+                      className='tx-secondary'
+                    >
+                      {item.title}
+                    </strong>
+                  </Col>
+                ))}
+              </Row>
+              {!isMobile && (
+                <div
+                  style={{
+                    position: "absolute",
+                    inset: 0,
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0
+                  }}
+                >
+                  <img
+                    src='images/bg/box-gold.png'
+                    style={{
+                      height: "100%",
+                      width: "100%"
+                    }}
+                    alt=''
+                  />
+                </div>
+              )}
+            </div>
+          </div>
+          <div style={{ marginTop: 20 }}>
+            {(reincarnation?.reincarnationLinks || []).map(({ url, label }) => (
+              <Link key={url + label} passHref href={url ?? "/"}>
+                <div
+                  style={{
+                    height: 50,
+                    position: "relative",
+                    margin: "24px 0"
+                  }}
+                >
+                  <div
+                    style={{
+                      textAlign: "center",
+                      fontWeight: 700
+                    }}
                   >
-                    {item.title}
-                  </strong>
-                </Col>
-              ))}
-            </Row>
+                    {label}
+                  </div>
+                  {!isMobile && (
+                    <div
+                      style={{
+                        position: "absolute",
+                        inset: 0,
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        bottom: 0
+                      }}
+                    >
+                      <img
+                        src={
+                          reincarnation?.borderButtonImage?.data?.attributes
+                            ?.url ?? "images/bg/box-gold.png"
+                        }
+                        style={{
+                          height: "100%",
+                          width: "100%"
+                        }}
+                        alt=''
+                      />
+                    </div>
+                  )}
+                </div>
+              </Link>
+            ))}
           </div>
         </div>
       </div>

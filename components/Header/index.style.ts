@@ -60,13 +60,11 @@ export const DivHeaderWrapperV1 = styled.div<HeaderProps>`
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
-        max-width: 420px;
+        max-width: 520px;
         position: absolute;
-        left: 18px;
         bottom: 18px;
         z-index: 3;
         padding: 32px;
-        opacity: 0.7;
         h2 {
           color: ${(props) => props.theme.white} !important;
           font-size: 32px;
@@ -450,12 +448,11 @@ export const DivHeaderMobile = styled.div`
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
-      max-width: 200px;
+      max-width: 146px;
       position: absolute;
       left: 10px;
-      top: 87px;
+      top: 50%;
       z-index: 3;
-      padding: 24px 0;
       opacity: 0.7;
       h2 {
         color: ${(props) => props.theme.white} !important;

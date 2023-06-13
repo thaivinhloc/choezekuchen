@@ -1,13 +1,13 @@
 // @ts-nocheck
-import { ArrowRightOutlined } from "@ant-design/icons"
-import { Col, Row } from "antd"
-import { THEME } from "common"
-import { Button } from "elements/Button"
-import { RichText } from "elements/RichText"
-import Link from "next/link"
-import { useTranslation } from "next-i18next"
-import styled from "styled-components"
-import { TITLE_SIZES, Title } from "components/Title"
+import { ArrowRightOutlined } from "@ant-design/icons";
+import { Col, Row } from "antd";
+import { THEME } from "common";
+import { Button } from "elements/Button";
+import { RichText } from "elements/RichText";
+import Link from "next/link";
+import { useTranslation } from "next-i18next";
+import styled from "styled-components";
+import { TITLE_SIZES, Title } from "components/Title";
 
 const BackgroundWrapper = styled.div<{ background?: any }>`
   background: url(${(props) => props.background?.data?.attributes?.url});
@@ -17,7 +17,7 @@ const BackgroundWrapper = styled.div<{ background?: any }>`
   @media (min-width: 1200px) {
     padding: 200px 0;
   }
-`
+`;
 
 export const Offering: React.FC = ({
   description,
@@ -29,8 +29,8 @@ export const Offering: React.FC = ({
   offeringRedirectTitle,
   offeringRedirectLink
 }) => {
-  const { t } = useTranslation()
-  const contentSize = isMobile ? "18px" : "24px"
+  const { t } = useTranslation();
+  const contentSize = isMobile ? "18px" : "24px";
   return (
     <BackgroundWrapper background={background}>
       <div className='container'>
@@ -44,6 +44,10 @@ export const Offering: React.FC = ({
               }
               size={TITLE_SIZES.LARGE}
             />
+          </Col>
+        </Row>
+        <Row>
+          <Col span={24} md={{ span: 12 }} style={{ paddingBottom: 28 }}>
             <RichText fontSize={contentSize} content={description} />
           </Col>
           <Col span={24} md={{ span: 12 }} style={{ paddingBottom: 28 }}>
@@ -81,7 +85,7 @@ export const Offering: React.FC = ({
         </Row>
       </div>
     </BackgroundWrapper>
-  )
-}
+  );
+};
 
-export default Offering
+export default Offering;

@@ -307,20 +307,28 @@ const Header = ({
                       height='100%'
                       style={{ objectFit: "cover" }}
                     />
+                    <div className='banner-slider__content'>
+                      <h2>{homeTopSlider[currentSlide].title}</h2>
+                      <RichText
+                        color={THEME.white}
+                        content={homeTopSlider[currentSlide].description}
+                        fontSize='20px'
+                      />
+                    </div>
                   </div>
                 </div>
               ))}
             </Carousel>
-            {homeTopSlider?.[currentSlide] ? (
+            {/* {homeTopSlider?.[currentSlide] ? (
               <div className='banner-slider__content'>
                 <h2>{homeTopSlider[currentSlide].title}</h2>
                 <RichText
-                  color={THEME.white}
+                  color={"#fdfdfd"}
                   content={homeTopSlider[currentSlide].description}
                   fontSize='20px'
                 />
               </div>
-            ) : null}
+            ) : null} */}
           </div>
         ) : null}
       </header>

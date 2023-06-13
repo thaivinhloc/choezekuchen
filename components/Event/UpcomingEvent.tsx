@@ -1,12 +1,12 @@
 // @ts-nocheck
-import { THEME } from "common"
-import { GridMedia } from "elements/Media"
-import { getEventPathFromSlug } from "helper"
-import Link from "next/link"
-import styled from "styled-components"
-import { useTranslation } from "next-i18next"
-import { Button } from "elements/Button"
-import { ArrowRightAlt } from "@mui/icons-material"
+import { THEME } from "common";
+import { GridMedia } from "elements/Media";
+import { getEventPathFromSlug } from "helper";
+import Link from "next/link";
+import styled from "styled-components";
+import { useTranslation } from "next-i18next";
+import { Button } from "elements/Button";
+import { ArrowRightAlt } from "@mui/icons-material";
 
 const EventItemWrapper = styled.div`
   padding: 24px;
@@ -18,7 +18,7 @@ const EventItemWrapper = styled.div`
   background-position: center center;
   ${(props) =>
     props.background && `background-image: url(${props.background});`}
-`
+`;
 
 export const UpcomingEventItem: React.FC = ({
   id,
@@ -28,14 +28,15 @@ export const UpcomingEventItem: React.FC = ({
   image,
   style = {}
 }) => {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
   return (
     <EventItemWrapper background={cover?.url} style={style}>
       <Link href={getEventPathFromSlug(id, slug)}>
         <div
           style={{
             position: "relative",
-            cursor: "pointer"
+            cursor: "pointer",
+            height: "100%"
           }}
         >
           <div style={{ marginBottom: 24 }}>
@@ -74,7 +75,9 @@ export const UpcomingEventItem: React.FC = ({
               border: "1px solid " + THEME.white,
               color: THEME.white,
               display: "flex",
-              justifyContent: "space-between"
+              justifyContent: "space-between",
+              position: "absolute",
+              bottom: 0
             }}
           >
             {t("See more")}
@@ -83,5 +86,5 @@ export const UpcomingEventItem: React.FC = ({
         </div>
       </Link>
     </EventItemWrapper>
-  )
-}
+  );
+};
