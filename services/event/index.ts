@@ -178,3 +178,27 @@ export const getEventDetails = ({
     }
   });
 };
+
+export const postSendEmail = ({
+  fullName,
+  email,
+  phoneNumber,
+  description
+}: {
+  fullName: string;
+  email: string;
+  phoneNumber: string;
+  description: string;
+}) => {
+  return client.createRequest({
+    path: `/api/send-email/contact-us`,
+    method: "post",
+    external: true,
+    body: {
+      fullName,
+      email,
+      phoneNumber,
+      description
+    }
+  });
+};

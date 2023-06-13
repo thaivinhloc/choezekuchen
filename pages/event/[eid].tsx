@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 // @ts-nocheck
 import { ArrowRightOutlined, RightCircleFilled } from "@ant-design/icons";
-import { Col, Form, Row } from "antd";
+import { Col, Form, Row, notification } from "antd";
 import { THEME } from "common";
 import { EventItem } from "components/Event/EventItem";
 import Input, { TextArea } from "components/Input";
@@ -28,6 +28,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Gallery } from "react-grid-gallery";
 import Lightbox from "react-image-lightbox";
 import "react-image-lightbox/style.css";
+import { postSendEmail } from "services/event";
 import styled from "styled-components";
 
 type TEventDetails = {
@@ -73,6 +74,8 @@ const EventDetails = ({ eventDetails, isMobile }: TEventDetails) => {
     locale: router.locale ?? "en"
   });
 
+  const [loading, setLoading] = useState(false);
+
   const { teachings, fetchListTeaching } = useTeaching({
     locale: router.locale ?? "en"
   });
@@ -113,6 +116,8 @@ const EventDetails = ({ eventDetails, isMobile }: TEventDetails) => {
     buttonRetreatText
   } = attributes;
   const listMedia = media.data || [];
+
+  const [form] = Form.useForm();
 
   const listIntro = useMemo(() => {
     const startTime = moment(dateStart).format("h:mm A");
@@ -166,7 +171,21 @@ const EventDetails = ({ eventDetails, isMobile }: TEventDetails) => {
     ? { fontSize: 42, lineHeight: "42px" }
     : { fontSize: 100, lineHeight: "60px" };
 
-  console.log({ cardTitle });
+  const handleSubmit = async (data) => {
+    try {
+      setLoading(true);
+      await postSendEmail({ ...data });
+      form.resetFields();
+      notification.success({
+        message: "Success",
+        description: `Submit successfully`
+      });
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div>
@@ -373,25 +392,43 @@ const EventDetails = ({ eventDetails, isMobile }: TEventDetails) => {
                   {t("Let we hear your comment!")}
                 </h1>
 
-                <Form style={{ marginTop: 16 }}>
+                <Form
+                  form={form}
+                  style={{ marginTop: 16 }}
+                  onFinish={handleSubmit}
+                >
                   <Row gutter={16}>
                     <Col span={12}>
-                      <Form.Item name='fullName'>
+                      <Form.Item
+                        name='fullName'
+                        rules={[{ required: true, message: "Please input" }]}
+                      >
                         <Input placeholder='Full name' />
                       </Form.Item>
                     </Col>
                     <Col span={12}>
-                      <Form.Item name='phoneNumber'>
+                      <Form.Item
+                        name='phoneNumber'
+                        rules={[{ required: true, message: "Please input" }]}
+                      >
                         <Input placeholder='Phone number' />
                       </Form.Item>
                     </Col>
                     <Col span={24}>
-                      <Form.Item name='email' wrapperCol={{ span: 24 }}>
+                      <Form.Item
+                        name='email'
+                        wrapperCol={{ span: 24 }}
+                        rules={[{ required: true, message: "Please input" }]}
+                      >
                         <Input placeholder='Your email' />
                       </Form.Item>
                     </Col>
                     <Col span={24}>
-                      <Form.Item name='content' wrapperCol={{ span: 24 }}>
+                      <Form.Item
+                        name='description'
+                        wrapperCol={{ span: 24 }}
+                        rules={[{ required: true, message: "Please input" }]}
+                      >
                         <TextArea
                           rows={4}
                           cols={4}
@@ -400,7 +437,12 @@ const EventDetails = ({ eventDetails, isMobile }: TEventDetails) => {
                       </Form.Item>
                     </Col>
                     <div className='d-flex justify-content-end w-100'>
-                      <Button type='primary' htmlType='submit' shape='round'>
+                      <Button
+                        type='primary'
+                        htmlType='submit'
+                        shape='round'
+                        loading={loading}
+                      >
                         <span style={{ padding: "0 16px" }}>Send Request!</span>
                       </Button>
                     </div>
