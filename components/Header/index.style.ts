@@ -48,7 +48,7 @@ export const DivHeaderWrapperV1 = styled.div<HeaderProps>`
         position: absolute;
         top: 0;
         left: 0;
-        background: rgba(0, 0, 0, 0.4);
+        /* background: rgba(0, 0, 0, 0.4); */
         @media (min-width: 1200px) {
           display: block;
         }

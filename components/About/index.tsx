@@ -173,9 +173,9 @@ export const About = ({
   };
 
   const findNextHasHistoryIndex = (_historyContentList, idx) => {
-    return _historyContentList?.findIndex(
-      (h, index) => index > idx && !!h.description
-    );
+    return _historyContentList?.findIndex((h, index) => {
+      return index > idx && !!h.description;
+    });
   };
 
   const findPrevHasHistoryIndex = (_historyContentList, idx) => {
@@ -183,10 +183,6 @@ export const About = ({
       (h, index) => index < idx && !!h.description
     );
   };
-  console.log("gurusItemsByGroup", {
-    gurusItemsByGroup,
-    gurusContentList
-  });
 
   return (
     <AboutWrapper>

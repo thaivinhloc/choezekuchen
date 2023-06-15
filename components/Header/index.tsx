@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 // @ts-nocheck
 import { RightOutlined } from "@ant-design/icons";
 import { Button, Carousel, Space, Typography } from "antd";
@@ -294,19 +295,33 @@ const Header = ({
           <div className='banner-slider'>
             <Carousel
               afterChange={(currentS) => setCurrentSlide(currentS)}
-              autoplay
+              autoplay={false}
               autoplaySpeed={7000}
               speed={1000}
             >
               {banners.map((b) => (
                 <div>
-                  <div style={{ height: "100vh" }}>
-                    <img
-                      src={b?.attributes.url}
-                      width='100%'
-                      height='100%'
-                      style={{ objectFit: "cover" }}
-                    />
+                  <div
+                    style={{
+                      height: "100vh"
+                    }}
+                  >
+                    <div style={{ height: "100%", position: "relative" }}>
+                      <img
+                        src={b?.attributes.url}
+                        width='100%'
+                        height='100%'
+                        style={{ objectFit: "cover" }}
+                        alt=''
+                      />
+                      <div
+                        style={{
+                          background: "rgba(0, 0, 0, 0.4)",
+                          position: "absolute",
+                          inset: 0
+                        }}
+                      />
+                    </div>
                     <div className='banner-slider__content'>
                       <h2>{homeTopSlider[currentSlide].title}</h2>
                       <RichText
