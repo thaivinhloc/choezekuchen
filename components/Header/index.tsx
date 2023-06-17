@@ -295,7 +295,7 @@ const Header = ({
           <div className='banner-slider'>
             <Carousel
               afterChange={(currentS) => setCurrentSlide(currentS)}
-              autoplay={false}
+              autoplay
               autoplaySpeed={7000}
               speed={1000}
             >
