@@ -323,9 +323,18 @@ const Header = ({
                       />
                     </div>
                     <div className='banner-slider__content'>
-                      <h2>{homeTopSlider[currentSlide].title}</h2>
+                      <h2
+                        style={{
+                          color: "#e5e2e2",
+                          opacity: 0.9,
+                          fontSize: "52px",
+                          lineHeight: "56px"
+                        }}
+                      >
+                        {homeTopSlider[currentSlide].title}
+                      </h2>
                       <RichText
-                        color={THEME.white}
+                        color={"#e5e2e2"}
                         content={homeTopSlider[currentSlide].description}
                         fontSize='20px'
                       />

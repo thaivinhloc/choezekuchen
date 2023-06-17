@@ -346,12 +346,15 @@ const HeaderMobile = ({
                   className='banner-slider__content'
                   style={{ maxWidth: "146px" }}
                 >
-                  <h2>{homeTopSlider[currentSlide].title}</h2>
+                  <h2 style={{ fontSize: "16px" }}>
+                    {homeTopSlider[currentSlide].title}
+                  </h2>
                   <RichText
                     color={THEME.white}
                     content={homeTopSlider[currentSlide].description}
                     fontSize='10px'
-                    lineHeight='20px'
+                    lineHeight='12px'
+                    style={{ marginBottom: 0 }}
                   />
                 </div>
               ) : null}

@@ -456,8 +456,10 @@ export const DivHeaderMobile = styled.div`
       opacity: 0.7;
       h2 {
         color: ${(props) => props.theme.white} !important;
-        font-size: 12px !important;
         line-height: 20px;
+      }
+      p {
+        margin-bottom: 0;
       }
     }
   }
