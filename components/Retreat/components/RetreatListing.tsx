@@ -1,82 +1,84 @@
-import { Table, Tooltip } from "antd"
-import LinkComponent from "components/Link"
-import { useAuth } from "context/auth/AuthContext"
-import { TRetreat } from "definition"
-import i18next from "i18next"
-import React, { useEffect, useMemo, useState } from "react"
-import { useTranslation } from "next-i18next"
-import { getParticipants } from "services/api"
-import { IResponseListRetreat, IUser } from "../../../services/retreatTypes"
-import useRetreat from "../hooks/useRetreat"
-import { DivTableRetreat } from "../index.style"
+import { Table, Tooltip } from "antd";
+import LinkComponent from "components/Link";
+import { useAuth } from "context/auth/AuthContext";
+import { TRetreat } from "definition";
+import i18next from "i18next";
+import React, { useEffect, useMemo, useState } from "react";
+import { useTranslation } from "next-i18next";
+import { getParticipants } from "services/api";
+import { IResponseListRetreat, IUser } from "../../../services/retreatTypes";
+import useRetreat from "../hooks/useRetreat";
+import { DivTableRetreat } from "../index.style";
 
 const RetreatListing: React.FC<{
-  listParticipant: IResponseListRetreat[]
-  isLoading: boolean
-  retreats: TRetreat[]
-  parentRetreatId: number
+  listParticipant: IResponseListRetreat[];
+  isLoading: boolean;
+  retreats: TRetreat[];
+  parentRetreatId: number;
 }> = ({ listParticipant, isLoading, retreats, parentRetreatId }) => {
-  const { user } = useAuth()
-  const { t } = useTranslation()
-  const DEFAULT_COLUMNS = [
-    {
-      title: t("No."),
-      dataIndex: "no"
-    },
-    {
-      title: t("Full Name"),
-      dataIndex: "name",
-      render: (name: string, record: any) => {
-        if (record.id === user?.id) {
-          return (
-            <LinkComponent href={`/retreat-history/${parentRetreatId}`}>
-              <a
-                style={{
-                  textDecoration: "underline",
-                  fontWeight: 600,
-                  color: "#A51818"
-                }}
-              >
-                {name}
-              </a>
-            </LinkComponent>
-          )
-        } else {
-          return <span>{name}</span>
-        }
-      }
-    },
-    {
-      title: t("City"),
-      dataIndex: "city",
-      render: (text: string) => {
-        return <span style={{ whiteSpace: "nowrap" }}>{text}</span>
-      }
-    },
-    {
-      title: t("Country"),
-      dataIndex: "country"
-    }
-  ]
+  const { user } = useAuth();
+  const { t } = useTranslation();
 
   const columns = useMemo(() => {
-    let columnsRetreat
+    const DEFAULT_COLUMNS = [
+      {
+        title: t("No."),
+        dataIndex: "no",
+        width: 80
+      },
+      {
+        title: t("Full Name"),
+        dataIndex: "name",
+        width: "240px",
+        render: (name: string, record: any) => {
+          if (record.id === user?.id) {
+            return (
+              <LinkComponent href={`/retreat-history/${parentRetreatId}`}>
+                <a
+                  style={{
+                    textDecoration: "underline",
+                    fontWeight: 600,
+                    color: "#A51818"
+                  }}
+                >
+                  {name}
+                </a>
+              </LinkComponent>
+            );
+          } else {
+            return <span>{name}</span>;
+          }
+        }
+      },
+      {
+        title: t("City"),
+        dataIndex: "city",
+        render: (text: string) => {
+          return <span style={{ whiteSpace: "nowrap" }}>{text}</span>;
+        }
+      },
+      {
+        title: t("Country"),
+        dataIndex: "country"
+      }
+    ];
+    let columnsRetreat;
     if (retreats.length > 1) {
       columnsRetreat = retreats.map((retreat) => ({
         title: retreat.name,
         dataIndex: retreat.name,
-        width: 200,
+        width: "240px",
         render: (retreat: any) => {
-          if (!retreat) return <span>0%</span>
-          const percent = (retreat?.completed / retreat?.commited) * 100
+          if (!retreat) return <span>0%</span>;
+          const percent = (retreat?.completed / retreat?.commited) * 100;
           return (
             <span style={{ whiteSpace: "nowrap" }}>
               {retreat?.completed_fm} (
-              {percent === Infinity ? 100 : Math.abs(percent).toFixed(2)}%)
+              {percent === Infinity ? 100 : Math.abs(percent).toFixed(1)}%)
             </span>
-          )
+          );
         }
-      }))
+      }));
     } else {
       columnsRetreat = [
         {
@@ -91,13 +93,13 @@ const RetreatListing: React.FC<{
           key: "completed",
           width: 140,
           render: (text: string, opt: any) => {
-            if (Array.isArray(opt.completed)) return <span />
-            const percent = (opt?.completed / opt?.commited) * 100
+            if (Array.isArray(opt.completed)) return <span />;
+            const percent = (opt?.completed / opt?.commited) * 100;
             return (
               <span style={{ whiteSpace: "nowrap" }}>
                 {text} ({percent === Infinity ? 100 : Math.abs(percent)}%)
               </span>
-            )
+            );
           }
         },
         {
@@ -112,7 +114,7 @@ const RetreatListing: React.FC<{
           key: "dailyRequired",
           width: 130
         }
-      ]
+      ];
     }
     return [
       ...DEFAULT_COLUMNS,
@@ -122,8 +124,10 @@ const RetreatListing: React.FC<{
         dataIndex: "lastUpdated",
         key: "lastUpdated"
       }
-    ]
-  }, [retreats])
+    ];
+  }, [parentRetreatId, retreats, t, user?.id]);
+
+  console.log("columns", { columns });
 
   /* Render */
   return (
@@ -133,13 +137,13 @@ const RetreatListing: React.FC<{
         dataSource={listParticipant
           .sort((participant) => (participant.id === user?.id ? -1 : 1))
           .map((item, idx) => ({ ...item, no: idx + 1 }))}
-        // scroll={{ x: "max-content", y: 1200 }}
+        scroll={{ x: "max-content", y: 1240 }}
         pagination={false}
         rowKey='id'
         loading={isLoading}
       />
     </DivTableRetreat>
-  )
-}
+  );
+};
 
-export default RetreatListing
+export default RetreatListing;

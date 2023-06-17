@@ -1,18 +1,20 @@
 // @ts-nocheck
-import { Col, Row } from "antd"
-import { THEME } from "common"
-import { GridMedia } from "elements/Media"
-import { getEventPathFromSlug } from "helper"
-import Link from "next/link"
-import styled from "styled-components"
-import moment from "moment"
-import { RichText } from "elements/RichText"
-import { useTranslation } from "next-i18next"
+import { Col, Row } from "antd";
+import { THEME } from "common";
+import { GridMedia } from "elements/Media";
+import { getEventPathFromSlug } from "helper";
+import Link from "next/link";
+import styled from "styled-components";
+import moment from "moment";
+import { RichText } from "elements/RichText";
+import { useTranslation } from "next-i18next";
 
 const EventItemWrapper = styled.div`
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   border-radius: 8px;
-`
+  background-color: #e6e7e8;
+  padding: 16px;
+`;
 
 export const EventItem: React.FC = ({
   id,
@@ -23,7 +25,7 @@ export const EventItem: React.FC = ({
   title,
   description
 }) => {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
   return (
     <EventItemWrapper>
       <Link href={getEventPathFromSlug(id, slug)}>
@@ -31,11 +33,9 @@ export const EventItem: React.FC = ({
           style={{
             position: "relative",
             cursor: "pointer",
-            background: "#fff",
             borderRadius: "8px"
           }}
         >
-          <GridMedia style={{ borderRadius: "8px 8px 0 0" }} url={image.url} width={640} height={360} />
           <Row
             gutter={16}
             align='middle'
@@ -79,5 +79,5 @@ export const EventItem: React.FC = ({
         </div>
       </Link>
     </EventItemWrapper>
-  )
-}
+  );
+};

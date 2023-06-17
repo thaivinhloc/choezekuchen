@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 // @ts-nocheck
 import { Col, Row, Space, Tabs, Tooltip } from "antd";
 import { THEME } from "common";
@@ -19,8 +20,10 @@ import { ChevronLeft, ChevronRight } from "@mui/icons-material";
 import { TitleWithHeadline } from "components/Title/TitleWithHeadline";
 import { Autoplay } from "swiper";
 import ReadMoreReact from "container/readMore/components/ReadMore";
-import Lightbox from "react-image-lightbox";
 import "react-image-lightbox/style.css";
+import Link from "next/link";
+import { LightgalleryProvider, LightgalleryItem } from "react-lightgallery";
+import "lightgallery.js/dist/css/lightgallery.css";
 
 const AboutWrapper = styled.div``;
 
@@ -38,6 +41,11 @@ const BackgroundWrapper = styled.div<{
 `;
 
 const TabsWrapper = styled(Tabs)`
+  .ant-tabs-nav {
+    &::before {
+      border-bottom: unset;
+    }
+  }
   .ant-tabs-nav-list {
     align-items: flex-start;
     @media (min-width: 1200px) {
@@ -82,7 +90,8 @@ export const About = ({
       "populate[14]": "gurus.contentList.cover",
       "populate[15]": "history.contentList.cover",
       "populate[16]": "eleventhHistory.contentList.cover",
-      "populate[17]": "eleventhHistory.contentList.images"
+      "populate[17]": "eleventhHistory.contentList.images",
+      "populate[18]": "reincarnation.borderButtonImage"
     }
   });
 
@@ -165,9 +174,9 @@ export const About = ({
   };
 
   const findNextHasHistoryIndex = (_historyContentList, idx) => {
-    return _historyContentList?.findIndex(
-      (h, index) => index > idx && !!h.description
-    );
+    return _historyContentList?.findIndex((h, index) => {
+      return index > idx && !!h.description;
+    });
   };
 
   const findPrevHasHistoryIndex = (_historyContentList, idx) => {
@@ -175,10 +184,6 @@ export const About = ({
       (h, index) => index < idx && !!h.description
     );
   };
-  console.log("gurusItemsByGroup", {
-    gurusItemsByGroup,
-    gurusContentList
-  });
 
   return (
     <AboutWrapper>
@@ -316,7 +321,7 @@ export const About = ({
             </i>
           </div>
           <div
-            style={{ transform: "translateY(-150px)", height: 1 }}
+            style={{ transform: "translateY(-100px)", height: 1 }}
             ref={historyTabRef}
           />
           {history && (
@@ -437,6 +442,7 @@ export const About = ({
                           src={cover?.data?.attributes.url}
                           {...cover?.data?.attributes}
                           layout='responsive'
+                          alt={cover?.data?.attributes?.name}
                         />
                       </div>
                     </Col>
@@ -449,8 +455,8 @@ export const About = ({
                         {title}
                       </h3>
                       <ReadMoreReact
-                        scrollHeight={isMobile ? 200 : 300}
-                        charLimit={500}
+                        scrollHeight={isMobile ? 200 : 400}
+                        charLimit={1000}
                         text={description}
                       />
                     </Col>
@@ -460,7 +466,7 @@ export const About = ({
             </Swiper>
             <Row
               gutter={[{ xs: 15, sm: 15, md: 32 }, 15]}
-              style={{ marginTop: 40 }}
+              style={{ marginTop: 24 }}
             >
               {/* <Col span={24} md={{ span: 7 }}></Col> */}
               <Col span={24} md={{ span: 24 }} style={{ textAlign: "left" }}>
@@ -485,7 +491,8 @@ export const About = ({
                           color: THEME.primary,
                           fontWeight: 500,
                           display: "flex",
-                          alignItems: "center"
+                          alignItems: "center",
+                          height: "20px"
                         }}
                         onClick={() =>
                           historySwiperRef.current?.slideTo(
@@ -519,7 +526,8 @@ export const About = ({
                           color: THEME.primary,
                           fontWeight: 500,
                           display: "flex",
-                          alignItems: "center"
+                          alignItems: "center",
+                          height: "20px"
                         }}
                         onClick={() =>
                           historySwiperRef.current?.slideTo(
@@ -562,7 +570,7 @@ export const About = ({
             />
           </div>
           <div
-            style={{ transform: "translateY(-150px)", height: 1 }}
+            style={{ transform: "translateY(-100px)", height: 1 }}
             ref={eleventhHistoryTabRef}
           />
           <TabsWrapper
@@ -646,169 +654,178 @@ export const About = ({
               );
             })}
           </TabsWrapper>
-          <div
-            style={{
-              position: "relative",
-              border: `1px solid ${THEME.primary}`,
-              borderRadius: 12,
-              padding: isMobile ? 15 : 24,
-              backgroundColor: "#f1f2f2"
-            }}
-          >
-            <Swiper
-              autoHeight
-              onSlideChange={(swiper) => {
-                setEleventhHistoryIndex(swiper.realIndex);
-                eleventhHistoryTabRef.current?.scrollIntoView({
-                  behavior: "smooth"
-                });
-              }}
-              modules={[Navigation]}
-              onBeforeInit={(swiper) => {
-                eleventhHistorySwiperRef.current = swiper;
+          <LightgalleryProvider currentPagerPosition='middle'>
+            <div
+              style={{
+                position: "relative",
+                border: `1px solid ${THEME.primary}`,
+                borderRadius: 12,
+                padding: isMobile ? 15 : 24,
+                backgroundColor: "#f1f2f2"
               }}
             >
-              {eleventhHistory?.contentList?.map(
-                ({ cover, title, description, images }, index) => (
-                  <SwiperSlide style={{ textAlign: "center" }}>
-                    <Row gutter={[{ xs: 15, sm: 15, md: 32 }, 15]}>
-                      <Col span={24} md={{ span: 7 }}>
-                        <div>
-                          <Image
-                            src={cover?.data?.attributes.url}
-                            {...cover?.data?.attributes}
-                            layout='responsive'
-                            alt=''
+              <Swiper
+                autoHeight
+                onSlideChange={(swiper) => {
+                  setEleventhHistoryIndex(swiper.realIndex);
+                  eleventhHistoryTabRef.current?.scrollIntoView({
+                    behavior: "smooth"
+                  });
+                }}
+                modules={[Navigation]}
+                onBeforeInit={(swiper) => {
+                  eleventhHistorySwiperRef.current = swiper;
+                }}
+              >
+                {eleventhHistory?.contentList?.map(
+                  ({ cover, title, description, images }, index) => (
+                    <SwiperSlide style={{ textAlign: "center" }}>
+                      <Row gutter={[{ xs: 15, sm: 15, md: 32 }, 15]}>
+                        <Col span={24} md={{ span: 7 }}>
+                          <div>
+                            <Image
+                              src={cover?.data?.attributes.url}
+                              {...cover?.data?.attributes}
+                              layout='responsive'
+                              alt=''
+                            />
+                            {images?.data && (
+                              <div style={{ marginTop: 12 }}>
+                                <span
+                                  style={{ cursor: "pointer", fontSize: 20 }}
+                                  onClick={() => {
+                                    var firstImage = document.querySelector(
+                                      "#lightgallery  img:first-child"
+                                    );
+                                    firstImage.click();
+                                  }}
+                                >
+                                  {t("More images")}
+                                </span>
+                              </div>
+                            )}
+                            <div id='lightgallery' style={{ display: "none" }}>
+                              {images?.data?.map(({ attributes }) => {
+                                return (
+                                  <LightgalleryItem
+                                    src={attributes.url}
+                                    thumb={attributes.url}
+                                    style={{ height: 0 }}
+                                  >
+                                    <img src={attributes.url} height={0} />
+                                  </LightgalleryItem>
+                                );
+                              })}
+                            </div>
+                          </div>
+                        </Col>
+                        <Col
+                          span={24}
+                          md={{ span: 17 }}
+                          style={{ textAlign: "left" }}
+                        >
+                          <h3 style={{ color: THEME.primary, marginTop: 0 }}>
+                            {title}
+                          </h3>
+                          <ReadMoreReact
+                            scrollHeight={400}
+                            text={description}
+                            charLimit={1100}
                           />
-                          {images?.data && (
-                            <span onClick={() => handleClick(index)}>
-                              {t("More images")}
-                            </span>
-                          )}
-                        </div>
-                        {!!currentImage && (
-                          /* @ts-ignore */
-                          <Lightbox
-                            mainSrc={currentImage.url}
-                            imageTitle={currentImage.name}
-                            mainSrcThumbnail={currentImage.formats.small.url}
-                            nextSrc={nextImage.url}
-                            nextSrcThumbnail={nextImage.formats.small.url}
-                            prevSrc={prevImage.url}
-                            prevSrcThumbnail={prevImage.formats.small.url}
-                            onCloseRequest={handleClose}
-                            onMovePrevRequest={handleMovePrev}
-                            onMoveNextRequest={handleMoveNext}
-                            reactModalStyle={{ zIndex: 99999999 }}
-                          />
-                        )}
-                      </Col>
-                      <Col
-                        span={24}
-                        md={{ span: 17 }}
-                        style={{ textAlign: "left" }}
-                      >
-                        <h3 style={{ color: THEME.primary, marginTop: 0 }}>
-                          {title}
-                        </h3>
-                        <ReadMoreReact
-                          scrollHeight={300}
-                          text={description}
-                          charLimit={800}
-                        />
-                      </Col>
-                    </Row>
-                  </SwiperSlide>
-                )
-              )}
-            </Swiper>
-            <Row
-              gutter={[{ xs: 15, sm: 15, md: 32 }, 15]}
-              style={{ marginTop: 40 }}
-            >
-              <Col span={24} md={{ span: 7 }}></Col>
-              <Col span={24} md={{ span: 17 }} style={{ textAlign: "left" }}>
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: isMobile ? "flex-start" : "space-between",
-                    alignItems: "center"
-                  }}
-                >
-                  <div>
-                    {findPrevHasHistory(
-                      eleventhHistory?.contentList,
-                      eleventhHistoryIndex
-                    ) && (
-                      <Button
-                        style={{
-                          padding: 0,
-                          color: THEME.primary,
-                          fontWeight: 500,
-                          display: "flex",
-                          alignItems: "center"
-                        }}
-                        onClick={() =>
-                          eleventhHistorySwiperRef.current?.slideTo(
-                            findPrevHasHistoryIndex(
-                              eleventhHistory?.contentList,
-                              eleventhHistoryIndex
+                        </Col>
+                      </Row>
+                    </SwiperSlide>
+                  )
+                )}
+              </Swiper>
+              <Row
+                gutter={[{ xs: 15, sm: 15, md: 32 }, 15]}
+                style={{ marginTop: 24 }}
+              >
+                {/* <Col span={24} md={{ span: 7 }}></Col> */}
+                <Col span={24} style={{ textAlign: "left" }}>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: isMobile ? "flex-start" : "space-between",
+                      alignItems: "center"
+                    }}
+                  >
+                    <div>
+                      {findPrevHasHistory(
+                        eleventhHistory?.contentList,
+                        eleventhHistoryIndex
+                      ) && (
+                        <Button
+                          style={{
+                            padding: 0,
+                            color: THEME.primary,
+                            fontWeight: 500,
+                            display: "flex",
+                            alignItems: "center"
+                          }}
+                          onClick={() =>
+                            eleventhHistorySwiperRef.current?.slideTo(
+                              findPrevHasHistoryIndex(
+                                eleventhHistory?.contentList,
+                                eleventhHistoryIndex
+                              )
                             )
-                          )
-                        }
-                        type='link'
-                      >
-                        <ChevronLeft />
-                        {
-                          eleventhHistory?.contentList?.[
-                            findPrevHasHistoryIndex(
-                              eleventhHistory?.contentList,
-                              eleventhHistoryIndex
+                          }
+                          type='link'
+                        >
+                          <ChevronLeft />
+                          {
+                            eleventhHistory?.contentList?.[
+                              findPrevHasHistoryIndex(
+                                eleventhHistory?.contentList,
+                                eleventhHistoryIndex
+                              )
+                            ]?.title
+                          }
+                        </Button>
+                      )}
+                    </div>
+                    <div>
+                      {findNextHasHistory(
+                        eleventhHistory?.contentList,
+                        eleventhHistoryIndex
+                      ) && (
+                        <Button
+                          style={{
+                            padding: 0,
+                            color: THEME.primary,
+                            fontWeight: 500,
+                            display: "flex",
+                            alignItems: "center"
+                          }}
+                          onClick={() =>
+                            eleventhHistorySwiperRef.current?.slideTo(
+                              findNextHasHistoryIndex(
+                                eleventhHistory?.contentList,
+                                eleventhHistoryIndex
+                              )
                             )
-                          ]?.title
-                        }
-                      </Button>
-                    )}
+                          }
+                          type='link'
+                        >
+                          {
+                            eleventhHistory?.contentList?.[
+                              findNextHasHistoryIndex(
+                                eleventhHistory?.contentList,
+                                eleventhHistoryIndex
+                              )
+                            ]?.title
+                          }
+                          <ChevronRight />
+                        </Button>
+                      )}
+                    </div>
                   </div>
-                  <div>
-                    {findNextHasHistory(
-                      eleventhHistory?.contentList,
-                      eleventhHistoryIndex
-                    ) && (
-                      <Button
-                        style={{
-                          padding: 0,
-                          color: THEME.primary,
-                          fontWeight: 500,
-                          display: "flex",
-                          alignItems: "center"
-                        }}
-                        onClick={() =>
-                          eleventhHistorySwiperRef.current?.slideTo(
-                            findNextHasHistoryIndex(
-                              eleventhHistory?.contentList,
-                              eleventhHistoryIndex
-                            )
-                          )
-                        }
-                        type='link'
-                      >
-                        {
-                          eleventhHistory?.contentList?.[
-                            findNextHasHistoryIndex(
-                              eleventhHistory?.contentList,
-                              eleventhHistoryIndex
-                            )
-                          ]?.title
-                        }
-                        <ChevronRight />
-                      </Button>
-                    )}
-                  </div>
-                </div>
-              </Col>
-            </Row>
-          </div>
+                </Col>
+              </Row>
+            </div>
+          </LightgalleryProvider>
         </div>
       </div>
       <div style={{ padding: "80px 0" }}>
@@ -821,27 +838,101 @@ export const About = ({
               size={TITLE_SIZES.MEDIUM}
               supTitle={t("Reincarnations of")}
               title={t("CHOEZE KUCHEN RINPOCHE")}
+              styleSubTitle={{ fontSize: "40px" }}
             />
           </div>
           <div
             style={{
-              border: "5px solid #d2aa66",
-              padding: isMobile ? 16 : "32px 48px",
-              borderRadius: "8px"
+              position: "relative"
             }}
           >
-            <Row gutter={[{ xs: 15, sm: 15, md: 40 }, 12]}>
-              {reincarnation?.contentList?.map((item) => (
-                <Col span={24} md={12} lg={8}>
-                  <strong
-                    style={{ lineHeight: "32px", fontSize: 28 }}
-                    className='tx-secondary'
+            <div
+              style={{
+                border: isMobile ? "5px solid #d2aa66" : "unset",
+                padding: isMobile ? 32 : "32px 48px",
+                borderRadius: "8px"
+              }}
+            >
+              <Row gutter={[{ xs: 15, sm: 15, md: 40 }, 12]}>
+                {reincarnation?.contentList?.map((item) => (
+                  <Col span={24} md={12} lg={8} className='text-center'>
+                    <strong
+                      style={{ lineHeight: "32px", fontSize: 28 }}
+                      className='tx-secondary'
+                    >
+                      {item.title}
+                    </strong>
+                  </Col>
+                ))}
+              </Row>
+              {!isMobile && (
+                <div
+                  style={{
+                    position: "absolute",
+                    inset: 0,
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0
+                  }}
+                >
+                  <img
+                    src='images/bg/box-gold.png'
+                    style={{
+                      height: "100%",
+                      width: "100%"
+                    }}
+                    alt=''
+                  />
+                </div>
+              )}
+            </div>
+          </div>
+          <div style={{ marginTop: 20 }}>
+            {(reincarnation?.reincarnationLinks || []).map(({ url, label }) => (
+              <Link key={url + label} passHref href={url ?? "/"}>
+                <div
+                  style={{
+                    height: 50,
+                    position: "relative",
+                    margin: "24px 0"
+                  }}
+                >
+                  <div
+                    style={{
+                      textAlign: "center",
+                      fontWeight: 700
+                    }}
                   >
-                    {item.title}
-                  </strong>
-                </Col>
-              ))}
-            </Row>
+                    {label}
+                  </div>
+                  {!isMobile && (
+                    <div
+                      style={{
+                        position: "absolute",
+                        inset: 0,
+                        top: 0,
+                        left: 0,
+                        right: 0,
+                        bottom: 0
+                      }}
+                    >
+                      <img
+                        src={
+                          reincarnation?.borderButtonImage?.data?.attributes
+                            ?.url ?? "images/bg/box-gold.png"
+                        }
+                        style={{
+                          height: "100%",
+                          width: "100%"
+                        }}
+                        alt=''
+                      />
+                    </div>
+                  )}
+                </div>
+              </Link>
+            ))}
           </div>
         </div>
       </div>

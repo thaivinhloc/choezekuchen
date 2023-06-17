@@ -65,7 +65,7 @@ function TopSection({
 }) {
   return topTitle ? (
     <div
-      className="text-center"
+      className='text-center'
       style={{ maxWidth: 800, margin: "0 auto 50px" }}
     >
       <h2>{topTitle}</h2>
@@ -135,13 +135,13 @@ function Monastery({
                     src={attributes.cover?.data?.attributes?.url}
                     width={640}
                     height={360}
-                    layout="fill"
-                    objectFit="cover"
-                    objectPosition="center"
+                    layout='fill'
+                    objectFit='cover'
+                    objectPosition='center'
                   />
                 </div>
                 <h3 style={{ color: THEME.primary }}>{attributes.title}</h3>
-                <p className="ellipsis ellipsis-3" style={{ minHeight: 80 }}>
+                <p className='ellipsis ellipsis-3' style={{ minHeight: 80 }}>
                   {attributes.description}
                 </p>
                 <Link href={getMonasteryPathFromSlug(id, attributes.slug)}>
@@ -161,7 +161,7 @@ function Monastery({
                     >
                       {t("Discover now")}
                       <Button
-                        shape="circle"
+                        shape='circle'
                         style={{
                           position: "absolute",
                           right: 3,
@@ -169,7 +169,7 @@ function Monastery({
                           height: 32,
                           width: 32
                         }}
-                        type="primary"
+                        type='primary'
                         icon={<ArrowRightOutlined style={{ fontSize: 16 }} />}
                       />
                     </div>
@@ -183,7 +183,7 @@ function Monastery({
       <UpcomingEvents
         background={eventsBackground.src}
         title={t("Upcoming Events")}
-        redirectLink="/events.html"
+        redirectLink='/events.html'
         isMobile={isMobile}
       />
     </>

@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { THEME } from "common";
 
 export const TitleWithHeadline = ({
@@ -47,8 +48,9 @@ export const TitleWithHeadlineSmall = ({
     <>
       {headLine && (
         <img
-          style={{ width: "100%", maxWidth: 320, margin: "0 auto 12px" }}
+          style={{ width: "100%", maxWidth: 240, margin: "0 auto 12px" }}
           src={headLine.data?.attributes?.url}
+          alt={headLine.data?.attributes?.name}
         />
       )}
       {title && (

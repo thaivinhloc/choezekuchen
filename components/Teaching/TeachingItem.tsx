@@ -1,16 +1,16 @@
 // @ts-nocheck
-import { Col, Row } from "antd"
-import { THEME } from "common"
-import { GridMedia } from "elements/Media"
-import { getEventPathFromSlug } from "helper"
-import Link from "next/link"
-import styled from "styled-components"
-import moment from "moment"
-import { RichText } from "elements/RichText"
-import { useTranslation } from "next-i18next"
-import { Button } from "elements/Button"
-import { ArrowRight, ArrowRightAlt } from "@mui/icons-material"
-import { useRouter } from "next/router"
+import { Col, Row } from "antd";
+import { THEME } from "common";
+import { GridMedia } from "elements/Media";
+import { getTeachingDetailPathFromSlug } from "helper";
+import Link from "next/link";
+import styled from "styled-components";
+import moment from "moment";
+import { RichText } from "elements/RichText";
+import { useTranslation } from "next-i18next";
+import { Button } from "elements/Button";
+import { ArrowRight, ArrowRightAlt } from "@mui/icons-material";
+import { useRouter } from "next/router";
 
 const TeachingItemWrapper = styled.div`
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
@@ -18,22 +18,21 @@ const TeachingItemWrapper = styled.div`
   border: 1px solid ${(props) => props.theme.primary};
   padding: 8px;
   height: 100%;
-`
+`;
 
 export const TeachingItem: React.FC = ({
   id,
-  redirectPage,
-  redirectTitle,
-  cover,
+  slug,
+  thumbnail,
   title,
-  description
+  shortDescription,
+  ...props
 }) => {
-  const router = useRouter()
-  console.log({ redirectPage, redirectTitle })
+  const { t } = useTranslation();
 
   return (
     <TeachingItemWrapper>
-      <Link href={redirectPage?.data?.attributes?.slug ?? "/"}>
+      <Link href={getTeachingDetailPathFromSlug(id, slug ?? "/")}>
         <div
           style={{
             position: "relative",
@@ -42,7 +41,7 @@ export const TeachingItem: React.FC = ({
         >
           <GridMedia
             style={{ borderRadius: 8 }}
-            url={cover.data?.attributes?.url}
+            url={thumbnail.data?.attributes?.url}
           />
           <div
             style={{
@@ -61,12 +60,14 @@ export const TeachingItem: React.FC = ({
             >
               {title}
             </h3>
-            <RichText fontSize='15px' content={description} />
+            <RichText
+              fontSize='15px'
+              content={shortDescription}
+              style={{ marginBottom: 12 }}
+            />
           </div>
           <Button
-            onClick={() =>
-              router.push(redirectPage?.data?.attributes?.slug ?? "/")
-            }
+            onClick={() => getTeachingDetailPathFromSlug(id, slug ?? "/")}
             size='large'
             style={{
               position: "absolute",
@@ -79,11 +80,11 @@ export const TeachingItem: React.FC = ({
             type='primary'
             block
           >
-            {redirectTitle}
+            {t("Learn more")}
             <ArrowRightAlt style={{ color: THEME.white }} />
           </Button>
         </div>
       </Link>
     </TeachingItemWrapper>
-  )
-}
+  );
+};

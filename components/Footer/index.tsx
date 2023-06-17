@@ -103,8 +103,8 @@ const Footer = ({ data, isMobile }) => {
             }}
           >
             <Row gutter={[24, 24]}>
-              {contacts?.map((item) => (
-                <Col span={24} lg={{ span: 8 }} key={item.address}>
+              {contacts?.map((item, idx) => (
+                <Col span={24} lg={{ span: 8 }} key={item.address + idx}>
                   <h3 style={{ fontSize: 15 }}>{item.name}</h3>
                   <div style={{ display: "flex", marginBottom: 14 }}>
                     <div
@@ -124,6 +124,7 @@ const Footer = ({ data, isMobile }) => {
                         width={16}
                         height={16}
                         src={require("assets/svgs/pin-icon.svg")}
+                        alt=''
                       />
                     </div>
                     <p style={{ fontSize: 13 }}>{item.address}</p>

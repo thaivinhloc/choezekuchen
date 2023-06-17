@@ -136,7 +136,11 @@ export const RetreatList = ({ locale, globalData }: TPage) => {
             </Col>
             <Col span={24} xl={{ span: 12 }}>
               <h2
-                style={{ ...titleStyle, cursor: "pointer" }}
+                style={{
+                  ...titleStyle,
+                  cursor: "pointer",
+                  marginBottom: !latestActiveRetreat.dateEnd ? 6 : 0
+                }}
                 onClick={() =>
                   onRetreatClick({
                     id: latestActiveRetreat.id,
@@ -169,7 +173,7 @@ export const RetreatList = ({ locale, globalData }: TPage) => {
               />
               <div style={{ marginBottom: 10 }}>
                 <strong
-                  style={{ cursor: "pointer" }}
+                  style={{ cursor: "pointer", color: THEME.primary }}
                   onClick={() =>
                     onRetreatClick({
                       id: latestActiveRetreat.id,
@@ -298,26 +302,31 @@ export const RetreatList = ({ locale, globalData }: TPage) => {
                         </div>
                         <div style={{ padding: 16 }}>
                           <h2
-                            style={titleStyle}
+                            style={{
+                              ...titleStyle,
+                              marginBottom: !dateEnd ? 6 : 0
+                            }}
                             onClick={() => {
                               onRetreatClick({ id, slug: slug ?? "", status });
                             }}
                           >
                             {name}
                           </h2>
-                          <i
-                            style={{
-                              color: THEME.dark,
-                              fontWeight: 300,
-                              fontSize: 14,
-                              display: "block",
-                              marginBottom: 8
-                            }}
-                          >
-                            {t("Time: ")}
-                            {moment(dateStart).format("hh:mmA")}-
-                            {moment(dateEnd).format("hh:mmA")}
-                          </i>
+                          {dateEnd && (
+                            <i
+                              style={{
+                                color: THEME.dark,
+                                fontWeight: 300,
+                                fontSize: 14,
+                                display: "block",
+                                marginBottom: 8
+                              }}
+                            >
+                              {t("Time: ")}
+                              {moment(dateStart).format("hh:mmA")}-
+                              {moment(dateEnd).format("hh:mmA")}
+                            </i>
+                          )}
                           <div style={{ paddingBottom: 40 }}>
                             {description && <RichText content={description} />}
                           </div>

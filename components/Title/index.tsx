@@ -39,7 +39,8 @@ export const Title = ({
   isMobile = false,
   size = TITLE_SIZES.MEDIUM,
   color = THEME.primary,
-  isSecondaryFont = false
+  isSecondaryFont = false,
+  styleSubTitle = {}
 }) => {
   const subTitleStyle = supSizes(isMobile)[size];
   const titleStyle = titleSizes(isMobile)[size];
@@ -51,7 +52,8 @@ export const Title = ({
           display: "block",
           color,
           fontWeight: 500,
-          ...subTitleStyle
+          ...subTitleStyle,
+          ...styleSubTitle
         }}
       >
         {supTitle}

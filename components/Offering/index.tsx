@@ -1,30 +1,30 @@
 // @ts-nocheck
-import { ArrowRightAlt } from "@mui/icons-material"
-import { Col, Form, Input, InputNumber, Radio, Row, Space } from "antd"
-import { useForm } from "antd/lib/form/Form"
-import { THEME } from "common"
-import { TITLE_SIZES, Title } from "components/Title"
-import { TitleWithHeadline } from "components/Title/TitleWithHeadline"
-import { SingleSection, SingleSectionSmall } from "container/Section"
-import { Button } from "elements/Button"
-import { GridMedia } from "elements/Media"
-import { Modal } from "elements/Modal"
-import { RichText } from "elements/RichText"
-import usePage from "hook/usePage"
-import { useTranslation } from "next-i18next"
-import Image from "next/image"
-import { useRouter } from "next/router"
-import { ElementRef, forwardRef, useEffect, useRef, useState } from "react"
-import styled from "styled-components"
+import { ArrowRightAlt } from "@mui/icons-material";
+import { Col, Form, Input, InputNumber, Radio, Row, Space } from "antd";
+import { useForm } from "antd/lib/form/Form";
+import { THEME } from "common";
+import { TITLE_SIZES, Title } from "components/Title";
+import { TitleWithHeadline } from "components/Title/TitleWithHeadline";
+import { SingleSection, SingleSectionSmall } from "container/Section";
+import { Button } from "elements/Button";
+import { GridMedia } from "elements/Media";
+import { Modal } from "elements/Modal";
+import { RichText } from "elements/RichText";
+import usePage from "hook/usePage";
+import { useTranslation } from "next-i18next";
+import Image from "next/image";
+import { useRouter } from "next/router";
+import { ElementRef, forwardRef, useEffect, useRef, useState } from "react";
+import styled from "styled-components";
 
-const OfferingPageWrapper = styled.div``
+const OfferingPageWrapper = styled.div``;
 const IntroductionWrapper = styled.div`
   background: url(${(props) => props.background?.data?.attributes?.url});
   background-size: contain;
   background-repeat: no-repeat;
   background-position: bottom center;
   padding: 50px 0;
-`
+`;
 
 const OfferingItem = styled.div`
   text-align: center;
@@ -49,7 +49,7 @@ const OfferingItem = styled.div`
       }
     }
   }
-`
+`;
 
 const PrayersWrapper = styled.div`
   height: 100%;
@@ -72,9 +72,9 @@ const PrayersWrapper = styled.div`
       color: ${(props) => props.theme.white} !important;
     }
   }
-`
+`;
 
-const MakeOfferingWrapper = styled.div``
+const MakeOfferingWrapper = styled.div``;
 
 const OfferingBannerWrapper = styled.div`
   position: relative;
@@ -108,7 +108,7 @@ const OfferingBannerWrapper = styled.div`
     z-index: 1;
     border-radius: 12px;
   }
-`
+`;
 
 const CloseIcon = ({ ...props }) => {
   return (
@@ -131,10 +131,10 @@ const CloseIcon = ({ ...props }) => {
         class='stroke-000000'
       ></path>
     </svg>
-  )
-}
+  );
+};
 
-const PaymentForm = styled.div``
+const PaymentForm = styled.div``;
 
 const PaymentFormSection = styled.div`
   h4 {
@@ -143,7 +143,7 @@ const PaymentFormSection = styled.div`
     margin: 0;
     line-height: 32px;
   }
-`
+`;
 
 export const OfferingPage = ({
   locale,
@@ -151,11 +151,11 @@ export const OfferingPage = ({
   globalData,
   pageContentEndpoint
 }) => {
-  const [form] = Form.useForm()
-  const makeOfferingModalRef = useRef<ElementRef<typeof Modal>>(null)
-  const amountInputRef = useRef()
-  const [amountRadioValue, setAmountRadioValue] = useState(30)
-  const [openedOffering, setOpenedOffering] = useState()
+  const [form] = Form.useForm();
+  const makeOfferingModalRef = useRef<ElementRef<typeof Modal>>(null);
+  const amountInputRef = useRef();
+  const [amountRadioValue, setAmountRadioValue] = useState(30);
+  const [openedOffering, setOpenedOffering] = useState();
   const { content, getPageContent } = usePage({
     locale,
     endpoint: pageContentEndpoint,
@@ -175,33 +175,33 @@ export const OfferingPage = ({
       "populate[11]": "otherOffering.contentList.cover",
       "populate[12]": "banner"
     }
-  })
+  });
 
-  const { t } = useTranslation()
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (pageContentEndpoint) {
-      getData()
+      getData();
     }
     async function getData() {
-      await getPageContent()
+      await getPageContent();
     }
-  }, [pageContentEndpoint])
+  }, [pageContentEndpoint]);
 
   useEffect(() => {
     if (openedOffering) {
-      makeOfferingModalRef.current?.handleOpen()
+      makeOfferingModalRef.current?.handleOpen();
     } else {
-      makeOfferingModalRef.current?.handleClose()
+      makeOfferingModalRef.current?.handleClose();
     }
-  }, [openedOffering])
+  }, [openedOffering]);
 
-  console.log({ content })
+  console.log({ content });
   const { introduction, makeOffering, otherOffering, banner } =
-    content?.data?.attributes ?? {}
+    content?.data?.attributes ?? {};
 
-  const offeringOptions = [30, 60, 108]
-  console.log({ values: form?.getFieldsValue() })
+  const offeringOptions = [30, 60, 108];
+  console.log({ values: form?.getFieldsValue() });
 
   return (
     <OfferingPageWrapper>
@@ -225,7 +225,7 @@ export const OfferingPage = ({
               gutter={[{ xs: 16, sm: 16, xl: 0 }, 24]}
             >
               {introduction.contentList?.map((item) => {
-                const { title, actionIcon } = item
+                const { title, actionIcon } = item;
                 return (
                   <Col span={12} lg={{ span: 4 }}>
                     <OfferingItem onClick={() => setOpenedOffering(item)}>
@@ -234,6 +234,7 @@ export const OfferingPage = ({
                           src={actionIcon?.data?.attributes?.url}
                           {...(actionIcon?.data?.attributes ?? {})}
                           layout='responsive'
+                          alt={actionIcon?.data?.attributes?.name}
                         />
                       </div>
                       <div
@@ -248,7 +249,7 @@ export const OfferingPage = ({
                       </div>
                     </OfferingItem>
                   </Col>
-                )
+                );
               })}
             </Row>
           </div>
@@ -373,9 +374,9 @@ export const OfferingPage = ({
         width='768px'
         closeIcon={<div />}
         onCancel={() => {
-          setOpenedOffering()
-          form.resetFields()
-          setAmountRadioValue(offeringOptions[0])
+          setOpenedOffering();
+          form.resetFields();
+          setAmountRadioValue(offeringOptions[0]);
         }}
         wrapClassName='make-offering-modal'
         destroyOnClose
@@ -488,28 +489,28 @@ export const OfferingPage = ({
                       decimalSeparator='.'
                       step='0.01'
                       onChange={(value) => {
-                        console.log({ value })
+                        console.log({ value });
                         form.setFieldsValue({
                           ...form.getFieldsValue(),
                           amount: value
-                        })
+                        });
                       }}
                       onBlur={() => {
-                        const updatedValue = form.getFieldValue("amount")
-                        console.log({ updatedValue })
+                        const updatedValue = form.getFieldValue("amount");
+                        console.log({ updatedValue });
 
                         if (!updatedValue) {
-                          setAmountRadioValue(offeringOptions[0])
+                          setAmountRadioValue(offeringOptions[0]);
                           form.setFieldsValue({
                             ...form.getFieldsValue(),
                             amount: offeringOptions[0]
-                          })
+                          });
                         } else {
                           setAmountRadioValue(
                             offeringOptions.includes(updatedValue)
                               ? updatedValue
                               : undefined
-                          )
+                          );
                         }
                       }}
                       onFocus={() => setAmountRadioValue()}
@@ -517,13 +518,13 @@ export const OfferingPage = ({
                   </Form.Item>
                   <Radio.Group
                     onChange={(e) => {
-                      setAmountRadioValue(e.target.value)
+                      setAmountRadioValue(e.target.value);
                       form.setFieldsValue({
                         ...form.getFieldsValue(),
                         amount: e.target.value
-                      })
+                      });
                       if (!e.target.value) {
-                        amountInputRef.current?.focus()
+                        amountInputRef.current?.focus();
                       }
                     }}
                     value={amountRadioValue}
@@ -574,7 +575,7 @@ export const OfferingPage = ({
                         <strong style={{ color: THEME.white }}>
                           ${form.getFieldValue("amount")?.toFixed(2) ?? "0.00"}
                         </strong>
-                      )
+                      );
                     }}
                   </Form.Item>
                 </td>
@@ -594,7 +595,7 @@ export const OfferingPage = ({
                         <i style={{ color: THEME.white }}>
                           ${form.getFieldValue("amount")?.toFixed(2) ?? "0.00"}
                         </i>
-                      )
+                      );
                     }}
                   </Form.Item>
                 </td>
@@ -632,7 +633,7 @@ export const OfferingPage = ({
         }
       `}</style>
     </OfferingPageWrapper>
-  )
-}
+  );
+};
 
-export default OfferingPage
+export default OfferingPage;

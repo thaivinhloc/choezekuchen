@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 // @ts-nocheck
 import { PlayCircle } from "@mui/icons-material";
 import { Col, Row } from "antd";
@@ -27,8 +28,8 @@ import { ElementRef, useEffect, useRef, useState } from "react";
 import { Gallery, ThumbnailImageProps } from "react-grid-gallery";
 import styled from "styled-components";
 
-import Lightbox from "react-image-lightbox";
-import "react-image-lightbox/style.css";
+import { LightgalleryProvider, LightgalleryItem } from "react-lightgallery";
+import "lightgallery.js/dist/css/lightgallery.css";
 
 const Offering = dynamic(() => import("components/Home/Offering"), {
   ssr: false
@@ -118,10 +119,17 @@ const Switcher = ({ value = SWITCHER_VALUES.IMAGE, onChange }) => {
 const ImageComponent = (props: ThumbnailImageProps) => {
   return (
     <>
-      <img
-        {...props.imageProps}
+      {/* <img
+        src={props.item.src}
         style={{ ...props.imageProps.style, borderRadius: 12 }}
-      />
+      /> */}
+      <LightgalleryItem src={props.item.src} thumb={props.item.src}>
+        <img
+          src={props.item.src}
+          style={{ ...props.imageProps.style, borderRadius: 12 }}
+          alt=''
+        />
+      </LightgalleryItem>
     </>
   );
 };
@@ -246,6 +254,12 @@ const Monastery = ({ monastery, otherMonasteries, isMobile, globalData }) => {
   const handleClose = () => setIndexImages(-1);
   const handleMovePrev = () => setIndexImages(prevIndex);
   const handleMoveNext = () => setIndexImages(nextIndex);
+  const GROUP2 = [
+    "https://images.unsplash.com/photo-1594818898109-44704fb548f6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80",
+    "https://images.unsplash.com/photo-1594818896795-35ad7bcf3c6a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80",
+    "https://images.unsplash.com/photo-1594818896744-57eca4d47b07?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80",
+    "https://images.unsplash.com/photo-1594818897077-aec41f55241f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1951&q=80"
+  ];
 
   return (
     <PageContentWrapper>
@@ -278,31 +292,17 @@ const Monastery = ({ monastery, otherMonasteries, isMobile, globalData }) => {
               <Switcher value={galleryState} onChange={setGalleryState} />
             </div>
           </div>
-          <CustomGallery
-            type={galleryState}
-            data={
-              galleryState === SWITCHER_VALUES.IMAGE
-                ? images?.data
-                : videos?.data
-            }
-            handleClick={handleClick}
-          />
-          {!!currentImage && (
-            /* @ts-ignore */
-            <Lightbox
-              mainSrc={currentImage.url}
-              imageTitle={currentImage.name}
-              mainSrcThumbnail={currentImage.formats.small.url}
-              nextSrc={nextImage.url}
-              nextSrcThumbnail={nextImage.formats.small.url}
-              prevSrc={prevImage.url}
-              prevSrcThumbnail={prevImage.formats.small.url}
-              onCloseRequest={handleClose}
-              onMovePrevRequest={handleMovePrev}
-              onMoveNextRequest={handleMoveNext}
-              reactModalStyle={{ zIndex: 99999999 }}
+          <LightgalleryProvider currentPagerPosition='middle'>
+            <CustomGallery
+              type={galleryState}
+              data={
+                galleryState === SWITCHER_VALUES.IMAGE
+                  ? images?.data
+                  : videos?.data
+              }
+              handleClick={() => {}}
             />
-          )}
+          </LightgalleryProvider>
         </div>
       </GaleryWrapper>
       <ContactWrapper>
@@ -455,6 +455,7 @@ const Monastery = ({ monastery, otherMonasteries, isMobile, globalData }) => {
                   height={address_pin.data?.attributes.height}
                   src={address_pin.data?.attributes.url}
                   layout='responsive'
+                  alt={address_pin.data?.attributes?.name}
                 />
               )}
             </Col>

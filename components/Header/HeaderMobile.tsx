@@ -166,7 +166,6 @@ const HeaderMobile = ({
             className='headermobile__menu'
             inlineIndent={0}
             expandIcon={(...props: any) => {
-              console.log("props", props[0].isHasChildren);
               const isHasChildren = !!props[0]?.isHasChildren;
               const isOpen = props[0].isOpen;
               if (!isHasChildren) return <div />;
@@ -297,65 +296,84 @@ const HeaderMobile = ({
           </div>
         </div>
       </div>
-      <div className='navbar__title'>
-        <h1>{title.toUpperCase()}</h1>
-        <span className='navbar__title__desc'>{desc}</span>
-      </div>
-      {banners?.length ? (
-        <div className='banner-slider'>
-          <Carousel
-            afterChange={(currentS) => setCurrentSlide(currentS)}
-            autoplay
-            autoplaySpeed={7000}
-            speed={1000}
-          >
-            {banners.map((b: any) => (
-              <div>
+      {router.pathname === "/" ? (
+        <>
+          <div className='navbar__title'>
+            <h1>{title.toUpperCase()}</h1>
+            <span className='navbar__title__desc'>{desc}</span>
+          </div>
+          {banners?.length ? (
+            <div className='banner-slider'>
+              <Carousel
+                afterChange={(currentS) => setCurrentSlide(currentS)}
+                autoplay
+                autoplaySpeed={7000}
+                speed={1000}
+              >
+                {banners.map((b: any) => (
+                  <div>
+                    <div
+                      style={{
+                        // height: "calc(100vh - 100px)",
+                        background: "rgba(0, 0, 0, 0.4)"
+                      }}
+                    >
+                      <Image
+                        src={b?.attributes.url}
+                        {...b?.attributes}
+                        layout='responsive'
+                        // width='100%'
+                        // height='100%'
+                        // style={{ objectFit: "contain" }}
+                        alt=''
+                      />
+                    </div>
+                    <div
+                      style={{
+                        background: "rgba(0, 0, 0, 0.4)",
+                        top: 0,
+                        bottom: 0,
+                        left: 0,
+                        right: 0,
+                        inset: 0
+                      }}
+                    ></div>
+                  </div>
+                ))}
+              </Carousel>
+              {homeTopSlider?.[currentSlide] ? (
                 <div
-                  style={{
-                    // height: "calc(100vh - 100px)",
-                    background: "rgba(0, 0, 0, 0.4)"
-                  }}
+                  className='banner-slider__content'
+                  style={{ maxWidth: "146px" }}
                 >
-                  <Image
-                    src={b?.attributes.url}
-                    {...b?.attributes}
-                    layout='responsive'
-                    // width='100%'
-                    // height='100%'
-                    // style={{ objectFit: "contain" }}
-                    alt=''
+                  <h2 style={{ fontSize: "16px" }}>
+                    {homeTopSlider[currentSlide].title}
+                  </h2>
+                  <RichText
+                    color={THEME.white}
+                    content={homeTopSlider[currentSlide].description}
+                    fontSize='10px'
+                    lineHeight='12px'
+                    style={{ marginBottom: 0 }}
                   />
                 </div>
-                <div
-                  style={{
-                    background: "rgba(0, 0, 0, 0.4)",
-                    top: 0,
-                    bottom: 0,
-                    left: 0,
-                    right: 0,
-                    inset: 0
-                  }}
-                ></div>
-              </div>
-            ))}
-          </Carousel>
-          {homeTopSlider?.[currentSlide] ? (
-            <div
-              className='banner-slider__content'
-              style={{ maxWidth: "200px" }}
-            >
-              <h2>{homeTopSlider[currentSlide].title}</h2>
-              <RichText
-                color={THEME.white}
-                content={homeTopSlider[currentSlide].description}
-                fontSize='10px'
-                lineHeight='20px'
-              />
+              ) : null}
             </div>
           ) : null}
+        </>
+      ) : (
+        <div style={{ position: "relative" }}>
+          <img
+            className='w-100 '
+            src={banner?.attributes?.url ?? "/images/title-image-3.jpeg"}
+            alt='banner'
+            style={{ height: "160px", objectFit: "cover" }}
+          />
+          <div className='banner__content' style={{ top: 0 }}>
+            {title}
+          </div>
         </div>
-      ) : null}
+      )}
       {/* <div className='w-100 banner'>
         {router.pathname === "/" ? (
           <img

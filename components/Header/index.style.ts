@@ -48,7 +48,7 @@ export const DivHeaderWrapperV1 = styled.div<HeaderProps>`
         position: absolute;
         top: 0;
         left: 0;
-        background: rgba(0, 0, 0, 0.4);
+        /* background: rgba(0, 0, 0, 0.4); */
         @media (min-width: 1200px) {
           display: block;
         }
@@ -60,13 +60,11 @@ export const DivHeaderWrapperV1 = styled.div<HeaderProps>`
         display: flex;
         flex-direction: column;
         justify-content: flex-end;
-        max-width: 420px;
+        max-width: 520px;
         position: absolute;
-        left: 18px;
         bottom: 18px;
         z-index: 3;
         padding: 32px;
-        opacity: 0.7;
         h2 {
           color: ${(props) => props.theme.white} !important;
           font-size: 32px;
@@ -88,7 +86,7 @@ export const DivHeaderWrapperV1 = styled.div<HeaderProps>`
       align-items: center;
       padding: 40px 50px 15px;
       position: relative;
-      z-index: 1002;
+      z-index: 999;
       transition: 0.3s linear;
       &-nav {
         display: flex;
@@ -450,17 +448,18 @@ export const DivHeaderMobile = styled.div`
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
-      max-width: 200px;
+      max-width: 146px;
       position: absolute;
       left: 10px;
-      top: 87px;
+      top: 50%;
       z-index: 3;
-      padding: 24px 0;
       opacity: 0.7;
       h2 {
         color: ${(props) => props.theme.white} !important;
-        font-size: 12px !important;
         line-height: 20px;
+      }
+      p {
+        margin-bottom: 0;
       }
     }
   }
@@ -520,6 +519,6 @@ export const TopActionStyled = styled.div`
     position: absolute;
     top: 0;
     right: 0;
-    z-index: 99999999;
+    z-index: 999;
   }
 `;
