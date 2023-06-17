@@ -19,6 +19,7 @@ import { ArrowRightAlt, ArrowForward } from "@mui/icons-material";
 import Link from "next/link";
 import { getTeachingContent } from "services/teaching";
 import TeachingBackground from "assets/bg/background-teaching.jpg";
+import { getTeachingDetailPathFromSlug } from "helper";
 
 const TeachingDetailWrapper = styled.div`
   padding-top: 50px;
@@ -107,7 +108,7 @@ const TeachingDetail = ({
   /* Zoom Images */
   const [indexImages, setIndexImages] = useState(-1);
 
-  const listImages = [...images?.data, ...images2?.data] || [];
+  const listImages = [...images?.data, ...(images2?.data || [])] || [];
   const currentImage = listImages[indexImages]?.attributes;
 
   const nextIndex = (indexImages + 1) % listImages.length;
@@ -181,54 +182,55 @@ const TeachingDetail = ({
           </Row>
         </div>
       </div>
-      {Object.values(socialMedia).length > 0 && (
-        <div className='socials'>
-          <div className='container'>
-            <Row gutter={32}>
-              <Col span={24} lg={12}>
-                <div>
-                  <Image
-                    src={
-                      socialMedia.attributes.socialMedia.image.data.attributes
-                        .url
-                    }
-                    layout='responsive'
-                    {...socialMedia.attributes.socialMedia.image.data
-                      .attributes}
-                    alt={
-                      socialMedia.attributes.socialMedia.image.data.attributes
-                        .name
-                    }
-                    style={{ borderRadius: 16 }}
-                  />
-                </div>
-              </Col>
-              <Col span={24} lg={12}>
-                <div>
-                  <h3>{socialMedia?.attributes?.socialMedia?.title}</h3>
-                  <p>{socialMedia?.attributes?.socialMedia?.description}</p>
-                </div>
-                <div>
-                  {socialMedia?.attributes?.socialMedia?.social_links
-                    .split(",")
-                    .map((link: any, idx: any) => (
-                      <div key={link + idx} className='d-flex'>
-                        <div className='icon-link'>
-                          <ArrowForward
-                            style={{ color: THEME.primary, fontSize: "22px" }}
-                          />
+      {!!socialMedia.attributes?.socialMedia?.image &&
+        Object.values(socialMedia).length > 0 && (
+          <div className='socials'>
+            <div className='container'>
+              <Row gutter={32}>
+                <Col span={24} lg={12}>
+                  <div>
+                    <Image
+                      src={
+                        socialMedia.attributes.socialMedia.image.data.attributes
+                          .url
+                      }
+                      layout='responsive'
+                      {...socialMedia.attributes.socialMedia.image.data
+                        .attributes}
+                      alt={
+                        socialMedia.attributes.socialMedia.image.data.attributes
+                          .name
+                      }
+                      style={{ borderRadius: 16 }}
+                    />
+                  </div>
+                </Col>
+                <Col span={24} lg={12}>
+                  <div>
+                    <h3>{socialMedia?.attributes?.socialMedia?.title}</h3>
+                    <p>{socialMedia?.attributes?.socialMedia?.description}</p>
+                  </div>
+                  <div>
+                    {socialMedia?.attributes?.socialMedia?.social_links
+                      .split(",")
+                      .map((link: any, idx: any) => (
+                        <div key={link + idx} className='d-flex'>
+                          <div className='icon-link'>
+                            <ArrowForward
+                              style={{ color: THEME.primary, fontSize: "22px" }}
+                            />
+                          </div>
+                          <a href={link} target='_blank' rel='noreferrer'>
+                            {link}
+                          </a>
                         </div>
-                        <a href={link} target='_blank' rel='noreferrer'>
-                          {link}
-                        </a>
-                      </div>
-                    ))}
-                </div>
-              </Col>
-            </Row>
+                      ))}
+                  </div>
+                </Col>
+              </Row>
+            </div>
           </div>
-        </div>
-      )}
+        )}
       <div className='container'>
         <div className='list-teaching'>
           <div className='d-flex'>
@@ -246,44 +248,58 @@ const TeachingDetail = ({
           </div>
           <Row gutter={16} style={{ padding: "40px 0" }}>
             {listTeaching?.data?.map(
-              ({ attributes }: { attributes: any }, idx: number) => {
+              (
+                { attributes, id }: { attributes: any; id: number },
+                idx: number
+              ) => {
+                console.log("---slug", { id, slug: attributes.slug ?? "/" });
+
                 const { attributes: cover } = attributes?.thumbnail?.data;
                 return (
                   <Col span={24} lg={8} key={idx + "list-teaching"}>
-                    <div className='teaching-card'>
-                      <Image
-                        src={cover?.url}
-                        {...cover}
-                        layout='responsive'
-                        alt={cover?.name}
-                      />
-                      <h3
-                        className='text-center'
-                        style={{ color: THEME.primary, fontSize: 18 }}
-                      >
-                        {attributes?.title}
-                      </h3>
-                      <p className='text-center'>
-                        {attributes.shortDescription}
-                      </p>
-                      <Button
-                        onClick={
-                          () => {}
-                          // router.push(redirectPage?.data?.attributes?.slug ?? "/")
-                        }
-                        size='large'
-                        style={{
-                          borderRadius: 4,
-                          display: "flex",
-                          justifyContent: "space-between"
-                        }}
-                        type='primary'
-                        block
-                      >
-                        {t("Learn more")}
-                        <ArrowRightAlt style={{ color: THEME.white }} />
-                      </Button>
-                    </div>
+                    <Link
+                      href={getTeachingDetailPathFromSlug(
+                        id,
+                        attributes.slug ?? "/"
+                      )}
+                    >
+                      <div className='teaching-card'>
+                        <Image
+                          src={cover?.url}
+                          {...cover}
+                          layout='responsive'
+                          alt={cover?.name}
+                        />
+                        <h3
+                          className='text-center'
+                          style={{ color: THEME.primary, fontSize: 18 }}
+                        >
+                          {attributes?.title}
+                        </h3>
+                        <p className='text-center'>
+                          {attributes.shortDescription}
+                        </p>
+                        <Button
+                          onClick={() =>
+                            getTeachingDetailPathFromSlug(
+                              id,
+                              attributes.slug ?? "/"
+                            )
+                          }
+                          size='large'
+                          style={{
+                            borderRadius: 4,
+                            display: "flex",
+                            justifyContent: "space-between"
+                          }}
+                          type='primary'
+                          block
+                        >
+                          {t("Learn more")}
+                          <ArrowRightAlt style={{ color: THEME.white }} />
+                        </Button>
+                      </div>
+                    </Link>
                   </Col>
                 );
               }

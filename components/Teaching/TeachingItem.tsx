@@ -2,7 +2,7 @@
 import { Col, Row } from "antd";
 import { THEME } from "common";
 import { GridMedia } from "elements/Media";
-import { getEventPathFromSlug, getTeachingDetailPathFromSlug } from "helper";
+import { getTeachingDetailPathFromSlug } from "helper";
 import Link from "next/link";
 import styled from "styled-components";
 import moment from "moment";
@@ -60,7 +60,11 @@ export const TeachingItem: React.FC = ({
             >
               {title}
             </h3>
-            <RichText fontSize='15px' content={shortDescription} />
+            <RichText
+              fontSize='15px'
+              content={shortDescription}
+              style={{ marginBottom: 12 }}
+            />
           </div>
           <Button
             onClick={() => getTeachingDetailPathFromSlug(id, slug ?? "/")}
