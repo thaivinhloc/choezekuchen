@@ -358,6 +358,36 @@ const Retreat: React.FC<{
     );
   };
 
+  const RenderItemSmaller = ({ title, content }: TRenderItem) => {
+    return (
+      <RenderItemWrapper
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          borderRadius: 16,
+          border: "1px solid #800000"
+        }}
+      >
+        <div style={{ textAlign: "center" }}>
+          <strong
+            style={{
+              display: "block",
+              fontSize: 24,
+              color: THEME.primary,
+              lineHeight: "24px"
+            }}
+          >
+            {content}
+          </strong>
+          <strong style={{ fontSize: 16, color: "rgba(0,0,0,0.7)" }}>
+            {title}
+          </strong>
+        </div>
+      </RenderItemWrapper>
+    );
+  };
+
   const userRetreat: User | undefined = retreatDetail?.user;
   const totalDue =
     Number(retreatDetail?.totalCommitment || 0) -
@@ -501,16 +531,75 @@ const Retreat: React.FC<{
                           >
                             <Col span={24} xl={{ span: 8 }}>
                               <RenderItem
-                                title={t("Committed", {
+                                title={t("Group Committed", {
                                   ns: "retreat"
                                 })}
                                 content={formatNumber(
-                                  userRetreat?.commited || 0
+                                  retreatDetail?.totalCommitment || 0
                                 )}
                               />
                             </Col>
                             <Col span={24} xl={{ span: 8 }}>
                               <RenderItem
+                                title={t("Group Completed", {
+                                  ns: "retreat"
+                                })}
+                                content={formatNumber(
+                                  retreatDetail?.totalGroupCompleted || 0
+                                )}
+                              />
+                            </Col>
+                            <Col span={24} xl={{ span: 8 }}>
+                              <RenderItem
+                                title={t("Group Due", { ns: "retreat" })}
+                                content={
+                                  Number(retreatDetail?.due) < 0
+                                    ? 0
+                                    : formatNumber(retreatDetail?.due || 0)
+                                }
+                              />
+                            </Col>
+                            {/* {retreatDetail?.isGroup && (
+                              <>
+                                <Col span={24} xl={{ span: 12 }}>
+                                  <RenderItem
+                                    title={t("Group Daily Average", {
+                                      ns: "retreat"
+                                    })}
+                                    content={userRetreat?.dailyAverage || 0}
+                                  />
+                                </Col>
+                                <Col span={24} xl={{ span: 12 }}>
+                                  <RenderItem
+                                    title={t("Group Daily Required", {
+                                      ns: "retreat"
+                                    })}
+                                    content={userRetreat?.dailyRequired || 0}
+                                  />
+                                </Col>
+                              </>
+                            )} */}
+                          </Row>
+                        )}
+                          <Row
+                            gutter={[24, 16]}
+                            style={{
+                              marginTop: 16,
+                              marginBottom: 16
+                            }}
+                          >
+                            <Col span={24} xl={{ span: 24 }}>
+                              <RenderItemSmaller
+                                title={t("Committed", {
+                                  ns: "retreat"
+                                })}
+                                content={formatNumber(
+                                  retreatDetail?.totalCommitment || 0
+                                )}
+                              />
+                            </Col>
+                            <Col span={24} xl={{ span: 6 }}>
+                              <RenderItemSmaller
                                 title={t("Completed", {
                                   ns: "retreat"
                                 })}
@@ -519,8 +608,8 @@ const Retreat: React.FC<{
                                 )}
                               />
                             </Col>
-                            <Col span={24} xl={{ span: 8 }}>
-                              <RenderItem
+                            <Col span={24} xl={{ span: 6 }}>
+                              <RenderItemSmaller
                                 title={t("Due", { ns: "retreat" })}
                                 content={
                                   Number(userRetreat?.due) < 0
@@ -531,16 +620,16 @@ const Retreat: React.FC<{
                             </Col>
                             {retreatDetail?.isGroup && (
                               <>
-                                <Col span={24} xl={{ span: 12 }}>
-                                  <RenderItem
+                                <Col span={24} xl={{ span: 6 }}>
+                                  <RenderItemSmaller
                                     title={t("Daily Average", {
                                       ns: "retreat"
                                     })}
                                     content={userRetreat?.dailyAverage || 0}
                                   />
                                 </Col>
-                                <Col span={24} xl={{ span: 12 }}>
-                                  <RenderItem
+                                <Col span={24} xl={{ span: 6 }}>
+                                  <RenderItemSmaller
                                     title={t("Daily Required", {
                                       ns: "retreat"
                                     })}
@@ -550,7 +639,66 @@ const Retreat: React.FC<{
                               </>
                             )}
                           </Row>
-                        )}
+                        <Row gutter={16}>
+                          <Col span={16} md={{ span: 19 }}>
+                            <Form.Item
+                              style={{
+                                display: "inline-block",
+                                width: "100%",
+                                marginBottom: 0
+                              }}
+                              name='committedNumber'
+                              rules={[
+                                {
+                                  required: true,
+                                  message: "Committed is Number"
+                                },
+                                {
+                                  pattern: /^(?:\d*)$/,
+                                  message: "Value should contain just number"
+                                }
+                              ]}
+                            >
+                              <Input
+                                style={{
+                                  width: "100%",
+                                  borderRadius: "24px",
+                                  paddingLeft: 24,
+                                  paddingRight: 24
+                                }}
+                                size='large'
+                                placeholder={t(
+                                  "Digits only, no comma or period",
+                                  {
+                                    ns: "retreat"
+                                  }
+                                )}
+                              />
+                            </Form.Item>
+                          </Col>
+                          <Col span={8} md={{ span: 5 }}>
+                            <Form.Item>
+                              <Button
+                                shape='round'
+                                type='primary'
+                                className='w-100'
+                                htmlType='submit'
+                                size='large'
+                                loading={isLoadingSubmit}
+                              >
+                                {t("Committed", { ns: "retreat" })}
+                              </Button>
+                            </Form.Item>
+                          </Col>
+                          {submitSuccess && (
+                            <>
+                              <Col span={16} md={{ span: 19 }} />
+                              <Col span={8} md={{ span: 5 }}>
+                                <p>{t(submitSuccess)}</p>
+                              </Col>
+                            </>
+                          )}
+                        </Row>
                         <Row gutter={16}>
                           <Col span={16} md={{ span: 19 }}>
                             <Form.Item
