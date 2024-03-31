@@ -62,6 +62,20 @@ export const postRetreatRecitation = async (data: TPostSubmitRetreat) => {
   })
 }
 
+export const postRetreatUser = async (data: {
+  committed: number
+  user: number
+  retreat: number
+}) => {
+  return await Client.createRequest({
+    path: "/api/retreat-users",
+    method: "post",
+    body: {
+      data
+    }
+  })
+}
+
 export const getParticipantHistory = async (
   userId: number,
   retreatParentId: number,
