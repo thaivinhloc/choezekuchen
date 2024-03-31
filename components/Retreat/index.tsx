@@ -618,7 +618,70 @@ const Retreat: React.FC<{
                           objectPosition='center'
                         />
                       </div>
-                      {retreatDetail?.user && (
+                      {!retreatDetail?.isGroup && userRetreat && (
+                        <>
+                          <Row
+                            gutter={[24, 16]}
+                            style={{
+                              marginTop: 24,
+                              marginBottom: 24
+                            }}
+                          >
+                            <Col span={24} xl={{ span: 8 }}>
+                              <RenderItem
+                                title={t("Committed", {
+                                  ns: "retreat"
+                                })}
+                                content={formatNumber(
+                                  userRetreat?.commited || 0
+                                )}
+                              />
+                            </Col>
+                            <Col span={24} xl={{ span: 8 }}>
+                              <RenderItem
+                                title={t("Completed", {
+                                  ns: "retreat"
+                                })}
+                                content={formatNumber(
+                                  userRetreat?.completed || 0
+                                )}
+                              />
+                            </Col>
+                            <Col span={24} xl={{ span: 8 }}>
+                              <RenderItem
+                                title={t("Due", { ns: "retreat" })}
+                                content={
+                                  Number(userRetreat?.due) < 0
+                                    ? 0
+                                    : formatNumber(userRetreat?.due || 0)
+                                }
+                              />
+                            </Col>
+                            <Col span={24} xl={{ span: 12 }}>
+                              <RenderItem
+                                title={t("Daily Average", {
+                                  ns: "retreat"
+                                })}
+                                content={
+                                  formatNumber(userRetreat?.dailyAverage || 0)
+                                }
+                              />
+                            </Col>
+                            <Col span={24} xl={{ span: 12 }}>
+                              <RenderItem
+                                title={t("Daily Required", {
+                                  ns: "retreat"
+                                })}
+                                content={
+                                  formatNumber(userRetreat?.dailyRequired || 0)
+                                }
+                              />
+                            </Col>
+                          </Row>
+                          <hr style={{ color: THEME.primary }} />
+                        </>
+                      )}
+                      {retreatDetail?.isGroup && retreatDetail?.user && (
                         <>
                           <Row
                             gutter={[24, 16]}
@@ -661,6 +724,8 @@ const Retreat: React.FC<{
                           <hr style={{ color: THEME.primary }} />
                         </>
                       )}
+                      {retreatDetail?.isGroup && (
+                      <>
                       <Row
                         gutter={[24, 16]}
                         style={{
@@ -701,31 +766,28 @@ const Retreat: React.FC<{
                             }
                           />
                         </Col>
-                        {retreatDetail?.isGroup && (
-                          <>
-                            <Col span={24} xl={{ span: 6 }}>
-                              <RenderItemSmaller
-                                title={t("Daily Average", {
-                                  ns: "retreat"
-                                })}
-                                content={
-                                  formatNumber(userRetreat?.dailyAverage || 0)
-                                }
-                              />
-                            </Col>
-                            <Col span={24} xl={{ span: 6 }}>
-                              <RenderItemSmaller
-                                title={t("Daily Required", {
-                                  ns: "retreat"
-                                })}
-                                content={
-                                  formatNumber(userRetreat?.dailyRequired || 0)
-                                }
-                              />
-                            </Col>
-                          </>
-                        )}
+                        <Col span={24} xl={{ span: 6 }}>
+                          <RenderItemSmaller
+                            title={t("Daily Average", {
+                              ns: "retreat"
+                            })}
+                            content={
+                              formatNumber(userRetreat?.dailyAverage || 0)
+                            }
+                          />
+                        </Col>
+                        <Col span={24} xl={{ span: 6 }}>
+                          <RenderItemSmaller
+                            title={t("Daily Required", {
+                              ns: "retreat"
+                            })}
+                            content={
+                              formatNumber(userRetreat?.dailyRequired || 0)
+                            }
+                          />
+                        </Col>
                       </Row>
+                      </>)}
                       <Form
                         onFinish={handleSubmit}
                         form={form}
