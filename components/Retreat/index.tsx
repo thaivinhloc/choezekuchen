@@ -708,7 +708,9 @@ const Retreat: React.FC<{
                                 title={t("Daily Average", {
                                   ns: "retreat"
                                 })}
-                                content={userRetreat?.dailyAverage || 0}
+                                content={
+                                  formatNumber(userRetreat?.dailyAverage || 0)
+                                }
                               />
                             </Col>
                             <Col span={24} xl={{ span: 6 }}>
@@ -716,7 +718,9 @@ const Retreat: React.FC<{
                                 title={t("Daily Required", {
                                   ns: "retreat"
                                 })}
-                                content={userRetreat?.dailyRequired || 0}
+                                content={
+                                  formatNumber(userRetreat?.dailyRequired || 0)
+                                }
                               />
                             </Col>
                           </>
