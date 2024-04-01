@@ -788,7 +788,8 @@ const Retreat: React.FC<{
                               <RenderItemSmaller
                                 title={t("Due", { ns: "retreat" })}
                                 content={
-                                  Number(userRetreat?.due) < 0
+                                  Number(userRetreat?.due) < 0 ||
+                                  !userRetreat?.isCommitted
                                     ? 0
                                     : formatNumber(userRetreat?.due || 0)
                                 }
@@ -810,7 +811,9 @@ const Retreat: React.FC<{
                                   ns: "retreat"
                                 })}
                                 content={formatNumber(
-                                  userRetreat?.dailyRequired || 0
+                                  !userRetreat?.isCommitted
+                                    ? 0
+                                    : userRetreat?.dailyRequired || 0
                                 )}
                               />
                             </Col>
