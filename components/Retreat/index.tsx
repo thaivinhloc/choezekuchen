@@ -422,6 +422,26 @@ const Retreat: React.FC<{
     )
   }
 
+  const RenderTitle = ({ title, content }: TRenderItem) => {
+    return (
+      <div style={{ textAlign: "center" }}>
+        <strong
+          style={{
+            display: "block",
+            fontSize: 24,
+            color: THEME.primary,
+            lineHeight: "24px"
+          }}
+        >
+          {content}
+        </strong>
+        <strong style={{ fontSize: 16, color: "rgba(0,0,0,0.7)" }}>
+          {title}
+        </strong>
+      </div>
+    )
+  }
+
   const RenderCommitForm = ({ defaultCommitted, onFinish }) => {
     return (
       <RenderItemWrapper
@@ -657,7 +677,7 @@ const Retreat: React.FC<{
                                 }
                               />
                             </Col>
-                            <Col span={24} xl={{ span: 12 }}>
+                            {/* <Col span={24} xl={{ span: 12 }}>
                               <RenderItem
                                 title={t("Daily Average", {
                                   ns: "retreat"
@@ -676,7 +696,7 @@ const Retreat: React.FC<{
                                   formatNumber(userRetreat?.dailyRequired || 0)
                                 }
                               />
-                            </Col>
+                            </Col> */}
                           </Row>
                           <hr style={{ color: THEME.primary }} />
                         </>
@@ -726,6 +746,19 @@ const Retreat: React.FC<{
                       )}
                       {retreatDetail?.isGroup && (
                       <>
+                      <Row
+                        gutter={[24, 16]}
+                        style={{
+                          marginTop: 16,
+                          marginBottom: 16
+                        }}
+                      >
+                        <Col span={24} xl={{ span: 24 }}>
+                          <RenderTitle
+                            content={user?.username || ""}
+                          />
+                        </Col>
+                      </Row>
                       <Row
                         gutter={[24, 16]}
                         style={{
