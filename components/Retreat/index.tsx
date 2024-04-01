@@ -442,7 +442,7 @@ const Retreat: React.FC<{
     )
   }
 
-  const RenderCommitForm = ({ defaultCommitted, onFinish }) => {
+  const RenderCommitForm = ({ onFinish }) => {
     return (
       <RenderItemWrapper
         style={{
@@ -453,11 +453,7 @@ const Retreat: React.FC<{
           border: "1px solid #800000"
         }}
       >
-        <Form
-          onFinish={onFinish}
-          form={commitForm}
-          initialValues={{ committed: defaultCommitted }}
-        >
+        <Form onFinish={onFinish} form={commitForm}>
           <Row gutter={16}>
             <Col span={16} md={{ span: 16 }}>
               <Form.Item
@@ -502,7 +498,7 @@ const Retreat: React.FC<{
                   size='large'
                   loading={isCommitting}
                 >
-                  {t("Committed", { ns: "retreat" })}
+                  {t("Commit", { ns: "retreat" })}
                 </Button>
               </Form.Item>
             </Col>
@@ -745,82 +741,82 @@ const Retreat: React.FC<{
                         </>
                       )}
                       {retreatDetail?.isGroup && (
-                      <>
-                      <Row
-                        gutter={[24, 16]}
-                        style={{
-                          marginTop: 16,
-                          marginBottom: 16
-                        }}
-                      >
-                        <Col span={24} xl={{ span: 24 }}>
-                          <RenderTitle
-                            content={user?.username || ""}
-                          />
-                        </Col>
-                      </Row>
-                      <Row
-                        gutter={[24, 16]}
-                        style={{
-                          marginTop: 16,
-                          marginBottom: 16
-                        }}
-                      >
-                        <Col span={24} xl={{ span: 24 }}>
-                          {!userRetreat?.isCommitted ? (
-                            <RenderCommitForm
-                              onFinish={onUserCommit}
-                              defaultCommitted={userRetreat?.commited}
-                            />
-                          ) : (
-                            <RenderItemSmaller
-                              title={t("Committed", {
-                                ns: "retreat"
-                              })}
-                              content={formatNumber(userRetreat?.commited || 0)}
-                            />
-                          )}
-                        </Col>
-                        <Col span={24} xl={{ span: 6 }}>
-                          <RenderItemSmaller
-                            title={t("Completed", {
-                              ns: "retreat"
-                            })}
-                            content={formatNumber(userRetreat?.completed || 0)}
-                          />
-                        </Col>
-                        <Col span={24} xl={{ span: 6 }}>
-                          <RenderItemSmaller
-                            title={t("Due", { ns: "retreat" })}
-                            content={
-                              Number(userRetreat?.due) < 0
-                                ? 0
-                                : formatNumber(userRetreat?.due || 0)
-                            }
-                          />
-                        </Col>
-                        <Col span={24} xl={{ span: 6 }}>
-                          <RenderItemSmaller
-                            title={t("Daily Average", {
-                              ns: "retreat"
-                            })}
-                            content={
-                              formatNumber(userRetreat?.dailyAverage || 0)
-                            }
-                          />
-                        </Col>
-                        <Col span={24} xl={{ span: 6 }}>
-                          <RenderItemSmaller
-                            title={t("Daily Required", {
-                              ns: "retreat"
-                            })}
-                            content={
-                              formatNumber(userRetreat?.dailyRequired || 0)
-                            }
-                          />
-                        </Col>
-                      </Row>
-                      </>)}
+                        <>
+                          <Row
+                            gutter={[24, 16]}
+                            style={{
+                              marginTop: 16,
+                              marginBottom: 16
+                            }}
+                          >
+                            <Col span={24} xl={{ span: 24 }}>
+                              <RenderTitle content={user?.username || ""} />
+                            </Col>
+                          </Row>
+                          <Row
+                            gutter={[24, 16]}
+                            style={{
+                              marginTop: 16,
+                              marginBottom: 16
+                            }}
+                          >
+                            <Col span={24} xl={{ span: 24 }}>
+                              {!userRetreat?.isCommitted ? (
+                                <RenderCommitForm onFinish={onUserCommit} />
+                              ) : (
+                                <RenderItemSmaller
+                                  title={t("Committed", {
+                                    ns: "retreat"
+                                  })}
+                                  content={formatNumber(
+                                    userRetreat?.commited || 0
+                                  )}
+                                />
+                              )}
+                            </Col>
+                            <Col span={24} xl={{ span: 6 }}>
+                              <RenderItemSmaller
+                                title={t("Completed", {
+                                  ns: "retreat"
+                                })}
+                                content={formatNumber(
+                                  userRetreat?.completed || 0
+                                )}
+                              />
+                            </Col>
+                            <Col span={24} xl={{ span: 6 }}>
+                              <RenderItemSmaller
+                                title={t("Due", { ns: "retreat" })}
+                                content={
+                                  Number(userRetreat?.due) < 0
+                                    ? 0
+                                    : formatNumber(userRetreat?.due || 0)
+                                }
+                              />
+                            </Col>
+                            <Col span={24} xl={{ span: 6 }}>
+                              <RenderItemSmaller
+                                title={t("Daily Average", {
+                                  ns: "retreat"
+                                })}
+                                content={formatNumber(
+                                  userRetreat?.dailyAverage || 0
+                                )}
+                              />
+                            </Col>
+                            <Col span={24} xl={{ span: 6 }}>
+                              <RenderItemSmaller
+                                title={t("Daily Required", {
+                                  ns: "retreat"
+                                })}
+                                content={formatNumber(
+                                  userRetreat?.dailyRequired || 0
+                                )}
+                              />
+                            </Col>
+                          </Row>
+                        </>
+                      )}
                       <Form
                         onFinish={handleSubmit}
                         form={form}
