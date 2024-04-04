@@ -760,7 +760,7 @@ const Retreat: React.FC<{
                               marginBottom: 16
                             }}
                           >
-                            <Col span={24} xl={{ span: 24 }}>
+                            <Col span={24} xl={{ span: 8 }}>
                               {!userRetreat?.isCommitted ? (
                                 <RenderCommitForm onFinish={onUserCommit} />
                               ) : (
@@ -774,7 +774,7 @@ const Retreat: React.FC<{
                                 />
                               )}
                             </Col>
-                            <Col span={24} xl={{ span: 6 }}>
+                            <Col span={24} xl={{ span: 8 }}>
                               <RenderItemSmaller
                                 title={t("Completed", {
                                   ns: "retreat"
@@ -784,7 +784,7 @@ const Retreat: React.FC<{
                                 )}
                               />
                             </Col>
-                            <Col span={24} xl={{ span: 6 }}>
+                            <Col span={24} xl={{ span: 8 }}>
                               <RenderItemSmaller
                                 title={t("Due", { ns: "retreat" })}
                                 content={
@@ -795,7 +795,7 @@ const Retreat: React.FC<{
                                 }
                               />
                             </Col>
-                            <Col span={24} xl={{ span: 6 }}>
+                            {/* <Col span={24} xl={{ span: 6 }}>
                               <RenderItemSmaller
                                 title={t("Daily Average", {
                                   ns: "retreat"
@@ -816,7 +816,7 @@ const Retreat: React.FC<{
                                     : userRetreat?.dailyRequired || 0
                                 )}
                               />
-                            </Col>
+                            </Col> */}
                           </Row>
                         </>
                       )}

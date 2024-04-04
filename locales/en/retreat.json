@@ -5,11 +5,17 @@
   "Digits only, no comma or period": "Digits only, no comma or period",
   "Total commitment": "Total commitment",
   "Committed": "Committed",
+  "Commit": "Commit",
   "Completed": "Completed",
   "Due": "Due",
-  "Daily Everage": "Daily Average",
+  "Daily Average": "Daily Average",
   "Daily Required": "Daily Required",
   "Last Updated": "Last Updated",
   "View history": "View history",
-  "Welcome to join the Yangzab Ngondro Retreat - Log in or Sign up now!": "Welcome to join the Yangzab Ngondro Retreat - Log in or Sign up now!"
+  "Welcome to join the Yangzab Ngondro Retreat - Log in or Sign up now!": "Welcome to join the Yangzab Ngondro Retreat - Log in or Sign up now!",
+  "(*) Please choose date and submit the number for your record": "(*) Please choose date and submit the number for your record",
+  "Upcoming Events": "Upcoming Events",
+  "Group Committed": "Group Committed",
+  "Group Due": "Group Due",
+  "Group Completed": "Group Completed"
 }
