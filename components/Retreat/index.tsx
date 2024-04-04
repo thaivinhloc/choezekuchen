@@ -643,7 +643,7 @@ const Retreat: React.FC<{
                               marginBottom: 24
                             }}
                           >
-                            <Col span={24} xl={{ span: 24 }}>
+                            <Col span={24} xl={{ span: 8 }}>
                               <RenderItem
                                 title={t("Committed", {
                                   ns: "retreat"
@@ -653,7 +653,7 @@ const Retreat: React.FC<{
                                 )}
                               />
                             </Col>
-                            <Col span={24} xl={{ span: 12 }}>
+                            <Col span={24} xl={{ span: 8 }}>
                               <RenderItem
                                 title={t("Completed", {
                                   ns: "retreat"
@@ -663,7 +663,7 @@ const Retreat: React.FC<{
                                 )}
                               />
                             </Col>
-                            <Col span={24} xl={{ span: 12 }}>
+                            <Col span={24} xl={{ span: 8 }}>
                               <RenderItem
                                 title={t("Due", { ns: "retreat" })}
                                 content={
@@ -760,7 +760,7 @@ const Retreat: React.FC<{
                               marginBottom: 16
                             }}
                           >
-                            <Col span={24} xl={{ span: 8 }}>
+                            <Col span={24} xl={{ span: 24 }}>
                               {!userRetreat?.isCommitted ? (
                                 <RenderCommitForm onFinish={onUserCommit} />
                               ) : (
@@ -774,7 +774,7 @@ const Retreat: React.FC<{
                                 />
                               )}
                             </Col>
-                            <Col span={24} xl={{ span: 8 }}>
+                            <Col span={24} xl={{ span: 12 }}>
                               <RenderItemSmaller
                                 title={t("Completed", {
                                   ns: "retreat"
@@ -784,7 +784,7 @@ const Retreat: React.FC<{
                                 )}
                               />
                             </Col>
-                            <Col span={24} xl={{ span: 8 }}>
+                            <Col span={24} xl={{ span: 12 }}>
                               <RenderItemSmaller
                                 title={t("Due", { ns: "retreat" })}
                                 content={
