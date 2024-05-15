@@ -563,117 +563,124 @@ const Retreat: React.FC<{
                 </Radio.Group>
               </TopCategoryWrapper>
               <SubmitFormWrapper>
-                <Row gutter={[24, 16]}>
-                  <Col span={24} xl={{ span: 16 }}>
-                    <div>
-                      <div
-                        style={{
-                          display: "flex",
-                          justifyContent: "space-between",
-                          marginBottom: 24
-                        }}
-                      >
-                        <h2
+                <Form
+                  onFinish={handleSubmit}
+                  form={form}
+                  initialValues={{ completedAt: moment() }}
+                >
+                  <Row gutter={[24, 16]}>
+                    <Col span={24} xl={{ span: 16 }}>
+                      <div>
+                        <div
                           style={{
-                            color: THEME.primary,
-                            fontSize: 24,
-                            textTransform: "uppercase",
-                            margin: 0,
-                            lineHeight: "28px"
+                            display: "flex",
+                            justifyContent: "space-between",
+                            marginBottom: 24
                           }}
                         >
-                          {retreatDetail?.name || ""}
-                        </h2>
-                        {retreatDetail?.user && (
-                          <Space
-                            size={isMobile ? "small" : "large"}
-                            direction={isMobile ? "vertical" : "horizontal"}
+                          <h2
+                            style={{
+                              color: THEME.primary,
+                              fontSize: 24,
+                              textTransform: "uppercase",
+                              margin: 0,
+                              lineHeight: "28px"
+                            }}
                           >
-                            <a
-                              onClick={() => handleChangeTab(ETabPane.LISTING)}
-                              type='button'
-                              className='link-underline'
-                              style={{
-                                color: THEME.link,
-                                fontSize: 15
-                              }}
+                            {retreatDetail?.name || ""}
+                          </h2>
+                          {retreatDetail?.user && (
+                            <Space
+                              size={isMobile ? "small" : "large"}
+                              direction={isMobile ? "vertical" : "horizontal"}
                             >
-                              {t("Participant List", {
-                                ns: "retreat"
-                              })}
-                            </a>
-                            <Link href={`/retreat-history/${parent?.id}`}>
                               <a
+                                onClick={() =>
+                                  handleChangeTab(ETabPane.LISTING)
+                                }
+                                type='button'
                                 className='link-underline'
                                 style={{
                                   color: THEME.link,
                                   fontSize: 15
                                 }}
                               >
-                                {t("View history", {
+                                {t("Participant List", {
                                   ns: "retreat"
                                 })}
                               </a>
-                            </Link>
-                          </Space>
-                        )}
-                      </div>
-                      <div
-                        style={{
-                          height: 160,
-                          position: "relative",
-                          borderRadius: 16
-                        }}
-                      >
-                        <Image
-                          style={{ borderRadius: 16 }}
-                          src={retreatDetail?.image?.url ?? ""}
-                          {...retreatDetail?.image}
-                          layout='fill'
-                          objectFit='cover'
-                          objectPosition='center'
-                        />
-                      </div>
-                      {!retreatDetail?.isGroup && userRetreat && (
-                        <>
-                          <Row
-                            gutter={[24, 16]}
-                            style={{
-                              marginTop: 24,
-                              marginBottom: 24
-                            }}
-                          >
-                            <Col span={24} xl={{ span: 8 }}>
-                              <RenderItem
-                                title={t("Committed", {
-                                  ns: "retreat"
-                                })}
-                                content={formatNumber(
-                                  userRetreat?.commited || 0
-                                )}
-                              />
-                            </Col>
-                            <Col span={24} xl={{ span: 8 }}>
-                              <RenderItem
-                                title={t("Completed", {
-                                  ns: "retreat"
-                                })}
-                                content={formatNumber(
-                                  userRetreat?.completed || 0
-                                )}
-                              />
-                            </Col>
-                            <Col span={24} xl={{ span: 8 }}>
-                              <RenderItem
-                                title={t("Due", { ns: "retreat" })}
-                                content={
-                                  Number(userRetreat?.due) < 0
-                                    ? 0
-                                    : formatNumber(userRetreat?.due || 0)
-                                }
-                              />
-                            </Col>
-                            {/* <Col span={24} xl={{ span: 12 }}>
+                              <Link href={`/retreat-history/${parent?.id}`}>
+                                <a
+                                  className='link-underline'
+                                  style={{
+                                    color: THEME.link,
+                                    fontSize: 15
+                                  }}
+                                >
+                                  {t("View history", {
+                                    ns: "retreat"
+                                  })}
+                                </a>
+                              </Link>
+                            </Space>
+                          )}
+                        </div>
+                        <div
+                          style={{
+                            height: 160,
+                            position: "relative",
+                            borderRadius: 16
+                          }}
+                        >
+                          <Image
+                            style={{ borderRadius: 16 }}
+                            src={retreatDetail?.image?.url ?? ""}
+                            {...retreatDetail?.image}
+                            layout='fill'
+                            objectFit='cover'
+                            objectPosition='center'
+                          />
+                        </div>
+                        {!retreatDetail?.isGroup && userRetreat && (
+                          <>
+                            <Row
+                              gutter={[24, 16]}
+                              style={{
+                                marginTop: 24,
+                                marginBottom: 24
+                              }}
+                            >
+                              <Col span={24} xl={{ span: 8 }}>
+                                <RenderItem
+                                  title={t("Committed", {
+                                    ns: "retreat"
+                                  })}
+                                  content={formatNumber(
+                                    userRetreat?.commited || 0
+                                  )}
+                                />
+                              </Col>
+                              <Col span={24} xl={{ span: 8 }}>
+                                <RenderItem
+                                  title={t("Completed", {
+                                    ns: "retreat"
+                                  })}
+                                  content={formatNumber(
+                                    userRetreat?.completed || 0
+                                  )}
+                                />
+                              </Col>
+                              <Col span={24} xl={{ span: 8 }}>
+                                <RenderItem
+                                  title={t("Due", { ns: "retreat" })}
+                                  content={
+                                    Number(userRetreat?.due) < 0
+                                      ? 0
+                                      : formatNumber(userRetreat?.due || 0)
+                                  }
+                                />
+                              </Col>
+                              {/* <Col span={24} xl={{ span: 12 }}>
                               <RenderItem
                                 title={t("Daily Average", {
                                   ns: "retreat"
@@ -693,109 +700,109 @@ const Retreat: React.FC<{
                                 }
                               />
                             </Col> */}
-                          </Row>
-                          <hr style={{ color: THEME.primary }} />
-                        </>
-                      )}
-                      {retreatDetail?.isGroup && retreatDetail?.user && (
-                        <>
-                          <Row
-                            gutter={[24, 16]}
-                            style={{
-                              marginTop: 24,
-                              marginBottom: 24
-                            }}
-                          >
-                            <Col span={24} xl={{ span: 8 }}>
-                              <RenderItem
-                                title={t("Group Committed", {
-                                  ns: "retreat"
-                                })}
-                                content={formatNumber(
-                                  retreatDetail?.totalCommitment || 0
-                                )}
-                              />
-                            </Col>
-                            <Col span={24} xl={{ span: 8 }}>
-                              <RenderItem
-                                title={t("Group Completed", {
-                                  ns: "retreat"
-                                })}
-                                content={formatNumber(
-                                  retreatDetail?.totalGroupCompleted || 0
-                                )}
-                              />
-                            </Col>
-                            <Col span={24} xl={{ span: 8 }}>
-                              <RenderItem
-                                title={t("Group Due", { ns: "retreat" })}
-                                content={
-                                  Number(retreatDetail?.due) < 0
-                                    ? 0
-                                    : formatNumber(retreatDetail?.due || 0)
-                                }
-                              />
-                            </Col>
-                          </Row>
-                          <hr style={{ color: THEME.primary }} />
-                        </>
-                      )}
-                      {retreatDetail?.isGroup && (
-                        <>
-                          <Row
-                            gutter={[24, 16]}
-                            style={{
-                              marginTop: 16,
-                              marginBottom: 16
-                            }}
-                          >
-                            <Col span={24} xl={{ span: 24 }}>
-                              <RenderTitle content={user?.username || ""} />
-                            </Col>
-                          </Row>
-                          <Row
-                            gutter={[24, 16]}
-                            style={{
-                              marginTop: 16,
-                              marginBottom: 16
-                            }}
-                          >
-                            <Col span={24} xl={{ span: 24 }}>
-                              {!userRetreat?.isCommitted ? (
-                                <RenderCommitForm onFinish={onUserCommit} />
-                              ) : (
-                                <RenderItemSmaller
-                                  title={t("Committed", {
+                            </Row>
+                            <hr style={{ color: THEME.primary }} />
+                          </>
+                        )}
+                        {retreatDetail?.isGroup && retreatDetail?.user && (
+                          <>
+                            <Row
+                              gutter={[24, 16]}
+                              style={{
+                                marginTop: 24,
+                                marginBottom: 24
+                              }}
+                            >
+                              <Col span={24} xl={{ span: 8 }}>
+                                <RenderItem
+                                  title={t("Group Committed", {
                                     ns: "retreat"
                                   })}
                                   content={formatNumber(
-                                    userRetreat?.commited || 0
+                                    retreatDetail?.totalCommitment || 0
                                   )}
                                 />
-                              )}
-                            </Col>
-                            <Col span={24} xl={{ span: 12 }}>
-                              <RenderItemSmaller
-                                title={t("Completed", {
-                                  ns: "retreat"
-                                })}
-                                content={formatNumber(
-                                  userRetreat?.completed || 0
+                              </Col>
+                              <Col span={24} xl={{ span: 8 }}>
+                                <RenderItem
+                                  title={t("Group Completed", {
+                                    ns: "retreat"
+                                  })}
+                                  content={formatNumber(
+                                    retreatDetail?.totalGroupCompleted || 0
+                                  )}
+                                />
+                              </Col>
+                              <Col span={24} xl={{ span: 8 }}>
+                                <RenderItem
+                                  title={t("Group Due", { ns: "retreat" })}
+                                  content={
+                                    Number(retreatDetail?.due) < 0
+                                      ? 0
+                                      : formatNumber(retreatDetail?.due || 0)
+                                  }
+                                />
+                              </Col>
+                            </Row>
+                            <hr style={{ color: THEME.primary }} />
+                          </>
+                        )}
+                        {retreatDetail?.isGroup && (
+                          <>
+                            <Row
+                              gutter={[24, 16]}
+                              style={{
+                                marginTop: 16,
+                                marginBottom: 16
+                              }}
+                            >
+                              <Col span={24} xl={{ span: 24 }}>
+                                <RenderTitle content={user?.username || ""} />
+                              </Col>
+                            </Row>
+                            <Row
+                              gutter={[24, 16]}
+                              style={{
+                                marginTop: 16,
+                                marginBottom: 16
+                              }}
+                            >
+                              <Col span={24} xl={{ span: 24 }}>
+                                {!userRetreat?.isCommitted ? (
+                                  <RenderCommitForm onFinish={onUserCommit} />
+                                ) : (
+                                  <RenderItemSmaller
+                                    title={t("Committed", {
+                                      ns: "retreat"
+                                    })}
+                                    content={formatNumber(
+                                      userRetreat?.commited || 0
+                                    )}
+                                  />
                                 )}
-                              />
-                            </Col>
-                            <Col span={24} xl={{ span: 12 }}>
-                              <RenderItemSmaller
-                                title={t("Due", { ns: "retreat" })}
-                                content={
-                                  Number(userRetreat?.due) < 0 ||
-                                  !userRetreat?.isCommitted
-                                    ? 0
-                                    : formatNumber(userRetreat?.due || 0)
-                                }
-                              />
-                            </Col>
-                            {/* <Col span={24} xl={{ span: 6 }}>
+                              </Col>
+                              <Col span={24} xl={{ span: 12 }}>
+                                <RenderItemSmaller
+                                  title={t("Completed", {
+                                    ns: "retreat"
+                                  })}
+                                  content={formatNumber(
+                                    userRetreat?.completed || 0
+                                  )}
+                                />
+                              </Col>
+                              <Col span={24} xl={{ span: 12 }}>
+                                <RenderItemSmaller
+                                  title={t("Due", { ns: "retreat" })}
+                                  content={
+                                    Number(userRetreat?.due) < 0 ||
+                                    !userRetreat?.isCommitted
+                                      ? 0
+                                      : formatNumber(userRetreat?.due || 0)
+                                  }
+                                />
+                              </Col>
+                              {/* <Col span={24} xl={{ span: 6 }}>
                               <RenderItemSmaller
                                 title={t("Daily Average", {
                                   ns: "retreat"
@@ -817,14 +824,9 @@ const Retreat: React.FC<{
                                 )}
                               />
                             </Col> */}
-                          </Row>
-                        </>
-                      )}
-                      <Form
-                        onFinish={handleSubmit}
-                        form={form}
-                        initialValues={{ completedAt: moment() }}
-                      >
+                            </Row>
+                          </>
+                        )}
                         <Row gutter={16}>
                           <Col span={16} md={{ span: 19 }}>
                             <Form.Item
@@ -885,64 +887,64 @@ const Retreat: React.FC<{
                             </>
                           )}
                         </Row>
-                      </Form>
-                    </div>
-                  </Col>
-                  <Col span={24} xl={{ span: 8 }}>
-                    <div
-                      style={{
-                        background: "#fff",
-                        borderRadius: 16,
-                        height: "100%",
-                        paddingBottom: isMobile ? 24 : 0
-                      }}
-                    >
-                      <DatePopupWrapper>
-                        <Form.Item
-                          name='completedAt'
-                          label=''
-                          style={{
-                            display: "inline-block",
-                            width: "100%",
-                            marginBottom: 0,
-                            paddingLeft: "4px"
-                          }}
-                        >
-                          <DatePicker
-                            showToday={false}
-                            open={true}
-                            getPopupContainer={() => {
-                              return datePickerRef.current ?? null
-                            }}
-                            className='h-100'
-                            size='large'
-                            format='DD/MM/YYYY'
-                            allowClear={false}
-                            disabledDate={(current) => {
-                              return (
-                                moment(retreatDetail?.dateStart) >= current ||
-                                moment(retreatDetail?.dateEnd) <= current
-                              )
-                            }}
-                          />
-                        </Form.Item>
-                        <div ref={datePickerRef} />
-                      </DatePopupWrapper>
+                      </div>
+                    </Col>
+                    <Col span={24} xl={{ span: 8 }}>
                       <div
                         style={{
-                          fontSize: 12,
-                          padding: "8px 24px 0"
+                          background: "#fff",
+                          borderRadius: 16,
+                          height: "100%",
+                          paddingBottom: isMobile ? 24 : 0
                         }}
                       >
-                        <i>
-                          {t(
-                            "(*) Please choose date and submit the number for your record"
-                          )}
-                        </i>
+                        <DatePopupWrapper>
+                          <Form.Item
+                            name='completedAt'
+                            label=''
+                            style={{
+                              display: "inline-block",
+                              width: "100%",
+                              marginBottom: 0,
+                              paddingLeft: "4px"
+                            }}
+                          >
+                            <DatePicker
+                              showToday={false}
+                              open={true}
+                              getPopupContainer={() => {
+                                return datePickerRef.current ?? null
+                              }}
+                              className='h-100'
+                              size='large'
+                              format='DD/MM/YYYY'
+                              allowClear={false}
+                              disabledDate={(current) => {
+                                return (
+                                  moment(retreatDetail?.dateStart) >= current ||
+                                  moment(retreatDetail?.dateEnd) <= current
+                                )
+                              }}
+                            />
+                          </Form.Item>
+                          <div ref={datePickerRef} />
+                        </DatePopupWrapper>
+                        <div
+                          style={{
+                            fontSize: 12,
+                            padding: "8px 24px 0"
+                          }}
+                        >
+                          <i>
+                            {t(
+                              "(*) Please choose date and submit the number for your record"
+                            )}
+                          </i>
+                        </div>
                       </div>
-                    </div>
-                  </Col>
-                </Row>
+                    </Col>
+                  </Row>
+                </Form>
               </SubmitFormWrapper>
               <Row gutter={[24, 16]}>
                 <Col span={24} xl={{ span: 16 }}>
