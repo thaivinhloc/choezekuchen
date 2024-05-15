@@ -142,7 +142,17 @@ const SignUpForm = () => {
                 </Form.Item>
               </Col>
             </Row>
-            <Form.Item name='phone' label={t("Phone")}>
+            <Form.Item 
+              name='phone' 
+              label={t("Phone")} 
+              rules={[
+              {
+                whitespace: true,
+                required: true,
+                message: t("Please input your phone")
+              }
+            ]}
+              >
               <Input />
             </Form.Item>
             <Form.Item

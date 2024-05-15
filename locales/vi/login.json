@@ -5,6 +5,7 @@
   "RETREAT REGISTER": "Đăng ký nhập thất",
   "City": "Thành Phố",
   "Please input your City": "Vui lòng nhập thành phố của bạn",
+  "Please input your phone": "Vui lòng nhập điện thoại của bạn",
   "Country": "Quốc gia",
   "Password": "Mật khẩu",
   "Please input your Password": "Vui lòng nhập mật khẩu",
@@ -13,5 +14,6 @@
   "Please input your": "Vui lòng nhập",
   "firstName": "Họ",
   "lastName": "Tên",
-  "Phone": "Số điện thoại"
+  "Phone": "Số điện thoại",
+  "Reset Password": "Khôi phục mật khẩu"
 }

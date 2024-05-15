@@ -5,6 +5,7 @@
   "RETREAT REGISTER": "Retreat register",
   "City": "City",
   "Please input your City": "Please input your City",
+  "Please input your phone": "Please input your phone",
   "Country": "Country",
   "Password": "Password",
   "Please input your Password": "Please input your Password",
@@ -13,5 +14,6 @@
   "Please input your": "Please input your",
   "firstName": "First Name",
   "lastName": "Last Name",
-  "Phone": "Phone"
+  "Phone": "Phone",
+  "Reset Password": "Reset Password"
 }
