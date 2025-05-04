@@ -650,16 +650,18 @@ const Retreat: React.FC<{
                                 marginBottom: 24
                               }}
                             >
-                              <Col span={24} xl={{ span: 8 }}>
-                                <RenderItem
-                                  title={t("Committed", {
-                                    ns: "retreat"
-                                  })}
-                                  content={formatNumber(
-                                    userRetreat?.commited || 0
-                                  )}
-                                />
-                              </Col>
+                              {retreatDetail?.totalCommitment !== 0 && (
+                                <Col span={24} xl={{ span: 8 }}>
+                                  <RenderItem
+                                    title={t("Committed", {
+                                      ns: "retreat"
+                                    })}
+                                    content={formatNumber(
+                                      userRetreat?.commited || 0
+                                    )}
+                                  />
+                                </Col>
+                              )}
                               <Col span={24} xl={{ span: 8 }}>
                                 <RenderItem
                                   title={t("Completed", {
@@ -670,16 +672,18 @@ const Retreat: React.FC<{
                                   )}
                                 />
                               </Col>
-                              <Col span={24} xl={{ span: 8 }}>
-                                <RenderItem
-                                  title={t("Due", { ns: "retreat" })}
-                                  content={
-                                    Number(userRetreat?.due) < 0
-                                      ? 0
-                                      : formatNumber(userRetreat?.due || 0)
-                                  }
-                                />
-                              </Col>
+                              {retreatDetail?.totalCommitment !== 0 && (
+                                <Col span={24} xl={{ span: 8 }}>
+                                  <RenderItem
+                                    title={t("Due", { ns: "retreat" })}
+                                    content={
+                                      Number(userRetreat?.due) < 0
+                                        ? 0
+                                        : formatNumber(userRetreat?.due || 0)
+                                    }
+                                  />
+                                </Col>
+                              )}
                               {/* <Col span={24} xl={{ span: 12 }}>
                               <RenderItem
                                 title={t("Daily Average", {
