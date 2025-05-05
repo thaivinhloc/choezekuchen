@@ -662,7 +662,7 @@ const Retreat: React.FC<{
                                   />
                                 </Col>
                               )}
-                              <Col span={24} xl={{ span: 8 }}>
+                              <Col span={24} xl={{ span: retreatDetail?.totalCommitment === 0 ? 24 : 8 }}>
                                 <RenderItem
                                   title={t("Completed", {
                                     ns: "retreat"
