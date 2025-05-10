@@ -224,7 +224,9 @@ const SignUpForm = () => {
               <Row justify="space-between" align="middle">
                 <Col>
                   <Row>
-                    <Col>{t("Already have member?", { ns: "content" })} &nbsp;</Col>
+                    <Col>
+                      {t("Already have member?", { ns: "content" })} &nbsp;
+                    </Col>
                     <Col>
                       <Link href="/login">
                         <a>
@@ -237,7 +239,9 @@ const SignUpForm = () => {
                 <Col>
                   <Link href="/forgot-password">
                     <a>
-                      <strong>{t("Forgot password?", { ns: "login" })}</strong>
+                      <strong>
+                        {t("Forgot password?", { ns: "content" })}
+                      </strong>
                     </a>
                   </Link>
                 </Col>
