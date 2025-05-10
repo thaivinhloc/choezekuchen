@@ -3,8 +3,8 @@ import {
   ArrowLeftOutlined,
   DownOutlined,
   LeftOutlined,
-  RightOutlined
-} from "@ant-design/icons"
+  RightOutlined,
+} from "@ant-design/icons";
 import {
   Button,
   Col,
@@ -19,52 +19,52 @@ import {
   Skeleton,
   Space,
   Tabs,
-  Tooltip
-} from "antd"
-import { useForm } from "antd/lib/form/Form"
-import { THEME } from "common"
-import { LOGIN, RETREAT_HISTORY } from "common/navigator"
-import { TRetreat } from "definition"
-import { RichText } from "elements/RichText"
-import i18next from "i18next"
-import moment from "moment"
-import { useTranslation } from "next-i18next"
-import Link from "next/link"
-import { useRouter } from "next/router"
-import React, { createElement, useEffect, useRef, useState } from "react"
-import { Container } from "react-bootstrap"
-import { useApp } from "../../context/app/AppContext"
-import { useAuth } from "../../context/auth/AuthContext"
-import { formatNumber } from "../../helper"
+  Tooltip,
+} from "antd";
+import { useForm } from "antd/lib/form/Form";
+import { THEME } from "common";
+import { LOGIN, RETREAT_HISTORY } from "common/navigator";
+import { TRetreat } from "definition";
+import { RichText } from "elements/RichText";
+import i18next from "i18next";
+import moment from "moment";
+import { useTranslation } from "next-i18next";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import React, { createElement, useEffect, useRef, useState } from "react";
+import { Container } from "react-bootstrap";
+import { useApp } from "../../context/app/AppContext";
+import { useAuth } from "../../context/auth/AuthContext";
+import { formatNumber } from "../../helper";
 import {
   getParticipants,
   getRetreatDetail,
   postRetreatRecitation,
-  postRetreatUser
-} from "../../services/api"
+  postRetreatUser,
+} from "../../services/api";
 import {
   IResponseActiveRetreat,
   IResponseListRetreat,
   IResponseRetreatDetail,
-  User
-} from "../../services/retreatTypes"
-import RetreatListing from "./components/RetreatListing"
-import useRetreat, { TLanguage } from "./hooks/useRetreat"
-import { DivRetreatWrapper } from "./index.style"
-import { GridMedia } from "elements/Media"
-import styled from "styled-components"
-import Image from "next/image"
-import { ArrowRight, ChevronRight } from "@mui/icons-material"
-import useEvents from "hook/useEvents"
-import { EventItem } from "components/Event/EventItem"
-import { TopCategoryWrapper } from "elements/styled/TopCategory"
+  User,
+} from "../../services/retreatTypes";
+import RetreatListing from "./components/RetreatListing";
+import useRetreat, { TLanguage } from "./hooks/useRetreat";
+import { DivRetreatWrapper } from "./index.style";
+import { GridMedia } from "elements/Media";
+import styled from "styled-components";
+import Image from "next/image";
+import { ArrowRight, ChevronRight } from "@mui/icons-material";
+import useEvents from "hook/useEvents";
+import { EventItem } from "components/Event/EventItem";
+import { TopCategoryWrapper } from "elements/styled/TopCategory";
 
 const SubmitFormWrapper = styled.div`
   border-radius: 16px;
   background: #f1f2f2;
   padding: 16px 24px;
   margin-bottom: 50px;
-`
+`;
 
 const DatePopupWrapper = styled.div`
   width: 100%;
@@ -141,57 +141,57 @@ const DatePopupWrapper = styled.div`
       }
     }
   }
-`
+`;
 
-const { TabPane } = Tabs
+const { TabPane } = Tabs;
 
-const PATH = process.env.REACT_APP_API_URL
+const PATH = process.env.REACT_APP_API_URL;
 enum ETabPane {
   DETAIL = "detail",
-  LISTING = "listing"
+  LISTING = "listing",
 }
 type TRenderItem = {
-  title: string
-  content: string | number | React.ReactNode
-}
+  title: string;
+  content: string | number | React.ReactNode;
+};
 type TRetreatForm = {
-  recitationNumber: number
-  completedAt: string | moment.Moment
-}
+  recitationNumber: number;
+  completedAt: string | moment.Moment;
+};
 
 type TCommitForm = {
-  committed: number
-}
+  committed: number;
+};
 
 const Retreat: React.FC<{
-  retreats: TRetreat[]
-  onGetRetreats: () => Promise<TRetreat[]>
-  parent: TRetreat
+  retreats: TRetreat[];
+  onGetRetreats: () => Promise<TRetreat[]>;
+  parent: TRetreat;
 }> = ({ retreats, onGetRetreats, parent, isMobile }) => {
-  const datePickerRef = useRef()
-  const router = useRouter()
-  const { user } = useAuth()
+  const datePickerRef = useRef();
+  const router = useRouter();
+  const { user } = useAuth();
   const { upcomingEvents, getUpcomingEvents } = useEvents({
-    locale: router.locale
-  })
-  const [form] = useForm<TRetreatForm>()
-  const [commitForm] = useForm<TCommitForm>()
-  const { t } = useTranslation("retreat")
+    locale: router.locale,
+  });
+  const [form] = useForm<TRetreatForm>();
+  const [commitForm] = useForm<TCommitForm>();
+  const { t } = useTranslation("retreat");
 
-  const currentLng = router.locale as any
+  const currentLng = router.locale as any;
 
   /* All State */
-  const [tab, setTab] = useState<ETabPane>(ETabPane.DETAIL)
-  const [activeRetreat, setActiveRetreat] = useState<number | null>(null)
-  const [isLoading, setIsLoading] = useState<boolean>(false)
-  const [isLoadingSubmit, setIsLoadingSubmit] = useState<boolean>(false)
-  const [isCommitting, setIsCommitting] = useState<boolean>(false)
+  const [tab, setTab] = useState<ETabPane>(ETabPane.DETAIL);
+  const [activeRetreat, setActiveRetreat] = useState<number | null>(null);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoadingSubmit, setIsLoadingSubmit] = useState<boolean>(false);
+  const [isCommitting, setIsCommitting] = useState<boolean>(false);
 
   const [listParticipant, setListParticipant] = useState<
     IResponseListRetreat[]
-  >([])
+  >([]);
 
-  const [retreatDetail, setRetreatDetail] = useState<IResponseRetreatDetail>()
+  const [retreatDetail, setRetreatDetail] = useState<IResponseRetreatDetail>();
 
   useEffect(() => {
     switch (tab) {
@@ -199,159 +199,159 @@ const Retreat: React.FC<{
         onGetRetreats()
           .then((res: TRetreat[]) => {
             if (res) {
-              const response = res.sort((a, b) => a.id - b.id)
-              setActiveRetreat(response[0].id)
+              const response = res.sort((a, b) => a.id - b.id);
+              setActiveRetreat(response[0].id);
             }
           })
-          .catch((error) => console.log("---error", error))
-        break
+          .catch((error) => console.log("---error", error));
+        break;
       case ETabPane.LISTING:
-        onGetRetreats()
-        getListParticipant()
-        break
+        onGetRetreats();
+        getListParticipant();
+        break;
       default:
-        break
+        break;
     }
-  }, [tab, currentLng])
+  }, [tab, currentLng]);
 
   useEffect(() => {
-    if (!activeRetreat) return
-    handleGetRetreatDetail(activeRetreat, currentLng)
-  }, [activeRetreat, currentLng])
+    if (!activeRetreat) return;
+    handleGetRetreatDetail(activeRetreat, currentLng);
+  }, [activeRetreat, currentLng]);
 
   useEffect(() => {
     form.setFieldsValue({
-      completedAt: moment()
-    })
-    getUpcomingEvents({ from: moment().toISOString() })
-  }, [])
+      completedAt: moment(),
+    });
+    getUpcomingEvents({ from: moment().toISOString() });
+  }, []);
 
   const getListParticipant = async () => {
     try {
-      setIsLoading(true)
+      setIsLoading(true);
       const result = await getParticipants({
         parentId: parent?.id,
-        locale: router.locale || "en"
-      })
+        locale: router.locale || "en",
+      });
       const data = result.map((item) => {
-        const address = item.address?.split(",")
+        const address = item.address?.split(",");
 
         const retreats = item.completed.reduce((prev: any, curr) => {
           prev[curr.retreatName] = {
             name: curr.retreatName,
             completed_fm: formatNumber(curr.completed),
             commited_fm: formatNumber(curr.commited),
-            ...curr
-          }
-          return prev
-        }, {})
+            ...curr,
+          };
+          return prev;
+        }, {});
 
         return {
           city: address?.[0],
           country: address?.[address?.length - 1],
           ...retreats,
-          ...item
-        }
-      })
-      console.log("getListParticipant", { data })
+          ...item,
+        };
+      });
+      console.log("getListParticipant", { data });
 
-      setListParticipant(data)
-      return data
+      setListParticipant(data);
+      return data;
     } catch (error) {
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
   const handleGetRetreatDetail = async (
     retreatId: number,
     currentLng: string
   ) => {
     try {
-      setIsLoading(true)
-      const response = await getRetreatDetail(retreatId, currentLng)
-      setRetreatDetail(response)
+      setIsLoading(true);
+      const response = await getRetreatDetail(retreatId, currentLng);
+      setRetreatDetail(response);
     } catch (error) {
-      console.log("----failed", error)
+      console.log("----failed", error);
     } finally {
-      setIsLoading(false)
+      setIsLoading(false);
     }
-  }
+  };
 
-  const [submitSuccess, setSubmitSuccess] = useState("")
+  const [submitSuccess, setSubmitSuccess] = useState("");
 
   useEffect(() => {
     if (submitSuccess) {
       setTimeout(() => {
-        setSubmitSuccess("")
-      }, 3000)
+        setSubmitSuccess("");
+      }, 3000);
     }
-  }, [submitSuccess])
+  }, [submitSuccess]);
 
   const handleSubmit = async (value: TRetreatForm) => {
-    if (!activeRetreat) return
+    if (!activeRetreat) return;
 
     try {
-      const values = await form.validateFields()
-      const recitationNumber = Number(values.recitationNumber)
-      const completedAt = moment(values.completedAt).format("YYYY-MM-DD")
+      const values = await form.validateFields();
+      const recitationNumber = Number(values.recitationNumber);
+      const completedAt = moment(values.completedAt).format("YYYY-MM-DD");
       if (!user) {
-        router.push(LOGIN, undefined, { locale: currentLng })
+        router.push(LOGIN, undefined, { locale: currentLng });
       } else {
-        setIsLoadingSubmit(true)
+        setIsLoadingSubmit(true);
         await postRetreatRecitation({
           recitationNumber,
           completedAt,
-          retreatId: activeRetreat
+          retreatId: activeRetreat,
         }).then(() => {
-          handleGetRetreatDetail(activeRetreat, currentLng)
+          handleGetRetreatDetail(activeRetreat, currentLng);
           form.setFieldsValue({
-            recitationNumber: undefined
-          })
+            recitationNumber: undefined,
+          });
           notification.success({
             message: "Success",
-            description: `Submit successfully`
-          })
-        })
+            description: `Submit successfully`,
+          });
+        });
       }
     } catch (error) {
     } finally {
-      setIsLoadingSubmit(false)
+      setIsLoadingSubmit(false);
     }
-  }
+  };
 
   const onUserCommit = async (values: TCommitForm) => {
-    console.log({ activeRetreat, user })
+    console.log({ activeRetreat, user });
 
-    if (!activeRetreat) return
+    if (!activeRetreat) return;
     try {
       if (!user) {
-        router.push(LOGIN, undefined, { locale: currentLng })
+        router.push(LOGIN, undefined, { locale: currentLng });
       } else {
-        setIsCommitting(true)
-        const committed = Number(values.committed)
+        setIsCommitting(true);
+        const committed = Number(values.committed);
         await postRetreatUser({
           committed,
           user: user.id,
-          retreat: activeRetreat
+          retreat: activeRetreat,
         }).then(() => {
-          handleGetRetreatDetail(activeRetreat, currentLng)
+          handleGetRetreatDetail(activeRetreat, currentLng);
           notification.success({
             message: "Success",
-            description: `Submit successfully`
-          })
-        })
+            description: `Submit successfully`,
+          });
+        });
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     } finally {
-      setIsCommitting(false)
+      setIsCommitting(false);
     }
-  }
+  };
 
   function handleChangeTab(key: string) {
-    setTab(key as ETabPane)
-    form.resetFields()
+    setTab(key as ETabPane);
+    form.resetFields();
   }
 
   const RenderItemWrapper = styled.div`
@@ -359,7 +359,7 @@ const Retreat: React.FC<{
     @media (min-width: 992px) {
       padding: 48px 16px;
     }
-  `
+  `;
 
   /* Render */
   const RenderItem = ({ title, content }: TRenderItem) => {
@@ -370,7 +370,7 @@ const Retreat: React.FC<{
           alignItems: "center",
           justifyContent: "center",
           borderRadius: 16,
-          border: "1px solid #800000"
+          border: "1px solid #800000",
         }}
       >
         <div style={{ textAlign: "center" }}>
@@ -379,7 +379,7 @@ const Retreat: React.FC<{
               display: "block",
               fontSize: 36,
               color: THEME.primary,
-              lineHeight: "36px"
+              lineHeight: "36px",
             }}
           >
             {content}
@@ -389,8 +389,8 @@ const Retreat: React.FC<{
           </strong>
         </div>
       </RenderItemWrapper>
-    )
-  }
+    );
+  };
 
   const RenderItemSmaller = ({ title, content }: TRenderItem) => {
     return (
@@ -400,7 +400,7 @@ const Retreat: React.FC<{
           alignItems: "center",
           justifyContent: "center",
           borderRadius: 16,
-          border: "1px solid #800000"
+          border: "1px solid #800000",
         }}
       >
         <div style={{ textAlign: "center" }}>
@@ -409,7 +409,7 @@ const Retreat: React.FC<{
               display: "block",
               fontSize: 24,
               color: THEME.primary,
-              lineHeight: "24px"
+              lineHeight: "24px",
             }}
           >
             {content}
@@ -419,8 +419,8 @@ const Retreat: React.FC<{
           </strong>
         </div>
       </RenderItemWrapper>
-    )
-  }
+    );
+  };
 
   const RenderTitle = ({ title, content }: TRenderItem) => {
     return (
@@ -430,7 +430,7 @@ const Retreat: React.FC<{
             display: "block",
             fontSize: 24,
             color: THEME.primary,
-            lineHeight: "24px"
+            lineHeight: "24px",
           }}
         >
           {content}
@@ -439,8 +439,8 @@ const Retreat: React.FC<{
           {title}
         </strong>
       </div>
-    )
-  }
+    );
+  };
 
   const RenderCommitForm = ({ onFinish }) => {
     return (
@@ -450,7 +450,7 @@ const Retreat: React.FC<{
           alignItems: "center",
           justifyContent: "center",
           borderRadius: 16,
-          border: "1px solid #800000"
+          border: "1px solid #800000",
         }}
       >
         <Form onFinish={onFinish} form={commitForm}>
@@ -460,18 +460,18 @@ const Retreat: React.FC<{
                 style={{
                   display: "inline-block",
                   width: "100%",
-                  marginBottom: 0
+                  marginBottom: 0,
                 }}
-                name='committed'
+                name="committed"
                 rules={[
                   {
                     required: true,
-                    message: "Committed is Number"
+                    message: "Committed is Number",
                   },
                   {
                     pattern: /^(?:\d*)$/,
-                    message: "Value should contain just number"
-                  }
+                    message: "Value should contain just number",
+                  },
                 ]}
               >
                 <Input
@@ -479,11 +479,11 @@ const Retreat: React.FC<{
                     width: "100%",
                     borderRadius: "24px",
                     paddingLeft: 24,
-                    paddingRight: 24
+                    paddingRight: 24,
                   }}
-                  size='large'
+                  size="large"
                   placeholder={t("Digits only, no comma or period", {
-                    ns: "retreat"
+                    ns: "retreat",
                   })}
                 />
               </Form.Item>
@@ -491,11 +491,11 @@ const Retreat: React.FC<{
             <Col span={8} md={{ span: 8 }}>
               <Form.Item>
                 <Button
-                  shape='round'
-                  type='primary'
-                  className='w-100'
-                  htmlType='submit'
-                  size='large'
+                  shape="round"
+                  type="primary"
+                  className="w-100"
+                  htmlType="submit"
+                  size="large"
                   loading={isCommitting}
                 >
                   {t("Commit", { ns: "retreat" })}
@@ -505,20 +505,20 @@ const Retreat: React.FC<{
           </Row>
         </Form>
       </RenderItemWrapper>
-    )
-  }
+    );
+  };
 
-  const userRetreat: User | undefined = retreatDetail?.user
+  const userRetreat: User | undefined = retreatDetail?.user;
   const totalDue =
     Number(retreatDetail?.totalCommitment || 0) -
-    Number(retreatDetail?.totalGroupCompleted || 0)
+    Number(retreatDetail?.totalGroupCompleted || 0);
 
-  console.log({ listParticipant, parent })
+  console.log({ listParticipant, parent });
 
   return (
     <DivRetreatWrapper>
-      <Container className='position-relative'>
-        <Tabs activeKey={tab} onChange={handleChangeTab} className='hide-tabs'>
+      <Container className="position-relative">
+        <Tabs activeKey={tab} onChange={handleChangeTab} className="hide-tabs">
           <TabPane
             tab={
               <strong style={{ textTransform: "uppercase" }}>
@@ -531,17 +531,17 @@ const Retreat: React.FC<{
               <TopCategoryWrapper style={{ marginBottom: isMobile ? 32 : 80 }}>
                 <Radio.Group
                   value={activeRetreat}
-                  size='large'
-                  buttonStyle='solid'
+                  size="large"
+                  buttonStyle="solid"
                   onChange={(e) => {
-                    setActiveRetreat(e.target.value)
-                    form.resetFields()
+                    setActiveRetreat(e.target.value);
+                    form.resetFields();
                   }}
                 >
                   <div
                     style={{
                       display: "flex",
-                      flexWrap: "nowrap"
+                      flexWrap: "nowrap",
                     }}
                   >
                     {retreats
@@ -557,7 +557,7 @@ const Retreat: React.FC<{
                           >
                             {retreat.name}
                           </Radio.Button>
-                        )
+                        );
                       })}
                   </div>
                 </Radio.Group>
@@ -575,7 +575,7 @@ const Retreat: React.FC<{
                           style={{
                             display: "flex",
                             justifyContent: "space-between",
-                            marginBottom: 24
+                            marginBottom: 24,
                           }}
                         >
                           <h2
@@ -584,7 +584,7 @@ const Retreat: React.FC<{
                               fontSize: 24,
                               textTransform: "uppercase",
                               margin: 0,
-                              lineHeight: "28px"
+                              lineHeight: "28px",
                             }}
                           >
                             {retreatDetail?.name || ""}
@@ -598,27 +598,27 @@ const Retreat: React.FC<{
                                 onClick={() =>
                                   handleChangeTab(ETabPane.LISTING)
                                 }
-                                type='button'
-                                className='link-underline'
+                                type="button"
+                                className="link-underline"
                                 style={{
                                   color: THEME.link,
-                                  fontSize: 15
+                                  fontSize: 15,
                                 }}
                               >
                                 {t("Participant List", {
-                                  ns: "retreat"
+                                  ns: "retreat",
                                 })}
                               </a>
                               <Link href={`/retreat-history/${parent?.id}`}>
                                 <a
-                                  className='link-underline'
+                                  className="link-underline"
                                   style={{
                                     color: THEME.link,
-                                    fontSize: 15
+                                    fontSize: 15,
                                   }}
                                 >
                                   {t("View history", {
-                                    ns: "retreat"
+                                    ns: "retreat",
                                   })}
                                 </a>
                               </Link>
@@ -629,16 +629,16 @@ const Retreat: React.FC<{
                           style={{
                             height: 160,
                             position: "relative",
-                            borderRadius: 16
+                            borderRadius: 16,
                           }}
                         >
                           <Image
                             style={{ borderRadius: 16 }}
                             src={retreatDetail?.image?.url ?? ""}
                             {...retreatDetail?.image}
-                            layout='fill'
-                            objectFit='cover'
-                            objectPosition='center'
+                            layout="fill"
+                            objectFit="cover"
+                            objectPosition="center"
                           />
                         </div>
                         {!retreatDetail?.isGroup && userRetreat && (
@@ -647,14 +647,14 @@ const Retreat: React.FC<{
                               gutter={[24, 16]}
                               style={{
                                 marginTop: 24,
-                                marginBottom: 24
+                                marginBottom: 24,
                               }}
                             >
                               {retreatDetail?.totalCommitment !== 0 && (
                                 <Col span={24} xl={{ span: 8 }}>
                                   <RenderItem
                                     title={t("Committed", {
-                                      ns: "retreat"
+                                      ns: "retreat",
                                     })}
                                     content={formatNumber(
                                       userRetreat?.commited || 0
@@ -662,10 +662,18 @@ const Retreat: React.FC<{
                                   />
                                 </Col>
                               )}
-                              <Col span={24} xl={{ span: retreatDetail?.totalCommitment === 0 ? 24 : 8 }}>
+                              <Col
+                                span={24}
+                                xl={{
+                                  span:
+                                    retreatDetail?.totalCommitment === 0
+                                      ? 24
+                                      : 8,
+                                }}
+                              >
                                 <RenderItem
                                   title={t("Completed", {
-                                    ns: "retreat"
+                                    ns: "retreat",
                                   })}
                                   content={formatNumber(
                                     userRetreat?.completed || 0
@@ -714,10 +722,10 @@ const Retreat: React.FC<{
                               gutter={[24, 16]}
                               style={{
                                 marginTop: 24,
-                                marginBottom: 24
+                                marginBottom: 24,
                               }}
                             >
-                              <Col span={24} xl={{ span: 8 }}>
+                              {/* <Col span={24} xl={{ span: 8 }}>
                                 <RenderItem
                                   title={t("Group Committed", {
                                     ns: "retreat"
@@ -726,18 +734,18 @@ const Retreat: React.FC<{
                                     retreatDetail?.totalCommitment || 0
                                   )}
                                 />
-                              </Col>
-                              <Col span={24} xl={{ span: 8 }}>
+                              </Col> */}
+                              {/* <Col span={24} xl={{ span: 8 }}>
                                 <RenderItem
                                   title={t("Group Completed", {
-                                    ns: "retreat"
+                                    ns: "retreat",
                                   })}
                                   content={formatNumber(
                                     retreatDetail?.totalGroupCompleted || 0
                                   )}
                                 />
-                              </Col>
-                              <Col span={24} xl={{ span: 8 }}>
+                              </Col> */}
+                              {/* <Col span={24} xl={{ span: 8 }}>
                                 <RenderItem
                                   title={t("Group Due", { ns: "retreat" })}
                                   content={
@@ -746,67 +754,68 @@ const Retreat: React.FC<{
                                       : formatNumber(retreatDetail?.due || 0)
                                   }
                                 />
-                              </Col>
+                              </Col> */}
                             </Row>
-                            <hr style={{ color: THEME.primary }} />
+                            {/* <hr style={{ color: THEME.primary }} /> */}
                           </>
                         )}
-                        {retreatDetail?.isGroup && (
-                          <>
-                            <Row
-                              gutter={[24, 16]}
-                              style={{
-                                marginTop: 16,
-                                marginBottom: 16
-                              }}
-                            >
-                              <Col span={24} xl={{ span: 24 }}>
-                                <RenderTitle content={user?.username || ""} />
-                              </Col>
-                            </Row>
-                            <Row
-                              gutter={[24, 16]}
-                              style={{
-                                marginTop: 16,
-                                marginBottom: 16
-                              }}
-                            >
-                              <Col span={24} xl={{ span: 24 }}>
+                        {retreatDetail?.isGroup &&
+                          retreatDetail?.isGroup &&
+                          retreatDetail?.user && (
+                            <>
+                              <Row
+                                gutter={[24, 16]}
+                                style={{
+                                  marginTop: 16,
+                                  marginBottom: 16,
+                                }}
+                              >
+                                <Col span={24} xl={{ span: 24 }}>
+                                  <RenderTitle content={user?.username || ""} />
+                                </Col>
+                              </Row>
+                              <Row
+                                gutter={[24, 16]}
+                                style={{
+                                  marginTop: 16,
+                                  marginBottom: 16,
+                                }}
+                              >
+                                {/* <Col span={24} xl={{ span: 24 }}>
                                 {!userRetreat?.isCommitted ? (
                                   <RenderCommitForm onFinish={onUserCommit} />
                                 ) : (
                                   <RenderItemSmaller
                                     title={t("Committed", {
-                                      ns: "retreat"
+                                      ns: "retreat",
                                     })}
                                     content={formatNumber(
                                       userRetreat?.commited || 0
                                     )}
                                   />
                                 )}
-                              </Col>
-                              <Col span={24} xl={{ span: 12 }}>
-                                <RenderItemSmaller
-                                  title={t("Completed", {
-                                    ns: "retreat"
-                                  })}
-                                  content={formatNumber(
-                                    userRetreat?.completed || 0
-                                  )}
-                                />
-                              </Col>
-                              <Col span={24} xl={{ span: 12 }}>
-                                <RenderItemSmaller
-                                  title={t("Due", { ns: "retreat" })}
-                                  content={
-                                    Number(userRetreat?.due) < 0 ||
-                                    !userRetreat?.isCommitted
-                                      ? 0
-                                      : formatNumber(userRetreat?.due || 0)
-                                  }
-                                />
-                              </Col>
-                              {/* <Col span={24} xl={{ span: 6 }}>
+                              </Col> */}
+                                <Col span={24} xl={{ span: 12 }}>
+                                  <RenderItemSmaller
+                                    title={t("Completed", {
+                                      ns: "retreat",
+                                    })}
+                                    content={formatNumber(
+                                      userRetreat?.completed || 0
+                                    )}
+                                  />
+                                </Col>
+                                <Col span={22} xl={{ span: 12 }}>
+                                  <RenderItemSmaller
+                                    title={t("Group Completed", {
+                                      ns: "retreat",
+                                    })}
+                                    content={formatNumber(
+                                      retreatDetail?.totalGroupCompleted || 0
+                                    )}
+                                  />
+                                </Col>
+                                {/* <Col span={24} xl={{ span: 6 }}>
                               <RenderItemSmaller
                                 title={t("Daily Average", {
                                   ns: "retreat"
@@ -828,27 +837,27 @@ const Retreat: React.FC<{
                                 )}
                               />
                             </Col> */}
-                            </Row>
-                          </>
-                        )}
+                              </Row>
+                            </>
+                          )}
                         <Row gutter={16}>
                           <Col span={16} md={{ span: 19 }}>
                             <Form.Item
                               style={{
                                 display: "inline-block",
                                 width: "100%",
-                                marginBottom: 0
+                                marginBottom: 0,
                               }}
-                              name='recitationNumber'
+                              name="recitationNumber"
                               rules={[
                                 {
                                   required: true,
-                                  message: "Recitation is Number"
+                                  message: "Recitation is Number",
                                 },
                                 {
                                   pattern: /^(?:\d*)$/,
-                                  message: "Value should contain just number"
-                                }
+                                  message: "Value should contain just number",
+                                },
                               ]}
                             >
                               <Input
@@ -856,13 +865,13 @@ const Retreat: React.FC<{
                                   width: "100%",
                                   borderRadius: "24px",
                                   paddingLeft: 24,
-                                  paddingRight: 24
+                                  paddingRight: 24,
                                 }}
-                                size='large'
+                                size="large"
                                 placeholder={t(
                                   "Digits only, no comma or period",
                                   {
-                                    ns: "retreat"
+                                    ns: "retreat",
                                   }
                                 )}
                               />
@@ -871,11 +880,11 @@ const Retreat: React.FC<{
                           <Col span={8} md={{ span: 5 }}>
                             <Form.Item>
                               <Button
-                                shape='round'
-                                type='primary'
-                                className='w-100'
-                                htmlType='submit'
-                                size='large'
+                                shape="round"
+                                type="primary"
+                                className="w-100"
+                                htmlType="submit"
+                                size="large"
                                 loading={isLoadingSubmit}
                               >
                                 {t("Submit", { ns: "retreat" })}
@@ -899,35 +908,35 @@ const Retreat: React.FC<{
                           background: "#fff",
                           borderRadius: 16,
                           height: "100%",
-                          paddingBottom: isMobile ? 24 : 0
+                          paddingBottom: isMobile ? 24 : 0,
                         }}
                       >
                         <DatePopupWrapper>
                           <Form.Item
-                            name='completedAt'
-                            label=''
+                            name="completedAt"
+                            label=""
                             style={{
                               display: "inline-block",
                               width: "100%",
                               marginBottom: 0,
-                              paddingLeft: "4px"
+                              paddingLeft: "4px",
                             }}
                           >
                             <DatePicker
                               showToday={false}
                               open={true}
                               getPopupContainer={() => {
-                                return datePickerRef.current ?? null
+                                return datePickerRef.current ?? null;
                               }}
-                              className='h-100'
-                              size='large'
-                              format='DD/MM/YYYY'
+                              className="h-100"
+                              size="large"
+                              format="DD/MM/YYYY"
                               allowClear={false}
                               disabledDate={(current) => {
                                 return (
                                   moment(retreatDetail?.dateStart) >= current ||
                                   moment(retreatDetail?.dateEnd) <= current
-                                )
+                                );
                               }}
                             />
                           </Form.Item>
@@ -936,7 +945,7 @@ const Retreat: React.FC<{
                         <div
                           style={{
                             fontSize: 12,
-                            padding: "8px 24px 0"
+                            padding: "8px 24px 0",
                           }}
                         >
                           <i>
@@ -963,13 +972,13 @@ const Retreat: React.FC<{
                     style={{
                       borderRadius: 16,
                       background: "#f1f2f2",
-                      padding: "24px"
+                      padding: "24px",
                     }}
                   >
                     <h3
                       style={{
                         margin: "0 0 24px",
-                        color: THEME.primary
+                        color: THEME.primary,
                       }}
                     >
                       {t("Upcoming Events")}
@@ -1001,15 +1010,15 @@ const Retreat: React.FC<{
                   marginTop: 10,
                   marginBottom: 20,
                   fontWeight: "bold",
-                  fontSize: 20
+                  fontSize: 20,
                 }}
-                type='link'
+                type="link"
                 icon={<ArrowLeftOutlined />}
                 onClick={() => handleChangeTab(ETabPane.DETAIL)}
               >
                 {t("Back", { ns: "common" })}
               </Button>
-              <div className='text-center'>
+              <div className="text-center">
                 <RetreatListing
                   listParticipant={listParticipant}
                   isLoading={isLoading}
@@ -1033,7 +1042,7 @@ const Retreat: React.FC<{
           </div> */}
       </Container>
     </DivRetreatWrapper>
-  )
-}
+  );
+};
 
-export default Retreat
+export default Retreat;
