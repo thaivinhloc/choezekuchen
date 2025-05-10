@@ -110,7 +110,7 @@ const LoginForm: React.FC<{}> = () => {
               <Col span={24} style={{ textAlign: "right" }}>
                 <Link href="/forgot-password">
                   <a>
-                    <strong>{t("Forgot password?")}</strong>
+                    <strong>{t("Forgot password?", { ns: "content" })}</strong>
                   </a>
                 </Link>
               </Col>
