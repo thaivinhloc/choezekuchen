@@ -44,11 +44,11 @@ const RetreatListItemLabel = styled.div`
 `;
 
 export const RetreatList = ({ locale, globalData }: TPage) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation(["content", "login"]);
   const router = useRouter();
   const { user } = useAuth();
   const { parentRetreats, getPRetreats, isLoading } = useRetreat({
-    locale
+    locale,
   });
 
   useEffect(() => {
@@ -61,7 +61,7 @@ export const RetreatList = ({ locale, globalData }: TPage) => {
   const onRetreatClick = ({
     id,
     slug,
-    status
+    status,
   }: {
     id: number;
     slug: string;
@@ -92,14 +92,14 @@ export const RetreatList = ({ locale, globalData }: TPage) => {
     fontSize: 24,
     lineHeight: "28px",
     color: THEME.primary,
-    margin: 0
+    margin: 0,
   };
 
   return (
     <ListPageContentWrapper>
       {latestActiveRetreat && (
         <LatestRetreatWrapper>
-          <Row gutter={[40, 24]} align='top'>
+          <Row gutter={[40, 24]} align="top">
             <Col span={24} xl={{ span: 12 }}>
               <div style={{ position: "relative" }}>
                 <GridMedia
@@ -112,7 +112,7 @@ export const RetreatList = ({ locale, globalData }: TPage) => {
                     onRetreatClick({
                       id: latestActiveRetreat.id,
                       slug: latestActiveRetreat.slug ?? "",
-                      status: latestActiveRetreat.status
+                      status: latestActiveRetreat.status,
                     })
                   }
                 />
@@ -125,10 +125,10 @@ export const RetreatList = ({ locale, globalData }: TPage) => {
                     borderRadius: 12,
                     cursor: "auto",
                     height: 50,
-                    fontSize: 24
+                    fontSize: 24,
                   }}
-                  type='primary'
-                  size='large'
+                  type="primary"
+                  size="large"
                 >
                   {t("New")}
                 </Button>
@@ -141,30 +141,30 @@ export const RetreatList = ({ locale, globalData }: TPage) => {
                   onRetreatClick({
                     id: latestActiveRetreat.id,
                     slug: latestActiveRetreat.slug ?? "",
-                    status: latestActiveRetreat.status
+                    status: latestActiveRetreat.status,
                   })
                 }
               >
                 {latestActiveRetreat.name}
               </h2>
-              {latestActiveRetreat.dateEnd && (
+              {/* {latestActiveRetreat.dateEnd && (
                 <i
                   style={{
                     color: THEME.dark,
                     fontWeight: 300,
                     fontSize: 14,
                     display: "block",
-                    marginBottom: 8
+                    marginBottom: 8,
                   }}
                 >
                   {t("Time: ")}
                   {moment(latestActiveRetreat.dateStart).format("hh:mmA")}-
                   {moment(latestActiveRetreat.dateEnd).format("hh:mmA")}
                 </i>
-              )}
+              )} */}
               <RichText
-                fontSize='16px'
-                lineHeight='20px'
+                fontSize="16px"
+                lineHeight="20px"
                 content={latestActiveRetreat.description}
               />
               <div style={{ marginBottom: 10 }}>
@@ -174,7 +174,7 @@ export const RetreatList = ({ locale, globalData }: TPage) => {
                     onRetreatClick({
                       id: latestActiveRetreat.id,
                       slug: latestActiveRetreat.slug ?? "",
-                      status: latestActiveRetreat.status
+                      status: latestActiveRetreat.status,
                     })
                   }
                 >
@@ -185,38 +185,38 @@ export const RetreatList = ({ locale, globalData }: TPage) => {
                 {!user && (
                   <>
                     <Button
-                      shape='round'
-                      type='primary'
+                      shape="round"
+                      type="primary"
                       ghost
                       onClick={() =>
                         onRetreatClick({
                           id: latestActiveRetreat.id,
                           slug: latestActiveRetreat.slug ?? "",
-                          status: latestActiveRetreat.status
+                          status: latestActiveRetreat.status,
                         })
                       }
                       style={{ display: "flex", alignItems: "center" }}
                     >
-                      Login
+                      {t("login", { ns: "login" })}
                     </Button>
                     or
                   </>
                 )}
                 {!user && (
                   <Button
-                    shape='round'
-                    type='primary'
+                    shape="round"
+                    type="primary"
                     ghost
                     onClick={() =>
                       onRetreatClick({
                         id: latestActiveRetreat.id,
                         slug: latestActiveRetreat.slug ?? "",
-                        status: latestActiveRetreat.status
+                        status: latestActiveRetreat.status,
                       })
                     }
                     style={{ display: "flex", alignItems: "center" }}
                   >
-                    {t("Register now")}
+                    {t("Register Now", { ns: "content" })}
                     <ArrowRightAlt />
                   </Button>
                 )}
@@ -226,10 +226,10 @@ export const RetreatList = ({ locale, globalData }: TPage) => {
         </LatestRetreatWrapper>
       )}
       <RetreatListWrapper>
-        <div className='container'>
+        <div className="container">
           <div style={{ textAlign: "center" }}>
             <SingleSection
-              content=''
+              content=""
               title={t("ALL RETREAT SECTION")}
               headLine={defaultHeadLine}
             />
@@ -246,7 +246,7 @@ export const RetreatList = ({ locale, globalData }: TPage) => {
                     slug,
                     status,
                     dateEnd,
-                    dateStart
+                    dateStart,
                   },
                   idx
                 ) => {
@@ -257,7 +257,7 @@ export const RetreatList = ({ locale, globalData }: TPage) => {
                       key={`retreat-list-col-${idx}`}
                       style={{
                         background: "#fff",
-                        padding: 16
+                        padding: 16,
                       }}
                     >
                       <div
@@ -267,7 +267,7 @@ export const RetreatList = ({ locale, globalData }: TPage) => {
                           borderRadius: 12,
                           height: "100%",
                           position: "relative",
-                          backgroundColor: "#f9f9f9"
+                          backgroundColor: "#f9f9f9",
                         }}
                       >
                         <RetreatListItemLabel
@@ -278,7 +278,7 @@ export const RetreatList = ({ locale, globalData }: TPage) => {
                               display: "block",
                               fontWeight: 600,
                               fontSize: 28,
-                              lineHeight: "28px"
+                              lineHeight: "28px",
                             }}
                           >
                             {moment(dateStart).format("DD")}
@@ -305,7 +305,7 @@ export const RetreatList = ({ locale, globalData }: TPage) => {
                           >
                             {name}
                           </h2>
-                          <i
+                          {/* <i
                             style={{
                               color: THEME.dark,
                               fontWeight: 300,
@@ -317,13 +317,13 @@ export const RetreatList = ({ locale, globalData }: TPage) => {
                             {t("Time: ")}
                             {moment(dateStart).format("hh:mmA")}-
                             {moment(dateEnd).format("hh:mmA")}
-                          </i>
+                          </i> */}
                           <div style={{ paddingBottom: 40 }}>
                             {description && <RichText content={description} />}
                           </div>
                           <Button
-                            shape='round'
-                            type='primary'
+                            shape="round"
+                            type="primary"
                             ghost
                             onClick={() =>
                               onRetreatClick({ id, slug: slug ?? "", status })
@@ -333,11 +333,11 @@ export const RetreatList = ({ locale, globalData }: TPage) => {
                               alignItems: "center",
                               position: "absolute",
                               bottom: 16,
-                              left: 16
+                              left: 16,
                             }}
                             disabled={!status}
                           >
-                            {t("Register now")}
+                            {t("Register Now", { ns: "content" })}
                             <ArrowRightAlt />
                           </Button>
                         </div>
