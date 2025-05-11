@@ -44,7 +44,7 @@ const RetreatListItemLabel = styled.div`
 `;
 
 export const RetreatList = ({ locale, globalData }: TPage) => {
-  const { t } = useTranslation(["content", "login"]);
+  const { t } = useTranslation(["content", "login", "common"]);
   const router = useRouter();
   const { user } = useAuth();
   const { parentRetreats, getPRetreats, isLoading } = useRetreat({
@@ -130,7 +130,7 @@ export const RetreatList = ({ locale, globalData }: TPage) => {
                   type="primary"
                   size="large"
                 >
-                  {t("New")}
+                  {t("New", { ns: "common" })}
                 </Button>
               </div>
             </Col>
@@ -230,7 +230,7 @@ export const RetreatList = ({ locale, globalData }: TPage) => {
           <div style={{ textAlign: "center" }}>
             <SingleSection
               content=""
-              title={t("ALL RETREAT SECTION")}
+              title={t("ALL RETREAT SECTION", { ns: "common" })}
               headLine={defaultHeadLine}
             />
           </div>
