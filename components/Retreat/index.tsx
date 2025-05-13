@@ -725,43 +725,48 @@ const Retreat: React.FC<{
                                 marginBottom: 24,
                               }}
                             >
-                              {/* <Col span={24} xl={{ span: 8 }}>
-                                <RenderItem
-                                  title={t("Group Committed", {
-                                    ns: "retreat"
-                                  })}
-                                  content={formatNumber(
-                                    retreatDetail?.totalCommitment || 0
-                                  )}
-                                />
-                              </Col> */}
-                              {/* <Col span={24} xl={{ span: 8 }}>
-                                <RenderItem
-                                  title={t("Group Completed", {
-                                    ns: "retreat",
-                                  })}
-                                  content={formatNumber(
-                                    retreatDetail?.totalGroupCompleted || 0
-                                  )}
-                                />
-                              </Col> */}
-                              {/* <Col span={24} xl={{ span: 8 }}>
-                                <RenderItem
-                                  title={t("Group Due", { ns: "retreat" })}
-                                  content={
-                                    Number(retreatDetail?.due) < 0
-                                      ? 0
-                                      : formatNumber(retreatDetail?.due || 0)
-                                  }
-                                />
-                              </Col> */}
+                              {retreatDetail?.totalCommitment !== 0 && (
+                                <Col span={24} xl={{ span: 8 }}>
+                                  <RenderItem
+                                    title={t("Group Committed", {
+                                      ns: "retreat",
+                                    })}
+                                    content={formatNumber(
+                                      retreatDetail?.totalCommitment || 0
+                                    )}
+                                  />
+                                </Col>
+                              )}
+                              {retreatDetail?.totalCommitment !== 0 && (
+                                <Col span={24} xl={{ span: 8 }}>
+                                  <RenderItem
+                                    title={t("Group Completed", {
+                                      ns: "retreat",
+                                    })}
+                                    content={formatNumber(
+                                      retreatDetail?.totalGroupCompleted || 0
+                                    )}
+                                  />
+                                </Col>
+                              )}
+                              {retreatDetail?.totalCommitment !== 0 && (
+                                <Col span={24} xl={{ span: 8 }}>
+                                  <RenderItem
+                                    title={t("Group Due", { ns: "retreat" })}
+                                    content={
+                                      Number(retreatDetail?.due) < 0
+                                        ? 0
+                                        : formatNumber(retreatDetail?.due || 0)
+                                    }
+                                  />
+                                </Col>
+                              )}
                             </Row>
-                            {/* <hr style={{ color: THEME.primary }} /> */}
+                            <hr style={{ color: THEME.primary }} />
                           </>
                         )}
                         {retreatDetail?.isGroup &&
-                          retreatDetail?.isGroup &&
-                          retreatDetail?.user && (
+                          retreatDetail.totalCommitment != 0 && (
                             <>
                               <Row
                                 gutter={[24, 16]}
@@ -781,20 +786,20 @@ const Retreat: React.FC<{
                                   marginBottom: 16,
                                 }}
                               >
-                                {/* <Col span={24} xl={{ span: 24 }}>
-                                {!userRetreat?.isCommitted ? (
-                                  <RenderCommitForm onFinish={onUserCommit} />
-                                ) : (
-                                  <RenderItemSmaller
-                                    title={t("Committed", {
-                                      ns: "retreat",
-                                    })}
-                                    content={formatNumber(
-                                      userRetreat?.commited || 0
-                                    )}
-                                  />
-                                )}
-                              </Col> */}
+                                <Col span={24} xl={{ span: 24 }}>
+                                  {!userRetreat?.isCommitted ? (
+                                    <RenderCommitForm onFinish={onUserCommit} />
+                                  ) : (
+                                    <RenderItemSmaller
+                                      title={t("Committed", {
+                                        ns: "retreat",
+                                      })}
+                                      content={formatNumber(
+                                        userRetreat?.commited || 0
+                                      )}
+                                    />
+                                  )}
+                                </Col>
                                 <Col span={24} xl={{ span: 12 }}>
                                   <RenderItemSmaller
                                     title={t("Completed", {
@@ -805,14 +810,15 @@ const Retreat: React.FC<{
                                     )}
                                   />
                                 </Col>
-                                <Col span={22} xl={{ span: 12 }}>
+                                <Col span={24} xl={{ span: 12 }}>
                                   <RenderItemSmaller
-                                    title={t("Group Completed", {
-                                      ns: "retreat",
-                                    })}
-                                    content={formatNumber(
-                                      retreatDetail?.totalGroupCompleted || 0
-                                    )}
+                                    title={t("Due", { ns: "retreat" })}
+                                    content={
+                                      Number(userRetreat?.due) < 0 ||
+                                      !userRetreat?.isCommitted
+                                        ? 0
+                                        : formatNumber(userRetreat?.due || 0)
+                                    }
                                   />
                                 </Col>
                                 {/* <Col span={24} xl={{ span: 6 }}>
@@ -837,6 +843,39 @@ const Retreat: React.FC<{
                                 )}
                               />
                             </Col> */}
+                              </Row>
+                            </>
+                          )}
+                        {retreatDetail?.isGroup &&
+                          retreatDetail.totalCommitment == 0 && (
+                            <>
+                              <Row
+                                gutter={[24, 16]}
+                                style={{
+                                  marginTop: 16,
+                                  marginBottom: 16,
+                                }}
+                              >
+                                <Col span={24} xl={{ span: 12 }}>
+                                  <RenderItemSmaller
+                                    title={t("Completed", {
+                                      ns: "retreat",
+                                    })}
+                                    content={formatNumber(
+                                      userRetreat?.completed || 0
+                                    )}
+                                  />
+                                </Col>
+                                <Col span={24} xl={{ span: 12 }}>
+                                  <RenderItemSmaller
+                                    title={t("Group Completed", {
+                                      ns: "retreat",
+                                    })}
+                                    content={formatNumber(
+                                      retreatDetail?.totalGroupCompleted || 0
+                                    )}
+                                  />
+                                </Col>
                               </Row>
                             </>
                           )}
