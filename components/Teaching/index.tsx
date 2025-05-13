@@ -1,21 +1,21 @@
 // @ts-nocheck
-import { THEME } from "common"
-import { UpcomingEvents } from "components/Home/UpcomingEvents"
-import { Button } from "elements/Button"
-import usePage from "hook/usePage"
-import { useTranslation } from "next-i18next"
-import Image from "next/image"
-import { useEffect, useRef } from "react"
-import styled from "styled-components"
-import { Swiper, SwiperSlide } from "swiper/react"
-import ArrowLeftIcon from "assets/svgs/circle_arrow_left_icon.svg"
-import ArrowRightIcon from "assets/svgs/circle_arrow_right_icon.svg"
-import { Navigation } from "swiper"
-import { Col, Row } from "antd"
-import { RichText } from "elements/RichText"
-import { Autoplay } from "swiper"
-import { SingleSection } from "container/Section"
-import { TeachingItem } from "./TeachingItem"
+import { THEME } from "common";
+import { UpcomingEvents } from "components/Home/UpcomingEvents";
+import { Button } from "elements/Button";
+import usePage from "hook/usePage";
+import { useTranslation } from "next-i18next";
+import Image from "next/image";
+import { useEffect, useRef } from "react";
+import styled from "styled-components";
+import { Swiper, SwiperSlide } from "swiper/react";
+import ArrowLeftIcon from "assets/svgs/circle_arrow_left_icon.svg";
+import ArrowRightIcon from "assets/svgs/circle_arrow_right_icon.svg";
+import { Navigation } from "swiper";
+import { Col, Row } from "antd";
+import { RichText } from "elements/RichText";
+import { Autoplay } from "swiper";
+import { SingleSection } from "container/Section";
+import { TeachingItem } from "./TeachingItem";
 
 const TeachingMethodsWrapper = styled.div`
   @media (min-width: 1200px) {
@@ -23,9 +23,9 @@ const TeachingMethodsWrapper = styled.div`
   }
   position: relative;
   z-index: 10;
-`
+`;
 const TeachingMethods = ({ data, isMobile }) => {
-  const swiperRef = useRef()
+  const swiperRef = useRef();
   return (
     <TeachingMethodsWrapper>
       <div className='container'>
@@ -40,7 +40,7 @@ const TeachingMethods = ({ data, isMobile }) => {
               speed={1500}
               modules={[Navigation, Autoplay]}
               onBeforeInit={(swiper) => {
-                swiperRef.current = swiper
+                swiperRef.current = swiper;
               }}
             >
               {data.map(({ title, cover, description, background }) => (
@@ -142,12 +142,12 @@ const TeachingMethods = ({ data, isMobile }) => {
         )}
       </div>
     </TeachingMethodsWrapper>
-  )
-}
+  );
+};
 
 const BackgroundWrapper = styled.div<{
-  background?: any
-  backgroundColor?: string
+  background?: any;
+  backgroundColor?: string;
 }>`
   background: ${(props) =>
     props.background?.data
@@ -156,7 +156,10 @@ const BackgroundWrapper = styled.div<{
   background-size: cover;
   background-repeat: no-repeat;
   padding: 80px 0;
-`
+  @media (min-width: 1200px) {
+    transform: translateY(-7%);
+  }
+`;
 
 export const Teaching = ({
   locale,
@@ -164,7 +167,7 @@ export const Teaching = ({
   isMobile,
   globalData
 }) => {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
   const { content, getPageContent } = usePage({
     locale,
     endpoint: pageContentEndpoint,
@@ -179,24 +182,27 @@ export const Teaching = ({
       "populate[7]": "ourPractices.contentList.redirectPage",
       "populate[8]": "event_banner"
     }
-  })
+  });
 
   useEffect(() => {
     if (pageContentEndpoint) {
-      getData()
+      getData();
     }
     async function getData() {
-      await getPageContent()
+      await getPageContent();
     }
-  }, [pageContentEndpoint])
+  }, [pageContentEndpoint]);
 
   const { ourPractices, teachingMethods, event_banner } =
-    content?.data?.attributes ?? {}
-  const { defaultHeadLine } = globalData.attributes
+    content?.data?.attributes ?? {};
+  const { defaultHeadLine } = globalData.attributes;
   return (
     <div>
       <TeachingMethods data={teachingMethods ?? []} isMobile={isMobile} />
-      <BackgroundWrapper background={ourPractices?.background}>
+      <BackgroundWrapper
+        background={ourPractices?.background}
+        style={{ paddingTop: 20 }}
+      >
         <div className='container'>
           <SingleSection
             headLine={defaultHeadLine}
@@ -226,5 +232,7 @@ export const Teaching = ({
         isMobile={isMobile}
       />
     </div>
-  )
-}
+  );
+};
+
+export default Teaching;

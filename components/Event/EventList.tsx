@@ -164,8 +164,8 @@ export const EventList = ({ locale, isMobile }) => {
                     name={
                       highlightedEvent.attributes.image?.data?.attributes.name
                     }
-                    width={600}
-                    height={300}
+                    width={640}
+                    height={360}
                     style={{ borderRadius: 12 }}
                   />
                 </Col>
@@ -274,13 +274,17 @@ export const EventList = ({ locale, isMobile }) => {
                     </EventListItemLabel>
                     <Row gutter={[16, 16]}>
                       <Col span={24} md={{ span: 9 }}>
-                        <GridMedia
-                          url={item.attributes.image?.data?.attributes.url}
-                          name={item.attributes.image?.data?.attributes.name}
-                          width={600}
-                          height={300}
-                          style={{ borderRadius: 12 }}
-                        />
+                        <div style={{ height: "max-content" }}>
+                          <GridMedia
+                            url={item.attributes.image?.data?.attributes.url}
+                            name={item.attributes.image?.data?.attributes.name}
+                            style={{ borderRadius: 12 }}
+                            {...item.attributes.image?.data?.attributes}
+                            width={640}
+                            height={360}
+                            layout='responsive'
+                          />
+                        </div>
                       </Col>
                       <Col
                         span={24}
@@ -302,7 +306,7 @@ export const EventList = ({ locale, isMobile }) => {
                             </h2>
                             <i
                               style={{
-                                color: "#000",
+                                color: THEME.dark,
                                 fontWeight: 300,
                                 fontSize: 14,
                                 display: "block",
@@ -369,3 +373,5 @@ export const EventList = ({ locale, isMobile }) => {
     </EventListWrapper>
   )
 }
+
+export default EventList

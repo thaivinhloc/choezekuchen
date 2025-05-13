@@ -78,39 +78,33 @@ const RetreatListing: React.FC<{
         }
       }))
     } else {
+      const retreatName = retreats[0]?.name || "unknown"
       columnsRetreat = [
         {
           title: "Commited",
-          dataIndex: "commited_fm",
+          dataIndex: retreatName,
           key: "commited",
-          width: 110
-        },
-        {
-          title: "Completed (%)",
-          dataIndex: "completed_fm",
-          key: "completed",
-          width: 140,
-          render: (text: string, opt: any) => {
-            if (Array.isArray(opt.completed)) return <span />
-            const percent = (opt?.completed / opt?.commited) * 100
+          width: 110,
+          render: (data: any) => {
             return (
-              <span style={{ whiteSpace: "nowrap" }}>
-                {text} ({percent === Infinity ? 100 : Math.abs(percent)}%)
-              </span>
+              <span style={{ whiteSpace: "nowrap" }}>{data?.commited_fm}</span>
             )
           }
         },
         {
-          title: "Daily Average",
-          dataIndex: "dailyAverage",
-          key: "dailyAverage",
-          width: 130
-        },
-        {
-          title: "Daily Required",
-          dataIndex: "dailyRequired",
-          key: "dailyRequired",
-          width: 130
+          title: "Completed (%)",
+          dataIndex: retreatName,
+          key: "completed",
+          width: 140,
+          render: (data: any) => {
+            const percent = (data?.completed / data?.commited) * 100
+            return (
+              <span style={{ whiteSpace: "nowrap" }}>
+                {data?.completed_fm} (
+                {percent === Infinity ? 100 : Math.abs(percent).toFixed(2)}%)
+              </span>
+            )
+          }
         }
       ]
     }
@@ -124,6 +118,7 @@ const RetreatListing: React.FC<{
       }
     ]
   }, [retreats])
+  console.log({ listParticipant })
 
   /* Render */
   return (

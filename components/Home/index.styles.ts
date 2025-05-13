@@ -6,7 +6,6 @@ type TStyled = {
 }
 
 export const DivHomeWrapper = styled.div<{ background?: string }>`
-  color: rgb(48, 48, 48);
   background: ${(props) => props.background ?? "#fff"};
   padding: 0;
 `
@@ -51,7 +50,7 @@ export const MeetUsSectionContent = styled.div`
   z-index: 3;
   position: relative;
   a {
-    color: #fff !important;
+    color: ${props => props.theme.white} !important;
     font-weight: 600;
     text-decoration: underline;
     font-size: 20px;

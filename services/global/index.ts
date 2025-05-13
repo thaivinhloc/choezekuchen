@@ -14,7 +14,8 @@ export const globalDataReq = () => {
       "populate[5]": "offering",
       "populate[6]": "offering.background",
       "populate[7]": "practice",
-      "populate[8]": "practice.background"
+      "populate[8]": "practice.background",
+      "populate[9]": "homeTopSlider"
     }
   })
 }

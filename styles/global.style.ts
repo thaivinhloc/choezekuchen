@@ -1,9 +1,9 @@
-import { createGlobalStyle, css } from "styled-components"
-import { THEME } from "../common"
+import { createGlobalStyle, css } from "styled-components";
+import { THEME } from "../common";
 
 type TStyled = {
-  theme: typeof THEME
-}
+  theme: typeof THEME;
+};
 
 export const GlobalStyle = createGlobalStyle`${css`
   html,
@@ -53,6 +53,7 @@ export const GlobalStyle = createGlobalStyle`${css`
 
   a,
   .ant-btn-link {
+    cursor: pointer;
     font-weight: 500;
     color: ${(props) => props.theme.primary};
     span {
@@ -64,6 +65,10 @@ export const GlobalStyle = createGlobalStyle`${css`
     span {
       color: unset;
     }
+  }
+
+  .tx-secondary {
+    font-family: "SVN Alluring";
   }
 
   .text-center {
@@ -147,7 +152,7 @@ export const GlobalStyle = createGlobalStyle`${css`
   }
   .btn-secondary {
     border: 2px solid #303030;
-    color: #000;
+    color: ${(props) => props.theme.dark};
   }
   .container {
     position: relative;
@@ -205,7 +210,7 @@ export const GlobalStyle = createGlobalStyle`${css`
   }
   @media (min-width: 1400px) {
     .container {
-      width: 1340px;
+      width: 1200px;
       max-width: 100%;
     }
   }
@@ -489,7 +494,7 @@ export const GlobalStyle = createGlobalStyle`${css`
         &:hover {
           .ant-dropdown-menu-title-content {
             span {
-              color: #000;
+              color: ${(props) => props.theme.dark};
             }
           }
         }
@@ -504,4 +509,7 @@ export const GlobalStyle = createGlobalStyle`${css`
   .rs__popper_actions ~ p {
     color: #fff;
   }
-`}`
+  .cursor-pointer {
+    cursor: pointer;
+  }
+`}`;

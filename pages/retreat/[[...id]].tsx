@@ -1,5 +1,6 @@
 // @ts-nocheck
-import Retreat from "components/Retreat"
+import dynamic from "next/dynamic"
+const Retreat = dynamic(() => import("components/Retreat"), { ssr: false })
 import useRetreat from "components/Retreat/hooks/useRetreat"
 import { useApp } from "context/app/AppContext"
 import { TRetreat } from "definition"
@@ -26,8 +27,8 @@ const RetreatPage: FC<{ retreats: TRetreat[]; parent: TRetreat }> = ({
     if (parent?.name) {
       setTitleBanner(parent.name)
     }
-    if (parent?.banner) {
-      setBanner({ id: parent.banner.id, attributes: parent.banner })
+    if (parent?.cover) {
+      setBanner({ id: parent.cover.id, attributes: parent.cover })
     }
   }, [parent])
 

@@ -1,28 +1,42 @@
 // @ts-nocheck
-import { ArrowRightOutlined } from "@ant-design/icons"
-import { Col, Row } from "antd"
-import { THEME } from "common"
-import { DrikungKagyuLinage } from "components/About/Drikung"
-import { UpcomingEvents } from "components/Home/UpcomingEvents"
-import { TitleWithHeadline } from "components/Title/TitleWithHeadline"
-import { ESinglePageLayout, TPage } from "definition"
-import { Button } from "elements/Button"
-import { GridMedia } from "elements/Media"
-import { RichText } from "elements/RichText"
-import { getMonasteryPathFromSlug } from "helper"
-import useMonastery from "hook/useMonastery"
-import { useTranslation } from "next-i18next"
-import Image from "next/image"
-import Link from "next/link"
-import { useEffect } from "react"
-import styled from "styled-components"
-import eventsBackground from "assets/bg/events_background.png"
-import { About } from "components/About"
-import { Teaching } from "components/Teaching"
-import { Library } from "components/Library"
-import { RetreatList } from "components/Retreat/RetreatList"
-import { EventList } from "components/Event/EventList"
-import { OfferingPage } from "components/Offering"
+import { ArrowRightOutlined } from "@ant-design/icons";
+import { Col, Row } from "antd";
+import { THEME } from "common";
+import { ESinglePageLayout, TPage } from "definition";
+import { Button } from "elements/Button";
+import { GridMedia } from "elements/Media";
+import { RichText } from "elements/RichText";
+import { getMonasteryPathFromSlug } from "helper";
+import useMonastery from "hook/useMonastery";
+import { useTranslation } from "next-i18next";
+import Image from "next/image";
+import Link from "next/link";
+import { useEffect } from "react";
+import styled from "styled-components";
+import eventsBackground from "assets/bg/events_background.png";
+import dynamic from "next/dynamic";
+const About = dynamic(() => import("components/About"), { ssr: false });
+const Teaching = dynamic(() => import("components/Teaching"), { ssr: false });
+const Library = dynamic(() => import("components/Library"), { ssr: false });
+const RetreatList = dynamic(() => import("components/Retreat/RetreatList"), {
+  ssr: false
+});
+const EventList = dynamic(() => import("components/Event/EventList"), {
+  ssr: false
+});
+const OfferingPage = dynamic(() => import("components/Offering"), {
+  ssr: false
+});
+const TitleWithHeadline = dynamic(
+  () => import("components/Title/TitleWithHeadline"),
+  { ssr: false }
+);
+const UpcomingEvents = dynamic(() => import("components/Home/UpcomingEvents"), {
+  ssr: false
+});
+const DrikungKagyuLinage = dynamic(() => import("components/About/Drikung"), {
+  ssr: false
+});
 
 export const SinglePageContentWrapper = styled.div`
   padding-top: 50px;
@@ -40,29 +54,29 @@ export const SinglePageContentWrapper = styled.div`
     width: 1340px;
     max-width: 100%;
   }
-`
+`;
 
 function TopSection({
   topTitle,
   topDesciption
 }: {
-  topTitle?: string
-  topDesciption?: string
+  topTitle?: string;
+  topDesciption?: string;
 }) {
   return topTitle ? (
     <div
-      className='text-center'
+      className="text-center"
       style={{ maxWidth: 800, margin: "0 auto 50px" }}
     >
       <h2>{topTitle}</h2>
       <RichText content={topDesciption ?? ""} />
     </div>
-  ) : null
+  ) : null;
 }
 
 function Horizontal({ globalData }) {
-  const { t } = useTranslation()
-  const { defaultHeadLine } = globalData.attributes
+  const { t } = useTranslation();
+  const { defaultHeadLine } = globalData.attributes;
   return (
     <SinglePageContentWrapper>
       <div style={{ textAlign: "center", padding: "60px 0 100px" }}>
@@ -72,7 +86,7 @@ function Horizontal({ globalData }) {
         />
       </div>
     </SinglePageContentWrapper>
-  )
+  );
 }
 
 function Monastery({
@@ -82,16 +96,16 @@ function Monastery({
   globalData,
   isMobile
 }: TPage) {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
   const { monasteries, getAllMonasteries } = useMonastery({
     locale: locale ?? "en"
-  })
+  });
 
   useEffect(() => {
-    getAllMonasteries()
-  }, [])
-  const { defaultHeadLine } = globalData.attributes
-  console.log({ eventsBackground })
+    getAllMonasteries();
+  }, []);
+  const { defaultHeadLine } = globalData.attributes;
+  console.log({ eventsBackground });
 
   return (
     <>
@@ -119,14 +133,15 @@ function Monastery({
                   <Image
                     style={{ borderRadius: 12 }}
                     src={attributes.cover?.data?.attributes?.url}
-                    width={attributes.cover?.data?.attributes?.width}
-                    height={attributes.cover?.data?.attributes?.height}
-                    layout='fill'
-                    objectFit='cover'
+                    width={640}
+                    height={360}
+                    layout="fill"
+                    objectFit="cover"
+                    objectPosition="center"
                   />
                 </div>
                 <h3 style={{ color: THEME.primary }}>{attributes.title}</h3>
-                <p className='ellipsis ellipsis-3' style={{ minHeight: 80 }}>
+                <p className="ellipsis ellipsis-3" style={{ minHeight: 80 }}>
                   {attributes.description}
                 </p>
                 <Link href={getMonasteryPathFromSlug(id, attributes.slug)}>
@@ -146,7 +161,7 @@ function Monastery({
                     >
                       {t("Discover now")}
                       <Button
-                        shape='circle'
+                        shape="circle"
                         style={{
                           position: "absolute",
                           right: 3,
@@ -154,25 +169,25 @@ function Monastery({
                           height: 32,
                           width: 32
                         }}
-                        type='primary'
+                        type="primary"
                         icon={<ArrowRightOutlined style={{ fontSize: 16 }} />}
                       />
                     </div>
                   </a>
                 </Link>
               </Col>
-            )
+            );
           })}
         </Row>
       </SinglePageContentWrapper>
       <UpcomingEvents
         background={eventsBackground.src}
         title={t("Upcoming Events")}
-        redirectLink='/events.html'
+        redirectLink="/events.html"
         isMobile={isMobile}
       />
     </>
-  )
+  );
 }
 
 export function SinglePageLayout({
@@ -180,12 +195,14 @@ export function SinglePageLayout({
   globalData,
   isMobile
 }: {
-  data: TPage
+  data: TPage;
 }) {
-  console.log("SinglePageLayout", { data })
+  console.log("SinglePageLayout", { data });
   switch (data.pageContentLayout) {
     case ESinglePageLayout.MONASTERY:
-      return <Monastery {...data} isMobile={isMobile} globalData={globalData} />
+      return (
+        <Monastery {...data} isMobile={isMobile} globalData={globalData} />
+      );
     case ESinglePageLayout.DRIKUNG_KAGYU_LINEAGE:
       return (
         <DrikungKagyuLinage
@@ -193,26 +210,30 @@ export function SinglePageLayout({
           globalData={globalData}
           isMobile={isMobile}
         />
-      )
+      );
     case ESinglePageLayout.ABOUT:
-      return <About {...data} globalData={globalData} isMobile={isMobile} />
+      return <About {...data} globalData={globalData} isMobile={isMobile} />;
     case ESinglePageLayout.TEACHING:
-      return <Teaching {...data} globalData={globalData} isMobile={isMobile} />
+      return <Teaching {...data} globalData={globalData} isMobile={isMobile} />;
     case ESinglePageLayout.LIBRARY:
-      return <Library {...data} globalData={globalData} isMobile={isMobile} />
+      return <Library {...data} globalData={globalData} isMobile={isMobile} />;
     case ESinglePageLayout.RETREAT:
       return (
         <RetreatList {...data} globalData={globalData} isMobile={isMobile} />
-      )
+      );
     case ESinglePageLayout.EVENT:
-      return <EventList {...data} globalData={globalData} isMobile={isMobile} />
+      return (
+        <EventList {...data} globalData={globalData} isMobile={isMobile} />
+      );
     case ESinglePageLayout.OFFERING:
       return (
         <OfferingPage {...data} globalData={globalData} isMobile={isMobile} />
-      )
+      );
     default:
       return (
         <Horizontal {...data} globalData={globalData} isMobile={isMobile} />
-      )
+      );
   }
 }
+
+export default SinglePageLayout;

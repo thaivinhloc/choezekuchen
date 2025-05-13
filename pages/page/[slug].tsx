@@ -1,6 +1,11 @@
 // @ts-nocheck
-import { Offering } from "components/Home/Offering"
-import { SinglePageLayout } from "container/layout/SinglePage"
+import dynamic from "next/dynamic"
+const Offering = dynamic(() => import("components/Home/Offering"), {
+  ssr: false
+})
+const SinglePageLayout = dynamic(() => import("container/layout/SinglePage"), {
+  ssr: false
+})
 import { useApp } from "context/app/AppContext"
 import { TPage } from "definition"
 import withDetectDevice from "hoc/withDetectDevice"
@@ -24,7 +29,7 @@ function Page({ data, globalData, isMobile }: { data: TPage }) {
     if (data.title) {
       setTitleBanner(data.title)
     }
-  }, [data.title])
+  }, [data?.title])
   useEffect(() => {
     if (data.cover) {
       setBanner({
@@ -32,13 +37,13 @@ function Page({ data, globalData, isMobile }: { data: TPage }) {
         attributes: data.cover
       })
     }
-  }, [data.cover])
+  }, [data?.cover])
   console.log("Page", data)
   console.log({ globalData })
 
   return (
     <>
-      <Head>{data.title && <title>{data.title}</title>}</Head>
+      <Head>{data?.title && <title>{data?.title}</title>}</Head>
       <PageContentWrapper background={data.background}>
         <SinglePageLayout
           data={data}
@@ -46,7 +51,14 @@ function Page({ data, globalData, isMobile }: { data: TPage }) {
           globalData={globalData}
         />
         {data.isEnabledOffering && (
-          <Offering {...globalData.attributes.offering} isMobile={isMobile} />
+          <Offering
+            {...globalData.attributes.offering}
+            offeringTitle={data.offeringTitle}
+            offeringSubTitle={data.offeringSubTitle}
+            offeringRedirectLink={data.offeringRedirectLink}
+            offeringRedirectTitle={data.offeringRedirectTitle}
+            isMobile={isMobile}
+          />
         )}
       </PageContentWrapper>
     </>

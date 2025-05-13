@@ -36,6 +36,7 @@ function MyApp({ Component, pageProps }) {
     <ThemeProvider theme={THEME}>
       <Head>
         <title>Choeze Kuchen | Life Long Tibetan Buddhism Practice</title>
+        <link href="/fonts/font-face.css" rel="stylesheet"/>
       </Head>
       <GlobalStyle />
       <AppProvider>

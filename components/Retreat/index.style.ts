@@ -5,7 +5,7 @@ export const DivRetreatWrapper = styled.div`
     color: ${(props) => props.theme.primary};
     font-size: 32px;
   }
-  color: #000;
+  color: ${(props) => props.theme.dark};
   padding: 0 0 80px;
   .retreat-content {
     .ant-tabs-nav {
@@ -61,7 +61,7 @@ export const DivRetreatWrapper = styled.div`
       }
       &__right {
         &-form {
-          color: #000;
+          color: ${(props) => props.theme.dark};
           margin-bottom: 30px;
           .ant-input {
             &:focus {
@@ -116,7 +116,7 @@ export const DivTableRetreat = styled.div`
     }
   }
   .ant-table {
-    color: #000;
+    color: ${(props) => props.theme.dark};
     &-thead {
       > tr,
       th {

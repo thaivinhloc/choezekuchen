@@ -35,7 +35,7 @@ export const EventItem: React.FC = ({
             borderRadius: "8px"
           }}
         >
-          <GridMedia style={{ borderRadius: "8px 8px 0 0" }} url={image.url} />
+          <GridMedia style={{ borderRadius: "8px 8px 0 0" }} url={image.url} width={640} height={360} />
           <Row
             gutter={16}
             align='middle'
@@ -62,7 +62,7 @@ export const EventItem: React.FC = ({
               </h3>
               <i
                 style={{
-                  color: "#000",
+                  color: THEME.dark,
                   fontWeight: 300,
                   fontSize: 14,
                   display: "block",

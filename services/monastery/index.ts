@@ -36,6 +36,7 @@ export const getMonasteries = ({
       "pagination[pageSize]": pageSize,
       "pagination[page]": page,
       locale: locale,
+      sort: "order:asc",
       ...filter
     }
   })

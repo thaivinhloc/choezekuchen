@@ -1,43 +1,54 @@
 // @ts-nocheck
-import { SinglePageContentWrapper } from "container/layout/SinglePage"
-import { useApp } from "context/app/AppContext"
-import withDetectDevice from "hoc/withDetectDevice"
-import withGlobalData from "hoc/withGlobalData"
-import { withNavigator } from "hoc/withNavigator"
-import withTrans from "hoc/withTrans"
-import moment from "moment"
-import { useRouter } from "next/router"
-import { ElementRef, useEffect, useRef, useState } from "react"
-import { useTranslation } from "next-i18next"
-import styled from "styled-components"
-import withMonastery from "hoc/withMonastery"
-import { SingleSection } from "container/Section"
-import { TITLE_SIZES, Title } from "components/Title"
-import { Button } from "elements/Button"
-import { Gallery, ThumbnailImageProps } from "react-grid-gallery"
-import { Modal } from "elements/Modal"
-import { PlayArrow, PlayCircle } from "@mui/icons-material"
-import { Col, Row } from "antd"
-import { TitleWithHeadline } from "components/Title/TitleWithHeadline"
-import Image from "next/image"
-import { THEME } from "common"
-import Link from "next/link"
+import { PlayCircle } from "@mui/icons-material";
+import { Col, Row } from "antd";
+import { THEME } from "common";
 import {
   MeetUsSectionContent,
   MeetUsSectionOverlay,
   MeetUsSectionWrapper
-} from "components/Home/index.styles"
-import { getMonasteryPathFromSlug } from "helper"
-import { Offering } from "components/Home/Offering"
+} from "components/Home/index.styles";
+import { TITLE_SIZES, Title } from "components/Title";
+import { useApp } from "context/app/AppContext";
+import { Button } from "elements/Button";
+import { Modal } from "elements/Modal";
+import { getMonasteryPathFromSlug } from "helper";
+import withDetectDevice from "hoc/withDetectDevice";
+import withGlobalData from "hoc/withGlobalData";
+import withMonastery from "hoc/withMonastery";
+import { withNavigator } from "hoc/withNavigator";
+import withTrans from "hoc/withTrans";
+import moment from "moment";
+import { useTranslation } from "next-i18next";
+import dynamic from "next/dynamic";
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { ElementRef, useEffect, useRef, useState } from "react";
+import { Gallery, ThumbnailImageProps } from "react-grid-gallery";
+import styled from "styled-components";
 
-const PageContentWrapper = styled.div``
+import Lightbox from "react-image-lightbox";
+import "react-image-lightbox/style.css";
+
+const Offering = dynamic(() => import("components/Home/Offering"), {
+  ssr: false
+});
+const SingleSection = dynamic(() => import("container/Section"), {
+  ssr: false
+});
+const TitleWithHeadline = dynamic(
+  () => import("components/Title/TitleWithHeadline"),
+  { ssr: false }
+);
+
+const PageContentWrapper = styled.div``;
 
 const SectionWrapper = styled.div`
   background: url(${(props) => props.background?.data?.attributes?.url});
   background-size: cover;
   background-repeat: no-repeat;
   padding: 130px 0 80px;
-`
+`;
 
 const GaleryWrapper = styled.div`
   background-color: #f1f2f2;
@@ -47,15 +58,15 @@ const GaleryWrapper = styled.div`
       border-radius: 8px;
     }
   }
-`
+`;
 
 const ContactWrapper = styled.div`
   padding: 80px 0;
-`
+`;
 
 const OtherWrapper = styled.div`
   padding: 0 0 80px;
-`
+`;
 
 enum SWITCHER_VALUES {
   IMAGE,
@@ -80,10 +91,10 @@ const SwitcherWrapper = styled.div`
       font-size: 24px;
     }
   }
-`
+`;
 
 const Switcher = ({ value = SWITCHER_VALUES.IMAGE, onChange }) => {
-  const { t } = useTranslation()
+  const { t } = useTranslation();
   return (
     <SwitcherWrapper>
       <Button
@@ -101,35 +112,22 @@ const Switcher = ({ value = SWITCHER_VALUES.IMAGE, onChange }) => {
         {t("Videos")}
       </Button>
     </SwitcherWrapper>
-  )
-}
+  );
+};
 
 const ImageComponent = (props: ThumbnailImageProps) => {
-  const viewModalRef = useRef<ElementRef<typeof Modal>>(null)
   return (
     <>
       <img
         {...props.imageProps}
-        onClick={() => viewModalRef.current?.handleOpen()}
         style={{ ...props.imageProps.style, borderRadius: 12 }}
       />
-      <Modal
-        destroyOnClose
-        ref={viewModalRef}
-        width='768px'
-        bodyStyle={{ padding: 0 }}
-      >
-        <img
-          {...props.imageProps}
-          style={{ ...props.imageProps.style, width: "100%", height: "auto" }}
-        />
-      </Modal>
     </>
-  )
-}
+  );
+};
 
 const VideoComponent = (props: ThumbnailImageProps) => {
-  const viewModalRef = useRef<ElementRef<typeof Modal>>(null)
+  const viewModalRef = useRef<ElementRef<typeof Modal>>(null);
   return (
     <>
       <div style={{ ...props.imageProps.style }}>
@@ -170,15 +168,17 @@ const VideoComponent = (props: ThumbnailImageProps) => {
         </Modal>
       </div>
     </>
-  )
-}
+  );
+};
 
 const CustomGallery = ({
   data,
-  type = SWITCHER_VALUES.IMAGE
+  type = SWITCHER_VALUES.IMAGE,
+  handleClick
 }: {
-  data: Record<string, any>[]
-  type?: SWITCHER_VALUES
+  data: Record<string, any>[];
+  type?: SWITCHER_VALUES;
+  handleClick: () => void;
 }) => {
   return (
     <Gallery
@@ -190,29 +190,30 @@ const CustomGallery = ({
         width: attributes.width,
         height: attributes.height
       }))}
+      onClick={handleClick}
       thumbnailImageComponent={
         type === SWITCHER_VALUES.VIDEO ? VideoComponent : ImageComponent
       }
     />
-  )
-}
+  );
+};
 
 const Monastery = ({ monastery, otherMonasteries, isMobile, globalData }) => {
-  const { setTitleBanner, setBanner } = useApp()
-  const { t } = useTranslation()
-  const [galleryState, setGalleryState] = useState(SWITCHER_VALUES.IMAGE)
-  const router = useRouter()
-  const { attributes } = monastery.data || {}
-  moment.locale(router.locale)
+  const { setTitleBanner, setBanner } = useApp();
+  const { t } = useTranslation();
+  const [galleryState, setGalleryState] = useState(SWITCHER_VALUES.IMAGE);
+  const router = useRouter();
+  const { attributes } = monastery.data || {};
+  moment.locale(router.locale);
 
   useEffect(() => {
     if (attributes.title) {
-      setTitleBanner(attributes.title)
+      setTitleBanner(attributes.title);
     }
     if (attributes.cover) {
-      setBanner(attributes.cover.data)
+      setBanner(attributes.cover.data);
     }
-  }, [attributes])
+  }, [attributes]);
 
   const {
     title,
@@ -225,9 +226,26 @@ const Monastery = ({ monastery, otherMonasteries, isMobile, globalData }) => {
     email,
     facebook,
     address_pin
-  } = attributes
-  const { defaultHeadLine } = globalData.attributes
-  console.log({ otherMonasteries })
+  } = attributes;
+  const { defaultHeadLine } = globalData.attributes;
+  console.log({ otherMonasteries });
+
+  /* Zoom Images */
+  const [indexImages, setIndexImages] = useState(-1);
+
+  const listImages = images?.data || [];
+  const currentImage = listImages[indexImages]?.attributes;
+
+  const nextIndex = (indexImages + 1) % listImages.length;
+  const nextImage = listImages[nextIndex]?.attributes || currentImage;
+  const prevIndex = (indexImages + listImages.length - 1) % listImages.length;
+  const prevImage = listImages[prevIndex]?.attributes || currentImage;
+
+  const handleClick = (index: number, item: CustomImage) =>
+    setIndexImages(index);
+  const handleClose = () => setIndexImages(-1);
+  const handleMovePrev = () => setIndexImages(prevIndex);
+  const handleMoveNext = () => setIndexImages(nextIndex);
 
   return (
     <PageContentWrapper>
@@ -267,7 +285,24 @@ const Monastery = ({ monastery, otherMonasteries, isMobile, globalData }) => {
                 ? images?.data
                 : videos?.data
             }
+            handleClick={handleClick}
           />
+          {!!currentImage && (
+            /* @ts-ignore */
+            <Lightbox
+              mainSrc={currentImage.url}
+              imageTitle={currentImage.name}
+              mainSrcThumbnail={currentImage.formats.small.url}
+              nextSrc={nextImage.url}
+              nextSrcThumbnail={nextImage.formats.small.url}
+              prevSrc={prevImage.url}
+              prevSrcThumbnail={prevImage.formats.small.url}
+              onCloseRequest={handleClose}
+              onMovePrevRequest={handleMovePrev}
+              onMoveNextRequest={handleMoveNext}
+              reactModalStyle={{ zIndex: 99999999 }}
+            />
+          )}
         </div>
       </GaleryWrapper>
       <ContactWrapper>
@@ -296,6 +331,7 @@ const Monastery = ({ monastery, otherMonasteries, isMobile, globalData }) => {
                         width={16}
                         height={16}
                         src={require("assets/svgs/pin-icon-black.svg")}
+                        alt=''
                       />
                     </div>
                     <p>
@@ -329,6 +365,7 @@ const Monastery = ({ monastery, otherMonasteries, isMobile, globalData }) => {
                         width={16}
                         height={16}
                         src={require("assets/svgs/phone-icon-black.svg")}
+                        alt=''
                       />
                     </div>
                     <p>
@@ -472,11 +509,11 @@ const Monastery = ({ monastery, otherMonasteries, isMobile, globalData }) => {
       </OtherWrapper>
       <Offering {...globalData.attributes.offering} isMobile={isMobile} />
     </PageContentWrapper>
-  )
-}
+  );
+};
 
 export const getServerSideProps = withDetectDevice(
   withGlobalData(withMonastery(withTrans))
-)
+);
 
-export default withNavigator(Monastery)
+export default withNavigator(Monastery);

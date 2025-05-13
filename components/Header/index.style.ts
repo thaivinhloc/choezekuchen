@@ -1,16 +1,16 @@
-import { TMedia } from "definition"
-import styled from "styled-components"
-import { THEME } from "../../common"
+import { TMedia } from "definition";
+import styled from "styled-components";
+import { THEME } from "../../common";
 
 type TStyled = {
-  theme: typeof THEME
-}
+  theme: typeof THEME;
+};
 
 type HeaderProps = {
-  banner?: TMedia
-  isMobile?: boolean
-  isHeaderFullscreen?: boolean
-}
+  banner?: TMedia;
+  isMobile?: boolean;
+  isHeaderFullscreen?: boolean;
+};
 
 export const DivHeaderWrapperV1 = styled.div<HeaderProps>`
   .site-header {
@@ -33,19 +33,47 @@ export const DivHeaderWrapperV1 = styled.div<HeaderProps>`
       position: relative;
       z-index: 2;
     }
-    &:after {
-      content: "";
-      display: none;
+    .banner-slider {
       width: 100%;
-      height: 100%;
+      height: 100vh;
       position: absolute;
       top: 0;
       left: 0;
-      background: rgba(0, 0, 0, 0.3);
-      @media (min-width: 1200px) {
-        display: block;
-      }
       z-index: 1;
+      &:after {
+        content: "";
+        display: none;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background: rgba(0, 0, 0, 0.4);
+        @media (min-width: 1200px) {
+          display: block;
+        }
+        z-index: 2;
+      }
+      &__content {
+        width: 100%;
+        height: 50vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        max-width: 420px;
+        position: absolute;
+        left: 18px;
+        bottom: 18px;
+        z-index: 3;
+        padding: 32px;
+        opacity: 0.7;
+        h2 {
+          color: ${(props) => props.theme.white} !important;
+          font-size: 32px;
+          line-height: 40px;
+          margin-bottom: 16px;
+        }
+      }
     }
 
     .navbar {
@@ -58,7 +86,7 @@ export const DivHeaderWrapperV1 = styled.div<HeaderProps>`
       }
       display: flex;
       align-items: center;
-      padding: 64px 50px 15px;
+      padding: 40px 50px 15px;
       position: relative;
       z-index: 1002;
       transition: 0.3s linear;
@@ -109,14 +137,14 @@ export const DivHeaderWrapperV1 = styled.div<HeaderProps>`
         z-index: 10;
         position: relative;
         h1 {
-          color: #ffffff;
+          color: ${(props) => props.theme.white};
           font-size: 48px;
           line-height: 62px;
           font-weight: 700px;
         }
         &__desc {
           font-size: 16px;
-          color: #ffffff !important;
+          color: ${(props) => props.theme.white} !important;
           opacity: 0.8;
         }
       }
@@ -167,13 +195,14 @@ export const DivHeaderWrapperV1 = styled.div<HeaderProps>`
         min-width: 240px;
         display: block;
         position: absolute;
-        top: 35px;
+        top: 50px;
+        left: 16px;
         transition: 300ms;
         padding: 10px;
         opacity: 0;
         visibility: hidden;
         transform: translateY(5px);
-        background: ${(props) => props.theme.white};
+        background: #fff;
         z-index: 999;
         box-shadow: 0 5px 5px 0px rgba(0, 0, 0, 0.15);
         .nav-link {
@@ -241,7 +270,7 @@ export const DivHeaderWrapperV1 = styled.div<HeaderProps>`
         &:hover,
         &:focus {
           background: ${(props: TStyled) => props.theme.dark};
-          color: #fff;
+          color: ${(props) => props.theme.white};
         }
       }
     }
@@ -271,7 +300,7 @@ export const DivHeaderWrapperV1 = styled.div<HeaderProps>`
       }
     }
   }
-`
+`;
 
 export const DivHeaderMobile = styled.div`
   .banner {
@@ -281,7 +310,7 @@ export const DivHeaderMobile = styled.div`
       height: 100%;
       width: 100%;
       inset: 0;
-      color: #fff;
+      color: ${(props) => props.theme.white};
       font-size: 20px;
       font-weight: bold;
       display: flex;
@@ -356,7 +385,7 @@ export const DivHeaderMobile = styled.div`
       height: 30px;
       border-radius: 50%;
       background-color: #303030;
-      color: #fff;
+      color: ${(props) => props.theme.white};
       font-weight: bold;
       display: flex;
       align-items: center;
@@ -410,7 +439,32 @@ export const DivHeaderMobile = styled.div`
       background: none;
     }
   }
-`
+
+  .banner-slider {
+    width: 100%;
+    z-index: 1;
+    position: relative;
+
+    &__content {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      max-width: 200px;
+      position: absolute;
+      left: 10px;
+      top: 87px;
+      z-index: 3;
+      padding: 24px 0;
+      opacity: 0.7;
+      h2 {
+        color: ${(props) => props.theme.white} !important;
+        font-size: 12px !important;
+        line-height: 20px;
+      }
+    }
+  }
+`;
 
 export const NavListStyled = styled.nav<{ isSticky?: boolean }>`
   justify-content: space-between;
@@ -423,7 +477,7 @@ export const NavListStyled = styled.nav<{ isSticky?: boolean }>`
       left:0;
       width:100%;
       height: 80px;
-      background:${props.theme.white};
+      background: #fff;
       padding: 15px 50px !important;
       .navbar-nav {
         .nav-link {
@@ -446,13 +500,13 @@ export const NavListStyled = styled.nav<{ isSticky?: boolean }>`
         }
       }
     `}
-`
+`;
 
 export const NavbarNavStyled = styled.ul`
   justify-content: center;
   align-items: center;
   margin-bottom: 0;
-`
+`;
 
 export const TopActionStyled = styled.div`
   display: flex;
@@ -464,8 +518,8 @@ export const TopActionStyled = styled.div`
   @media (min-width: 1200px) {
     padding: 16px 50px;
     position: absolute;
-    top: 16px;
+    top: 0;
     right: 0;
     z-index: 99999999;
   }
-`
+`;

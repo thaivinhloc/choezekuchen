@@ -42,3 +42,5 @@ export const SingleSectionSmall = ({ title, headLine, content }) => {
     </SingleSectionWrapper>
   )
 }
+
+export default SingleSection

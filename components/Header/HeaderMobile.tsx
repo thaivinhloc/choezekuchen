@@ -1,3 +1,4 @@
+// @ts-check
 /* eslint-disable @next/next/no-img-element */
 import {
   CloseOutlined,
@@ -5,60 +6,73 @@ import {
   MenuOutlined,
   RightOutlined,
   UserOutlined
-} from "@ant-design/icons"
-import { Button, Collapse, Drawer, Dropdown, Menu, Space } from "antd"
-import { THEME } from "common"
-import { LOGIN, RETREAT } from "common/navigator"
-import { useApp } from "context/app/AppContext"
-import { TNavigatorItem } from "definition"
-import { TFunction } from "i18next"
-import Link from "next/link"
-import { useRouter } from "next/router"
-import React, { useEffect, useState } from "react"
-import ReactCountryFlag from "react-country-flag"
-import { LANGS } from "."
-import { ROUTES } from "../../common/routes"
-import { useAuth } from "../../context/auth/AuthContext"
-import { IUser } from "../../context/auth/AuthTypes"
-import { DivHeaderMobile } from "./index.style"
+} from "@ant-design/icons";
+import {
+  Button,
+  Carousel,
+  Collapse,
+  Drawer,
+  Dropdown,
+  Menu,
+  Space
+} from "antd";
+import { THEME } from "common";
+import { LOGIN, PROFILE, RETREAT } from "common/navigator";
+import { useApp } from "context/app/AppContext";
+import { TNavigatorItem } from "definition";
+import { TFunction } from "i18next";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
+import ReactCountryFlag from "react-country-flag";
+import { LANGS } from ".";
+import { ROUTES } from "../../common/routes";
+import { useAuth } from "../../context/auth/AuthContext";
+import { IUser } from "../../context/auth/AuthTypes";
+import { DivHeaderMobile } from "./index.style";
+import { RichText } from "elements/RichText";
+import Image from "next/image";
 
-const { SubMenu } = Menu
+const { SubMenu } = Menu;
 
 const HeaderMobile = ({
   t,
   data,
-  logo
+  logo,
+  homeTopSlider
 }: {
-  t: TFunction
-  data: TNavigatorItem[]
-  logo?: any
+  t: TFunction;
+  data: TNavigatorItem[];
+  logo?: any;
+  homeTopSlider?: any;
 }) => {
-  const [isOpenMenu, setOpenMenu] = useState(false)
-  const [isSticky, setSticky] = useState(false)
-  const auth = useAuth()
-  const user = auth.user as IUser
-  const { onLogout } = useAuth()
-  const { title, banner } = useApp()
-  const router = useRouter()
+  const [isOpenMenu, setOpenMenu] = useState(false);
+  const [isSticky, setSticky] = useState(false);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const auth = useAuth();
+  const user = auth.user as IUser;
+  const { onLogout } = useAuth();
+  const { title, banner, desc, banners } = useApp();
+  const router = useRouter();
 
   useEffect(() => {
-    window.addEventListener("scroll", onScroll)
+    window.addEventListener("scroll", onScroll);
     return () => {
-      window.removeEventListener("scroll", onScroll)
-    }
-  }, [])
+      window.removeEventListener("scroll", onScroll);
+    };
+  }, []);
 
   const onScroll = () => {
-    const scrollTop = window.scrollY
-    setSticky(scrollTop >= 100 ? true : false)
-  }
+    const scrollTop = window.scrollY;
+    setSticky(scrollTop >= 100 ? true : false);
+  };
 
-  const currentLocale = router.locale
+  const currentLocale = router.locale;
 
   const handleChangeLocale = (newLocale: string) => {
-    const { pathname, asPath, query } = router
-    router.push({ pathname, query }, asPath, { locale: newLocale })
-  }
+    const { pathname, asPath, query } = router;
+    router.push({ pathname, query }, asPath, { locale: newLocale });
+  };
 
   const headerStyle = isSticky
     ? {
@@ -70,13 +84,13 @@ const HeaderMobile = ({
         paddingTop: 12,
         paddingBottom: 12,
         zIndex: 10,
-        background: THEME.white,
+        background: "#fff",
         boxShadow: "0 9px 35px rgb(0 0 0 / 5%)"
       }
     : {
         paddingTop: 12,
         paddingBottom: 12
-      }
+      };
 
   /* Render */
   return (
@@ -102,11 +116,16 @@ const HeaderMobile = ({
           >
             <Space direction='vertical' style={{ width: "100%" }}>
               {user?.username ? (
-                <Link href='/profile'>
-                  <Button block type='primary' ghost>
-                    <span>{t("Profile")}</span>
+                <>
+                  <Link href={PROFILE}>
+                    <Button block type='primary'>
+                      <span>{t("Profile")}</span>
+                    </Button>
+                  </Link>
+                  <Button onClick={onLogout} block type='primary' ghost>
+                    <span>{t("Log out")}</span>
                   </Button>
-                </Link>
+                </>
               ) : (
                 <Link href={LOGIN}>
                   <Button block type='primary' ghost>
@@ -147,15 +166,15 @@ const HeaderMobile = ({
             className='headermobile__menu'
             inlineIndent={0}
             expandIcon={(...props: any) => {
-              console.log("props", props[0].isHasChildren)
-              const isHasChildren = !!props[0]?.isHasChildren
-              const isOpen = props[0].isOpen
-              if (!isHasChildren) return <div />
+              console.log("props", props[0].isHasChildren);
+              const isHasChildren = !!props[0]?.isHasChildren;
+              const isOpen = props[0].isOpen;
+              if (!isHasChildren) return <div />;
               return (
                 <div className='headermobile__menu-icon'>
                   {!isOpen ? <RightOutlined /> : <DownOutlined />}
                 </div>
-              )
+              );
             }}
           >
             {data.map((route) => (
@@ -278,7 +297,66 @@ const HeaderMobile = ({
           </div>
         </div>
       </div>
-      <div className='w-100 banner'>
+      <div className='navbar__title'>
+        <h1>{title.toUpperCase()}</h1>
+        <span className='navbar__title__desc'>{desc}</span>
+      </div>
+      {banners?.length ? (
+        <div className='banner-slider'>
+          <Carousel
+            afterChange={(currentS) => setCurrentSlide(currentS)}
+            autoplay
+            autoplaySpeed={7000}
+            speed={1000}
+          >
+            {banners.map((b: any) => (
+              <div>
+                <div
+                  style={{
+                    // height: "calc(100vh - 100px)",
+                    background: "rgba(0, 0, 0, 0.4)"
+                  }}
+                >
+                  <Image
+                    src={b?.attributes.url}
+                    {...b?.attributes}
+                    layout='responsive'
+                    // width='100%'
+                    // height='100%'
+                    // style={{ objectFit: "contain" }}
+                    alt=''
+                  />
+                </div>
+                <div
+                  style={{
+                    background: "rgba(0, 0, 0, 0.4)",
+                    top: 0,
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    inset: 0
+                  }}
+                ></div>
+              </div>
+            ))}
+          </Carousel>
+          {homeTopSlider?.[currentSlide] ? (
+            <div
+              className='banner-slider__content'
+              style={{ maxWidth: "200px" }}
+            >
+              <h2>{homeTopSlider[currentSlide].title}</h2>
+              <RichText
+                color={THEME.white}
+                content={homeTopSlider[currentSlide].description}
+                fontSize='10px'
+                lineHeight='20px'
+              />
+            </div>
+          ) : null}
+        </div>
+      ) : null}
+      {/* <div className='w-100 banner'>
         {router.pathname === "/" ? (
           <img
             className='w-100'
@@ -296,9 +374,9 @@ const HeaderMobile = ({
         <div className='banner__content' style={{ top: 0 }}>
           {title}
         </div>
-      </div>
+      </div> */}
     </DivHeaderMobile>
-  )
-}
+  );
+};
 
-export default HeaderMobile
+export default HeaderMobile;

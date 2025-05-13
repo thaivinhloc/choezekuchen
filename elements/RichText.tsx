@@ -1,3 +1,4 @@
+import { THEME } from "common"
 import HtmlParser from "html-react-parser"
 import styled from "styled-components"
 
@@ -33,18 +34,16 @@ const RichTextWrapper = styled.div<RichTextProps>`
   i {
     font-family: ${(props) => props.theme.primaryFont} !important;
     background: transparent !important;
-    line-height: 1.3;
-    color: #000;
+    line-height: ${props => props.lineHeight ?? parseInt(props.fontSize ?? "") + 8 + "px"} +  '!important';
     ${({ align }) => `text-align: ${align} !important;`}
     ${(props) => props.fontSize && `font-size: ${props.fontSize} !important;`}
-    ${(props) =>
-      props.lineHeight && `line-height: ${props.lineHeight} !important;`}
     ${(props) =>
       props.fontWeight && `font-weight: ${props.fontWeight} !important;`}
     ${(props) => props.color && `color: ${props.color} !important;`}
     ${(props) =>
       props.letterSpacing &&
       `letter-spacing: ${props.letterSpacing} !important;`}
+  }
 `
 
 export const RichText: React.FC<RichTextProps> = ({
@@ -52,11 +51,11 @@ export const RichText: React.FC<RichTextProps> = ({
   className,
   style,
   align,
-  fontSize,
+  fontSize = "16px",
   lineHeight,
   fontWeight,
   letterSpacing,
-  color
+  color = THEME.dark
 }) => (
   <RichTextWrapper
     className={className}

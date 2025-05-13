@@ -1,6 +1,8 @@
-import Footer from "components/Footer"
-import Header from "components/Header"
+// @ts-nocheck
+const Footer = dynamic(() => import("components/Footer"), { ssr: false })
+const Header = dynamic(() => import("components/Header"), { ssr: false })
 import { useApp } from "context/app/AppContext"
+import dynamic from "next/dynamic"
 import { useRouter } from "next/router"
 import { useEffect } from "react"
 import styled from "styled-components"
@@ -17,7 +19,7 @@ export const withNavigator = (RootPageComponent: NextPage) => {
   return ({ ...props }) => {
     console.log("withNavigator", { props })
     const router = useRouter()
-    const { setTitleBanner, setBanner } = useApp()
+    const { setTitleBanner, setBanner, setBanners } = useApp()
     const replaceTitle = (title: string) => {
       if (!title) return ""
       return title.replaceAll("-", " ")
@@ -44,8 +46,11 @@ export const withNavigator = (RootPageComponent: NextPage) => {
           id: 0,
           attributes: props.data.cover[0]
         })
+        setBanners(
+          props.data?.cover.map((c, idx) => ({ id: idx, attributes: c }))
+        )
       } else {
-        if (!["/event/[eid]", "/monastery/[mid]"].includes(router.pathname)) {
+        if (!["/event/[eid]", "/monastery/[mid]", "/retreat/[[...id]]"].includes(router.pathname)) {
           setBanner(undefined)
         }
       }
@@ -56,10 +61,10 @@ export const withNavigator = (RootPageComponent: NextPage) => {
         {props.navData && (
           <Header
             data={props.navData}
-            retreats={props.retreats}
             isMobile={props.isMobile}
             isHeaderFullscreen={props.isHeaderFullscreen}
             logo={props.globalData?.attributes?.logo}
+            homeTopSlider={props.globalData?.attributes?.homeTopSlider}
           />
         )}
         <RootPageComponent {...props} isMobile={props.isMobile} />
@@ -70,3 +75,5 @@ export const withNavigator = (RootPageComponent: NextPage) => {
     )
   }
 }
+
+export default withNavigator

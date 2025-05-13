@@ -1,4 +1,4 @@
-import { THEME } from "common"
+import { THEME } from "common";
 
 export enum TITLE_SIZES {
   MEDIUM,
@@ -19,32 +19,34 @@ const supSizes = (isMobile = false) => {
           lineHeight: "24px"
         }
       : { fontSize: 32, lineHeight: "36px" }
-  }
-}
+  };
+};
 
 const titleSizes = (isMobile = false) => {
   return {
     [TITLE_SIZES.LARGE]: isMobile
-      ? { fontSize: 64, lineHeight: "64px" }
-      : { fontSize: 112, lineHeight: "112px" },
+      ? { fontSize: 48, lineHeight: "48px" }
+      : { fontSize: 80, lineHeight: "80px" },
     [TITLE_SIZES.MEDIUM]: isMobile
       ? { fontSize: 28, lineHeight: "32px" }
       : { fontSize: 48, lineHeight: "54px" }
-  }
-}
+  };
+};
 
 export const Title = ({
   title = "",
   supTitle = "",
   isMobile = false,
   size = TITLE_SIZES.MEDIUM,
-  color = THEME.primary
+  color = THEME.primary,
+  isSecondaryFont = false
 }) => {
-  const subTitleStyle = supSizes(isMobile)[size]
-  const titleStyle = titleSizes(isMobile)[size]
+  const subTitleStyle = supSizes(isMobile)[size];
+  const titleStyle = titleSizes(isMobile)[size];
   return (
     <>
       <strong
+        className={isSecondaryFont ? "tx-secondary" : ""}
         style={{
           display: "block",
           color,
@@ -65,5 +67,5 @@ export const Title = ({
         {title}
       </h2>
     </>
-  )
-}
+  );
+};
